@@ -1,0 +1,1907 @@
+BACKEND
+
+-----------------------------------------------------------------DATA STRUCTURES--------------------------------------------------------------
+
+ArrayList: Resizable array, implements List
+	Acess: 0(1) by index
+	Insert: O(1) at the end
+	Remove: O(1) by index
+	better for storing and accessing
+	less memory
+Linked List: Double linked list to next and prev node, implements List and Queue
+	Acess: O(n) by iterating elements
+	Insert: O(n) insert to the end
+	Remove: either by head O(1) or by index O(n)
+	better for manipulating
+	more memory
+Queues: First In First out, adds to the tail, removes from the head
+Stacks: First in, Last out, adds to the top, removes from the top
+Deques: Double ended queues, you can add or remove from the beggining or the end
+
+Binary Search Tree: Data structure with 1 data value and 2 pointers left and right
+	Insertion: O (log n)
+	Traversal: O(n)
+	Search: O(log n)
+	Deletion rebalancing: Take the leftmost child of the right child of the deleted node (El mas izquierdo del hijo derecho del nodo eliminado)
+		Retain rule of smaller to the left, greater to the right
+
+
+---------------------------------------------------------------------ALGORITHM------------------------------------------------------------------
+
+
+Big(o) notation:
+O(1) Cosntant: time regardless of length
+O(log n) Logarithmic: grows slower than the data size, better than linear. Binary search
+O(n) Linear: Grows in function of the size of the collection
+O(n2) Squared: Grows in function of nested loops
+
+
+String Manipulation
+Multiple Pointers
+HashTables
+
+SORTING
+BubbleSort
+SelectionSort
+MergeSort
+QuickSort
+
+ARRAYS/MATRIX
+
+SEARCH
+Binary search
+Depth First Search: Searches a structure deep inside a node before asking his children. Uses recursion and Queues
+Breadth First Search: Searches a structure wide first asking neighboors before going deep. Iterates using Queues
+Graphs
+Trees
+Recursion
+Dynamic programming
+
+
+RECURSION
+fibonacci
+
+----------------------------------------------------------------------JAVA---------------------------------------------------------------
+
+CORE
+
+Heap: Stores objects
+Stack: Stores methods and refs
+
+OOP
+
+
+Inheritance: Ability of classes to inherit properties and methods from the superclass by extending it's logic
+Encapsulation: Protecting the access to fields and methods to keep code integrity
+Polymorphism: Ability to perform different behaviours based on the object passed
+Abstracion: Hides the implementation details
+The compiler sees only the methods in the ref class (left assign)
+But executes the instance's method (right assign)
+
+Overrride/Overload
+When working with objects
+The overriden methods run the instance method (runtime)
+The overloaded methods take the reference method (compile time)
+
+equals()/hashCode()
+equals(): Compares if two objects are meaningfully equal
+hashCode(): generates a hashCode for placing the object in a collection Hashxxx
+If two objects are equal, their hashcodes must be equal as well.
+Consider the same attributes for equals and hashcode
+
+
+EXCEPTIONS:
+Checked: Extend from Exception. Compile time
+	You can recover
+	IOException, SQLEXception, ClassNotFoundException
+Unchecked: Extend from RuntimeException. Run time
+	You can't recover
+	NullPointerException, ClassCastException, IndexOutOfBoundException, ArithmeticException
+
+ERRORS:
+	Errors represent serious problems that are typically beyond the control of the application, such as system failures or resource exhaustion.
+	Errors are subclasses of the java.lang.Error class, and they are not meant to be caught or handled by regular application code.
+	Examples of errors include OutOfMemoryError and StackOverflowError.
+
+
+COLLECTIONS
+Collection: Super class of all the other collections
+Collections: Utility class that contains methods to work with collections
+
+List(Interface): Ordered, Duplicated, Indexed
+	ArrayList: Has a backing array (init size 10  doubling as req), best performance, O(1)
+	LinkedList: Double linked (next node, previous node), also implements Queue, lower performance, O(n), add/remove from Head and Tail
+
+Set(Interface): Uses the equals/hashcode method to define uniqueness
+SortedSet(Interface): Order insertion
+	HashSet: Based on HashMap
+	TreeSet: Implements SortedSet, elements are sorted, tree structure, implements SortedSet (Ordered) and NavigableSet
+
+Queue(Interface): Orders elements as FIFO, supports ordering
+	LinkedList: works as a queue and list, less efficient
+	ArrayDeque: double ended queue, stores in a resizable array, pure, more efficient
+
+Map(Inteface): Maps key value pairs, no duplicates
+	HashMap: Stores keys in a hash table
+	TreeMap: Stores keys in a sorted way
+	LinkedHashMap: Stores keys in the insertion order
+
+Comparable<T>:
+Natural order
+implements int objOne.compareTo(T objTwo)
+returns 0 if = arg, returns 1 if < arg, returns 1 if > arg
+Only one sort sequence can be created
+
+Comparator<T>:
+Multiple, defined by programmer,
+implements int compare(T objOne, T objTwo);
+returns objOne.getAttribute().compareTo(objOne.getAttribute())
+Many sort sequences can be created
+
+Convertions:
+Arrays: collection.toArray()
+List and Set: List list = Arrays.asList(array)
+
+
+
+FUNCTIONAL INTERFACES
+
+Contain only one abstract method, may contain any static or default methods
+Consumer<String> c2 = x> System.out.println(x);c2.accept("Annie");
+Function<String, Integer> f2 = x > x.length();f2.apply("cluck");
+Predicate<String> p2 = x > x.isEmpty();p2.test("");
+Supplier<StringBuilder> sb2 = ()> new StringBuilder();sb2.get();
+UnaryOperator<String> u2 = x > x.toUpperCase();u2.apply("chirp");
+
+
+
+STREAMS
+
+It's like a wrapper for treatment and processing of big collections like a pipeline function
+Operation types:
+	Intermediate operations: Don't terminate the stream
+	Terminal operations: Terminate the stream. Collectors, reductors, forEach
+		Need all: Require all elements to operate
+			forEach
+			count
+		Short circuit: any matching element can be enough
+			allMatch
+			noneMatch
+Streams should not affect external things, instead of altering a collection with foreach use collect, reduce
+
+Stream constructors:
+	collection.stream()
+	Stream.empty()
+	Stream.of("one","two")
+	Arrays.stream(array)
+
+
+Pattern Map/Filter/Reduce
+	Transforms(apply functions, change type, maintain order) data -> Filter(apply predicates, maintain types, remove objects) -> Collect(apply bifunction, Agregate) result
+
+Mapping stream types:
+	mapToObj: primitives to objects
+	mapToInt,Long,Double: object to primitives
+
+File to Stream:
+	Stream<String> lines = Files.lines(path,encoding);
+
+
+
+
+OPTIONAL: Wrapper that could contain a value or not
+isPresent(): validates if contains a value
+get(): if present returns value, else throws an exception
+ifPresent(Consumer c): if present calls consumer with value, else does nothing
+orElse(T other): if present returns value, else returns other
+orElseGet(Supplier s): if present returns value, else returns the supplier result
+orElseThrow(Supplier s): if present returns value, else throws exception created by calling supplier
+
+
+
+CONCURRENCY
+
+Creation:
+	Implement Runnable (void)
+	Implement Callable (<T> return result)
+	Extend Thread
+	ExecutorService:
+		execute() returns void
+		submit() returns a Future<?> object containing the result
+		Future<T> contains the result of a thread execution
+		ScheduledFuture<T> contains the result of a scheduled thread execution
+		newSingleThreadExecutor: Single thread
+		newSingleThreadScheduledExecutor: Scheduled single thread
+		newCachedThreadPool: Dynamic thread pool
+		newFixedThreadPool(int n): Thread pool with size
+		newScheduledFixedThreadPool(int n): Scheduled Thread pool with size
+	CyclicBarrier: Sets a limit of workers, once reached, other threads can start working, and so on
+	ForkJoinPool: Uses recursion to finish a task
+		RecursiveAction: Like execute()
+		RecursiveTask<T>: Like submit()
+
+
+Atomics: Atomic(primitives) supports thread safe operations
+
+Java Reflection: Extract and invoke methods from a class whose code we don't have access
+	Method[] metodos=c.getClass().getMethods()
+	String cadena=(String) m.invoke(c, null)
+
+REACTIVE PROGRAMMING: Declarative asynchronous style of programming that reacts to events
+	Nonblocking
+	Asynchronous
+	Functional/Declarative
+
+	INTERFACES:
+		Publisher
+		Suscriber
+		CompletableFuture
+
+
+
+------------------------------------------------------------------------------SPRING----------------------------------------------------------------------
+
+------------------------------------------------------------------------------SPRING CORE---------------------------------------------------------------
+
+Dependency Injection: Allow to inject dependencies dynamically
+Inversion of Control: Passing the control of how to create object from the programmer to the framework
+
+Core container: Factory for managing beans /Spring container: Application Context
+Beans
+Core
+SpEL(Spring expression language)
+Context
+
+Infrastructure: Aspect Oriented Programming. Add functionality to objects declaratively. Logging, Security, Transactions
+AOP
+Aspects
+Instrumentation: JMX (Java Management Extension) Remotely monitoring apps
+Messaging
+
+Data Access Layer: Handles JDBC
+JDBC: Helper classes for managing DB
+ORM
+Transactions:
+OXM
+JMS: Messagin service
+
+Web Layer: MVC Framework
+Servlet
+Web Socket
+Web
+Portlet
+
+Test Layer: Support for TDD. Mocking objects and out of container testing
+Unit
+Integration
+Mock
+
+Beans:
+A "Spring Bean" is simply a Java object.
+When Java objects are created by the Spring Container, then Spring refers to them as "Spring Beans".
+Spring Beans are created from normal Java classes .... just like Java objects.
+
+Scopes:
+Singleton: Only one instance per container (default scope)
+Prototype: A bean instance for each container request
+Request: Scoped to an http request
+Session: Scoped to an http session
+Global session: Scoped to a global session
+
+Bean lifecycle:
+Instantiation > Populate properties(injected, fileconfig) > BeanNameAware Context(aware to other resources) > BeanFactoryAware (aware to context) > ApplicationContextAware > PreInitialization > Init() > PostInitialization() > Ready > Container Shutdown > Destroy() > Terminated
+
+The Spring framework provides several implementations of the ApplicationContext interface: ClassPathXmlApplicationContext and FileSystemXmlApplicationContext for standalone applications, and WebApplicationContext for web applications
+
+WebApplicationContext  ApplicationContext
+WebApplicationContext  Creates objects and handles the lifecycle. Extends the ApplicationContext
+
+Injection types:
+Constructor injection: Through constructor. When the class cannot function without the dependent class. Immutability
+Setter Injection: Through setters. When the class can function without the dependent class. Changeable dependencies
+Field Injection: Through fields. Avoid. Tight coupling. Immutability
+
+
+----------------------------------------------------------------------SPRING BOOT---------------------------------------------------------------------------------
+
+
+Annotations:
+@Component: generic stereotype for any Springmanaged component, indicates a bean is created
+@Repository: stereotype for persistence layer, Provides the data, database interaction, mapping
+@Service: stereotype for service layer, Business logic, data manipulation, starts transactions
+@Controller: stereotype for presentation layer (springmvc), Process requests, builds response
+@RestController (@Controller & @ResponseBody) stereotype for REST controller
+Annotations should be placed on the implementation, not the interface maintain decoupling
+
+@Configuration: declares that the class contains @Bean methods to be processed by the Spring container
+@ComponentScan: configures which packages to scan for classes
+@EnableAutoConfiguration: autoconfigures beans based on the classpath
+
+@SpringBootApplication (@SpringBootConfiguration, @EnableAutoConfiguration, @ComponentScan) stereotype marking a class for bootstrapping and setting the @ComponentScan from that class level down
+
+
+@RequestMapping: indicates the mapping of the request to a path
+@GetMapping, @PostMapping, etc: mark controller to respond to the http method
+@RestController(@Controller && @ResponseBody): marks as a controller that returns data
+
+@PathVariable: maps a path var to a param in spring
+@RequestParam: maps a query param to a java param
+@PathParam: maps a path param to a param in jaxrs
+
+@RequestBody  Deserializes HttpRequest (JSON) to an object
+@ResponseBody  Serializes the object and sends it as a response (JSON)
+
+@Value: For injecting values from the properties/yml file
+
+
+RequestEntity
+ResponseEntity
+
+Run on start:
+
+	CommandLineRunner: receives argument
+	ApplicationRunner:
+
+
+-------------------------------------------------------------------------------------SPRING MVC----------------------------------------------------------------------
+
+Controller > Model > View
+Web browser > Request > DispatcherServlet
+DispatcherServlet (Entry point) > Controller(pass/request data to the model) > View
+View > renderize data/view to the browser
+
+
+Spring MVC Configuration
+Configure DispatcherServlet
+Setup URL mappings to the DispatcherServlet
+Setup ComponentScanning
+Configure conversion, formatting, validation
+Configure ViewResolver
+
+
+Servlet Mapping vs Request Mapping
+Servlet Mapping  which web container of the Java servlet should be invoked for a given URL. The Servlet container decides which Servlet it should forward the request to.
+Request Mapping  Maps a Request to a controller method to invoke as a response to the request.
+View Resolver  Locates the view to rendered as a response to a request (application.properties prefix  suffix)
+
+
+
+template engine
+thymeleaf > replace jsp
+
+SPRING WEBFLUX
+
+Nonblocking API (Servlet v3.1)
+Asynchronous nature (like callbacks) though messages
+Publisher/Subscriber model through a Subscription
+Functional/Declarative style
+Functional programming: Pure functions, Lambdas, Immutability
+Concurrent connections handles by few threads
+Contnuos stream of data live connection(MediaType.TEXT_EVENT_STREAM_VALUE)
+
+REACTIVE STREAMS:
+	1 Subscriber > subscirbe() > Publisher
+	2 Subscription is created
+	3 Publisher > onSubscribe(Subscription) > Subscriber
+	4 Subscriber > request() > Subscription
+	5 Publisher > onNext() > Subscriber
+	If no more elems:  Publisher > onComplete() > Subscriber > Subscription cancelled
+	If error: Publisher > onError() > Subscriber > Susbscription cancelled
+	ASYNC
+	NONBLOCKING
+	BACKPRESSURE
+	INTERFACES:
+		PUBLISHER:
+			public interface Publisher<T> {
+				public void subscribe(Subscriber<? super T> s);
+			}
+		SUBSCRIBER:
+			public interface Subscriber<T> {
+				public void OnSubscribe(Subscription s);
+				public void onNext(T t);
+				public void onError(Throwable t);
+				public void onComplete();
+			}
+		SUBSCRIPTION:
+			public interface Subscription<T> {
+				public void request(long n); >backpressure
+				public void cancel();
+			}
+		PROCESSOR:
+
+
+PROJECT REACTOR (Reactive Library):
+	FLUX: Publish [0... n] for Object or void
+	MONO: Publish [0,1] for Lists
+	Flux and Mono are implementations of the Publisher interface
+
+ServerWebExchange: Reactive container
+	ServerHttpRequest: Reactive request
+	ServerHttpResponse: Reactive response
+
+@Controllers become Router and Handler Function
+s	Handler function: take a ServerRequest, return a ServerResponse
+	Router Function: routes the request to the appropiate handler function
+
+Router function:
+	public Mono<HandlerFunction> myRouterFunction(ServerRequest request){}
+	RouterFunctions.route(RequestPredicate, HandlerFunction)
+
+interface HandlerFunction<T extends ServerResponse>{
+	Mono<T> handle(ServerRequest request)
+}
+
+class <T>Handler{
+	public Mono<ServerResponse> myHandlerFunction(ServerRequest request){
+		Mono<T> t = request.bodyToMono(T.class); //or
+		Flux<T> t = request.bodyToFlux(T.class);
+
+		return ServerResponse.ok().contentType( MediaType.APPLICATION_JSON).body(t);
+	}
+}
+
+
+RequestPredicate Class:
+public abstract class RequestPredicate{
+	static RequestPredicate accept(MediaType... mediaTypes)//tests if the request contains a particular accept header
+	static RequestPredicate GET(String pattern)//checks if the request patter matches against the request path
+	static RequestPredicate method(HttpMethod method)//to test any request http method
+	static RequestPredicate path(String pattern)//test against the given path pattern
+
+}
+
+Functional Endpoint Example:
+
+	RouterFunctions<ServerResponse> myRoute =
+		RouterFunctions.route(
+			RequestPredicates.path(/products),//test if the request was made agains the path
+			request>Response.ok().body(productFlux)//pass an implementation of the handler function interface
+		);
+
+	or
+
+	RouterFunctions<ServerResponse> myRoute =
+		RouterFunctions.route()
+		.RequestPredicates.GET("/product",handler::getProduct)
+		.RequestPredicates.POST("/product",handler::saveProduct)
+		.build();
+
+
+
+
+
+
+
+
+---------------------------------------------------------------------------------------DB-------------------------------------------------------------------------------------
+
+CAP Theorem
+
+Consistency: Data is consistent across all the nodes
+Availability: Data is available at any time
+Partition Tolerance: System does not fail regardless any data drop or updated in any node
+
+Only two of these requirements can be achieved at a time. Not all three may be possible
+
+
+---------------------------------------------------------------------------------NO SQL---------------------------------------------------------------------------------
+
+DB TYPES:
+	Key-Value
+	Wide Column
+	Graph
+	Document:
+		MongoDB
+
+DB -> DB
+TABLES -> COLLECTIONS
+ROW -> DOCUMENTS
+COLUMN -> FIELD
+INDEX -> INDEX
+JOIN -> EMBBEDING & LINKING
+
+------------------------------------------------------------------------------MONGO DB------------------------------------------------------------------------------------------
+
+Has C&P from CAP theorem
+
+MONGO:
+	Uses documents (JSON - BSON:  EXTENDED JSON)
+
+
+Indexes:
+	Support efficient execution of queries
+	Types:
+		Single Field
+		Multikey
+		Text
+		Geospatial
+		Hashed
+		Compound
+
+Aggregation pipeline:
+	A framework for data aggregation modeled on the concept of data processing pipelines
+
+Replica sets:
+	A group of mongodb processes that maintain the same data sets to provide redundancy and high availability
+
+Sharding:
+	A method to distribute data across multiple machines
+
+Commands:
+	use database: select database
+	show databases: shows available databases
+	show collections: show collections
+	create collection: db.createCollection("collection")
+	CREATE:
+		db.collection.insertOne({object})
+		insertMany([array])
+	READ:
+		db.collection.find({object})/findMany():
+		filter: query: {attribute: {$operator: value}}, {"attribute.sub":value} , {$and: [{amount: {$lte: 11}},{"awards.wins":3}]}
+		projection: select fields: db.collection.find({attribute: value}, {attr1: 1, attr2: 1, attr3: 0}) (true/1: include, false/0: exclude)
+		sort({attr: value}): 1/-1: ASC/DESC
+		limit(n): limits results
+		readConcern("type"): specifies read Concern
+	UPDATE:
+		db.colection.updateOne(): updates only the fields. Atomic on a single document
+		db.colection.updateOne(
+			{field: {$op: "old value"}},{$set: {"field":"new value"},{upsert:true/false}}
+		)
+		db.colection.updateMany()
+		db.collection.replaceOne(): replaces the object completely
+		db.collection.replaceOne({attr:{$op: value}},{new object definition})
+		$set: updates/creates a field in a document
+		upser: true : a documente is created if it doesn't exists, else, regular update (update on match, insert on no match)
+	DELETE:
+		db.collection.deleteOne(): db.collection.deleteOne({attr:value})
+		db.collection.deleteMany(): db.collection.deleteMany({attr:value})
+		db.collection.remove(): db.collection.remove({attr: value}, true) (true for only one, no param, remove all). db.collection.remove({}) erases all the data from collection
+
+Query operators:
+	Comparison
+	Logical
+	Element
+	Evaluation
+	Geospatial
+	Array
+	Bitwise
+Query projection:
+	Specifies the fields to return in the document that match the query (true/1: include, false/0: exclude)
+Concern:
+	Read concern: Allows to control the consistency and isolation properties of the data read from replica sets and shards
+		Local: reading from primary replica, may not exists in other replicas
+		Available: reding from secondary replica, data may not be replicated to the majority of replicas
+		Majority: default for all the fixed operators, data acknodledged by majority of replicas
+		Linearizable: returns data that has the majority of successfull writes previous to the read operation
+		Snapshot: Multidocument transaction, reads from majority of commited data
+	Write concern: Level of acknoledgement requested from mongodb for write operations. Level of consistency across replicas
+		w1: Ack only from primary
+		w0: No ack
+		w(n): Ack primary + (n-1) secondary: (All nodes-1 always including primary)
+		w: majority
+		wtimout:the limit to prevent write operations from blocking indefinitely
+
+
+
+
+------------------------------------------------------------------------------DynamoDB------------------------------------------------------------------------------------------
+
+DynamoDB:
+	Key-value database
+-------------------------------------------------------------------------------SQL-----------------------------------------------------------------------------
+
+
+
+SQL
+
+CREATE DATABSE name: creates database
+CREATE TABLE name (id int, field1 varchar, field2 varchar): creates table
+ALTER TABLE name ADD column_name: adds a new column
+ALTER TABLE name DROP column_name: deletes a column
+DROP TABLE name: deletes a table
+DROP DATABASE name: drops a database
+
+
+SELECT columns: selects columns
+FROM tables: specifies table
+WHERE conditions: sets row conditions
+INSER INTO table (id, field1.. fieldn) VALUES (1 , val1...valn): insert values
+UPDATE table SET fields = values  WHERE column=value: updates a row
+DELETE FROM table WHERE field=value: deletes rows from table
+SELECT COUNT (*) FROM table: counts the number of rows in a table
+ORDER BY: orders results
+LIMIT: limits number of results
+
+JOINS:
+INNER JOIN: A inner join B on A.fk_b_id = B.id
+	join only in matching rows, all null matches are excluded
+LEFT OUTER JOIN: A left join B on A.fk_b_id = B.id
+	join containing all the elems from the left table, filling no matches from the right table with null values
+RIGHT OUTER JOIN: B right join A on A.fk_b_id = B.id
+	join containing all the elems from the right table, filling no matches from the left table with null values
+FULL OUTER JOIN: B full outer join A on A.fk_b_id = B.id
+	A full join B on A.fk_b_id = B.id
+	join all elems from both tables, fillin no matches with nulls
+SELF JOIN: joins a table with itself
+CROSS JOIN: product between two tables, each row in the first table with each row in the second table
+COALESCE((query),0) AS name: replaces null values with 0
+
+UNIONS: combines queries in the same resultset if the columns match the number and types
+
+CREATE VIEW name AS query: virtual table from query
+CREATE INDEX name ON table (fields): creates an index to accelerate search on those fields
+
+RELATIONS:
+	1 TO MANY:
+		By FK
+	MANY TO MANY:
+		Should be avoided and modeled as a joining table
+
+BD TUNNING TECHNIQUES:
+	Indexing: CREATE INDEX index_name ON table (column);
+	Views
+	Partitioning
+	Caching
+	Denormalization, duplication with load balancers
+	Separate write/read master/slave
+
+CONCURRENCY:
+	LOCKS:
+		Exclusive locking (write lock): while one transaction is running with update/insert/delete statements, this lock prevents other transactions from accessing the same data until the first transaction finishes
+		Shared locking (read lock): While one transaction is running select, other transactions are prevented from update/insert/delete the same data until the read finishes. Other transactions can read the data.
+
+Atomicity: A transaction should be executed as a single unit
+Consitency: Data should be consistent with the restrictions/rules
+Isolation: One operation should not afect the result of other transactions
+Durability: There's no data loss in case of failure
+
+---------------------------------------------------------------------------------ORM-------------------------------------------------------------------------
+
+ORM: Object Relational Mapping
+JPA: Java Persistance API
+JDBC: Java Database Connectivity and provides a set of Java API for accessing the relational databases from Java
+
+--------------------------------------------------------------------------SPRING DATA-----------------------------------------------------------------------
+
+Annotations:
+
+@Entity
+@Table(name="table_name")
+@Id
+@Column(name="column_name")
+@GeneratedValue
+@OneToOne
+@OneToMany
+@ManyToOne
+@ManyToMany (requires a join table)
+@JoinColumn(name="id") / (mappedBy="id")
+@Enumerated
+
+
+Constants:
+GenerationType(strategy = TABLE,AUTO,IDENTITY,SEQUENCE)
+FetchType(fetch = EAGER,LAZY)
+CascadeType(ALL,PERSIST,MERGE,REMOVE,DETACH,LOCK,REFRESH,REPLICATE,SAVE_UPDATE)
+EnumType(ORDINAL,STRING)
+
+CrudRepository<T,ID>
+
+-----------------------------------------------------------------------------HIBERNATE---------------------------------------------------------------------------
+
+
+JPA: Specification
+	EntityManagerFactory
+Hibernate: Implementation
+	SessionFactory
+
+Hibernate objects:
+	Configuration − Represents a configuration or properties file required by the Hibernate.
+	SessionFactory − Configures Hibernate for the application using the supplied configuration file and allows for a Session object to be instantiated.
+	Session − Used to get a physical connection with a database.
+	Transaction − Represents a unit of work with the database and most of the RDBMS supports transaction functionality.
+	Query − Uses SQL or Hibernate Query Language (HQL) string to retrieve data from the database and create objects.
+	Criteria − Used to create and execute object oriented criteria queries to retrieve objects.
+
+
+
+Configuration
+1 Add Hibernate config files (Define DB connection):
+	hibernate.cfg.xml for hibernate
+	persistence.xml: for jpa
+	Configure dialect:
+		org.hibernate.dialect.SQLServerDialect
+		org.hibernate.dialect.MySQLDialect
+		org.hibernate.dialect.OracleDialect
+2 Annotate java class
+3 Develop code for db operations:
+	SessionFactory:
+	EntityManagerFactory emf = Persistence.createEntityManagerFactory("unitname");
+	EntityManager em = emf.createEntityManager();: defines operations for persisting transactions
+		em.getTransaction().begin();
+		em.persist(object);
+		em.persist(object);
+	emf.close();
+
+persistance.xml:
+
+	<persistenceunit name="hibernatecourse"><!unit name>
+        <provider>org.hibernate.jpa.HibernatePersistenceProvider</provider><!provider>
+        <properties>
+            <property name="javax.persistence.jdbc.driver" value="com.mysql.cj.jdbc.Driver"/>
+            <property name="javax.persistence.jdbc.url" value="jdbc:mysql://localhost:3306/airport"/>
+            <property name="javax.persistence.jdbc.user" value="root"/>
+            <property name="javax.persistence.jdbc.password" value="admin"/>
+
+            <property name="hibernate.dialect" value="org.hibernate.dialect.MySQL57Dialect"/><!dialect>
+
+            <property name="hibernate.show_sql" value="true"/>
+            <property name="hibernate.format_sql" value="true"/>
+
+            <property name="hibernate.hbm2ddl.auto" value="create"/>
+        </properties>
+    </persistenceunit>
+
+
+
+
+
+Annotations:
+1 Map class to table
+2 Map fields to columns
+
+Mapping:
+	@Entity: Marks the class as a DB entity
+	@Table(name="table_name"): Indicates the mapping table
+	@SecondaryTables and @SecondaryTables: defines secondary tables and the logic for populating those tables (by defining referencing FK on the tables)
+	@Id: Indicates the field is an id
+	@GeneratedValue(strategy=GenerationType.IDENTITY): Defines strategy for the autogeneration id
+	@Column(name="column_name"): Indicates the mapping column. If the name in java matches the name of db it's not necesary to annotate
+
+	@Access(AccessType.Type): Method to access the persistent state of the entity:
+		AccessType.FIELD: Based Annotations on fields
+		AccessType.PROPERTY: Based Annotations on methods
+
+	//For compoiste keys
+	@Embeddable: Marks a class as being embedded inside another class
+	@EmbeddedId: Marks a field to be used for an @Embeddable class
+	@Transactional: marks the methos as transactional and removes the need to call the methods beginTransaction, commit
+
+Hibernate needs empty constructors
+
+Relationships:
+	Unidirectional
+	Bidirectional
+	@ManyToMany
+	@ManyToOne
+	@OneToMany
+	@OneToOne
+	Owner Side: are mappedBy="owner" by the owning side (passenger owns > tickets. passenger is the owner mappedBy="passenger")
+	Owned Side: The @JoinColumn(name="OWNER_ID") references the owner
+	@JoinTable:
+		Specifies the cross reference table for the mapping of the relationship
+		Specified on the owning side of the relationship
+	@JoinColumn:
+		Specifies the column for entity association with the referenced columnName as a param
+	@JoinColumns:
+		Defines the mapping for composite fk
+		Groups @JoinColumn annotations
+
+SessionFactory:
+Reads the config, creates session objects, create only once in your app
+
+Session:
+Wraps JDBC connection, used for saving retrieveing objects from db, Retrieved from SessionFactory
+
+
+
+
+
+DDL = Data Definition Language
+DML = Data Manipulation Language
+
+Entity lifecycle
+Detach: Not associated with a hibernate session
+Merge: Merging will reattach to the session
+Persist: Managed state. Next commit will save to db
+Remove: Managed entities will be removed. Next commit will delete them from db
+Refresh: sync to db
+
+Cascade types
+Persist, Remove, Refresh, Detach, Merge, All
+
+----------------------------------------------------------------------------SECURITY------------------------------------------------------------------------
+
+Authentication: Is the real user
+Transport Layer Security(TLS)
+SSL Certificates
+Basic authentication: user/pass(hashed pass)
+API Key: Gives each client a specific API Key
+Client Certificate: Uses a public key to allow the caller to prove their identity
+Auth Server (Oauth OpenID, etc): Client send credentials, server send an access token (temporary) to be included in the headers request. The ms can verify token with auth server
+
+Authorization: What the user can do
+On behalf: A ms communicating with other ms makes a call passing the request credecntials on behalf of a user so the service called can also validate if it's the real user
+Encryption:Use standard algorythms:
+Firewalls
+Pentesting
+Automated Security Tests: prove that API rejects unauth callers
+
+
+
+-----------------------------------------------------------------------------------------DESIGN/ARCHITECTURE------------------------------------------------------
+
+Single Responsability: A class should have only one responsability
+Open Closed: Open for extension, closed for modifications
+Listkov Substitution: You should be able to substitute classes when using inheritance
+Interface segregation: Do not implement things that you don't need in your interfaces. Small granularity
+Dependency Injection: Your code should depend on abstractions, not implementations so you can inject the dependecies without problem
+
+DRY: Dont repeat yourself (code)
+Encapsulate what changes
+Favor composition over inheritance
+Program against an interface, not implementations
+
+DESIGN PATTERNS:
+	CREATIONAL:
+		 Factory: Delegates the creation to another class, hides creation logic
+		 Singleton: Returns a single instance of an object
+		 Builder: Makes a complex object immutable upon construction, avoids the need to write many constructors
+	BEHAVIORAL:
+	 	Strategy: Use composition to delegate behaviours
+	STRUCTURAL:
+	 	Adapter: Create new interfaces that act as a bridge between incompatible interfaces
+
+
+MICROSERVICES:
+	Api Gateway/Backend For Frontend: acts as a single entry point for the frontend calls, hides the details of communication with backend, implements authentication security
+	Shared Event Bus/Message Queues: uses a bus to communicate ms async by using messages
+	Circuit Breaker: Between client and server. Allows all calls to go through. If enough errors are detected, it blocks the calls and fails fast (sends error messages quickly instead of asking for the server to respond). After some time it validates if some calls work and restablishes the connection.
+	Service Registry: Keeps a directory of the services with ip addresses for discovery
+	Blue Green swap: swap the pasive service to the active with the new code blue>green
+
+Architecture types:
+DB centric architecture: Has a database at the center of the application and its divided in the layers:
+	UI:
+	Buisness Logic
+	Data Access: DB
+Domain centric architecture: The domain is at the center of the application and the layers are divided in:
+	Presentation: UI
+	Application: Abstractions for the use cases for of the app
+	Domain: Abstractions for the problema/business domain
+	Persistance: Interface with the storage/DB
+	Infratructure: Interface with the operative system and 3rd party dependencies
+	Crosscutting: Aspects common to all projects of the app
+	Specification: Acceptance tests verifying the functionality of the application
+
+Functional Organization: Separate the layers by functionality
+
+
+
+SYSTEM DESIGN:
+
+TIPS:
+	Understand the problem
+	Ask questions about:
+		Features
+		Users
+		Scaling
+		Stack
+		Design the most critical components first
+
+
+
+REQUIREMENTS:
+	Functional: Describe behavior: APIs, Operations supported
+	Non functional: Describe qualitites: Scalable, Fast, Secure
+	Who is going to use the system and How?
+	Convert functional requirements into APIs Action> POST/PUT/GET/DELETE
+
+		HIGH AVAILABILITY:
+			Redundancy as:
+				Availability zones
+				Fallbakc
+				Data replication
+			Switching between servers wuthout losing data:
+				DNS
+				Load balancers
+				Reverse proxy
+				API gateway
+				Service discovery
+			Protecting against client behaviour:
+				Load shedding
+				Rate limiter
+				Shuffle sharding
+				Cell based architecture
+			Protecting against failures:
+				Timeouts
+				Circuit breaker
+				Bulkhead
+				Retries
+			Detecting failures:
+				Monitoring
+				Logging
+			PROCESS:
+				Change management: Changes reviewed and approved
+				Deployment: Deploying changes to prod safe and quickly, rollbacks if necessary
+				QA: regularly exercise tests to validate new changes meet funcional/non functional reqs
+				Capacity planning: monitor system and resources to meet growing demands
+				Disaster recovery: Recover quickly in case of diusaster, regularly test DR
+				Root cause analysis: establish root causes of failures and identify preventive measures
+			SLO: Service Level Objective: Defines availability %
+			System handles expected failures:
+				Reliability: performs its intended functions correctly in time
+				High availability: small downtime
+				Recover from:
+					Server crash
+					Power outage in DC
+					Network problems
+			System handles unexpected failures:
+				Fault tolerance: close to zero downtime
+				Resilience: ability to quickly recover from failures
+				Recover from:
+					Load spikes
+					Dependency failures
+
+		SCALABILITY: The property of handling variable loads (reqs,inout data,connections, etc). Long term strategic needs
+			VERTICAL: Adding compute power (Scale up)
+			HORIZONTAL: Adding servers/replicas (Scale out)
+			ELASTICITY: Ability to aquire resources as needed and release them when not needed. Short term tactical needs
+
+		PERFORMANCE: Time required to process something
+			LATENCY: Time to get a response
+				Network latency: Time spent in the network
+					Osi Model
+					Network protocols
+				Server latency: Time the server takes to process the request
+					Faster algorithms
+					Memory vs disk
+					Thread pools and parallel processing
+					Local cache
+				Client latency:
+					Blocking vs non blocking io
+					Message formats
+					Data compression
+					CDN
+					External cache
+				AVG Latency: sum of latencies/number of reqs
+				PERCENTAGE: What reqs fall above the media latency %
+				BANDWIDHT: Rate of data transfer across a given path (bits per second)
+				TROUGHPUT: Rate at which something is processed
+					Reqs per second
+					Queries per minute
+					Network packets per hour
+					Increase by reducing latency
+					Increase by scaling
+				CACHING:
+					DEDUPLICATION CHACHE:
+						Local cache: private. Inside the server
+							PROS:
+								Simple
+								Fast
+							CONS:
+								Not scalable
+								No fault tolerance
+								No durability
+						External cache: shared, remote. Outside the server
+							PROS:
+								Scalable
+								Fault tolerant
+							CONS:
+								Requires maintainance
+						Adding data:
+							Explicitly: put > cache
+							Implicitly: get < cache:
+								Sync
+								Async
+						Evict (Replacing) data from cache:
+							Size based:
+								Evict entries not used recently (LRU Last recently used)
+								Evict entries used less often (LFU Least freq used)
+							Time based:
+								Passive expiration: When entry is accesed
+								Active expiration: Background thread
+							Explicit removal:
+								cache.invalidate(key)
+							Expiration: get > cache sync> data store: entry not expired, load new
+							Refresh: get > cache async> datastore: entry not yet expired, load in background
+						Deduplication: Producer > payload (deduplication id added) > cache (put/get deduplication id).
+							Producer send message with deduplication id. If not provided one is generated by the broker (hash based on the payload body)
+							Store deduplication id in the cache for x time
+							When the producer sends a message, the broker checks if the deduplication id is already in the cache
+							If the deduplication id is not there it means the producer has not send the message before
+							If the deduplication id is there, the message is not accepted
+							Only a message with the same id is processsed once even if it was sent multiple times
+					METADATA CACHE:
+						SYNC:
+							BY THE APP: Cache aside pattern
+								Data hit: the data is found in the cache: App > cache
+								Data miss: the data si not found in the cache: App > cache (not found) then > App > get DB > App put cache
+									App queries data in cache
+									If not found queries the db, retrieves the data and puts it in the cache
+								Pros:
+									Widely used
+								Cons:
+									Less suitable for latency critical systems
+									Stale data when data changes very freq in the DS
+									Cache stampede behaviour: Multiple thread trying to retrieve the data drom the DS
+							BY THE CACHE: All read and writes go through the cache. All operations are sync
+								Read thourgh cache pattern: In case of a cache miss the cahce is responsible for loading data from the DS
+								Write through cache pattern: Any modifications done to the data in cache are written back to the DS
+									Pros:
+										Simplify data access on the app side (readthrough & write through)
+										Helps to mitigate cache stampede problem (readthrough)
+									Cons:
+										Contains a lot of rarely used data (problem fro small caches)
+										Cache bcomes a critical component of the system
+								Write behind pattern: Write data to the cache sync, write later data back to the DS async
+									Pros:
+										Better write performance (high throughput, low latency)
+									Cons:
+										Data can be lost (mitigated by replication in cache)
+
+
+
+
+		DURABILITY: Once data submitted is not lost by maintaining multi copies
+			BACKUP: Copy data periodically and store it elsewhere
+				Full: Complete backup
+				Differential: We only save differences from the last backup
+				Incremental: Only the portion since the preceding backup was made
+			RAID: Redundant storing of information
+			REPLICATION: Copying the data to another machines
+				Read scalabilitty
+				Read performance
+				Availability
+				Durability
+			CHECKSUM: For preventing data corruption. Verify stored data chacksum vs retrieved data chacksum
+			AVAILABILITY: System uptime. Can I access my data now
+			DURABILITY: Storing data without losing it. Will my databe there in the future
+
+		CONSISTENCY:
+			RELATIONAL: ACID: Database constrains are not violated when transactions are executed
+			NO SQL: BASE
+			CAP THEOREM:
+				CONSITENCY:
+				AVAILABILITY:
+				PARTITION TOLERANCE:
+			CONSISTENCY MODELS: Weak consistency <> Strong consistency
+				Linearizability: After the update completes all clients read the updated data ++
+				Consistent prefix reads:
+				Read your writes:
+				Monotonic reads:
+				Eventual Consistency: If no additional updates to the object eventually all reads return the latest written value of the object
+
+		MAINTAINABILITY:
+			Maintenance phase:
+				Identify bugs
+				Add new features
+				Increase test coverage
+				Writing documentation
+
+			Failure modes and mitigations:
+				If a component fails what happens to he rest of the system?
+				How the system handles network partitions?
+				How we want the system to handle network partitions?
+
+			Monitoring:
+				How do we monitor the health of the system?
+				In case of a failure how do we know what is broken?
+
+			Testing:
+				How to test each individual component?
+				How to test end to end?
+
+			Deployment:
+				How to deploy regular changes safely?
+				How to rollback bad changes quickly?
+
+		SECURITY:
+			C: Confidentiality: Data is protected from unauthorized views
+			I: Integrity: Data is not corrupted or lost
+			A: Availability: Authorized users can access the resources when they need them
+
+			INDENTITY AND PERMISSION MANAGEMENT:
+				Who can access the system
+				Who cna acces what in a system
+				How to implement authentication and authorization
+
+			INFRASTRUCTURE PROTECTION:
+				Is the system protected from DDoS attack
+				Is protected from SQL injection, cross site scripting
+				Should we use a web application firewall or API gateway to implement protection
+
+			DATA PROTECTION:
+				How to protect data at rest
+				How to protect data at transit
+
+		COST: = EC + MC + RC
+			ENGINEERING COST:
+				Design
+				Implementation
+				Testing
+				Deployment
+			MAINTENANTCE COST:
+				The effort needed to maintain the system
+			RESOURCES COST:
+				Hardware:
+					Machines
+					Network devices
+					Hardware devices
+				Software:
+					Cloud services
+					On prem services
+					3rd party services
+				Cost: = Hardware + Requests made + Bytes transferred + Bytes stored
+					Hardware:
+						Availability +
+						Elasticity
+					Requests made:
+						Long polling
+						Request batching
+					Bytes transferred:
+						Compression
+					Bytes stored:
+						Durability
+						Hot and cold storages
+
+
+HARDWARE:
+	SERVER:
+		Contains:
+			Memory
+			CPU
+			Network
+			Disk
+		Types:
+			General purpose
+			Compute optimized
+			Memory optimized
+			Storage optimized
+	SERVER RACKS: Multiple servers are mounted on server racks. It's own network, cooling and power source
+	DATA CENTERS: Multiple racks in a DC. Independant power and physical security
+	AVAILABILITY ZONES: Multiple DC.
+		Increased availability as hardware is distributed across DC
+		Increased scalability as multiple places allocate resources
+	REGION: Multiple availability zones in a region
+		AZ within are connected with high bandwidth and low latency networking
+
+	COMPUTE ENVIRONMENT:
+		PHYSICAL SERVER:
+			Hardware that supports OS
+			OS that support apps
+			Applications contain code, bins, libs
+			PROS:
+				Complete control of the resources and stack
+				Processing power
+				Isolation between tenants
+				Eliminates noisy neighboor phenomenom (one app impacts the performance of other)
+				High security
+			CONS:
+				Expensive
+				Hard to manage
+				Hard to scale
+				Hard to port
+				Slow to provision and boot
+			GOOD FOR:
+				Need for highly productive hardware to run apps
+				Need to comply with complex corporate security and regulatory reqs
+
+		VIRTUAL MACHINES:
+			Hardware supports host OS
+			Host OS supports hypervisor
+			Hypervisor supports guest OS
+			Guest OS supports apps
+			PROS:
+				Cheaper
+				Easier to maintain
+				Easier to scale
+				Easier to port
+				Faster to provision and boot
+			CONS:
+				Exposed to the noisy neighboor problem
+				Less secure due to potential HyperV vulns
+			GOOD FOR:
+				Any workload
+				Config and prices may vary
+		CONTAINERS: Lightweight standalone package of software that includes everything you need to run an app
+			Hardware supports host OS
+			Host OS supports  container engine
+			Container engine supports apps
+			PROS:
+				Lightweight
+				More scalable and portable
+				Easier to deploy and maintaint at scale
+				Faster to start
+			CONS:
+				Possibly less secure
+				Less flexible dealing with multi OS
+			GOOD FOR:
+				Any workload
+
+		SERVERLESS: Cloud provides all the resources
+			Cloud supports HW and SW and apps
+			PROS:
+				No servers to manga, provision, configure, update
+				Cheap, we only pay for what we use
+				Automatic scaling based on the load
+				Increased delivery speed
+			CONS:
+				Technical limitations (cold start, invocation duration, memory size)
+				Expensive at big scale
+			GOOD FOR:
+				Small tasks prformed upon events
+
+COMMUNICATION:
+	REQUESTRESPONSE: When the client expects real time response from the server
+		SYNC: RequestResponse
+		ASYNC: Messaging
+		PROS:
+			Easy and fast implementation
+		CONS:
+			What if server is not available
+			What if failed request
+			What if server is slow
+			What if there's a traffic spike
+	ASYNC MESSAGING: When the client doesn't want to be blocked waiting
+		Through a messaging system
+		PROS:
+			Decouples the client from the server
+			Keeps messages and sends them later
+			Resends failed messages
+			Possible to add processing servers
+			Keep draining messages at its own pace
+		CONS:
+			Increased complexity
+			Operational overhead
+		MODELS:
+			MESSAGE QUEUES: Only a single consumer gets the message through a queue
+			PUBLISHER/SUSCRIBER: All the suscribers get the message when they suscribe to a topic
+		PATTERS:
+			Competing consumers: Multiple consumers compete for processing messages from the queue
+				Scalability: Add more consumers and the queue will balance the load/consumers
+				Availability: When an instance fail, others will continue processing the messages
+				Performance: Processing more messages in parallel by adding more instances
+			Request/Response messaging: The producer sends a request and receives a response from the consumer by using a callback queue
+			Priority queue: The service reorders messages from the queue by higher priority
+			Claim check: When a large message is processed, the message is stored in a shared storage and instead
+			a small message is sent to the service to notify and the services retrieves the large message from the shared storage
+	NETWORK PROTOCOLS: Rules that define how to transfer data
+		TCP: Realiability over time
+			Connection oriented: connection between clientserver is stablished before data is sent
+			Handshake: 3 steps connection stablishment process
+			Reliable: lost packets are retransmitted
+			Sequence numbers: Allow receivers to discard duplicate packages and properly reorder packets
+			Acknowledgements: Allows senders to determine when to retransmit lost packages
+			Order: All bytes are received in the order they were sent
+			Integrity: uses checksums for validating data correctness
+			Flow control: Controls the rate at which sender transmits the data to the receiver
+			Congestion control: Controls the rate of data entering the network
+		UDP: Time over reliability
+			Connectionless
+			Not reliable
+			No ACK
+			No retransmission
+			No order
+			No flow control
+			No congestion control
+			Checksums to ensure data correctness
+			Broadcast: Messages transferred to all receivers in the network
+			Multicast: Messages routed to the specific receivers
+		HTTP:
+			Request/Response: The client submits an http request, the server send back an http response
+			TCP: used for older http versions as transport protocol
+			QUIC: used for newer versions fo http/3 as transport protocol
+			Persisten connection: a single tcp connection may be used for multiple requests
+			Multiplexing: Multiple requests sent over the same tcp connection without waiting for responses
+			Compression: Allows content to be compressed on the server before transmission
+			HTTP Request:
+				Method: GET/POST/PUT/DELETE
+				Resource: /hello?
+				Query parameters: person=person1
+				Protocol version HTTP/1.1
+				Headers: Host: www.example.com AcceptEncoding: gzip
+				Body(optional): {user: "user1", data: "somedata"}
+			HTTP Response:
+				Protocol version HTTP/1.1
+				Headers: ContentType: text/html ContentLength: 101 ContentEncoding: gzip
+				Body(optional): {user: "user1", data: "somedata"}
+
+	BLOCKING vs NON BLOCKING I/O: Connections using sockets
+		BLOCKING I/O: Thread is suspended until read/write operation finishes
+			One thread per connection
+		THREAD PER REQUEST (NONBLOCKING I/O): Thread reads data available in the socket buffer and doesn't wait for the remaining data to arrive
+			One thread manages multiple connections
+			Handling connections is cheap
+			Easier to implemetn and maintain
+			Each thread consumes resources
+		REQUEST PROCESSING: Requests>IO threads > Working threads
+			THREAD PER CONNECTION: A dedicated IO thread and a working thread for every connection
+				Business logic executed inside the worker thread
+				Less scalable
+				More expensive
+			THREAD PER REQUEST: Single IO thread and a pool of working threads for multiple connections
+			EVENT LOOP: Single IO thread that works as a working thread for processing all connections
+				Massive ammount of active connections
+				More resilient to traffic spikes
+				Increase development and operational complexity
+
+		CONCURRENCY AND PARALLELISM:
+			CONCURRENCY: Multiple working threads in a single CPU
+			PARALLELISM: Multiple working threads run in parallel CPUs simultaneously
+
+	QUEUES:
+		BOUNDED: Limited size
+		UNBOUNDED: Unlimited size
+
+		IMPLEMENTATION:
+			LinkedList
+			Array
+			Circular buffer: Data Structure that keeps track of both positions. Higly recurrent operations.
+
+		PROBLEMS:
+			FULL QUEUE SOLUTIONS:
+				Dropping messages:
+					Load shedding: When the messages hit a treshold no more messages are accepted
+					Rate limiter: When the messages rate is over the limit, the new messages are stored in cache
+					Producers reacting to being notified the mesagges are no longer received:
+						Do nothing
+						Buffer messages (memory, disk)
+						Propagate the exception up the stack
+						Send messages over the limit to a temporary storage
+						Retry
+				Force producers to slow down:
+					Backpressure: mechanism that communicates it's under stress to another components
+				Scale consumers:
+					Autoscaling: Adding consumers to process mesages
+			EMPTY QUEUE SOLUTIONS:
+				Broker pushes the messages when available:
+					Websocket:
+				Broker blocks the pull request  and waits for messages:
+					Long polling: Block pull requests from consumer and waits for messages to arrive
+
+		BLOCKING QUEUE: Blocks operations depending on state of the queue
+			When full block the put operation
+			When empty blocks the take operation
+
+		PRODUCER/CONSUMER: Separates the production of tasks from their execution
+			Wait and notify:
+				Producer: Calls wait when the queue is full: Pauses execution thread.
+				Consumer: Calls notify when the queue is empty: Wakes up the producing thread
+			Semaphores:
+				Producer: emptycount, fillcount++. Thread blocked when empty becomes 0
+				Consumer: emptycount++, fillcount. Thread is blocked when fillcount becomes 0
+			Notification system: stream messages > blocking queue > notification thread (mail, sns, sms, etc)
+			Data aggregation: stream messages > data aggregator > blocking queue > writer threads > db
+
+		THREAD POOL: Is a queue and a collection of working threads
+			Creating threads increases performance, but too much threads can slow down
+			PROS:
+				Increases throughput
+				Increase performance
+				Make applications stable
+				Simplify coding (think tasks, not threads)
+			CONS:
+				Threads consume resources
+				Too many concurrent threads lead to outofmemory
+				Too many threads can lead to thread starvation
+				Thread creation takes time
+				Sizing a thread pool can be difficult
+				Long running tasks can clog the thread pool (mitigate w/timouts)
+			Thread should shutdown gracefully
+
+		BIG COMPUTE ARCHITECTURE:
+			COMPETEING CONSUMERS:: distributed task queue > VM Pool
+				Used when:
+					Homogeneus tasks
+					Task arrive at aprox similar rates
+					Independent tasks
+					Small tasks
+			BATCH COMPUTING: distributed job queue > coordinator > job n > VM pool n
+				Used when:
+					Heterogeneus tasks
+					Tasks represent bath jobs
+					Tasks are tightly coupled
+					Tasks take long time to run
+			HIGH PERFORMANCE COMPUTING:
+				Used for:
+					Analyse large volumes of data (trading transactions, clickstream events, app logs)
+					Build thousands of machine learning models (personalized home pages for customers)
+					Perform computaionally intensive operations (weather forecasting, climate simulation, drug discovery, analysis of genomic seq)
+
+
+	DATA STORE:
+		LOGS:
+			Storing messages in disk about the errors
+			Appends messages to a file
+			PROS:
+				Put and Get operations are fast
+			CONS:
+				Limited memory space
+				Becomes a problem when
+					Consumer gets slower
+					Messages are big
+					Producers start to send more messages
+				Low durability guarantee
+		INDEX:
+			Hashes
+		TIME SERIES: Sequence of data points collected over time intervals
+		B-TREES: Self balancing data structure
+			When hash table is very large, divide in sections and load small parts in memory
+			Divide the indexes into smaller indexes iteratively until the desire performance is achieved (Tree structure -> index of index childs that contains childs that contains childs)
+			Queries search first by index, then by sequence within the data in the index segment
+			Faster for reads
+		LSM-TREE: Log structured mem tree
+			Persisted to disk using a Sorted Strings Table
+			Multiple sorted files called segments
+			Perform only sequential writes
+			Faster for writes
+		EMBEDDED DATABSE: Stores data locally, integrated into the app
+		PAGE CACHE: Disk cache. App -> Page Cache -> Disk
+			Batching: buffering data in memory and processing by batches before writing to disk
+			When data is no longer used is automatically deleted
+
+
+
+
+
+
+
+WEB TIER:
+
+	DB:
+		TYPE: Relation vs NoDB
+		REPLICATIONS: Usually divides DB repolicas in master (original)/slave (copies) sending write operations (heavy) to master and read ops to slaves (light)
+
+	LOAD BALANCERS: Forward traffic between servers through a private ip to balance the workload, provides redundancy
+
+	CACHE: Stores heavy/frequent accessed data for faster access and better performance. If it has the data from a previous request, it sends it, else, it queries the sb, source
+	CDN: Content Delivery Network serves static context by finding the closest server to the user.
+
+	STATELESS ARCHITECTURE: Architecture where the session is stored outside the servers.
+		When scaling horizontally, move the session data out of the web tier.
+		Persisting session in a db.
+		Add sticky sessions in load balancers.
+		Users requests can be sent to any server.
+		Scalable and robust.
+
+	DATA CENTERS: Data centers by region.
+		Store data in diferent regions.
+		The users request is sent to the closest data center based on the geolocation.
+		Forwarded by a load balancer.
+		If a disaster ocurs, all the requests are sent to the healthy data center.
+
+	MIDDLEWARE: A layer/system between FE/BE that can add functions to the requests/communication between client/server
+		API Gateway: Provides logic to process the requests
+		Rate Limiter: provides logic to filter the number of requests to let pass trhough. Based on criterias: requests per time, user, ip, etc. Can use queues/caching to process the requests
+
+	MESSAGE QUEUES: A buffer that distributes async requests for async communication
+		PRODUCERS: Produces messages.
+		CONSUMERS/SUSCRIBERS: Perform actions defined by the messages.
+		Workers(Consumers) can be added upon the message/work load.
+
+	LOGGING: For identifying and tracking errors.
+	METRICS: Collecting info about the systems: CPU, Memory, Disk, Network, Performance.
+	AUTOMATION: Tools to automate processes like CI/CD.
+
+DATA TIER:
+
+	SHARDING: Separate big db into smaller ones called shards.
+		Requests sent to shards by using a hashing function (ex user_id%4)
+	DATA REPLICATION: Replicas for availability/redundancy avoid loss
+		Master: Original data, usually handles writing/reading
+		Replica: contains a copy of the data, usually handles reading
+	CLUSTER PROXY: Acts as a lb/gw proxy between shards.
+	SHARD PROXY: Installed in front of the shard to add caching, monitoring, health, terminating long queries, etc functionalities, addin scalability and performance
+	CONFIGURATION SERVICE: Checks the health/availability of shards
+
+	PROCESSING SERVICE: Producers>Consumers&Deduplication cache>Agregators&In Memory store>Internal queue>DB Writer>DB
+		CONSUMERS: Single or multithread component. Consume data sent to the DB for storing
+			Deduplication cache: distributed cache attached to the consumer to validate unique event ids
+		AGREGATORS: A hash tablet that accumulates data for a period of time in memory, like a counter
+		INTERNAL QUEUE: For processing data before sending it to the DB in case we use multithead(consumers) to decouple consumption and processing
+		DB Writer: Single or multithread component. Reads from the queue and writes to the DB
+			Deadletter queue: Attached to the writer in case some messages cannot be sent to DB due to DB poor performance
+			Embedded DB: Stores additional info (like a relationship detail) to complete the info we're going to send to the DB
+
+
+	INGESTION SERVICE: User>Api Gateway>Load balancer>Partition service> Partitions>Processing services>DB
+		PARTITIONER SERVICE CLIENT:
+			Blocking vs Non blocking I/O: Single thread to handle multiplie connections
+			Buffering and batching:
+			Timeouts:
+				Connection Timeout: how much time a client has to wait for a connection to stablish (small)
+				Request timeout: Processing a request takes much time (long)
+			Retries: What we do with failed requests
+			Exponential backoff and jitter algorythms:
+				Backoff: to increase the time between request in order to avoid service saturation
+				Jitter: adds randomness between retry intervals
+			Circuit breaker: Calculates how many errors have failed recently and if the error threshold is exceeded stops calling the service, reestablishes service later
+
+		LOAD BALANCER: Distribute traffic between multiple servers
+			Software load balancers: Software installed on machines
+			Hardware load balancers: Optimized machines to handle very high throughput (,illions of request/sec)
+			Load balancer algorythms:
+				Round robin: Distributes requests in order across servers
+				Least connections: Sends requests to the servers with the lowest level of active connections
+				Least response time: Semds requests to the server with the fastest response time
+			DNS: entry point for the requests, maps the request to the servers
+			Health checking: Checks the health of the servers to know where to send the requests
+		PARTITIONER SERVICE AND PARTITIONS:
+			Partition service: Service that looks for the reqeusts and routes the request to partitions. Distributes events/partitions
+			Partitions: Service that reads messages and stores them in a log file
+			Partition strategy: Defines what partition gets what messages
+				Caluclate a hash function based on a key and choose a machine based on this hash
+				Spread more active partitions across time
+			Service discovery: Service to know what partitions are available
+			Service discovery patterns:
+				Service side discovery: Clients know about load balancers, load balancers know about server side instances
+				Client side discovery: Every server instance registers itself in a service registry
+			Replication:
+				Single leader rep:
+				Multi leader rep:
+				Leaderless rep:
+
+	DATA RETRIEVAL:
+
+
+
+
+ESTIMATION: Metrics for estimating capacity
+	Millions of users
+	Daily transactions
+	Size of transactions (data)
+
+HASHING: Technique for generating unique ids to balance traffic.
+	CACHING SERVERS: ServerIndex = hash(hey)%numberofServers
+
+
+
+
+----------------------------------------------------------------------------------DEVOPS---------------------------------------------
+
+----------------------------------------------------------------------------------CLOUD-----------------------------------------------
+
+------------------------------------------------------------------------------------AWS----------------------------------------------------
+
+Computing:
+	EC2:
+		Autoscaling:
+			Vertical scaling: Adding resources
+			Horizontal scaling: Adding machines (ELB)
+			Scaling out: increase machines
+			Scaling in: decresing machines
+			Desired capacity: Allocate minimum and maximum number of machines
+			Auto assign: Adding/removing ec2 instances to meet the demands
+			Autoscaling alarms:
+				Cloudwatch
+				Metrics
+
+		Autoscaling groups: EC2 machines for autoscaling
+			Launch configuration:
+				AMI + Instance type
+				EC2 user data
+				EBS volumes
+				Security groups
+				SSH keypair
+			MIN/MAX/Initial capacity
+			Network/Subnets
+			Scaling policies: What will trigger autoscaling in/out
+				CPU
+				Network
+				Etc
+				Scheduled
+			ASG can terminate instances marked as unhealthy
+	Lambda: Serverless function.
+		Virtual functions
+		On demand
+		Short time execution
+		Auto scaled
+		Event-Driven
+Storing:
+	S3:
+		Stores files as objects in buckets
+		URL access for files
+		Configurable rules for data lifecycle
+	EBS:
+		Block storage to be connected to EC2 instances
+	EFS:
+		Network file system
+		Fully manged FS for linux
+		Configurable lifecycle rules
+
+
+Networking:
+	VPC: Virtual Network
+	CloudFront:
+		CDN
+		Supports static and dynamic content
+	API Gateway:
+		API Management service
+		Monitoring and metrics for APIs
+
+	Route 53: DNS
+		Routing functionalities
+	ELB: Load Balancer
+		Distributes traffic across multiple targets
+		Integrates with EC2, ECS, Lambda
+		Supports multi AZ
+
+Monitoring:
+	Cloudwatch: metric report->ASG->Add/remove instances
+
+
+
+---------------------------------------------------------------------------------AWSCLI-------------------------------------------------
+
+CONFIGURE:aws configure profile name: config setup for the credentials and region
+
+------------------------------------------------------------------------------------DOCKER-----------------------------------------------
+
+Image: Like a VM template
+build: docker image build
+show: docker image ls
+pull: docker image pull name:version
+inspect: docker image inspect name
+see layers: docker history name
+delete: docker image rm
+image location: Linux: /var/lib/docker Windows: C:\ProgramData\Docker\windowsfilter
+
+
+Container: Image running
+start: docker container run name it/d (interactive/detach) name name p 8080:8080 (hostport:containerport) imagename:version sh (opt: command to run)
+pause: Ctrl PQ
+resume: docker container attach id
+stop: exit/docker container stop id
+delete: docker container rm
+save: docker commit id
+running container ports: docker port name
+
+Configuration file: Dockerfile:
+FROM alpine:                            select image
+RUN apk add update nodejs nodejsnpm: execute commands in the image
+COPY . /src:                            origin/destiny copy the code to the image folder
+WORKDIR /src:                           sets the working directory
+RUN npm install:                        executes commands in the image
+EXPOSE 8080:                            sets the running port of the app
+ENTRYPOINT ["node","./app.js"]:         the app to execute after booting the container
+docker image t build name .:           build the image name in the directory
+
+Volumes:
+create: docker volume create name
+delete: docker volume rm name
+mount: docker container run it name voltest mount source=vol1(volume name),target=/var(path in the container) kalilinux/kalirolling
+
+Docker swarm:
+init: docker swarm init
+see nodes: docker node ls
+
+
+
+------------------------------------------------------------------------------KUBERNETES---------------------------------------------------------------
+
+Structure:
+Deployment contains > Pods contains > Containers
+Pods run apps. Nodes are like infrastructure
+
+Nodes:
+Master node: Takes decisions about the cluster
+ Leaders: Take the decision (active/pasive) switching between masters
+ Followers: Follow the decision
+ Components:
+ 	apiserver: exposes API to communicate with the master node
+ 	clusterstore: persists state and configuration
+ 	kubecontrolmanager: controller of all other controllers, reconciles current state with the desired state
+ 	kube scheduler: watches apiserver for new tasks to execute, assigns work to cluster nodes
+ Process: $kubectl sends commands to > apiserver communicatesinstructions to clusterstore >clusterstore stores state
+ 										 apiserver communicates tasks to scheduler > scheduler planifies tasks
+ 										 apiserver communicates with controllers > controllers loop the state vs desired state and make sure they match
+Worker node: Carries on work
+ Components:
+  Kubelet: Main kubernetes agent,
+   registers node in the cluster and assigns resources
+   watches apiserver to check if ther are pods
+   executes pods
+   reports to the master
+  Container runtime: runs the container
+  Kube proxy: Networkking component
+  load balancing between all the pods
+
+Pods: Kubernetes unit of work. Containers always run inside pods. Every pod shares an execution environment for all the containers.
+ Pods have an ip address to communicate
+ Containers have ports to communicate
+ Sharing:
+  Tightly coupled: 1 pod to many containers: when the containers need to share resources (memory, columes, etc)
+  Loosely coupled: 1 pod to 1 container: when the containers don't need to share resources
+ Scaling: Adding more pods, not adding containers
+ Mesh container: another container added to the pod to provide enhanced services to the app container (encryption, networking, etc)
+ Kubernetes networking service: exposes an ip and uses a load balancer to communicate with the ip's internal applications also uses labels to know to which pod balance traffic
+
+Deployments: High level controllers that contain pods and provide advanced features like self healing, state reconciliation, etc
+
+Commands:
+ kubectl get nodes: list nodes
+ kubectl clusterinfo: display cluster info
+ kubectl apply f .\pod.yml: applies the yaml configuration to k8s
+ kubectl get pods watch: lists the pods running
+ kubectl get pods o wide: displays detailed information about the running pods
+ kubectl describe pods hellopod: describes all the information of the pod
+ kubectl delete f .\pod.yml: delete pod
+
+Configuration file: deployment.yaml
+
+
+
+
+
+TERRAFORM
+
+required_providers: defines the cloud provider for the terraform
+provider "aws" {region="useast1"}: provides the region
+resource "type" "name" {attrs="values"}: define the type and config of the cloud resource
+
+
+terraform init #initialize directory, pull down provider
+terraform validate: validates the code
+terraform plan: shows the deployment plan
+terraform apply: apply changes to infra
+terrafom destroy: destroys the resources
+terraform state: shows the state of your resources
+terraform show: shows the state file
+
+JENKINS
+
+Jenkins:
+Jenkinsfile: Descriptor file for configuring the pipeline
+Pipeline block: the complete script
+Agent: the agent that's going to run the pipeline
+Stages: Stages of the pipeline
+Steps: Steps in the stage
+
+GIT Webhooks allow to invoke auto builds
+
+Jenkins API:
+	Trigerring build: host:port/job/name/build (requires crub auth token)
+		Headers:
+			jenkinsCrumb: crub
+			Authorization: Basic user:pass (base64)
+	Generate crub token: host:port/crumblssuer/api/json
+
+
+
+TESTING
+
+UNIT
+
+JUNIT
+
+Mocking: Creating beans as objects that are used to simulate data used for the tests
+Mocking frameworks: Mockito
+
+Annotations:
+@Before: For preparing data before being tested, ex openning a db connection
+@After: For finalizing using resources after the test are executed, ex cleaning data, closing connections, etc
+@Test: for marking a method as a runnable test
+@MockBean, @Mock: for marking an object as a bean to be mocked
+
+INTEGRATION
+
+SELENIUM
+
+
+PERFORMANCE
+
+JMETER
+CURL SCRIPTS
+
+
+FRONTEND
+
+HTML 5
+
+Audio/Video
+Web Workers/Service Workers (Threads js)
+Local Storage (globaL)
+Session Storage (tab)
+
+
+<inline> no height/width
+<block> h/w yes
+
+
+CSS boc model
+margin: external
+padding: internal
+css selector reset *{} crossbrowser compatibility
+
+css selectors
+css combiners
+
+book: css secrets
+site: csstricks
+
+specificity
+
+----------------------------------------------------------JAVASCRIPT-------------------------------------------------------------
+
+Scopes
+Callbacks: A function that be passed as argument to be called later
+Hoisting: Js automatically moves all variable declarations at the top when compiling
+Closures
+Promises:
+Async functions:
+Await operations/methods:
+
+Module pattern
+
+objects are passed by reference
+
+Reflections
+
+Unit testing: Jasmine
+
+it( "should be called" function() ){}
+beforeEach/beforeAll/afterEach/afterAll
+expect().equals()
+throwError
+
+spyOn() : listener
+toHaveBeenCalled()/toHaveBeenCalled(x,y)
+
+-------------------------------------------------------TYPESCRIPT----------------------------------------------------------------
+
+INSTALL: npm install -g typescript
+
+Type Annotations: let x: string = 'My string';
+Type Inference:
+
+Data types:
+	Void data type
+	Never
+	Any
+
+Union types:
+	let somevalue: number | string
+
+Type assertions:
+	let fixedstring: string = (<number>value).toFixed(4)
+	let fixedstring: string = (value as number).toFixed(4)
+
+message?: string : optional apram
+
+function(): string{} : typed function
+function greetin(greeting: string = 'hello') default initalizers
+
+
+-------------------------------------------------------REACT---------------------------------------------------------------------
+
+Component:
+Props: Properties to pass data from parent to child (unidirectional). Props are read only
+State: Data that belongs to the component. The component manages its own state
+DataFlow: From parent to child. Unidirectional
+
+Hooks: functions that allow the access to low level react features
+	useState: used to manage the state. When state changes re renders UI
+	useEffect: used when component is mounted and when state changes
+	useContext: used to share data across all the component tree
+	useRef: creates a mutable object that keeps the reference between renders. Doesn't retriger rendering. Typically to target elements from the dom
+
+
+
+
+
+-----------------------------------------------------------------------------GIT-------------------------------------------------
+
+Merging strategies:
+Rebase vs Merge:
+Cherry pick
+
+
+-------------------------------------------------------------------------BOOKS--------------------------------------------------------
+
+Java precise
+Java the complete reference
+Java language specification
+Effective java
+Head first  design patterns
+Java design patterns essentials
+Java concurrence in practice
