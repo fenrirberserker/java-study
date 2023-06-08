@@ -13,13 +13,17 @@ public class ArraysAndLists {
         int[] array = {5,9,6,7,3,6,1,2,8,4};
         List<Integer> list = convertArrayToList(array);
         System.out.println("List "+list);
-        Integer[] arrayInt = {5,9,6,7,3,6,1,2,8,4};
+        int[] arrayInt = convertListToArray(list);
+        System.out.print("Array ");
+        for (int i : arrayInt) {
+            System.out.print(i+" ");
+        }
     }
 
     public static List<Integer> convertArrayToList(int[] array){
 
-        List<Integer> list = Arrays.stream(array).boxed().collect(Collectors.toList());
-        list.sort(Comparator.naturalOrder());
+        List<Integer> list = Arrays.stream(array).boxed().sorted().collect(Collectors.toList());
+
 
 
         return list;
