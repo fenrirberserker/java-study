@@ -1,6 +1,6 @@
 package concepts.streams;
 
-import java.util.*;
+import java.util.Comparator;
 import java.util.stream.Stream;
 
 public class Sorted {

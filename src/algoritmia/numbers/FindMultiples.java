@@ -1,7 +1,5 @@
 package algoritmia.numbers;
 
-import java.util.Arrays;
-
 /**
  * Find 2 numbers in a given array that are multiple of a target num
  */

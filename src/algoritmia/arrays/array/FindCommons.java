@@ -1,7 +1,9 @@
 package algoritmia.arrays.array;
 
-import java.util.*;
-import java.util.stream.*;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+import java.util.stream.IntStream;
 
 /**
  * 

@@ -1,7 +1,5 @@
 package algoritmia.search.bfs;
 
-import java.util.LinkedList;
-
 /**
  * Uses a queue to find the element
  *

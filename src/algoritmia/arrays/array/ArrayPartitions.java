@@ -6,8 +6,6 @@ package algoritmia.arrays.array;
 import java.util.ArrayList;
 import java.util.List;
 
-import static java.util.stream.Collectors.joining;
-
 /**
  * Find all the different partitions of groups of 1,2,.3...n numbers in an array
  */

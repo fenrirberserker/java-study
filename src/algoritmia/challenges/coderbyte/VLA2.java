@@ -1,6 +1,5 @@
 package algoritmia.challenges.coderbyte;
 
-import java.sql.Array;
 import java.util.Arrays;
 import java.util.Comparator;
 

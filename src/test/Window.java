@@ -1,8 +1,8 @@
 package test;
-import java.awt.BorderLayout;
-import java.io.IOException;
 
 import javax.swing.*;
+import java.awt.*;
+import java.io.IOException;
 
 
 public class Window {

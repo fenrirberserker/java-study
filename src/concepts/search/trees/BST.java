@@ -1,9 +1,5 @@
 package concepts.search.trees;
 
-import algoritmia.mapping.MapHashTest;
-
-import java.util.HashSet;
-
 public class BST {
 
     public static void main(String[] args) {

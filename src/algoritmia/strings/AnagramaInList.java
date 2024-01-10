@@ -1,6 +1,9 @@
 package algoritmia.strings;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+import java.util.Random;
 
 public class AnagramaInList {
 	static String word = "AMOR";

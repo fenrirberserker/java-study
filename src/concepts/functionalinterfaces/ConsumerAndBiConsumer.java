@@ -1,7 +1,9 @@
 package concepts.functionalinterfaces;
 
-import java.util.*;
-import java.util.function.*;
+import java.util.HashMap;
+import java.util.Map;
+import java.util.function.BiConsumer;
+import java.util.function.Consumer;
 
 
 public class ConsumerAndBiConsumer {

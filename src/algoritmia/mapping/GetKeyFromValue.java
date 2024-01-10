@@ -2,7 +2,6 @@ package algoritmia.mapping;
 
 import java.util.HashMap;
 import java.util.Map;
-import java.util.Optional;
 
 public class GetKeyFromValue {
 

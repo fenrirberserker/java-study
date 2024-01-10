@@ -1,6 +1,8 @@
 package algoritmia.challenges.amazon;
 
-import java.util.*;
+import java.util.IntSummaryStatistics;
+import java.util.Map;
+import java.util.TreeMap;
 import java.util.stream.Stream;
 
 /**

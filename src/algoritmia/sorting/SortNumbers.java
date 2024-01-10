@@ -1,7 +1,5 @@
 package algoritmia.sorting;
 
-import java.util.Arrays;
-
 /**
  * 
  * @author Miguel Alba

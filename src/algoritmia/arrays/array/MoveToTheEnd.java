@@ -1,6 +1,8 @@
 package algoritmia.arrays.array;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 
 /**
  * Given an array and a target

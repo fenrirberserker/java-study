@@ -1,8 +1,11 @@
 package algoritmia.search;
 
-import java.util.*;
-import java.util.function.*;
-import java.util.stream.*;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.function.IntConsumer;
+import java.util.stream.Collectors;
+import java.util.stream.IntStream;
+import java.util.stream.Stream;
 
 /**
  * 

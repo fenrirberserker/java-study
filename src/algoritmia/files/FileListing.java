@@ -1,6 +1,6 @@
 package algoritmia.files;
 
-import java.io.*;
+import java.io.File;
 
 public class FileListing {
 

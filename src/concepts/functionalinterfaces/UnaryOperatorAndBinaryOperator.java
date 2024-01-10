@@ -1,6 +1,7 @@
 package concepts.functionalinterfaces;
 
-import java.util.function.*;
+import java.util.function.BinaryOperator;
+import java.util.function.UnaryOperator;
 
 public class UnaryOperatorAndBinaryOperator {
 

@@ -1,6 +1,8 @@
 package algoritmia.strings;
 
-import java.util.*;
+import java.util.Arrays;
+import java.util.HashMap;
+import java.util.Map;
 
 /**
  * Test if two Strings have the same letters*

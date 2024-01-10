@@ -1,9 +1,5 @@
 package algoritmia.recursion;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
-
 /**
  * The Fibonacci sequence is defined as follows:
  * the first number of the sequence is 0, the second number is 1,

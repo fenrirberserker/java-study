@@ -1,6 +1,8 @@
 package algoritmia.strings;
 
-import java.util.*;
+import java.util.LinkedHashMap;
+import java.util.Map;
+import java.util.Optional;
 
 /**
  * Find the character inside a String that doesn't repeat
