@@ -3,6 +3,10 @@ package algoritmia.dynamic;
 import java.util.HashMap;
 import java.util.Map;
 
+
+/**
+ * Solve the fibonacci sequence by using memoization
+ */
 public class Fibonacci {
 
 
