@@ -25,13 +25,15 @@ public class DepthFirstSearch {
     //plain solution
     public static void DFS (Map<Character,List<Character>> graph, Character source){
 
+        //initialize first element
         LinkedList<Character> stack = new LinkedList<>();
         stack.push(source);
 
+        //exit condition
         while(!stack.isEmpty()){
             Character pop = stack.pop();
             System.out.println(pop);
-
+            //check neighbors
             for (Character c: graph.get(pop) ) {
                 stack.push(c);
             }

@@ -26,6 +26,7 @@ public class BreadthFirstSearch {
         while(!queue.isEmpty()){
             Character current = queue.removeFirst();//remove from the front
             System.out.println(current);
+            //check neighbors
             for (char c: graph.get(current)){
                 queue.addLast(c);//add to the back
             }

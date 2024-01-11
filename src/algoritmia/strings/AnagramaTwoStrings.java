@@ -40,20 +40,11 @@ public class AnagramaTwoStrings {
 
 
         for(int i = 0; i < a.length(); i++){
-            if(mapa.containsKey(a.charAt(i))){
-                mapa.replace(a.charAt(i), mapa.get(a.charAt(i))+1);
-            }else{
-                mapa.put(a.charAt(i),1);
-            }
-
+            mapa.merge(a.charAt(i),1,Integer::sum);
         }
 
         for(int i = 0; i < b.length(); i++){
-            if(mapb.containsKey(b.charAt(i))){
-                mapb.replace(b.charAt(i), mapb.get(b.charAt(i))+1);
-            }else {
-                mapb.put(b.charAt(i),1);
-            }
+            mapb.merge(b.charAt(i),1,Integer::sum);
         }
 
         System.out.println("mapa");
@@ -67,7 +58,7 @@ public class AnagramaTwoStrings {
         });
 
 //        isContain = mapa.entrySet().equals(mapb.entrySet());//compare entries
-        isContain = mapa.hashCode()==mapb.hashCode();//or compare hashes
+        isContain = mapa.equals(mapb);//or compare hashes
         System.out.println("Equals: "+isContain);
 
         return isContain;
@@ -78,27 +69,17 @@ public class AnagramaTwoStrings {
 
         char[] charsa = a.toCharArray();
         char[] charsb = b.toCharArray();
-        StringBuilder stra = new StringBuilder();
-        StringBuilder strb = new StringBuilder();
 
         Arrays.sort(charsa);
         Arrays.sort(charsb);
 
-        for (char c: charsa ) {
-            stra.append(c);
+        for (int i=0;i<charsa.length;i++ ) {
+            if(charsa[i]!=charsb[i]){
+                return false;
+            }
         }
+        return true;
 
-        for (char c: charsb ) {
-            strb.append(c);
-        }
-
-        System.out.println("String a: "+stra);
-        System.out.println("String b: "+strb);
-
-        boolean isEqual = stra.toString().equals(strb.toString());
-        System.out.println("equals: "+isEqual);
-
-        return isEqual;
 
     }
 }
