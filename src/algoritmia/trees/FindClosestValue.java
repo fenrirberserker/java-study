@@ -42,7 +42,7 @@ public class FindClosestValue {
         Map<Integer,Integer> values = new TreeMap<>();
         List<Integer> numbers = new ArrayList<>();
 
-        root.inOrder(numbers);
+        root.inOrder();
         numbers.stream().forEach( x->{
             System.out.println("i "+x);
             int diff =0;

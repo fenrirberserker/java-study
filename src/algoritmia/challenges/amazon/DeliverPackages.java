@@ -54,9 +54,7 @@ public class DeliverPackages {
 
         }
 
-
         return trips+1;//count for the last
-
 
     }
 }

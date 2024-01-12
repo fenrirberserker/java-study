@@ -48,14 +48,13 @@ public class Node {
 	}
 	
 	//left, root, right
-	public void inOrder(List<Integer> numbers) {
+	public void inOrder() {
 		if(left!=null) {//left
-			left.inOrder(numbers);
+			left.inOrder();
 		}
 		System.out.println(data);//current
-		numbers.add(data);
 		if(right!=null) {//right
-			right.inOrder(numbers);
+			right.inOrder();
 		}
 	}
 	

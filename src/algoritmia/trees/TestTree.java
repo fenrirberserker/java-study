@@ -13,7 +13,7 @@ public class TestTree {
 		n.insert(5);
 		
 		System.out.println("Inorder");//left, root, right
-		n.inOrder(null);
+		n.inOrder();
 		System.out.println("\nPreorder");//root, left, right
 		n.preOrder();
 		System.out.println("\nPostorder");//left, right, root
