@@ -1,5 +1,7 @@
 package algoritmia.collectors;
 
+import java.util.Arrays;
+import java.util.List;
 import java.util.function.BinaryOperator;
 import java.util.stream.Stream;
 
@@ -7,10 +9,16 @@ public class TestReductors {
 
     public static void main(String[] args) {
 
-        reduceStrings();
+        /*reduceStrings();
         reduceIntegers();
         reduceOpyionals();
         reduceParallel();
+*/
+        List<String> list = Arrays.asList("dog","over","good");
+
+        list.stream().reduce((x1,x2) -> x1.length()==3?x1:x2).ifPresent(System.out::println);
+        System.out.println(list.stream().reduce(new String(),(x1,x2)->{if(x1.equals("dog")) return x1;return x2;}));
+
 
     }
 

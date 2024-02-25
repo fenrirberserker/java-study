@@ -1,4 +1,4 @@
-package algoritmia.challenges.amazon;
+package challenges.amazon;
 
 import java.util.IntSummaryStatistics;
 import java.util.Map;
@@ -29,11 +29,8 @@ public class FindDeviation {
 
         for (int i = 0; i < s.length(); i++) {
             char c = s.charAt(i);
-            if(map.containsKey(c)){
-                map.replace(c,map.get(c)+1);
-            }else{
-                map.put(c,1);
-            }
+            map.merge(c, 1, Integer::sum);
+
         }
         System.out.println(map);
 

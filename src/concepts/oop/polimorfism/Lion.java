@@ -1,4 +1,4 @@
-package concepts.polimorfism;
+package concepts.oop.polimorfism;
 
 public class Lion extends Animal {
 	
@@ -6,6 +6,10 @@ public class Lion extends Animal {
 	
 	public void play() {
 		System.out.println("toss in meat");
+	}
+
+	public void call(){
+		System.out.println("Come");
 	}
 
 }

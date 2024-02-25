@@ -22,6 +22,7 @@ public class NthLargest {
         for (int i:result) {
             System.out.print(i+",");
         }
+
     }
 
     public static int[] findNthLargest(int n, int[] array){

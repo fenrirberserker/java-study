@@ -1,4 +1,4 @@
-package algoritmia.challenges.amazon;
+package challenges.amazon;
 
 import java.util.ArrayList;
 import java.util.Arrays;

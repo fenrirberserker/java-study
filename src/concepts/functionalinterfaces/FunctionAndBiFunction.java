@@ -2,6 +2,7 @@ package concepts.functionalinterfaces;
 
 import java.util.function.BiFunction;
 import java.util.function.Function;
+import java.util.function.Predicate;
 
 public class FunctionAndBiFunction {
 
@@ -19,7 +20,12 @@ public class FunctionAndBiFunction {
 		
 		System.out.println(b1.apply("baby ", "chick"));
 		System.out.println(b2.apply("baby ", "chick"));
-		
+
+		Predicate<String> egg = s-> s.contains("egg");
+		Predicate<String> brown = s-> s.contains("brown");
+
+		Predicate<String> brownEggs = egg.and(brown);
+		System.out.println(brownEggs.test("brown eggs"));
 		
 
 	}

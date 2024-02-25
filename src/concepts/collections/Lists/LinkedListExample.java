@@ -9,12 +9,12 @@ public class LinkedListExample {
         LinkedList<Integer> linked = new LinkedList<>();
 
 
-        linked.offer(1);//adds to the front
+        linked.push(2);
         System.out.println(linked);
-        //linked.poll();//polls from the front
-        System.out.println();
-//        linked.
-        System.out.println(linked.get(0));
+        linked.add(3);
+        System.out.println(linked);
+        linked.offer(4);
+        System.out.println(linked);
     }
 
 }

@@ -15,6 +15,13 @@ public class ExceptionTest {
 
         }
 
+        try{
+            System.out.println("asfdsafsa");
+        }
+        finally {
+            System.out.println("SASADSAD");
+        }
+
         //Exceptions must have at least one catch or either finally
     }
 }

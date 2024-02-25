@@ -28,9 +28,9 @@ public class Reductor {
 		Stream<Integer> onelement = Stream.of(3);
 		Stream<Integer> threeelements = Stream.of(3,5,6);
 		
-		empty.reduce(op).ifPresent(System.out::print);//no output
-		onelement.reduce(op).ifPresent(System.out::print);//3
-		threeelements.reduce(op).ifPresent(System.out::print);//90
+		empty.reduce(op).ifPresent(System.out::println);//no output
+		onelement.reduce(op).ifPresent(System.out::println);//3
+		threeelements.reduce(op).ifPresent(System.out::println);//90
 		
 		
 

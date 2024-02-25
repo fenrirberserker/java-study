@@ -1,4 +1,4 @@
-package algoritmia.challenges.coderbyte;
+package challenges.coderbyte;
 
 import java.util.HashMap;
 import java.util.Map;

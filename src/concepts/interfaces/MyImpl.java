@@ -1,11 +1,11 @@
 package concepts.interfaces;
 
-public class MyImpl implements MyInterface{
+public class MyImpl implements My2Interface{
 
     public static void main(String[] args) {
         MyInterface i = new MyImpl();
-        i.another();
-        i.doThing();
+        i.another();//excecutes overriden method
+        i.doThing();//executes overriden method
     }
     @Override
     public void doThing() {

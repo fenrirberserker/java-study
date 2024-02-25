@@ -1,4 +1,4 @@
-package algoritmia.challenges.sonatafy;
+package challenges.sonatafy;
 
 import java.util.*;
 

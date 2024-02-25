@@ -1,4 +1,4 @@
-package algoritmia.challenges.coderbyte;
+package challenges.coderbyte;
 
 import java.io.IOException;
 

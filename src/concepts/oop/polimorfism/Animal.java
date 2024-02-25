@@ -1,4 +1,4 @@
-package concepts.polimorfism;
+package concepts.oop.polimorfism;
 
 public abstract class Animal {
 	String name = "???";
@@ -14,5 +14,7 @@ public abstract class Animal {
 	public void play() {
 		System.out.println("pet animal");
 	}
+
+
 
 }
