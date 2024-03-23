@@ -3,6 +3,10 @@ package algoritmia.combinations;
 import java.util.HashMap;
 import java.util.Map;
 
+/**
+ * Generate combinations of numbers in a progressive fashion
+ */
+
 public class Combinations {
 
     public static void main(String[] args) {
