@@ -52,7 +52,7 @@ public class Node {
 		if(left!=null) {//left
 			left.inOrder();
 		}
-		System.out.println(data);//current
+		System.out.println(data);//root
 		if(right!=null) {//right
 			right.inOrder();
 		}
@@ -77,7 +77,7 @@ public class Node {
 		if(right!=null) {
 			right.postOrder();
 		}
-		System.out.println(data);
+		System.out.println(data);//root
 	}
 
 }
