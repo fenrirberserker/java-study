@@ -1,6 +1,6 @@
 package algoritmia.trees;
 
-public class TestTree {
+public class OrderTree {
 
 	public static void main(String[] args) {
 		

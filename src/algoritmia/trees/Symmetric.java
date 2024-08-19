@@ -32,6 +32,10 @@ public class Symmetric {
         node.left = left;
         node.right = right;
 
+        System.out.println("Tree");
+        node.inOrder();
+
+        System.out.println("Result");
         boolean result = isSymmetric(node);
         System.out.println("Result "+result);
     }
@@ -46,7 +50,7 @@ public class Symmetric {
 
     public static boolean areSymmetric(Node node1, Node node2){
 
-        if(node1 == null && node2 == null){
+        if(node1 == null && node2 == null){//exit condition/ if end reached
             return true;
         }else if ( (node1==null) != (node2==null) || node1.data != node2.data){
             return false;
