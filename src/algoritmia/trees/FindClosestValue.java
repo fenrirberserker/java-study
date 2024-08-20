@@ -151,7 +151,7 @@ public class FindClosestValue {
         System.out.println("Values ");
         System.out.println(values);
 
-        Integer smallest = values.entrySet().stream().sorted(Comparator.comparing(x->x.getValue())).findFirst().get().getKey();
+        Integer smallest = values.entrySet().stream().min(Map.Entry.comparingByValue()).get().getKey();
 
         return smallest;
     }
