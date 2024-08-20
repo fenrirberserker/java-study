@@ -16,6 +16,100 @@ import java.util.*;
 
 public class FindClosestValue {
 
+    static class Node {
+
+        algoritmia.trees.Node left,right;
+        int data;
+
+
+        public Node(int data) {
+            this.data = data;
+        }
+
+        public void insert(int value) {
+
+            if(value<=data) {//value is minor
+                if(left==null) {
+                    left = new algoritmia.trees.Node(value);
+                }else {
+                    left.insert(value);
+                }
+            }else {//value is major
+                if(right==null) {
+                    right = new algoritmia.trees.Node(value);
+                }else {
+                    right.insert(value);
+                }
+            }
+        }
+
+        public boolean contains(int value) {
+            if(value == data) {//if current node equals value
+                return true;
+            }else if(value<data) {//search left
+                if(left == null) {
+                    return false;
+                }else {
+                    return left.contains(value);
+                }
+            }else {//search right
+                if(right==null) {
+                    return false;
+                }else {
+                    return right.contains(value);
+                }
+            }
+        }
+
+        //left, root, right
+        public void inOrder() {
+            if(left!=null) {//left
+                left.inOrder();
+            }
+            System.out.println(data);//root
+            if(right!=null) {//right
+                right.inOrder();
+            }
+        }
+
+        //root, left, right
+        public void preOrder() {
+            System.out.println(data);//root
+            if(left!=null) {//left
+                left.preOrder();
+            }
+            if(right!=null) {//right
+                right.preOrder();
+            }
+        }
+
+        //left, right, root
+        public void postOrder() {
+            if(left!=null) {
+                left.postOrder();
+            }
+            if(right!=null) {
+                right.postOrder();
+            }
+            System.out.println(data);//root
+        }
+
+        //left, root, right
+        public void inOrder(List<Integer> list) {
+            if(left!=null) {//left
+                left.inOrder();
+            }
+            System.out.println(data);//root
+            list.add(data);
+            if(right!=null) {//right
+                right.inOrder();
+            }
+        }
+
+    }
+
+
+
     public static void main(String[] args) {
 
         Node root = new Node(10);
@@ -42,7 +136,7 @@ public class FindClosestValue {
         Map<Integer,Integer> values = new TreeMap<>();
         List<Integer> numbers = new ArrayList<>();
 
-        root.inOrder();
+        root.inOrder(numbers);
         numbers.stream().forEach( x->{
             System.out.println("i "+x);
             int diff =0;
@@ -61,4 +155,5 @@ public class FindClosestValue {
 
         return smallest;
     }
+
 }

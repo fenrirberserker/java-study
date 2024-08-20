@@ -42,24 +42,17 @@ public class BreadthFirstSearch {
         public List<String> breadthFirstSearch(List<String> array) {
             // Write your code here.
             Queue<Node> queue = new ArrayDeque<>();
-            Node current = this;//add root/current to queue
-            queue.add(current);
+            Node current = this;//references the node on which breadthFirstSearch is called
+            queue.add(current);//add root/current to queue
 
             while(!queue.isEmpty()){//while nodes in queue
                 current = queue.remove();//current is next on the queue
                 array.add(current.name);//add extracted to the array
-                for (Node node: current.children) {//all children of current
-                    queue.add(node);//are added to the queue
-                }
+                queue.addAll(current.children); //all children of current are added to the queue
             }
 
             return array;
         }
 
-        public Node addChild(String name) {
-            Node child = new Node(name);
-            children.add(child);
-            return this;
-        }
     }
 }

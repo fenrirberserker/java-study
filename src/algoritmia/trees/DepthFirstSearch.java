@@ -16,13 +16,13 @@ public class DepthFirstSearch {
 
     public static void main(String[] args) {
 
-        Node root = new Node("A");
-        root.children.addAll(Arrays.asList(new Node("B"), new Node("C"), new Node("D")));
-        root.children.get(0).children.addAll(Arrays.asList(new Node("E"), new Node("F")));
-        root.children.get(0).children.get(1).children.addAll(Arrays.asList(new Node("I"), new Node("J")));
+        Node root = new Node("A");                                                                                              //A
+        root.children.addAll(Arrays.asList(new Node("B"), new Node("C"), new Node("D")));//A               //B      //C         //D
+        root.children.get(0).children.addAll(Arrays.asList(new Node("E"), new Node("F")));//B                 //E   //F
+        root.children.get(0).children.get(1).children.addAll(Arrays.asList(new Node("I"), new Node("J")));         //I //J
         //root.children.get(1).children.addAll(Arrays.asList())
-        root.children.get(2).children.addAll(Arrays.asList(new Node("G"), new Node("H")));
-        root.children.get(2).children.get(0).children.add(new Node("K"));
+        root.children.get(2).children.addAll(Arrays.asList(new Node("G"), new Node("H")));                                         //G    //H
+        root.children.get(2).children.get(0).children.add(new Node("K"));                                                             //K
 
         List<String> result = root.depthFirstSearch(new ArrayList<>());
         System.out.println(result);
@@ -50,12 +50,6 @@ public class DepthFirstSearch {
                 n.depthFirstSearch(array);//recursive call
             }
             return array;
-        }
-
-        public Node addChild(String name) {
-            Node child = new Node(name);
-            children.add(child);
-            return this;
         }
 
 
