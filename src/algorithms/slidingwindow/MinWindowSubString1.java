@@ -6,13 +6,22 @@ import java.util.function.Predicate;
 
 /**
  * Find all the characters from t in the smallest window in s
+ *
+ * Return only the first result found
  */
 
 public class MinWindowSubString1 {
 
     public static void main(String[] args) {
-        String s = "ADOBECODEBANC", t = "ABC";
-        System.out.println(minWindow(s, t)); // Output: "BANC"
+        String[][] s = {
+                {"ADOBECODEBANC", "ABC"},// Output: "BANC"
+                {"ASUFHUSAFUHSAIU","SHF"}
+        };
+        for (String[] a : s) {
+            System.out.println("result is: "+ minWindow2(a[0], a[1]));
+        }
+
+
     }
 
     public static String minWindow(String s, String t) {
@@ -55,20 +64,61 @@ public class MinWindowSubString1 {
         return min;
     }
 
-    /*public static String minWindow2(String s, String t){
+    public static String minWindow2(String s, String t){
 
-    }*/
+        int start = 0,end = t.length()-1;
+        Map<Character, Integer> target = new HashMap<>();
+        for (char c : t.toCharArray()) {
+            target.merge(c,1,Integer::sum);
+        }
+        System.out.println("target "+target);
+
+        List<String> subStrings = new ArrayList<>();
 
 
 
-    public static boolean compareMaps(Map<Character,Integer> origin, Map<Character,Integer> sub){
+        while (start<=(s.length()-t.length())-1) {
+
+            Map<Character, Integer> origin = new HashMap<>();
+            for (char c : s.substring(start,end+1).toCharArray()) {
+                origin.merge(c,1,Integer::sum);
+            }
+            System.out.println("origin "+origin);
+
+
+            if (compareMaps(origin,target)) {
+                subStrings.add(s.substring(start,end+1));
+            }
+
+            if(end<s.length()-1){
+                end++;
+            }
+            if(end==s.length()-1){
+                start++;
+            }
+
+
+
+        }
+        System.out.println("subStrings "+subStrings);
+
+        String result = subStrings.stream().min(Comparator.comparing(String::length)).get();
+
+
+        return result;
+
+    }
+
+
+
+    public static boolean compareMaps(Map<Character,Integer> origin, Map<Character,Integer> target){
 
         Predicate<Map.Entry<Character,Integer>> pred = (p) -> {
             return origin.containsKey(p.getKey()) &&
                     origin.get(p.getKey()) >= p.getValue();
         };
-        boolean value = false;
-        for (Map.Entry<Character,Integer> e: sub.entrySet()){
+
+        for (Map.Entry<Character,Integer> e: target.entrySet()){
             if(!pred.test(e)){
                 return false;
             }
