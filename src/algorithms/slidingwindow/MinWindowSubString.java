@@ -1,4 +1,4 @@
-package challenges.coderbyte;
+package algorithms.slidingwindow;
 
 import java.util.HashMap;
 import java.util.Map;

@@ -1,4 +1,4 @@
-package challenges.minWindowSubString.sonatafy;
+package algorithms.slidingwindow;
 
 import java.util.*;
 
@@ -9,7 +9,7 @@ import java.util.*;
  * else return ""
  */
 
-public class MinWindowSubString {
+public class MinWindowSubString3 {
 
     public static void main(String[] args) {
 

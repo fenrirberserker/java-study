@@ -1,10 +1,10 @@
-package challenges.minWindowSubString;
+package algorithms.slidingwindow;
 
 
 import java.util.*;
 import java.util.function.Predicate;
 
-public class MinWindowSubString {
+public class MinWindowSubString2 {
     public static String minWindow(String s, String t) {
         if (s == null || t == null || s.length() < t.length()) {
             return "";
