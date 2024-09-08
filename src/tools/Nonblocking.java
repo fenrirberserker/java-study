@@ -3,7 +3,7 @@ package tools;
 import java.awt.*;
 
 public class Nonblocking {
-    public static final int SLEEP_MILLIS = 60*10;
+    public static final int SLEEP_MILLIS = 60*100;
 
     public static void main(String... args) throws Exception {
         Robot robot = new Robot();

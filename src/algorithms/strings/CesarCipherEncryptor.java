@@ -5,7 +5,8 @@ import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 /**
- * Given a non-empty string of lowercase letters and a non-negative integer representing a key, write a function that returns a new string obtained by shifting every letter in the input string by k positions in the alphabet, where k is the key.
+ * Given a non-empty string of lowercase letters and a non-negative integer representing a key,
+ * write a function that returns a new string obtained by shifting every letter in the input string by k positions in the alphabet, where k is the key.
  *
  * Note that letters should "wrap" around the alphabet; in other words, the letter z shifted by one returns the letter a.
  */
@@ -17,36 +18,42 @@ public class CesarCipherEncryptor {
         String string = "xyz";
         int key = 2;
 
-        String newstring = caesarCypherEncryptor(string,key);
-        System.out.println("newstring "+newstring);
+        Object[][] samples = {{"xyz",2},{"agz",3}};
+
+        for (int i = 0; i < samples.length; i++) {
+            String s = (String) samples[i][0];
+            int k = (int) samples[i][1];
+            System.out.println("original String: " + s);
+            String result = caesarCypherEncryptor(s,k);
+            System.out.println("new String: " + result);
+            System.out.println();
+
+        }
 
     }
 
-    public static String caesarCypherEncryptor(String str, int key) {
-        // Write your code here.
 
+
+    public static String caesarCypherEncryptor(String str, int key){
         List<Character> chars = Stream.iterate('a', n-> (char) (n+1)).limit(26).collect(Collectors.toList());
+        int size = chars.size();
         System.out.println(chars);
-        String newstring = "";
-
+        System.out.println("size "+size);
+        StringBuilder sb = new StringBuilder();
         for (int i = 0; i < str.length(); i++) {
-            char c = str.charAt(i);
-            System.out.println("index "+i+" char "+c);
-            int newindex =0;
-            if((chars.indexOf(c)+key)>(25)){
-                newindex = -1+( key-( 25-( chars.indexOf(c) ) ) );//calc
-                System.out.println("extra");
-            }else {
-                newindex = chars.indexOf(c)+key;
-                System.out.println("regular");
-            }
-            System.out.println("new index "+newindex);
-            char newchar = chars.get(newindex);
-            System.out.println("newchar "+newchar);
-            newstring+=newchar;
 
+            int currentindex = chars.indexOf(str.charAt(i));
+            int newindex = (currentindex+key)%(size);
+            char currentchar = chars.get(currentindex);
+            char newchar = chars.get(newindex);
+
+            System.out.println("current i "+currentindex);
+            System.out.println("new i "+newindex);
+            System.out.println("current char "+currentchar);
+            System.out.println("new char "+newchar);
+            sb.append(newchar);
         }
-        
-        return newstring;
+
+        return sb.toString();
     }
 }
