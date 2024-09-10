@@ -26,7 +26,7 @@ public class ReversePolishNotation {
 
     public static double reversePolishNotation(String[] charr) {
 
-        double result = 0;
+        double result;
 
 
         ArrayDeque<String> stack = new ArrayDeque<>();
