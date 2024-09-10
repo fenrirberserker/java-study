@@ -1,6 +1,7 @@
 package algorithms.stacks;
 
 import java.util.ArrayDeque;
+import java.util.Deque;
 
 /**
  * Given a String
@@ -29,7 +30,7 @@ public class ReversePolishNotation {
         double result;
 
 
-        ArrayDeque<String> stack = new ArrayDeque<>();
+        Deque<String> stack = new ArrayDeque<>();
         for (int i=0; i<charr.length; i++) {
             String s = charr[i];
             System.out.println("Stack: " + stack);
@@ -66,7 +67,7 @@ public class ReversePolishNotation {
 
     }
 
-    public static double add(ArrayDeque<String> stack) {
+    public static double add(Deque<String> stack) {
 
         double second = Double.parseDouble(stack.pop());
         double first = Double.parseDouble(stack.pop());
@@ -75,7 +76,7 @@ public class ReversePolishNotation {
 
     }
 
-    public static double sub(ArrayDeque<String> stack) {
+    public static double sub(Deque<String> stack) {
 
         double second = Double.parseDouble(stack.pop());
         double first = Double.parseDouble(stack.pop());
@@ -84,7 +85,7 @@ public class ReversePolishNotation {
 
     }
 
-    public static double mul(ArrayDeque<String> stack) {
+    public static double mul(Deque<String> stack) {
 
         double second = Double.parseDouble(stack.pop());
         double first = Double.parseDouble(stack.pop());
@@ -93,7 +94,7 @@ public class ReversePolishNotation {
 
     }
 
-    public static double div(ArrayDeque<String> stack) {
+    public static double div(Deque<String> stack) {
 
         double second = Double.parseDouble(stack.pop());
         double first = Double.parseDouble(stack.pop());
