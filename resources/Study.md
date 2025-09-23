@@ -1002,6 +1002,73 @@ Describe qualities: Scalable, Fast, Secure
 
 ---
 
+# 🔧 DevOps
+
+## 🚀 Features
+- **Automationm**
+- **CI/CD**
+- **Monitoring**
+- **Collaboration**
+- **Infrastructure as Code**
+
+## 🔄 SDLC
+- **Requirement gathering**: Interact with the user to understand wht the software should do, features
+- **Analysis**: Analyse the requirements and understand how to build the software, roadmap for development
+- **Design**: Design the architecture of the software, components, interactions, technologies, ui
+- **Coding**: Write the code
+- **Testing**: Test the software functionality to ensure it meets the requirements and is free of bugs
+- **Deployment**: Deploy the software to a production environment
+- **Maintenance**: Ongoing support and maintenance of the software, improvements, bug fixes
+
+
+## 🐳 Docker
+
+### Images
+- **build**: docker image build
+- **show**: docker image ls
+- **pull**: docker image pull name:version
+- **inspect**: docker image inspect name
+- **delete**: docker image rm
+
+### Containers
+- **start**: docker container run
+- **stop**: docker container stop id
+- **delete**: docker container rm
+
+### Dockerfile
+```dockerfile
+FROM alpine
+RUN apk add update nodejs npm
+COPY . /src
+WORKDIR /src
+RUN npm install
+EXPOSE 8080
+ENTRYPOINT ["node","./app.js"]
+```
+
+## ☸️ Kubernetes
+
+### Structure
+Deployment contains > Pods contains > Containers
+
+### Nodes
+- **Master node**: Takes decisions about the cluster
+- **Worker node**: Carries on work
+
+### Components
+- **apiserver**: exposes API to communicate with the master node
+- **kubelet**: Main kubernetes agent
+- **kube-proxy**: Networking component
+
+### Commands
+```bash
+kubectl get nodes
+kubectl apply -f pod.yml
+kubectl get pods --watch
+kubectl describe pods hellopod
+kubectl delete -f pod.yml
+```
+
 ## ☁️ Cloud
 
 ### 🟠 AWS
@@ -1024,6 +1091,43 @@ Describe qualities: Scalable, Fast, Secure
 
 #### AWS Monitoring
 - **CloudWatch**: Metrics and monitoring
+## 🏢 Infrastructure as Code
+
+### 🏢 Terraform
+```hcl
+provider "aws" {
+  region = "us-east-1"
+}
+
+resource "aws_instance" "example" {
+  ami           = "ami-0c55b159cbfafe1d0"
+  instance_type = "t2.micro"
+}
+```
+
+### Commands
+```bash
+terraform init
+terraform validate
+terraform plan
+terraform apply
+terraform destroy
+```
+
+## 📚 Git
+
+### Concepts
+- **Merging strategies**
+- **Rebase vs Merge**
+- **Cherry pick**
+
+## 🔄 Jenkins
+- **Jenkinsfile**: Descriptor file for configuring the pipeline
+- **Pipeline block**: the complete script
+- **Agent**: the agent that's going to run the pipeline
+- **Stages**: Stages of the pipeline
+- **Steps**: Steps in the stage
+
 
 ---
 
@@ -1090,115 +1194,6 @@ toHaveBeenCalled()/toHaveBeenCalledWith(x,y)
     - **useEffect**: used when component is mounted and when state changes
     - **useContext**: used to share data across all the component tree
     - **useRef**: creates a mutable object that keeps the reference between renders
-
----
-
-# 🔧 DevOps
-
-## 🚀 Features
-- **Automationm**
-- **CI/CD**
-- **Monitoring**
-- **Collaboration**
-- **Infrastructure as Code**
-
-## 🔄 SDLC
-- **Requirement gathering**: Interact with the user to understand wht the software should do, features
-- **Analysis**: Analyse the requirements and understand how to build the software, roadmap for development
-- **Design**: Design the architecture of the software, components, interactions, technologies, ui
-- **Coding**: Write the code
-- **Testing**: Test the software functionality to ensure it meets the requirements and is free of bugs
-- **Deployment**: Deploy the software to a production environment
-- **Maintenance**: Ongoing support and maintenance of the software, improvements, bug fixes
-
-
-## 🐳 Docker
-
-### Images
-- **build**: docker image build
-- **show**: docker image ls
-- **pull**: docker image pull name:version
-- **inspect**: docker image inspect name
-- **delete**: docker image rm
-
-### Containers
-- **start**: docker container run
-- **stop**: docker container stop id
-- **delete**: docker container rm
-
-### Dockerfile
-```dockerfile
-FROM alpine
-RUN apk add update nodejs npm
-COPY . /src
-WORKDIR /src
-RUN npm install
-EXPOSE 8080
-ENTRYPOINT ["node","./app.js"]
-```
-
----
-
-## ☸️ Kubernetes
-
-### Structure
-Deployment contains > Pods contains > Containers
-
-### Nodes
-- **Master node**: Takes decisions about the cluster
-- **Worker node**: Carries on work
-
-### Components
-- **apiserver**: exposes API to communicate with the master node
-- **kubelet**: Main kubernetes agent
-- **kube-proxy**: Networking component
-
-### Commands
-```bash
-kubectl get nodes
-kubectl apply -f pod.yml
-kubectl get pods --watch
-kubectl describe pods hellopod
-kubectl delete -f pod.yml
-```
-
-## 🏢 Infrastructure as Code
-
-### 🏢 Terraform
-```hcl
-provider "aws" {
-  region = "us-east-1"
-}
-
-resource "aws_instance" "example" {
-  ami           = "ami-0c55b159cbfafe1d0"
-  instance_type = "t2.micro"
-}
-```
-
-### Commands
-```bash
-terraform init
-terraform validate
-terraform plan
-terraform apply
-terraform destroy
-```
-
-## 📚 Git
-
-### Concepts
-- **Merging strategies**
-- **Rebase vs Merge**
-- **Cherry pick**
-
-## 🔄 Jenkins
-- **Jenkinsfile**: Descriptor file for configuring the pipeline
-- **Pipeline block**: the complete script
-- **Agent**: the agent that's going to run the pipeline
-- **Stages**: Stages of the pipeline
-- **Steps**: Steps in the stage
-
 
 ---
 
