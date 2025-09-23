@@ -1,4 +1,4 @@
-# Backend
+# ⚙️ Backend
 
 ## 📊 Data Structures
 
@@ -514,17 +514,223 @@ RouterFunctions<ServerResponse> myRoute =
 
 *Only two of these requirements can be achieved at a time. Not all three may be possible*
 
+
+## 🗃️ SQL
+
+#### Database Operations
+```sql
+CREATE DATABASE name -- creates database
+CREATE TABLE name (id int, field1 varchar, field2 varchar) -- creates table
+ALTER TABLE name ADD column_name -- adds a new column
+ALTER TABLE name DROP column_name -- deletes a column
+DROP TABLE name -- deletes a table
+DROP DATABASE name -- drops a database
+```
+
+#### Query Operations
+```sql
+SELECT columns -- selects columns
+FROM tables -- specifies table
+WHERE conditions -- sets row conditions
+INSERT INTO table (id, field1.. fieldn) VALUES (1 , val1...valn) -- insert values
+UPDATE table SET fields = values WHERE column=value -- updates a row
+DELETE FROM table WHERE field=value -- deletes rows from table
+SELECT COUNT (*) FROM table -- counts the number of rows in a table
+ORDER BY -- orders results
+LIMIT -- limits number of results
+```
+
+#### Joins
+- **INNER JOIN**: A inner join B on A.fk_b_id = B.id
+    - join only in matching rows, all null matches are excluded
+- **LEFT OUTER JOIN**: A left join B on A.fk_b_id = B.id
+    - join containing all the elems from the left table, filling no matches from the right table with null values
+- **RIGHT OUTER JOIN**: B right join A on A.fk_b_id = B.id
+    - join containing all the elems from the right table, filling no matches from the left table with null values
+- **FULL OUTER JOIN**: B full outer join A on A.fk_b_id = B.id
+    - join all elems from both tables, filling no matches with nulls
+- **SELF JOIN**: joins a table with itself
+- **CROSS JOIN**: product between two tables, each row in the first table with each row in the second table
+- **COALESCE**((query),0) AS name: replaces null values with 0
+
+#### Advanced Operations
+- **UNIONS**: combines queries in the same resultset if the columns match the number and types
+- **CREATE VIEW** name AS query: virtual table from query
+- **CREATE INDEX** name ON table (fields): creates an index to accelerate search on those fields
+
+#### Relations
+- **1 TO MANY**: By FK
+- **MANY TO MANY**: Should be avoided and modeled as a joining table
+
+#### Database Tuning Techniques
+- **Indexing**: CREATE INDEX index_name ON table (column);
+- **Views**
+- **Partitioning**
+- **Caching**
+- **Denormalization**, duplication with load balancers
+- **Separate write/read master/slave**
+
+#### Concurrency
+##### Locks
+- **Exclusive locking (write lock)**: while one transaction is running with update/insert/delete statements, this lock prevents other transactions from accessing the same data until the first transaction finishes
+- **Shared locking (read lock)**: While one transaction is running select, other transactions are prevented from update/insert/delete the same data until the read finishes. Other transactions can read the data.
+
+#### ACID Properties
+- **Atomicity**: A transaction should be executed as a single unit
+- **Consistency**: Data should be consistent with the restrictions/rules
+- **Isolation**: One operation should not affect the result of other transactions
+- **Durability**: There's no data loss in case of failure
+
+
+
+## 🔗 ORM
+
+#### Definitions
+- **ORM**: Object Relational Mapping
+- **JPA**: Java Persistence API
+- **JDBC**: Java Database Connectivity and provides a set of Java API for accessing the relational databases from Java
+
+#### JPA vs Hibernate
+- **JPA**: Specification
+    - EntityManagerFactory
+- **Hibernate**: Implementation
+    - SessionFactory
+
+## 📊 Spring Data JPA
+
+#### Annotations
+```java
+@Entity
+@Table(name="table_name")
+@Id
+@Column(name="column_name")
+@GeneratedValue
+@OneToOne
+@OneToMany
+@ManyToOne
+@ManyToMany // (requires a join table)
+@JoinColumn(name="id") // (mappedBy="id")
+@Enumerated
+```
+
+#### Constants
+- **GenerationType**(strategy = TABLE,AUTO,IDENTITY,SEQUENCE)
+- **FetchType**(fetch = EAGER,LAZY)
+- **CascadeType**(ALL,PERSIST,MERGE,REMOVE,DETACH,LOCK,REFRESH,REPLICATE,SAVE_UPDATE)
+- **EnumType**(ORDINAL,STRING)
+
+#### Repository
+**CrudRepository<T,ID>**
+
+
+## 🐻 Hibernate
+
+#### Hibernate Objects
+- **Configuration**: Represents a configuration or properties file required by the Hibernate
+- **SessionFactory**: Configures Hibernate for the application using the supplied configuration file and allows for a Session object to be instantiated
+- **Session**: Used to get a physical connection with a database
+- **Transaction**: Represents a unit of work with the database and most of the RDBMS supports transaction functionality
+- **Query**: Uses SQL or Hibernate Query Language (HQL) string to retrieve data from the database and create objects
+- **Criteria**: Used to create and execute object oriented criteria queries to retrieve objects
+
+#### Configuration Steps
+1. **Add Hibernate config files** (Define DB connection):
+    - hibernate.cfg.xml for hibernate
+    - persistence.xml: for jpa
+    - Configure dialect:
+        - org.hibernate.dialect.SQLServerDialect
+        - org.hibernate.dialect.MySQLDialect
+        - org.hibernate.dialect.OracleDialect
+2. **Annotate java class**
+3. **Develop code for db operations**:
+   ```java
+   EntityManagerFactory emf = Persistence.createEntityManagerFactory("unitname");
+   EntityManager em = emf.createEntityManager();
+   em.getTransaction().begin();
+   em.persist(object);
+   em.persist(object);
+   emf.close();
+   ```
+
+#### persistence.xml Example
+```xml
+<persistenceunit name="hibernatecourse">
+    <provider>org.hibernate.jpa.HibernatePersistenceProvider</provider>
+    <properties>
+        <property name="javax.persistence.jdbc.driver" value="com.mysql.cj.jdbc.Driver"/>
+        <property name="javax.persistence.jdbc.url" value="jdbc:mysql://localhost:3306/airport"/>
+        <property name="javax.persistence.jdbc.user" value="root"/>
+        <property name="javax.persistence.jdbc.password" value="admin"/>
+        <property name="hibernate.dialect" value="org.hibernate.dialect.MySQL57Dialect"/>
+        <property name="hibernate.show_sql" value="true"/>
+        <property name="hibernate.format_sql" value="true"/>
+        <property name="hibernate.hbm2ddl.auto" value="create"/>
+    </properties>
+</persistenceunit>
+```
+
+#### Mapping Annotations
+1. Map class to table
+2. Map fields to columns
+
+##### Core Annotations
+- **@Entity**: Marks the class as a DB entity
+- **@Table**(name="table_name"): Indicates the mapping table
+- **@SecondaryTables** and **@SecondaryTables**: defines secondary tables and the logic for populating those tables
+- **@Id**: Indicates the field is an id
+- **@GeneratedValue**(strategy=GenerationType.IDENTITY): Defines strategy for the autogeneration id
+- **@Column**(name="column_name"): Indicates the mapping column
+- **@Access**(AccessType.Type): Method to access the persistent state of the entity:
+    - AccessType.FIELD: Based Annotations on fields
+    - AccessType.PROPERTY: Based Annotations on methods
+
+##### Composite Keys
+- **@Embeddable**: Marks a class as being embedded inside another class
+- **@EmbeddedId**: Marks a field to be used for an @Embeddable class
+- **@Transactional**: marks the methods as transactional and removes the need to call the methods beginTransaction, commit
+
+*Hibernate needs empty constructors*
+
+#### Relationships
+- **Unidirectional**
+- **Bidirectional**
+- **@ManyToMany**
+- **@ManyToOne**
+- **@OneToMany**
+- **@OneToOne**
+- **Owner Side**: are mappedBy="owner" by the owning side
+- **Owned Side**: The @JoinColumn(name="OWNER_ID") references the owner
+- **@JoinTable**: Specifies the cross reference table for the mapping of the relationship
+- **@JoinColumn**: Specifies the column for entity association with the referenced columnName as a param
+- **@JoinColumns**: Defines the mapping for composite fk
+
+#### SessionFactory
+Reads the config, creates session objects, create only once in your app
+
+#### Session
+Wraps JDBC connection, used for saving retrieving objects from db, Retrieved from SessionFactory
+
+#### Entity Lifecycle
+- **Detach**: Not associated with a hibernate session
+- **Merge**: Merging will reattach to the session
+- **Persist**: Managed state. Next commit will save to db
+- **Remove**: Managed entities will be removed. Next commit will delete them from db
+- **Refresh**: sync to db
+
+#### Cascade Types
+Persist, Remove, Refresh, Detach, Merge, All
+
 ---
 
 ## 📄 NoSQL
 
-### Database Types
+#### Database Types
 - **Key-Value**
 - **Wide Column**
 - **Graph**
 - **Document**: MongoDB
 
-### Database Mapping
+#### Database Mapping
 - **DB** → DB
 - **TABLES** → COLLECTIONS
 - **ROW** → DOCUMENTS
@@ -532,17 +738,16 @@ RouterFunctions<ServerResponse> myRoute =
 - **INDEX** → INDEX
 - **JOIN** → EMBEDDING & LINKING
 
----
 
 ## 🍃 MongoDB
 
-### Characteristics
+##### Characteristics
 - Has C&P from CAP theorem
 - Uses documents (JSON - BSON: EXTENDED JSON)
 
-### Features
+##### Features
 
-#### Indexes
+###### Indexes
 Support efficient execution of queries
 **Types**:
 - Single Field
@@ -552,32 +757,32 @@ Support efficient execution of queries
 - Hashed
 - Compound
 
-#### Aggregation Pipeline
+###### Aggregation Pipeline
 A framework for data aggregation modeled on the concept of data processing pipelines
 
-#### Replica Sets
+###### Replica Sets
 A group of mongodb processes that maintain the same data sets to provide redundancy and high availability
 
-#### Sharding
+###### Sharding
 A method to distribute data across multiple machines
 
-### Commands
+#### Commands
 
-#### Database Operations
+##### Database Operations
 - **use database**: select database
 - **show databases**: shows available databases
 - **show collections**: show collections
 - **create collection**: db.createCollection("collection")
 
-#### CRUD Operations
+##### CRUD Operations
 
-##### CREATE
+###### CREATE
 ```javascript
 db.collection.insertOne({object})
 insertMany([array])
 ```
 
-##### READ
+###### READ
 ```javascript
 db.collection.find({object})/findMany():
 // filter: query: {attribute: {$operator: value}}, {"attribute.sub":value} , {$and: [{amount: {$lte: 11}},{"awards.wins":3}]}
@@ -587,7 +792,7 @@ db.collection.find({object})/findMany():
 // readConcern("type"): specifies read Concern
 ```
 
-##### UPDATE
+###### UPDATE
 ```javascript
 db.collection.updateOne(): // updates only the fields. Atomic on a single document
 db.collection.updateOne(
@@ -600,14 +805,14 @@ db.collection.replaceOne({attr:{$op: value}},{new object definition})
 // upsert: true : a document is created if it doesn't exists, else, regular update (update on match, insert on no match)
 ```
 
-##### DELETE
+###### DELETE
 ```javascript
 db.collection.deleteOne(): db.collection.deleteOne({attr:value})
 db.collection.deleteMany(): db.collection.deleteMany({attr:value})
 db.collection.remove(): db.collection.remove({attr: value}, true) // (true for only one, no param, remove all). db.collection.remove({}) erases all the data from collection
 ```
 
-### Query Operators
+#### Query Operators
 - Comparison
 - Logical
 - Element
@@ -616,7 +821,7 @@ db.collection.remove(): db.collection.remove({attr: value}, true) // (true for o
 - Array
 - Bitwise
 
-### Query Projection
+#### Query Projection
 Specifies the fields to return in the document that match the query (true/1: include, false/0: exclude)
 
 ### Concern
@@ -637,221 +842,10 @@ Level of acknowledgement requested from mongodb for write operations. Level of c
 - **w: majority**
 - **wtimeout**: the limit to prevent write operations from blocking indefinitely
 
----
 
 ## ⚡ DynamoDB
 
-**DynamoDB**: Key-value database
-
----
-
-## 🗃️ SQL
-
-### Database Operations
-```sql
-CREATE DATABASE name -- creates database
-CREATE TABLE name (id int, field1 varchar, field2 varchar) -- creates table
-ALTER TABLE name ADD column_name -- adds a new column
-ALTER TABLE name DROP column_name -- deletes a column
-DROP TABLE name -- deletes a table
-DROP DATABASE name -- drops a database
-```
-
-### Query Operations
-```sql
-SELECT columns -- selects columns
-FROM tables -- specifies table
-WHERE conditions -- sets row conditions
-INSERT INTO table (id, field1.. fieldn) VALUES (1 , val1...valn) -- insert values
-UPDATE table SET fields = values WHERE column=value -- updates a row
-DELETE FROM table WHERE field=value -- deletes rows from table
-SELECT COUNT (*) FROM table -- counts the number of rows in a table
-ORDER BY -- orders results
-LIMIT -- limits number of results
-```
-
-### Joins
-- **INNER JOIN**: A inner join B on A.fk_b_id = B.id
-  - join only in matching rows, all null matches are excluded
-- **LEFT OUTER JOIN**: A left join B on A.fk_b_id = B.id
-  - join containing all the elems from the left table, filling no matches from the right table with null values
-- **RIGHT OUTER JOIN**: B right join A on A.fk_b_id = B.id
-  - join containing all the elems from the right table, filling no matches from the left table with null values
-- **FULL OUTER JOIN**: B full outer join A on A.fk_b_id = B.id
-  - join all elems from both tables, filling no matches with nulls
-- **SELF JOIN**: joins a table with itself
-- **CROSS JOIN**: product between two tables, each row in the first table with each row in the second table
-- **COALESCE**((query),0) AS name: replaces null values with 0
-
-### Advanced Operations
-- **UNIONS**: combines queries in the same resultset if the columns match the number and types
-- **CREATE VIEW** name AS query: virtual table from query
-- **CREATE INDEX** name ON table (fields): creates an index to accelerate search on those fields
-
-### Relations
-- **1 TO MANY**: By FK
-- **MANY TO MANY**: Should be avoided and modeled as a joining table
-
-### Database Tuning Techniques
-- **Indexing**: CREATE INDEX index_name ON table (column);
-- **Views**
-- **Partitioning**
-- **Caching**
-- **Denormalization**, duplication with load balancers
-- **Separate write/read master/slave**
-
-### Concurrency
-#### Locks
-- **Exclusive locking (write lock)**: while one transaction is running with update/insert/delete statements, this lock prevents other transactions from accessing the same data until the first transaction finishes
-- **Shared locking (read lock)**: While one transaction is running select, other transactions are prevented from update/insert/delete the same data until the read finishes. Other transactions can read the data.
-
-### ACID Properties
-- **Atomicity**: A transaction should be executed as a single unit
-- **Consistency**: Data should be consistent with the restrictions/rules
-- **Isolation**: One operation should not affect the result of other transactions
-- **Durability**: There's no data loss in case of failure
-
----
-
-## 🔗 ORM
-
-### Definitions
-- **ORM**: Object Relational Mapping
-- **JPA**: Java Persistence API
-- **JDBC**: Java Database Connectivity and provides a set of Java API for accessing the relational databases from Java
-
----
-
-## 📊 Spring Data
-
-### Annotations
-```java
-@Entity
-@Table(name="table_name")
-@Id
-@Column(name="column_name")
-@GeneratedValue
-@OneToOne
-@OneToMany
-@ManyToOne
-@ManyToMany // (requires a join table)
-@JoinColumn(name="id") // (mappedBy="id")
-@Enumerated
-```
-
-### Constants
-- **GenerationType**(strategy = TABLE,AUTO,IDENTITY,SEQUENCE)
-- **FetchType**(fetch = EAGER,LAZY)
-- **CascadeType**(ALL,PERSIST,MERGE,REMOVE,DETACH,LOCK,REFRESH,REPLICATE,SAVE_UPDATE)
-- **EnumType**(ORDINAL,STRING)
-
-### Repository
-**CrudRepository<T,ID>**
-
----
-
-## 🐻 Hibernate
-
-### JPA vs Hibernate
-- **JPA**: Specification
-  - EntityManagerFactory
-- **Hibernate**: Implementation
-  - SessionFactory
-
-### Hibernate Objects
-- **Configuration**: Represents a configuration or properties file required by the Hibernate
-- **SessionFactory**: Configures Hibernate for the application using the supplied configuration file and allows for a Session object to be instantiated
-- **Session**: Used to get a physical connection with a database
-- **Transaction**: Represents a unit of work with the database and most of the RDBMS supports transaction functionality
-- **Query**: Uses SQL or Hibernate Query Language (HQL) string to retrieve data from the database and create objects
-- **Criteria**: Used to create and execute object oriented criteria queries to retrieve objects
-
-### Configuration Steps
-1. **Add Hibernate config files** (Define DB connection):
-   - hibernate.cfg.xml for hibernate
-   - persistence.xml: for jpa
-   - Configure dialect:
-     - org.hibernate.dialect.SQLServerDialect
-     - org.hibernate.dialect.MySQLDialect
-     - org.hibernate.dialect.OracleDialect
-2. **Annotate java class**
-3. **Develop code for db operations**:
-   ```java
-   EntityManagerFactory emf = Persistence.createEntityManagerFactory("unitname");
-   EntityManager em = emf.createEntityManager();
-   em.getTransaction().begin();
-   em.persist(object);
-   em.persist(object);
-   emf.close();
-   ```
-
-### persistence.xml Example
-```xml
-<persistenceunit name="hibernatecourse">
-    <provider>org.hibernate.jpa.HibernatePersistenceProvider</provider>
-    <properties>
-        <property name="javax.persistence.jdbc.driver" value="com.mysql.cj.jdbc.Driver"/>
-        <property name="javax.persistence.jdbc.url" value="jdbc:mysql://localhost:3306/airport"/>
-        <property name="javax.persistence.jdbc.user" value="root"/>
-        <property name="javax.persistence.jdbc.password" value="admin"/>
-        <property name="hibernate.dialect" value="org.hibernate.dialect.MySQL57Dialect"/>
-        <property name="hibernate.show_sql" value="true"/>
-        <property name="hibernate.format_sql" value="true"/>
-        <property name="hibernate.hbm2ddl.auto" value="create"/>
-    </properties>
-</persistenceunit>
-```
-
-### Mapping Annotations
-1. Map class to table
-2. Map fields to columns
-
-#### Core Annotations
-- **@Entity**: Marks the class as a DB entity
-- **@Table**(name="table_name"): Indicates the mapping table
-- **@SecondaryTables** and **@SecondaryTables**: defines secondary tables and the logic for populating those tables
-- **@Id**: Indicates the field is an id
-- **@GeneratedValue**(strategy=GenerationType.IDENTITY): Defines strategy for the autogeneration id
-- **@Column**(name="column_name"): Indicates the mapping column
-- **@Access**(AccessType.Type): Method to access the persistent state of the entity:
-  - AccessType.FIELD: Based Annotations on fields
-  - AccessType.PROPERTY: Based Annotations on methods
-
-#### Composite Keys
-- **@Embeddable**: Marks a class as being embedded inside another class
-- **@EmbeddedId**: Marks a field to be used for an @Embeddable class
-- **@Transactional**: marks the methods as transactional and removes the need to call the methods beginTransaction, commit
-
-*Hibernate needs empty constructors*
-
-### Relationships
-- **Unidirectional**
-- **Bidirectional**
-- **@ManyToMany**
-- **@ManyToOne**
-- **@OneToMany**
-- **@OneToOne**
-- **Owner Side**: are mappedBy="owner" by the owning side
-- **Owned Side**: The @JoinColumn(name="OWNER_ID") references the owner
-- **@JoinTable**: Specifies the cross reference table for the mapping of the relationship
-- **@JoinColumn**: Specifies the column for entity association with the referenced columnName as a param
-- **@JoinColumns**: Defines the mapping for composite fk
-
-### SessionFactory
-Reads the config, creates session objects, create only once in your app
-
-### Session
-Wraps JDBC connection, used for saving retrieving objects from db, Retrieved from SessionFactory
-
-### Entity Lifecycle
-- **Detach**: Not associated with a hibernate session
-- **Merge**: Merging will reattach to the session
-- **Persist**: Managed state. Next commit will save to db
-- **Remove**: Managed entities will be removed. Next commit will delete them from db
-- **Refresh**: sync to db
-
-### Cascade Types
-Persist, Remove, Refresh, Detach, Merge, All
+- **DynamoDB**: Key-value database
 
 ---
 
@@ -1008,28 +1002,115 @@ Describe qualities: Scalable, Fast, Secure
 
 ---
 
-## ☁️ Cloud & AWS
+## ☁️ Cloud
 
-### AWS Computing
+### 🟠 AWS
+
+#### AWS Computing
 - **EC2**: Elastic Compute Cloud with autoscaling
 - **Lambda**: Serverless functions
 
-### AWS Storage
+#### AWS Storage
 - **S3**: Simple Storage Service for objects
 - **EBS**: Elastic Block Store for EC2
 - **EFS**: Elastic File System
 
-### AWS Networking
+#### AWS Networking
 - **VPC**: Virtual Private Cloud
 - **CloudFront**: Content Delivery Network
 - **API Gateway**: API management service
 - **Route 53**: DNS service
 - **ELB**: Elastic Load Balancer
 
-### AWS Monitoring
+#### AWS Monitoring
 - **CloudWatch**: Metrics and monitoring
 
 ---
+
+
+# 🌐 Frontend
+
+## 🌐 HTML5
+- Audio/Video
+- Web Workers/Service Workers (Threads js)
+- Local Storage (global)
+- Session Storage (tab)
+
+## 🎨 CSS
+- Box model: margin (external), padding (internal)
+- CSS selectors and combiners
+- Specificity
+
+## 📜 JavaScript
+- **Scopes**
+- **Callbacks**: A function that be passed as argument to be called later
+- **Hoisting**: JS automatically moves all variable declarations at the top when compiling
+- **Closures**
+- **Promises**
+- **Async functions**
+- **Await operations/methods**
+
+## 🔷 TypeScript
+- **Superset of JS**: All JS code is valid TS code
+- **Transpiled to JS**: TS code is converted to JS code
+- **Static typing**: Types are checked at compile time
+- **Optional typing**: Types can be omitted and inferred
+- **Modern JS features**: ES6+ features like classes, modules, arrow functions, destructuring, etc
+
+```bash
+npm install -g typescript
+```
+
+
+### Testing
+```javascript
+// Jasmine
+it("should be called", function() {})
+beforeEach/beforeAll/afterEach/afterAll
+expect().equals()
+spyOn() // listener
+toHaveBeenCalled()/toHaveBeenCalledWith(x,y)
+```
+
+
+#### Features
+- **Type Annotations**: `let x: string = 'My string';`
+- **Type Inference**
+- **Union types**: `let somevalue: number | string`
+- **Type assertions**: `let fixedstring: string = (value as number).toFixed(4)`
+- **Optional parameters**: `message?: string`
+- **Typed functions**: `function(): string{}`
+
+### React
+- **Component**: Building blocks of React applications
+- **Props**: Properties to pass data from parent to child (unidirectional)
+- **State**: Data that belongs to the component
+- **Hooks**: functions that allow access to low-level react features
+    - **useState**: used to manage the state
+    - **useEffect**: used when component is mounted and when state changes
+    - **useContext**: used to share data across all the component tree
+    - **useRef**: creates a mutable object that keeps the reference between renders
+
+---
+
+# 🔧 DevOps
+
+## 🚀 Features
+- **Automationm**
+- **CI/CD**
+- **Monitoring**
+- **Collaboration**
+- **Infrastructure as Code**
+
+## 🔄 SDLC
+- **Requirement gathering**: Interact with the user to understand wht the software should do, features
+- **Analysis**: Analyse the requirements and understand how to build the software, roadmap for development
+- **Design**: Design the architecture of the software, components, interactions, technologies, ui
+- **Coding**: Write the code
+- **Testing**: Test the software functionality to ensure it meets the requirements and is free of bugs
+- **Deployment**: Deploy the software to a production environment
+- **Maintenance**: Ongoing support and maintenance of the software, improvements, bug fixes
+
 
 ## 🐳 Docker
 
@@ -1081,11 +1162,9 @@ kubectl describe pods hellopod
 kubectl delete -f pod.yml
 ```
 
----
+## 🏢 Infrastructure as Code
 
-## 🏗️ Infrastructure as Code
-
-### Terraform
+### 🏢 Terraform
 ```hcl
 provider "aws" {
   region = "us-east-1"
@@ -1106,89 +1185,26 @@ terraform apply
 terraform destroy
 ```
 
----
+## 📚 Git
 
+### Concepts
+- **Merging strategies**
+- **Rebase vs Merge**
+- **Cherry pick**
 
-# 🌐 Frontend
-
-### HTML5
-- Audio/Video
-- Web Workers/Service Workers (Threads js)
-- Local Storage (global)
-- Session Storage (tab)
-
-### CSS
-- Box model: margin (external), padding (internal)
-- CSS selectors and combiners
-- Specificity
-
-### JavaScript
-- **Scopes**
-- **Callbacks**: A function that be passed as argument to be called later
-- **Hoisting**: JS automatically moves all variable declarations at the top when compiling
-- **Closures**
-- **Promises**
-- **Async functions**
-- **Await operations/methods**
-
-#### Testing
-```javascript
-// Jasmine
-it("should be called", function() {})
-beforeEach/beforeAll/afterEach/afterAll
-expect().equals()
-spyOn() // listener
-toHaveBeenCalled()/toHaveBeenCalledWith(x,y)
-```
-
-### TypeScript
-```bash
-npm install -g typescript
-```
-
-#### Features
-- **Type Annotations**: `let x: string = 'My string';`
-- **Type Inference**
-- **Union types**: `let somevalue: number | string`
-- **Type assertions**: `let fixedstring: string = (value as number).toFixed(4)`
-- **Optional parameters**: `message?: string`
-- **Typed functions**: `function(): string{}`
-
-### React
-- **Component**: Building blocks of React applications
-- **Props**: Properties to pass data from parent to child (unidirectional)
-- **State**: Data that belongs to the component
-- **Hooks**: functions that allow access to low-level react features
-    - **useState**: used to manage the state
-    - **useEffect**: used when component is mounted and when state changes
-    - **useContext**: used to share data across all the component tree
-    - **useRef**: creates a mutable object that keeps the reference between renders
-
----
-
-# 🔧 DevOps
-
-### SDLC
-- **Requirement gathering**: Interact with the user to understand wht the software should do, features
-- **Analysis**: Analyse the requirements and understand how to build the software, roadmap for development
-- **Design**: Design the architecture of the software, components, interactions, technologies, ui
-- **Coding**: Write the code
-- **Testing**: Test the software functionality to ensure it meets the requirements and is free of bugs
-- **Deployment**: Deploy the software to a production environment
-- **Maintenance**: Ongoing support and maintenance of the software, improvements, bug fixes
-
-### Jenkins
+## 🔄 Jenkins
 - **Jenkinsfile**: Descriptor file for configuring the pipeline
 - **Pipeline block**: the complete script
 - **Agent**: the agent that's going to run the pipeline
 - **Stages**: Stages of the pipeline
 - **Steps**: Steps in the stage
 
+
 ---
 
 ## 🧪 Testing
 
-### Unit Testing
+### ⚙️ Unit Testing
 - **JUnit**: Java testing framework
 - **Mockito**: Mocking framework
 
@@ -1200,38 +1216,28 @@ npm install -g typescript
 @MockBean, @Mock // for marking an object as a bean to be mocked
 ```
 
-### Integration Testing
+### 🔗 Integration Testing
 - **Selenium**: Web application testing
 
-### Performance Testing
+### 🚀 Performance Testing
 - **JMeter**: Load testing tool
 - **CURL Scripts**: Command-line testing
 
 ---
 
+# 📖 Recommended Books
 
-## 📚 Version Control
-
-### Git
-- **Merging strategies**
-- **Rebase vs Merge**
-- **Cherry pick**
-
----
-
-## 📖 Recommended Books
-
-### Java
+### ☕ Java Books
 - Java Precise
 - Java the Complete Reference
 - Java Language Specification
 - Effective Java
 
-### Design Patterns
+### 🎨 Design Patterns
 - Head First Design Patterns
 - Java Design Patterns Essentials
 
-### Concurrency
+### 🔄 Concurrency
 - Java Concurrency in Practice
 
 ---
