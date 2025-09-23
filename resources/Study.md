@@ -1091,9 +1091,16 @@ kubectl delete -f pod.yml
 
 #### AWS Monitoring
 - **CloudWatch**: Metrics and monitoring
+
+### AWS CI/CD
+- **CodeCommit**: Source control service
+- **CodeBuild**: Build service
+- **CodeDeploy**: Deployment service
+- **CodePipeline**: CI/CD service
+
 ## 🏢 Infrastructure as Code
 
-### 🏢 Terraform
+### 🟣 Terraform
 ```hcl
 provider "aws" {
   region = "us-east-1"
