@@ -1,27 +1,63 @@
 # ⚙️ Backend
 
-## 📊 Data Structures
+## 📑 Data Structures
 
 ### ArrayList
 - **Type**: Resizable array, implements List
-- **Access**: O(1) by index
-- **Insert**: O(1) at the end
-- **Remove**: O(1) by index
+- **Read/Access**: O(1) by index
+- **Write/Update**: O(1) Direct index modification
+- **Insert at end**: O(1) amortized - May trigger resize O(n)
+- **Insert at middle**: O(n) Must shift elements
+- **Delete at end**: O(1)
+- **Delete at middle**: O(n) Must shift elements
+- **Search**: O(n) linear
 - **Best for**: Storing and accessing
 - **Memory**: Less memory
 
+#### Pros:
+
+- **Fast random access O(1)**
+- **Dynamic sizing**
+- **Cache-friendly**
+- **Good for read-heavy operations**
+
+#### Cons:
+
+- **Slow insertions/deletions in middle**
+- **Resize operation is expensive**
+- **Wasted capacity**
+
 ### LinkedList
 - **Type**: Double linked list to next and prev node, implements List and Queue
-- **Access**: O(n) by iterating elements
-- **Insert**: O(n) insert to the end
-- **Remove**: Either by head O(1) or by index O(n)
+- **Read/Access**: O(n) Must traverse from head/tail
+- **Write/Update**: O(n) Must find node first, then O(1) to update
+- **Insert at head/tai**l: O(1) Just update pointers
+- **Insert at middle**: O(n) Must traverse to position, then O(1) to insert
+- **Delete at head/tail**: O(1) Just update pointers
+- **Delete at middle**: O(n) Must traverse to position, then O(1) to delete
+- **Search**: O(n) linear
 - **Best for**: Manipulating
-- **Memory**: More memory
+- **Memory**: Most overhead - each node stores data + 2 pointers (next, prev)
 
-### Other Data Structures
-- **Queues**: First In First out, adds to the tail, removes from the head
-- **Stacks**: First in, Last out, adds to the top, removes from the top
-- **Deques**: Double ended queues, you can add or remove from the beginning or the end
+#### Pros:
+
+- **Fast insertions/deletions at head/tail O(1)**
+- **No resize needed**
+- **Good for queue/deque operations**
+
+#### Cons:
+
+- **Slow random access O(n)**
+- **More memory per element**
+- **Not cache-friendly (scattered in memory)**
+- **Poor for read-heavy operations**
+
+### Queues:
+First In First out, adds to the tail, removes from the head
+### Stacks: 
+First in, Last out, adds to the top, removes from the top
+### Deques: 
+Double ended queues, you can add or remove from the beginning or the end
 
 ### Binary Search Tree
 - **Structure**: Data structure with 1 data value and 2 pointers left and right
@@ -302,7 +338,7 @@ Support for TDD. Mocking objects and out of container testing
 - **Integration**
 - **Mock**
 
-### Beans
+#### Beans
 - A "Spring Bean" is simply a Java object
 - When Java objects are created by the Spring Container, then Spring refers to them as "Spring Beans"
 - Spring Beans are created from normal Java classes .... just like Java objects
@@ -329,11 +365,11 @@ The Spring framework provides several implementations of the ApplicationContext 
 
 ---
 
-## 🚀 Spring Boot
+### 🚀 Spring Boot
 
-### Annotations
+#### Annotations
 
-#### Component Annotations
+##### Component Annotations
 - **@Component**: Generic stereotype for any Spring managed component, indicates a bean is created
 - **@Repository**: Stereotype for persistence layer, Provides the data, database interaction, mapping
 - **@Service**: Stereotype for service layer, Business logic, data manipulation, starts transactions
@@ -342,13 +378,13 @@ The Spring framework provides several implementations of the ApplicationContext 
 
 *Annotations should be placed on the implementation, not the interface maintain decoupling*
 
-#### Configuration Annotations
+##### Configuration Annotations
 - **@Configuration**: Declares that the class contains @Bean methods to be processed by the Spring container
 - **@ComponentScan**: Configures which packages to scan for classes
 - **@EnableAutoConfiguration**: Autoconfigures beans based on the classpath
 - **@SpringBootApplication** (@SpringBootConfiguration, @EnableAutoConfiguration, @ComponentScan): Stereotype marking a class for bootstrapping and setting the @ComponentScan from that class level down
 
-#### Web Annotations
+##### Web Annotations
 - **@RequestMapping**: Indicates the mapping of the request to a path
 - **@GetMapping, @PostMapping**, etc: Mark controller to respond to the http method
 - **@RestController**(@Controller && @ResponseBody): Marks as a controller that returns data
@@ -359,44 +395,44 @@ The Spring framework provides several implementations of the ApplicationContext 
 - **@ResponseBody**: Serializes the object and sends it as a response (JSON)
 - **@Value**: For injecting values from the properties/yml file
 
-#### Request/Response Entities
+##### Request/Response Entities
 - **RequestEntity**
 - **ResponseEntity**
 
-#### Run on Start
+##### Run on Start
 - **CommandLineRunner**: Receives argument
 - **ApplicationRunner**
 
 ---
 
-## 🌐 Spring MVC
+### 🌐 Spring MVC
 
-### Architecture
+#### Architecture
 Controller > Model > View
 Web browser > Request > DispatcherServlet
 DispatcherServlet (Entry point) > Controller(pass/request data to the model) > View
 View > renderize data/view to the browser
 
-### Spring MVC Configuration
+#### Spring MVC Configuration
 - Configure DispatcherServlet
 - Setup URL mappings to the DispatcherServlet
 - Setup ComponentScanning
 - Configure conversion, formatting, validation
 - Configure ViewResolver
 
-### Mapping Concepts
+#### Mapping Concepts
 - **Servlet Mapping**: Which web container of the Java servlet should be invoked for a given URL. The Servlet container decides which Servlet it should forward the request to
 - **Request Mapping**: Maps a Request to a controller method to invoke as a response to the request
 - **View Resolver**: Locates the view to rendered as a response to a request (application.properties prefix + suffix)
 
-### Template Engine
+#### Template Engine
 - **Thymeleaf**: Replace JSP
 
 ---
 
-## ⚡ Spring WebFlux
+### ⚡ Spring WebFlux
 
-### Characteristics
+#### Characteristics
 - **Nonblocking API** (Servlet v3.1)
 - **Asynchronous nature** (like callbacks) though messages
 - **Publisher/Subscriber model** through a Subscription
@@ -405,7 +441,7 @@ View > renderize data/view to the browser
 - **Concurrent connections** handles by few threads
 - **Continuous stream of data** live connection(MediaType.TEXT_EVENT_STREAM_VALUE)
 
-### Reactive Streams
+#### Reactive Streams
 1. Subscriber > subscribe() > Publisher
 2. Subscription is created
 3. Publisher > onSubscribe(Subscription) > Subscriber
@@ -416,7 +452,7 @@ View > renderize data/view to the browser
 
 **Properties**: ASYNC, NONBLOCKING, BACKPRESSURE
 
-#### Interfaces
+##### Interfaces
 ```java
 // PUBLISHER
 public interface Publisher<T> {
@@ -505,9 +541,9 @@ RouterFunctions<ServerResponse> myRoute =
 
 ---
 
-## 🗄️ Database
+# 🗄️ Database
 
-### CAP Theorem
+## CAP Theorem
 - **Consistency**: Data is consistent across all the nodes
 - **Availability**: Data is available at any time
 - **Partition Tolerance**: System does not fail regardless any data drop or updated in any node
@@ -517,7 +553,7 @@ RouterFunctions<ServerResponse> myRoute =
 
 ## 🗃️ SQL
 
-#### Database Operations
+### Database Operations
 ```sql
 CREATE DATABASE name -- creates database
 CREATE TABLE name (id int, field1 varchar, field2 varchar) -- creates table
@@ -527,7 +563,7 @@ DROP TABLE name -- deletes a table
 DROP DATABASE name -- drops a database
 ```
 
-#### Query Operations
+### Query Operations
 ```sql
 SELECT columns -- selects columns
 FROM tables -- specifies table
@@ -540,7 +576,7 @@ ORDER BY -- orders results
 LIMIT -- limits number of results
 ```
 
-#### Joins
+### Joins
 - **INNER JOIN**: A inner join B on A.fk_b_id = B.id
     - join only in matching rows, all null matches are excluded
 - **LEFT OUTER JOIN**: A left join B on A.fk_b_id = B.id
@@ -553,16 +589,16 @@ LIMIT -- limits number of results
 - **CROSS JOIN**: product between two tables, each row in the first table with each row in the second table
 - **COALESCE**((query),0) AS name: replaces null values with 0
 
-#### Advanced Operations
+### Advanced Operations
 - **UNIONS**: combines queries in the same resultset if the columns match the number and types
 - **CREATE VIEW** name AS query: virtual table from query
 - **CREATE INDEX** name ON table (fields): creates an index to accelerate search on those fields
 
-#### Relations
+### Relations
 - **1 TO MANY**: By FK
 - **MANY TO MANY**: Should be avoided and modeled as a joining table
 
-#### Database Tuning Techniques
+### Database Tuning Techniques
 - **Indexing**: CREATE INDEX index_name ON table (column);
 - **Views**
 - **Partitioning**
@@ -570,12 +606,12 @@ LIMIT -- limits number of results
 - **Denormalization**, duplication with load balancers
 - **Separate write/read master/slave**
 
-#### Concurrency
-##### Locks
+### Concurrency
+#### Locks
 - **Exclusive locking (write lock)**: while one transaction is running with update/insert/delete statements, this lock prevents other transactions from accessing the same data until the first transaction finishes
 - **Shared locking (read lock)**: While one transaction is running select, other transactions are prevented from update/insert/delete the same data until the read finishes. Other transactions can read the data.
 
-#### ACID Properties
+### ACID Properties
 - **Atomicity**: A transaction should be executed as a single unit
 - **Consistency**: Data should be consistent with the restrictions/rules
 - **Isolation**: One operation should not affect the result of other transactions
@@ -585,12 +621,12 @@ LIMIT -- limits number of results
 
 ## 🔗 ORM
 
-#### Definitions
+### Definitions
 - **ORM**: Object Relational Mapping
 - **JPA**: Java Persistence API
 - **JDBC**: Java Database Connectivity and provides a set of Java API for accessing the relational databases from Java
 
-#### JPA vs Hibernate
+### JPA vs Hibernate
 - **JPA**: Specification
     - EntityManagerFactory
 - **Hibernate**: Implementation
@@ -598,7 +634,7 @@ LIMIT -- limits number of results
 
 ## 📊 Spring Data JPA
 
-#### Annotations
+### Annotations
 ```java
 @Entity
 @Table(name="table_name")
@@ -613,19 +649,19 @@ LIMIT -- limits number of results
 @Enumerated
 ```
 
-#### Constants
+### Constants
 - **GenerationType**(strategy = TABLE,AUTO,IDENTITY,SEQUENCE)
 - **FetchType**(fetch = EAGER,LAZY)
 - **CascadeType**(ALL,PERSIST,MERGE,REMOVE,DETACH,LOCK,REFRESH,REPLICATE,SAVE_UPDATE)
 - **EnumType**(ORDINAL,STRING)
 
-#### Repository
+### Repository
 **CrudRepository<T,ID>**
 
 
 ## 🐻 Hibernate
 
-#### Hibernate Objects
+### Hibernate Objects
 - **Configuration**: Represents a configuration or properties file required by the Hibernate
 - **SessionFactory**: Configures Hibernate for the application using the supplied configuration file and allows for a Session object to be instantiated
 - **Session**: Used to get a physical connection with a database
@@ -633,7 +669,7 @@ LIMIT -- limits number of results
 - **Query**: Uses SQL or Hibernate Query Language (HQL) string to retrieve data from the database and create objects
 - **Criteria**: Used to create and execute object oriented criteria queries to retrieve objects
 
-#### Configuration Steps
+### Configuration Steps
 1. **Add Hibernate config files** (Define DB connection):
     - hibernate.cfg.xml for hibernate
     - persistence.xml: for jpa
@@ -652,7 +688,7 @@ LIMIT -- limits number of results
    emf.close();
    ```
 
-#### persistence.xml Example
+### persistence.xml Example
 ```xml
 <persistenceunit name="hibernatecourse">
     <provider>org.hibernate.jpa.HibernatePersistenceProvider</provider>
@@ -669,11 +705,11 @@ LIMIT -- limits number of results
 </persistenceunit>
 ```
 
-#### Mapping Annotations
+### Mapping Annotations
 1. Map class to table
 2. Map fields to columns
 
-##### Core Annotations
+#### Core Annotations
 - **@Entity**: Marks the class as a DB entity
 - **@Table**(name="table_name"): Indicates the mapping table
 - **@SecondaryTables** and **@SecondaryTables**: defines secondary tables and the logic for populating those tables
@@ -684,14 +720,14 @@ LIMIT -- limits number of results
     - AccessType.FIELD: Based Annotations on fields
     - AccessType.PROPERTY: Based Annotations on methods
 
-##### Composite Keys
+#### Composite Keys
 - **@Embeddable**: Marks a class as being embedded inside another class
 - **@EmbeddedId**: Marks a field to be used for an @Embeddable class
 - **@Transactional**: marks the methods as transactional and removes the need to call the methods beginTransaction, commit
 
 *Hibernate needs empty constructors*
 
-#### Relationships
+### Relationships
 - **Unidirectional**
 - **Bidirectional**
 - **@ManyToMany**
@@ -704,33 +740,33 @@ LIMIT -- limits number of results
 - **@JoinColumn**: Specifies the column for entity association with the referenced columnName as a param
 - **@JoinColumns**: Defines the mapping for composite fk
 
-#### SessionFactory
+### SessionFactory
 Reads the config, creates session objects, create only once in your app
 
-#### Session
+### Session
 Wraps JDBC connection, used for saving retrieving objects from db, Retrieved from SessionFactory
 
-#### Entity Lifecycle
+### Entity Lifecycle
 - **Detach**: Not associated with a hibernate session
 - **Merge**: Merging will reattach to the session
 - **Persist**: Managed state. Next commit will save to db
 - **Remove**: Managed entities will be removed. Next commit will delete them from db
 - **Refresh**: sync to db
 
-#### Cascade Types
+### Cascade Types
 Persist, Remove, Refresh, Detach, Merge, All
 
 ---
 
 ## 📄 NoSQL
 
-#### Database Types
+### Database Types
 - **Key-Value**
 - **Wide Column**
 - **Graph**
 - **Document**: MongoDB
 
-#### Database Mapping
+### Database Mapping
 - **DB** → DB
 - **TABLES** → COLLECTIONS
 - **ROW** → DOCUMENTS
@@ -739,15 +775,15 @@ Persist, Remove, Refresh, Detach, Merge, All
 - **JOIN** → EMBEDDING & LINKING
 
 
-## 🍃 MongoDB
+### 🍃 MongoDB
 
-##### Characteristics
+#### Characteristics
 - Has C&P from CAP theorem
 - Uses documents (JSON - BSON: EXTENDED JSON)
 
-##### Features
+#### Features
 
-###### Indexes
+##### Indexes
 Support efficient execution of queries
 **Types**:
 - Single Field
@@ -757,32 +793,32 @@ Support efficient execution of queries
 - Hashed
 - Compound
 
-###### Aggregation Pipeline
+##### Aggregation Pipeline
 A framework for data aggregation modeled on the concept of data processing pipelines
 
-###### Replica Sets
+##### Replica Sets
 A group of mongodb processes that maintain the same data sets to provide redundancy and high availability
 
-###### Sharding
+##### Sharding
 A method to distribute data across multiple machines
 
-#### Commands
+### Commands
 
-##### Database Operations
+#### Database Operations
 - **use database**: select database
 - **show databases**: shows available databases
 - **show collections**: show collections
 - **create collection**: db.createCollection("collection")
 
-##### CRUD Operations
+#### CRUD Operations
 
-###### CREATE
+##### CREATE
 ```javascript
 db.collection.insertOne({object})
 insertMany([array])
 ```
 
-###### READ
+##### READ
 ```javascript
 db.collection.find({object})/findMany():
 // filter: query: {attribute: {$operator: value}}, {"attribute.sub":value} , {$and: [{amount: {$lte: 11}},{"awards.wins":3}]}
@@ -792,7 +828,7 @@ db.collection.find({object})/findMany():
 // readConcern("type"): specifies read Concern
 ```
 
-###### UPDATE
+##### UPDATE
 ```javascript
 db.collection.updateOne(): // updates only the fields. Atomic on a single document
 db.collection.updateOne(
@@ -805,14 +841,14 @@ db.collection.replaceOne({attr:{$op: value}},{new object definition})
 // upsert: true : a document is created if it doesn't exists, else, regular update (update on match, insert on no match)
 ```
 
-###### DELETE
+##### DELETE
 ```javascript
 db.collection.deleteOne(): db.collection.deleteOne({attr:value})
 db.collection.deleteMany(): db.collection.deleteMany({attr:value})
 db.collection.remove(): db.collection.remove({attr: value}, true) // (true for only one, no param, remove all). db.collection.remove({}) erases all the data from collection
 ```
 
-#### Query Operators
+### Query Operators
 - Comparison
 - Logical
 - Element
@@ -821,7 +857,7 @@ db.collection.remove(): db.collection.remove({attr: value}, true) // (true for o
 - Array
 - Bitwise
 
-#### Query Projection
+### Query Projection
 Specifies the fields to return in the document that match the query (true/1: include, false/0: exclude)
 
 ### Concern
@@ -843,77 +879,253 @@ Level of acknowledgement requested from mongodb for write operations. Level of c
 - **wtimeout**: the limit to prevent write operations from blocking indefinitely
 
 
-## ⚡ DynamoDB
+### ⚡ DynamoDB
 
 - **DynamoDB**: Key-value database
 
 ---
 
-## 🔒 Security
+# 🔒 Security
 
-### Authentication
-Is the real user
-- **Transport Layer Security(TLS)**
-- **SSL Certificates**
-- **Basic authentication**: user/pass(hashed pass)
-- **API Key**: Gives each client a specific API Key
-- **Client Certificate**: Uses a public key to allow the caller to prove their identity
-- **Auth Server** (OAuth OpenID, etc): Client send credentials, server send an access token (temporary) to be included in the headers request
+## Authentication vs Authorization
+- **Authentication**: Verifying WHO you are (identity)
+- **Authorization**: Verifying WHAT you can access (permissions)
 
-### Authorization
-What the user can do
-- **On behalf**: A ms communicating with other ms makes a call passing the request credentials on behalf of a user
-- **Encryption**: Use standard algorithms
-- **Firewalls**
-- **Pentesting**
-- **Automated Security Tests**: prove that API rejects unauth callers
+## Authentication Methods
+
+### Session-Based Authentication
+- **How**: Server creates session, stores session ID in cookie
+- **Flow**: Login → Server creates session → Session ID in cookie → Client sends cookie → Server validates
+- **Stateful**: Server must remember sessions
+- **Pros**: Simple, server control, instant revocation
+- **Cons**: Not scalable, CSRF vulnerable, poor multi-server support
+
+### Token-Based Authentication (JWT)
+- **How**: Server creates signed token, client stores and sends it
+- **Flow**: Login → Server creates JWT → Client stores token → Client sends in Authorization header → Server validates signature
+- **JWT Structure**: `header.payload.signature`
+  - Header: Algorithm and token type
+  - Payload: Claims (user data, expiration)
+  - Signature: Ensures token integrity
+- **Stateless**: Server doesn't store tokens
+- **Pros**: Scalable, cross-domain, mobile-friendly
+- **Cons**: Can't revoke before expiration, larger size, XSS vulnerable
+
+### OAuth 2.0
+- **What**: Authorization framework for delegated access
+- **Use case**: "Login with Google/Facebook/GitHub"
+- **Roles**:
+  - Resource Owner: User
+  - Client: Your application
+  - Authorization Server: Google/Facebook
+  - Resource Server: API with user data
+- **Grant Types**:
+  - Authorization Code (most secure, web apps)
+  - Client Credentials (machine-to-machine)
+  - Password (legacy, not recommended)
+- **Tokens**:
+  - Access Token: Short-lived, access resources
+  - Refresh Token: Long-lived, get new access tokens
+
+### Single Sign-On (SSO)
+- **What**: One login for multiple applications
+- **Protocols**:
+  - SAML 2.0: XML-based, enterprise standard
+  - OpenID Connect (OIDC): Built on OAuth 2.0, modern
+- **Flow**: Access App A → Redirect to IdP → Login once → IdP sends token → Access App B (no login)
+- **Benefits**: Better UX, centralized management, reduced password fatigue
+
+### Multi-Factor Authentication (MFA/2FA)
+- **Factors**:
+  - Something you know: Password, PIN
+  - Something you have: Phone, hardware token
+  - Something you are: Fingerprint, face
+- **Types**: SMS codes, TOTP (Authenticator apps), Hardware tokens (YubiKey), Biometrics
+
+### API Keys
+- **What**: Simple token for API access
+- **Use case**: Third-party API, service-to-service
+- **Pros**: Simple, easy to implement
+- **Cons**: No expiration, no user context, hard to rotate
+
+### Basic Authentication
+- **What**: Username:password encoded in Base64
+- **Header**: `Authorization: Basic dXNlcjpwYXNz`
+- **Pros**: Simple, built into HTTP
+- **Cons**: Not secure (easily decoded), must use HTTPS
+
+### Certificate-Based Authentication
+- **What**: Uses digital certificates (X.509)
+- **Use case**: Enterprise, high-security environments
+
+## Authorization Methods
+
+### Role-Based Access Control (RBAC)
+- **What**: Permissions based on roles
+- **Structure**: User → Role → Permissions
+- **Example**: Admin, User, Guest
+
+```java
+@PreAuthorize("hasRole('ADMIN')")
+public void deleteUser() { }
+```
+
+### Attribute-Based Access Control (ABAC)
+- **What**: Permissions based on attributes
+- **Attributes**: User attributes, resource attributes, environment
+- **Example**: Allow if user.department == resource.department AND time < 5pm
+
+### Access Control Lists (ACL)
+- **What**: Permissions per resource
+- **Example**: File permissions (read, write, execute)
+
+## Security Best Practices
+
+### Token Storage
+- **Best**: HttpOnly cookies (prevents XSS)
+- **Better**: sessionStorage
+- **Never**: localStorage (XSS risk)
+
+### Token Refresh Strategy
+- **Access Token**: Short-lived (15 min)
+- **Refresh Token**: Long-lived (7 days), HttpOnly cookie
+- **Flow**: Access token expires → Use refresh token → Get new access token
+
+### Password Security
+- **Hash**: bcrypt, Argon2, PBKDF2 (never plain text)
+- **Salt**: Random value added before hashing
+- **Pepper**: Secret value added (stored separately)
+
+### Common Attacks & Prevention
+- **CSRF**: Use CSRF tokens, SameSite cookies
+- **XSS**: Sanitize input, Content Security Policy
+- **SQL Injection**: Use prepared statements
+- **Brute Force**: Rate limiting, account lockout
+
+## Recommended Stack
+
+### Modern Web App
+- **Authentication**: JWT (access) + Refresh tokens (HttpOnly cookie)
+- **Authorization**: RBAC
+- **Social login**: OAuth 2.0 / OIDC
+- **MFA**: TOTP (Google Authenticator)
+
+### Enterprise
+- **SSO**: SAML 2.0 or OIDC
+- **Authorization**: RBAC or ABAC
+- **MFA**: Required
+
+## Legacy Security Concepts
+- **Transport Layer Security(TLS)**: Encryption protocol for secure communication
+- **SSL Certificates**: Digital certificates for HTTPS
+- **Client Certificate**: Public key authentication
+- **On behalf**: Microservice passes user credentials to other services
+- **Encryption**: Use standard algorithms (AES, RSA)
+- **Firewalls**: Network security
+- **Pentesting**: Security testing
+- **Automated Security Tests**: Verify API rejects unauthorized callers
+
+
 
 ---
 
-## 🏗️ Design/Architecture
+# 🏢 System Design
 
-### SOLID Principles
+## System Design Principles
+
+### High Availability
+- **Redundancy**: Availability zones, Fallback, Data replication
+- **Switching between servers**: DNS, Load balancers, Reverse proxy, API gateway, Service discovery
+- **Protecting against client behavior**: Load shedding, Rate limiter, Shuffle sharding, Cell based architecture
+- **Protecting against failures**: Timeouts, Circuit breaker, Bulkhead, Retries
+- **Detecting failures**: Monitoring, Logging
+
+### Scalability
+- **Vertical**: Adding compute power (Scale up)
+- **Horizontal**: Adding servers/replicas (Scale out)
+- **Elasticity**: Ability to acquire resources as needed and release them when not needed
+
+### Performance
+- **Latency**: Time to get a response
+- **Bandwidth**: Rate of data transfer across a given path
+- **Throughput**: Rate at which something is processed
+
+### Durability
+- **Backup**: Copy data periodically and store it elsewhere
+- **RAID**: Redundant storing of information
+- **Replication**: Copying the data to another machines
+- **Checksum**: For preventing data corruption
+
+### Consistency
+- **ACID**: Database constraints are not violated when transactions are executed
+- **BASE**: NoSQL consistency model
+- **CAP Theorem**: Consistency, Availability, Partition Tolerance
+
+## Hardware
+
+### Compute Environment
+- **Physical Server**: Complete control, expensive, hard to manage
+- **Virtual Machines**: Cheaper, easier to maintain, hypervisor-based
+- **Containers**: Lightweight, portable, container engine-based
+- **Serverless**: Cloud provides all resources, event-driven
+
+## Communication
+
+### Request/Response
+- **Sync**: RequestResponse
+- **Async**: Messaging
+
+### Async Messaging
+- **Message Queues**: Only a single consumer gets the message
+- **Publisher/Subscriber**: All subscribers get the message
+
+### Network Protocols
+- **TCP**: Reliability over time, connection-oriented
+- **UDP**: Time over reliability, connectionless
+- **HTTP**: Request/Response protocol
+
+## SOLID Principles
 - **Single Responsibility**: A class should have only one responsibility
 - **Open Closed**: Open for extension, closed for modifications
 - **Liskov Substitution**: You should be able to substitute classes when using inheritance
 - **Interface Segregation**: Do not implement things that you don't need in your interfaces. Small granularity
 - **Dependency Injection**: Your code should depend on abstractions, not implementations
 
-### Design Principles
+## Design Principles
 - **DRY**: Don't repeat yourself (code)
 - **Encapsulate what changes**
 - **Favor composition over inheritance**
 - **Program against an interface, not implementations**
 
-### Design Patterns
+## Design Patterns
 
-#### Creational
+### Creational
 - **Factory**: Delegates the creation to another class, hides creation logic
 - **Singleton**: Returns a single instance of an object
 - **Builder**: Makes a complex object immutable upon construction, avoids the need to write many constructors
 
-#### Behavioral
+### Behavioral
 - **Strategy**: Use composition to delegate behaviors
 
-#### Structural
+### Structural
 - **Adapter**: Create new interfaces that act as a bridge between incompatible interfaces
 
-### Microservices Patterns
+## Microservices Patterns
 - **Api Gateway/Backend For Frontend**: acts as a single entry point for the frontend calls
 - **Shared Event Bus/Message Queues**: uses a bus to communicate ms async by using messages
 - **Circuit Breaker**: Between client and server. Allows all calls to go through. If enough errors are detected, it blocks the calls and fails fast
 - **Service Registry**: Keeps a directory of the services with ip addresses for discovery
 - **Blue Green swap**: swap the passive service to the active with the new code blue>green
 
-### Architecture Types
+## Architecture Types
 
-#### DB Centric Architecture
+### DB Centric Architecture
 Has a database at the center of the application and its divided in the layers:
 - **UI**
 - **Business Logic**
 - **Data Access**: DB
 
-#### Domain Centric Architecture
+### Domain Centric Architecture
 The domain is at the center of the application and the layers are divided in:
 - **Presentation**: UI
 - **Application**: Abstractions for the use cases for of the app
@@ -923,82 +1135,25 @@ The domain is at the center of the application and the layers are divided in:
 - **Crosscutting**: Aspects common to all projects of the app
 - **Specification**: Acceptance tests verifying the functionality of the application
 
-#### Functional Organization
+### Functional Organization
 Separate the layers by functionality
 
----
-
-## 🏢 System Design
-
-### Design Tips
+## Design Tips
 - Understand the problem
 - Ask questions about:
-  - Features
-  - Users
-  - Scaling
-  - Stack
+    - Features
+    - Users
+    - Scaling
+    - Stack
 - Design the most critical components first
 
-### Requirements
+## Requirements
 
-#### Functional Requirements
+### Functional Requirements
 Describe behavior: APIs, Operations supported
 
-#### Non-Functional Requirements
+### Non-Functional Requirements
 Describe qualities: Scalable, Fast, Secure
-
-### System Design Principles
-
-#### High Availability
-- **Redundancy**: Availability zones, Fallback, Data replication
-- **Switching between servers**: DNS, Load balancers, Reverse proxy, API gateway, Service discovery
-- **Protecting against client behavior**: Load shedding, Rate limiter, Shuffle sharding, Cell based architecture
-- **Protecting against failures**: Timeouts, Circuit breaker, Bulkhead, Retries
-- **Detecting failures**: Monitoring, Logging
-
-#### Scalability
-- **Vertical**: Adding compute power (Scale up)
-- **Horizontal**: Adding servers/replicas (Scale out)
-- **Elasticity**: Ability to acquire resources as needed and release them when not needed
-
-#### Performance
-- **Latency**: Time to get a response
-- **Bandwidth**: Rate of data transfer across a given path
-- **Throughput**: Rate at which something is processed
-
-#### Durability
-- **Backup**: Copy data periodically and store it elsewhere
-- **RAID**: Redundant storing of information
-- **Replication**: Copying the data to another machines
-- **Checksum**: For preventing data corruption
-
-#### Consistency
-- **ACID**: Database constraints are not violated when transactions are executed
-- **BASE**: NoSQL consistency model
-- **CAP Theorem**: Consistency, Availability, Partition Tolerance
-
-### Hardware
-
-#### Compute Environment
-- **Physical Server**: Complete control, expensive, hard to manage
-- **Virtual Machines**: Cheaper, easier to maintain, hypervisor-based
-- **Containers**: Lightweight, portable, container engine-based
-- **Serverless**: Cloud provides all resources, event-driven
-
-### Communication
-
-#### Request/Response
-- **Sync**: RequestResponse
-- **Async**: Messaging
-
-#### Async Messaging
-- **Message Queues**: Only a single consumer gets the message
-- **Publisher/Subscriber**: All subscribers get the message
-
-#### Network Protocols
-- **TCP**: Reliability over time, connection-oriented
-- **UDP**: Time over reliability, connectionless
-- **HTTP**: Request/Response protocol
 
 ---
 
