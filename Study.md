@@ -72,15 +72,71 @@ Double ended queues, you can add or remove from the beginning or the end
 ## 🔍 Algorithms
 
 ### Big O Notation
-- **O(1) Constant**: Time regardless of length
-- **O(log n) Logarithmic**: Grows slower than the data size, better than linear. Binary search
-- **O(n) Linear**: Grows in function of the size of the collection
-- **O(n²) Squared**: Grows in function of nested loops
+Notation to measure algorithm efficiency in terms of time and space complexity
+
+- **O(1) Constant**: Time regardless of input size. Example: Array access by index, hash table lookup
+- **O(log n) Logarithmic**: Grows slower than input size, divides problem in half each step. Example: Binary search, balanced tree operations
+- **O(n) Linear**: Grows proportionally with input size. Example: Single loop, linear search
+- **O(n log n) Linearithmic**: Efficient sorting algorithms. Example: Merge sort, quick sort (average), heap sort
+- **O(n²) Quadratic**: Nested loops over input. Example: Bubble sort, selection sort, naive string matching
+- **O(2ⁿ) Exponential**: Doubles with each input increase. Example: Recursive fibonacci, power set generation
+- **O(n!) Factorial**: Grows extremely fast. Example: Generating all permutations, traveling salesman (brute force)
 
 ### Algorithm Categories
-- String Manipulation
-- Multiple Pointers
-- HashTables
+
+#### String Manipulation
+- **What**: Algorithms that process, transform, or analyze strings
+- **Techniques**: Character frequency counting, sliding window, two pointers
+- **Examples**: Palindromes, anagrams, reverse string, longest palindrome, valid anagram, string compression
+
+#### Multiple Pointers
+- **What**: Use two or more pointers to iterate through data structure
+- **Use cases**: Sorted arrays, linked lists, finding pairs/triplets
+- **Complexity**: Often reduces O(n²) to O(n)
+- **Examples**: Two pointers (start/end), fast/slow pointers, two sum (sorted), remove duplicates, container with most water, cycle detection
+
+#### HashTables
+- **What**: Use hash map/set for O(1) lookup to optimize solutions
+- **Trade-off**: Space O(n) for time O(1) lookup
+- **Examples**: Frequency counting, caching results, two sum, group anagrams, contains duplicate, longest substring without repeating chars
+
+#### Sliding Window
+- **What**: Maintain a window that slides through array/string
+- **Complexity**: O(n) instead of O(n²)
+- **Examples**: Fixed-size window, variable-size window, maximum sum subarray, longest substring without repeating, minimum window substring
+
+#### Greedy Algorithms
+- **What**: Make locally optimal choice at each step
+- **When to use**: When local optimum leads to global optimum
+- **Note**: Doesn't always work, need to prove correctness
+- **Examples**: Activity selection, coin change, interval scheduling, jump game, gas station, meeting rooms
+
+#### Backtracking
+- **What**: Explore all possibilities by building solution incrementally
+- **Complexity**: Often exponential O(2ⁿ) or O(n!)
+- **Examples**: Permutations, combinations, subsets, constraint satisfaction, N-Queens, sudoku solver, generate parentheses, word search
+
+#### Divide and Conquer
+- **What**: Break problem into smaller subproblems, solve recursively, combine results
+- **Complexity**: Often O(n log n)
+- **Examples**: Split in half/solve/merge, merge sort, quick sort, binary search, closest pair of points
+
+#### Bit Manipulation
+- **What**: Use bitwise operations for optimization
+- **Operations**: AND (&), OR (|), XOR (^), NOT (~), shifts (<<, >>)
+- **Tricks**: XOR for finding unique, AND for checking bits
+- **Examples**: Set operations, single number, counting bits, power of two, reverse bits
+
+#### Graph Algorithms
+- **What**: Algorithms for traversing and analyzing graphs
+- **Data structures**: Adjacency list, adjacency matrix, union-find
+- **Examples**: DFS, BFS, topological sort, shortest path, number of islands, course schedule, clone graph, word ladder, cycle detection
+
+#### Dynamic Programming
+- **What**: Break problem into overlapping subproblems, store results
+- **Complexity**: Trade space for time
+- **Examples**: Top-down (memoization), bottom-up (tabulation), fibonacci, coin change, longest common subsequence, knapsack
+
 
 ### Sorting
 - BubbleSort
@@ -88,9 +144,9 @@ Double ended queues, you can add or remove from the beginning or the end
 - MergeSort
 - QuickSort
 
-### Arrays/Matrix
+### Arrays/Matrix: MxN bidimensional arrays, iteration to find patterns, values
 
-### Search
+### Search: Iterate to find a pattern, element
 - **Binary search**
 - **Depth First Search**: Searches a structure deep inside a node before asking his children. Uses recursion and Queues
 - **Breadth First Search**: Searches a structure wide first asking neighbors before going deep. Iterates using Queues
@@ -99,9 +155,70 @@ Double ended queues, you can add or remove from the beginning or the end
 - Recursion
 - Dynamic programming
 
-### Recursion
+### Recursion: Functions that call itself, contain an exit condition
 - fibonacci
 
+## 🎯 Top Interview Questions
+
+### Graphs
+
+0. [Clone Graph](https://lnkd.in/dV2P2TEs)
+1. [Course Schedule](https://lnkd.in/de8Q3NBS)
+2. [01 Matrix](https://lnkd.in/dV2P2TEs)
+3. [Number of Islands](https://lnkd.in/drT2MpTz)
+4. [Rotting Oranges](https://lnkd.in/dUQVwJ-d)
+
+### Arrays
+
+5. [Insert Interval](https://lnkd.in/dfcEDFwB)
+6. [3Sum](https://lnkd.in/duGvuCjf)
+7. [Product of Array Except Self](https://lnkd.in/dkGkjQVk)
+8. [Combination Sum](https://lnkd.in/d3iStbGc)
+9. [Merge Intervals](https://lnkd.in/dmFZxrVQ)
+
+### Stacks
+
+10. [Evaluate Reverse Polish Notation](https://lnkd.in/d-y7Zw4C)
+11. [Min Stack](https://lnkd.in/dqbh7PeV)
+12. [Trapping Rain Water](https://lnkd.in/dS_svBAm)
+
+### Binary Trees
+
+13. [Binary Tree Level Order Traversal](https://lnkd.in/dM-VYbVB)
+14. [Lowest Common Ancestor of a Binary Tree](https://lnkd.in/dUvJykgA)
+15. [Serialize and Deserialize Binary Tree](https://lnkd.in/dW2cP5Wn)
+
+### Dynamic Programming
+
+16. [Maximum Subarray](https://lnkd.in/dvjYye6E)
+17. [Coin Change](https://lnkd.in/d7zZRg7H)
+
+### Binary Search
+
+18. [Search in Rotated Sorted Array](https://lnkd.in/dEuh3gie)
+19. [Time-Based Key-Value Store](https://lnkd.in/dbERGKUB)
+
+### Strings
+
+20. [Longest Substring Without Repeating Characters](https://lnkd.in/d_vZrZda)
+21. [Minimum Window Substring](https://lnkd.in/de8aeeQD)
+
+### Heap
+
+22. [K Closest Points to Origin](https://lnkd.in/dUtCqYf4)
+23. [Find Median from Data Stream](https://lnkd.in/ddDgWqUv)
+
+### Recursion
+
+24. [Permutations](https://lnkd.in/dTUqmAfy)
+
+
+---
+## Data formats
+-**Json**:
+-**Binary**:
+-**Avro**:
+-**Protobuffers**:
 ---
 
 ## ☕ Java
@@ -239,6 +356,11 @@ Transforms(apply functions, change type, maintain order) data → Filter(apply p
 - **mapToObj**: primitives to objects
 - **mapToInt,Long,Double**: object to primitives
 
+#### Collectors
+```java
+Map<K,V> map = Collectors.groupingBy(Function, collection); //returns multiple values
+Map<K,V> map = Collectors.partitioningBy(Predicate, collection); //returns only two values
+```
 #### File to Stream
 ```java
 Stream<String> lines = Files.lines(path,encoding);
@@ -262,8 +384,8 @@ Wrapper that could contain a value or not
 - Implement Callable (<T> return result)
 - Extend Thread
 - **ExecutorService**:
-  - execute() returns void
-  - submit() returns a Future<?> object containing the result
+  - void execute() returns void
+  - Future<?> submit() returns a Future<?> object containing the result
   - Future<T> contains the result of a thread execution
   - ScheduledFuture<T> contains the result of a scheduled thread execution
   - newSingleThreadExecutor: Single thread
@@ -394,6 +516,9 @@ The Spring framework provides several implementations of the ApplicationContext 
 - **@RequestBody**: Deserializes HttpRequest (JSON) to an object
 - **@ResponseBody**: Serializes the object and sends it as a response (JSON)
 - **@Value**: For injecting values from the properties/yml file
+
+##### Transactional
+- **@EnableTransactionManagement**: Use in a @Configuration class to enable transactional support
 
 ##### Request/Response Entities
 - **RequestEntity**
@@ -1113,9 +1238,15 @@ public void deleteUser() { }
 ## Microservices Patterns
 - **Api Gateway/Backend For Frontend**: acts as a single entry point for the frontend calls
 - **Shared Event Bus/Message Queues**: uses a bus to communicate ms async by using messages
-- **Circuit Breaker**: Between client and server. Allows all calls to go through. If enough errors are detected, it blocks the calls and fails fast
 - **Service Registry**: Keeps a directory of the services with ip addresses for discovery
 - **Blue Green swap**: swap the passive service to the active with the new code blue>green
+
+## Distributed Design Patterns
+- **Circuit Breaker**: Between client and server. Allows all calls to go through. If enough errors are detected, it blocks the calls and fails fast
+- **Bulkhead**:
+- **Saga**:
+
+- **Libraries**Resilience4j, Polly
 
 ## Architecture Types
 
@@ -1191,10 +1322,11 @@ Describe qualities: Scalable, Fast, Secure
 - **delete**: docker container rm
 
 ### Dockerfile
+
 ```dockerfile
 FROM alpine
 RUN apk add update nodejs npm
-COPY . /src
+COPY resources /src
 WORKDIR /src
 RUN npm install
 EXPOSE 8080
@@ -1228,26 +1360,42 @@ kubectl delete -f pod.yml
 
 ### 🟠 AWS
 
-#### AWS Computing
+#### Computing
 - **EC2**: Elastic Compute Cloud with autoscaling
-- **Lambda**: Serverless functions
+- **Lambda**: Serverless functions, virtual functions, autoscalable, reactive
+- **Batch**: Timed jobs
+- **Lightsail**: Easy user friendly computing + services for quick startup
 
-#### AWS Storage
+#### Storage
 - **S3**: Simple Storage Service for objects
 - **EBS**: Elastic Block Store for EC2
 - **EFS**: Elastic File System
+- **DynamoDB**: NoDB key/value based
+- **DocumentDB**: NoDB MongoDB document based
+- **RDS**: Relational DB service for MySQL, SQLServer, Oracle, Postgress, etc.
+- **Aurora**: AWS Proprietary SQL DB engine
 
-#### AWS Networking
+#### Networking
 - **VPC**: Virtual Private Cloud
 - **CloudFront**: Content Delivery Network
 - **API Gateway**: API management service
 - **Route 53**: DNS service
 - **ELB**: Elastic Load Balancer
 
-#### AWS Monitoring
+#### Monitoring
 - **CloudWatch**: Metrics and monitoring
+- **Quicksight**: Dashboard for analytics
 
-### AWS CI/CD
+#### Events
+- **EventBridge**:  Event/cron based event trigger service
+
+#### Containers
+- **ECR**: Container repository
+- **ECS**: Provisioned ec2 instances
+- **Fargate**: Serverless container service
+- **EKS**: Elastic Kubernetes service, orchestrator, management
+
+#### CI/CD
 - **CodeCommit**: Source control service
 - **CodeBuild**: Build service
 - **CodeDeploy**: Deployment service

@@ -3,7 +3,7 @@
  * Sets a limit, when reached, then other tasks can start
  */
 
-package concepts.threads;
+package concepts.concurrency;
 
 import java.util.concurrent.BrokenBarrierException;
 import java.util.concurrent.CyclicBarrier;

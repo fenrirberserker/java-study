@@ -2,7 +2,7 @@
  * Simulates multiple workers weighting animals
  * Uses recursion
  */
-package concepts.threads;
+package concepts.concurrency;
 
 import java.util.Arrays;
 import java.util.Random;

@@ -1,4 +1,4 @@
-package concepts.threads.datasharing;
+package concepts.concurrency.datasharing;
 
 public class Consumer implements Runnable{
 

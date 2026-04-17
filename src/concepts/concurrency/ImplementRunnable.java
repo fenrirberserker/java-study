@@ -1,4 +1,4 @@
-package concepts.threads;
+package concepts.concurrency;
 
 public class ImplementRunnable implements Runnable{
 

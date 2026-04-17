@@ -18,14 +18,23 @@ public class DemoMap {
         System.out.println(map);
 
 
-        Map<Character,Integer> other = new HashMap<>();
+        Map<Character,Integer> mapCountChar = new HashMap<>();
         String str = "aaaaaaaaabcdeeefffffff";
 
         for (Character c : str.toCharArray() ) {
-            other.merge(c, 1, Integer::sum);
+            mapCountChar.merge(c, 1, Integer::sum);
         }
 
-        System.out.println(other);
+        System.out.println(mapCountChar);
+
+        Map<Integer, Integer> mapCountNum = new HashMap<>();
+        int[] nums = {1, 1, 1, 2, 3, 4, 4, 4, 5, 5, 5, 5, 5};
+
+        for (int n : nums) {
+            mapCountNum.merge(n, 1, Integer::sum);
+        }
+
+        System.out.println(mapCountNum);
 
 
 

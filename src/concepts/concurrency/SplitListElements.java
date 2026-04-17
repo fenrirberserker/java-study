@@ -1,4 +1,4 @@
-package concepts.threads;
+package concepts.concurrency;
 
 import java.util.ArrayList;
 import java.util.List;

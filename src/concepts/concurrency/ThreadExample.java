@@ -1,4 +1,4 @@
-package concepts.threads;
+package concepts.concurrency;
 
 public class ThreadExample {
 	private static int counter =0;
