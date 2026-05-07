@@ -105,7 +105,7 @@ Notation to measure algorithm efficiency in terms of time and space complexity
 - **Complexity**: O(n) instead of O(n²)
 - **Examples**: Fixed-size window, variable-size window, maximum sum subarray, longest substring without repeating, minimum window substring
 
-#### Greedy Algorithms
+#### Greedy
 - **What**: Make locally optimal choice at each step
 - **When to use**: When local optimum leads to global optimum
 - **Note**: Doesn't always work, need to prove correctness
@@ -127,7 +127,7 @@ Notation to measure algorithm efficiency in terms of time and space complexity
 - **Tricks**: XOR for finding unique, AND for checking bits
 - **Examples**: Set operations, single number, counting bits, power of two, reverse bits
 
-#### Graph Algorithms
+#### Graphs
 - **What**: Algorithms for traversing and analyzing graphs
 - **Data structures**: Adjacency list, adjacency matrix, union-find
 - **Examples**: DFS, BFS, topological sort, shortest path, number of islands, course schedule, clone graph, word ladder, cycle detection
@@ -254,6 +254,8 @@ When working with objects:
 
 ### Exceptions
 
+> 📘 Full guide: [Exceptions.md](Exceptions.md)
+
 #### Checked
 - Extend from Exception. Compile time
 - You can recover
@@ -378,6 +380,8 @@ Wrapper that could contain a value or not
 - **orElseThrow(Supplier s)**: if present returns value, else throws exception created by calling supplier
 
 ### Concurrency
+
+> 📘 Full guide: [Threads.md](Threads.md)
 
 #### Creation
 - Implement Runnable (void)

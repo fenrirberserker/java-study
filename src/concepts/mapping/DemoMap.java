@@ -3,40 +3,40 @@ package concepts.mapping;
 import java.util.HashMap;
 import java.util.Map;
 
+/**
+ *  Map<K, V> — minimal API tour.
+ *    put / get / remove          — basic access
+ *    putIfAbsent / replace       — conditional write
+ *    computeIfAbsent             — runs only when key missing
+ *    computeIfPresent            — runs only when key present
+ *    compute                     — runs in both cases (v == null if absent)
+ *    merge                       — combine old + new (classic counter)
+ */
 public class DemoMap {
 
     public static void main(String[] args) {
 
-        Map<Integer,Integer> map = new HashMap<>();
+        // put — insert or overwrite (returns previous value).
+        Map<Integer, Integer> map = new HashMap<>();
+        map.put(1, 3);                              // {1=3}
+        map.put(2, 5);                              // {1=3, 2=5}
 
-        map.put(1,3);
-        map.put(2,5);
-        map.computeIfPresent(2, (k,v) -> k*v );
-        map.computeIfAbsent(7,k -> k*k);
+        // computeIfPresent — runs only if key present; replaces value.
+        map.computeIfPresent(2, (k, v) -> k * v);   // 2*5 = 10
 
+        // computeIfAbsent — runs only if key missing; inserts value.
+        map.computeIfAbsent(7, k -> k * k);         // 7*7 = 49
 
-        System.out.println(map);
+        // compute — runs always; v is null when key absent.
+        map.compute(1, (k, v) -> v + 100);          // 3+100 = 103
 
+        System.out.println("computed " + map);      // {1=103, 2=10, 7=49}
 
-        Map<Character,Integer> mapCountChar = new HashMap<>();
-        String str = "aaaaaaaaabcdeeefffffff";
-
-        for (Character c : str.toCharArray() ) {
-            mapCountChar.merge(c, 1, Integer::sum);
+        // merge — insert value if absent, else combine(old, value).
+        Map<Character, Integer> counts = new HashMap<>();
+        for (char c : "aaabbc".toCharArray()) {
+            counts.merge(c, 1, Integer::sum);       // start at 1, +1 on repeat
         }
-
-        System.out.println(mapCountChar);
-
-        Map<Integer, Integer> mapCountNum = new HashMap<>();
-        int[] nums = {1, 1, 1, 2, 3, 4, 4, 4, 5, 5, 5, 5, 5};
-
-        for (int n : nums) {
-            mapCountNum.merge(n, 1, Integer::sum);
-        }
-
-        System.out.println(mapCountNum);
-
-
-
+        System.out.println(counts);                 // {a=3, b=2, c=1}
     }
 }
