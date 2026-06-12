@@ -20,17 +20,20 @@ public class DemoMap {
         Map<Integer, Integer> map = new HashMap<>();
         map.put(1, 3);                              // {1=3}
         map.put(2, 5);                              // {1=3, 2=5}
+        System.out.println(map);
 
         // computeIfPresent — runs only if key present; replaces value.
         map.computeIfPresent(2, (k, v) -> k * v);   // 2*5 = 10
+        System.out.println(map);
 
         // computeIfAbsent — runs only if key missing; inserts value.
         map.computeIfAbsent(7, k -> k * k);         // 7*7 = 49
+        System.out.println(map);
 
         // compute — runs always; v is null when key absent.
         map.compute(1, (k, v) -> v + 100);          // 3+100 = 103
+        System.out.println(map);
 
-        System.out.println("computed " + map);      // {1=103, 2=10, 7=49}
 
         // merge — insert value if absent, else combine(old, value).
         Map<Character, Integer> counts = new HashMap<>();
