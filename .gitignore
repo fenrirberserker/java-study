@@ -59,7 +59,7 @@ local.properties
 /nbdist/
 /.nb-gradle/
 
-# Build tools
+# Build utils
 target/
 build/
 !gradle/wrapper/gradle-wrapper.jar
@@ -112,6 +112,9 @@ auto-generated/
 application-*.properties
 application-*.yml
 application-*.yaml
+
+# Keep the Gradle wrapper config (the broad *.properties above would hide it)
+!gradle/wrapper/gradle-wrapper.properties
 
 # Database
 *.db

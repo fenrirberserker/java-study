@@ -1,0 +1,67 @@
+plugins {
+    id 'java'
+}
+
+group = 'dev.study'
+version = '1.0.0'
+
+java {
+    // Java 21 (matches the language level in the IDE module)
+    toolchain {
+        languageVersion = JavaLanguageVersion.of(21)
+    }
+}
+
+// The project keeps its original FLAT layout: every source file lives directly
+// under src/ (not the conventional src/main/java). Point Gradle at it.
+sourceSets {
+    main {
+        java {
+            srcDirs = ['src']
+        }
+    }
+}
+
+repositories {
+    mavenCentral()
+    mavenLocal()   // reuse anything already cached in the local Maven repository
+}
+
+ext {
+    springVersion = '6.2.7'
+}
+
+dependencies {
+    // Spring core container: inversion of control, dependency injection, events,
+    // aspect support — everything the concepts/spring examples use.
+    implementation "org.springframework:spring-context:${springVersion}"
+
+    // Pointcut parsing for @Aspect-style aspects (concepts/spring/aop).
+    implementation 'org.aspectj:aspectjweaver:1.9.22'
+
+    // @PostConstruct / @PreDestroy (concepts/spring/lifecycle).
+    implementation 'jakarta.annotation:jakarta.annotation-api:2.1.1'
+
+    // Lombok: compile-time only, plus its annotation processor.
+    compileOnly 'org.projectlombok:lombok:1.18.30'
+    annotationProcessor 'org.projectlombok:lombok:1.18.30'
+}
+
+tasks.withType(JavaCompile).configureEach {
+    options.encoding = 'UTF-8'
+}
+
+// Run any example's main() from the command line:
+//   gradle runClass -PmainClass=concepts.spring.ioc.IocContainerExample
+tasks.register('runClass', JavaExec) {
+    group = 'application'
+    description = 'Runs a single main class. Pass -PmainClass=<fully.qualified.Name>'
+    classpath = sourceSets.main.runtimeClasspath
+    mainClass = providers.gradleProperty('mainClass').orElse('')
+    doFirst {
+        if (!mainClass.get()) {
+            throw new GradleException(
+                "Provide a class, e.g. gradle runClass -PmainClass=concepts.spring.ioc.IocContainerExample")
+        }
+    }
+}
