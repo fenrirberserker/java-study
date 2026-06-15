@@ -99,6 +99,7 @@ String first = list.get(0);    // random access by index — O(1)
 list.set(0, "c");              // update by index — O(1)
 list.remove(0);                // delete by index — O(n), shifts everything left
 ```
+- **Resize mechanics**: the backing array starts at capacity 10; when full it is replaced by a larger array (Java's `ArrayList` grows by about 50%, `oldCapacity + oldCapacity/2`) and all elements are copied. Because the cost of growing is spread across many cheap appends, a run of n appends is O(n) total — **O(1) amortised** per append — even though an individual resize copy is O(n)
 
 #### LinkedList
 - **Type**: Double linked list to next and prev node, implements List and Queue
@@ -251,6 +252,70 @@ deque.peekLast();           // view back
 ```
 - **Monotonic deque** — the sliding-window maximum/minimum problem: maintain candidates in decreasing/increasing order to answer each window query in O(1); total O(n) for the whole array
 
+#### Heap / Priority Queue
+- **Type**: Complete binary tree satisfying the heap-order property — every node's key is ≤ its children's keys (min-heap) or ≥ its children's keys (max-heap). Stored implicitly in an array, so no node pointers are needed
+- **Insert (offer)**: O(log n) — append at the last position, then "bubble up" while smaller than the parent
+- **Remove min/max (poll)**: O(log n) — replace the root with the last element, then "bubble down"
+- **Peek**: O(1) — the root is always the minimum (min-heap) or maximum (max-heap)
+- **Build from n elements**: O(n) — bottom-up heapify, cheaper than n separate inserts (O(n log n))
+- **Remove an arbitrary element**: O(n) — linear scan to find it, then O(log n) to restore the heap
+- **Best for**: priority scheduling, Dijkstra's shortest path, Prim's minimum spanning tree, heap-sort, Top-K and streaming-median problems
+- **Memory**: O(n) — compact array; for the node at index `i`, parent is `(i-1)/2`, children are `2i+1` and `2i+2`
+
+##### Pros
+- **O(1) access to the minimum (or maximum)**
+- **Array-backed** — excellent cache locality, no per-node pointer overhead
+- **O(n) bulk construction** via bottom-up heapify
+- `java.util.PriorityQueue` is a min-heap by default; pass `Comparator.reverseOrder()` for a max-heap
+
+##### Cons
+- **Only the root is ordered** — there is no efficient sorted traversal of the whole structure
+- **Arbitrary removal is O(n)** unless you maintain a separate index map
+- **Not stable** — elements of equal priority may leave in any order
+
+```java
+// Min-heap (default): smallest element is polled first
+PriorityQueue<Integer> minHeap = new PriorityQueue<>();
+minHeap.offer(5); minHeap.offer(1); minHeap.offer(3);
+int min    = minHeap.peek();   // 1 — O(1), does not remove
+int polled = minHeap.poll();   // 1 — O(log n), removes the minimum
+
+// Max-heap: reverse the comparator
+PriorityQueue<Integer> maxHeap = new PriorityQueue<>(Comparator.reverseOrder());
+
+// Top-K smallest: keep a max-heap of size k, evicting the largest when over capacity
+PriorityQueue<Integer> topK = new PriorityQueue<>(Comparator.reverseOrder());
+for (int x : data) { topK.offer(x); if (topK.size() > k) topK.poll(); }
+```
+
+#### Hash Table
+- **Type**: Maps keys to array slots ("buckets") through a hash function; collisions are resolved by separate chaining (each bucket is a list/tree) or by open addressing (linear probing, quadratic probing, double hashing)
+- **Insert / lookup / delete**: O(1) expected, O(n) worst case (all keys collide into one bucket)
+- **Search**: O(1) expected
+- **Iteration**: O(n + capacity) — visits every bucket, including empty ones
+- **Best for**: frequency counting, deduplication, caching (for example a Least Recently Used cache), grouping by key
+- **Memory**: O(n + capacity); Java's `HashMap` starts at capacity 16 with a 0.75 load-factor threshold, doubling capacity and rehashing when exceeded
+
+##### Pros
+- **O(1) expected insert, lookup and delete** — the fastest general-purpose key lookup
+- **Any key type** that implements `hashCode()` and `equals()` correctly
+- **Amortised O(1) inserts** — occasional rehashing is spread across many cheap inserts
+
+##### Cons
+- **No ordering** — iteration order is undefined (`LinkedHashMap` preserves insertion order; `TreeMap` keeps keys sorted at O(log n) cost)
+- **Degrades to O(n)** under heavy collisions or a poor `hashCode()`
+- **Mutable keys are dangerous** — a key whose hash changes after insertion can never be found again
+- `HashMap` permits one `null` key and many `null` values; `Hashtable` and `ConcurrentHashMap` forbid `null` keys
+
+```java
+Map<String, Integer> freq = new HashMap<>();
+freq.merge("apple", 1, Integer::sum);          // idiomatic frequency counting
+int count = freq.getOrDefault("banana", 0);    // O(1) expected, null-safe read
+// Since Java 8, a bucket that exceeds 8 entries is converted from a linked list
+// to a red-black tree, capping worst-case lookup at O(log n) instead of O(n)
+```
+- **Load factor** λ = entries ÷ capacity; for separate chaining keep λ below ~0.75 (Java's default), for open addressing keep λ below ~0.5 to avoid clustering
+
 #### Binary Search Tree
 - **Structure**: Data structure with 1 data value and 2 pointers left and right
 - **Insertion**: O(log n)
@@ -258,6 +323,9 @@ deque.peekLast();           // view back
 - **Search**: O(log n)
 - **Deletion rebalancing**: Take the leftmost child of the right child of the deleted node (El mas izquierdo del hijo derecho del nodo eliminado)
   - Retain rule of smaller to the left, greater to the right
+- **Best for**: sorted maps and sets, range queries, in-order iteration
+- **Memory**: O(n) — one node per element, each holding two child pointers
+- **Worst-case height**: O(n) — inserting already-sorted keys degenerates the tree into a linked list and every operation degrades to O(n); the self-balancing variants below (AVL, Red-Black) restore the O(log n) guarantee
 
 ```java
 // A node holds one value and two child links
@@ -269,6 +337,144 @@ Node insert(Node root, int value) {
     if (value < root.value) root.left  = insert(root.left, value);
     else                    root.right = insert(root.right, value);
     return root;
+}
+```
+
+##### Pros
+- **In-order traversal yields the keys in sorted order** in O(n)
+- **Floor, ceiling and range queries** in O(log n) when balanced
+
+##### Cons
+- **Unbalanced after sorted or reverse-sorted inserts** — height degrades to O(n)
+- **Deletion is the most intricate operation** (the rebalancing rule above)
+- In production you rarely hand-roll one — Java's `TreeMap` and `TreeSet` use a Red-Black tree internally
+
+#### Balanced Binary Search Trees (AVL and Red-Black)
+- **Type**: self-balancing binary search trees that keep height at O(log n) by restructuring (rotations) on insert and delete
+- **Search**: O(log n) worst case
+- **Insert**: O(log n) — an AVL tree needs at most one rotation; a Red-Black tree needs O(1) structural changes
+- **Delete**: O(log n) — an AVL tree may rotate at O(log n) levels up to the root; a Red-Black tree needs O(1) structural changes
+- **Best for**: sorted maps and sets needing a *guaranteed* O(log n) with sorted iteration
+- **Memory**: O(n) — each node stores its key, value and child pointers plus one extra field: an AVL tree stores a height (an integer), a Red-Black tree stores a colour (a single bit)
+
+| Property | AVL tree | Red-Black tree |
+|---|---|---|
+| Balance invariant | Left and right subtree heights differ by at most 1 (strict height balance) | Colouring rules: root is black, a red node's children are black, every root-to-leaf path has the same number of black nodes (looser balance) |
+| Height bound | ≤ 1.44 · log₂(n) (shorter, so faster lookups) | ≤ 2 · log₂(n) (taller, so slightly slower lookups) |
+| Structural work per insert | At most 1 rotation (cheap) | O(1) rotations/recolourings (cheap) |
+| Structural work per delete | Up to O(log n) rotations (more expensive) | O(1) rotations/recolourings (cheaper) |
+| Best fit | Read-heavy workloads (stricter balance wins) | Write-heavy workloads (fewer restructurings per update) |
+| In the Java standard library | Not provided (use `TreeMap`) | `java.util.TreeMap` and `java.util.TreeSet` |
+
+##### Pros
+- **Guaranteed O(log n)** for search, insert and delete — removes the O(n) worst case of a plain binary search tree
+- **Sorted iteration** in O(n) via in-order traversal
+- **Order queries** (`firstKey`, `floorKey`, `ceilingKey`, `subMap`) in O(log n)
+
+##### Cons
+- **More complex** than a plain binary search tree — rotations and recolouring are easy to get wrong
+- **No access by position** — reaching the k-th element needs an order-statistics augmentation
+- **Pointer-heavy** — worse cache locality than an array-backed structure
+
+```java
+// TreeMap and TreeSet are backed by a Red-Black tree — all operations O(log n)
+NavigableMap<String, Integer> map = new TreeMap<>();
+map.put("banana", 2); map.put("apple", 1); map.put("cherry", 3);
+String first = map.firstKey();         // "apple"
+String ceil  = map.ceilingKey("b");    // "banana" — smallest key ≥ "b"
+var range    = map.subMap("apple", "cherry");   // sorted range view
+
+NavigableSet<Integer> set = new TreeSet<>(List.of(5, 1, 3));
+int floor  = set.floor(4);   // 3 — largest element ≤ 4
+int higher = set.higher(3);  // 5 — smallest element > 3
+```
+
+#### Trie (Prefix Tree)
+- **Type**: ordered tree where each edge is labelled with a character; the string at a node is the concatenation of edge labels from the root down to it
+- **Exact search**: O(m) — m = length of the query string; follow one child edge per character
+- **Insert**: O(m) — walk the existing path, then create nodes for the remaining suffix
+- **Prefix search / autocomplete**: O(m + k) — O(m) to reach the prefix node, O(k) to enumerate the k matches beneath it
+- **Delete**: O(m)
+- **Best for**: autocomplete, spell-checking, dictionaries, longest-prefix matching (for example network routing tables)
+- **Memory**: O(total characters × alphabet size) — large for wide alphabets; a compressed trie (Patricia/radix trie) collapses single-child chains to save space
+
+##### Pros
+- **Lookup is O(m), independent of the number of stored strings** — unlike a hash table, it never degrades under collisions
+- **Shared prefixes share nodes** — saves memory versus storing each string in full
+- **Natural prefix enumeration** in O(m + k) — ideal for autocomplete
+
+##### Cons
+- **Memory-hungry for wide alphabets** — an array of child links per node costs O(alphabet size) per node (a map per node trades memory for overhead)
+- **Poor cache locality** — nodes are individually allocated and scattered in memory
+- **Needs compression in practice** — plain tries waste many single-child nodes
+
+```java
+class TrieNode { TrieNode[] child = new TrieNode[26]; boolean end; }
+
+class Trie {
+    private final TrieNode root = new TrieNode();
+    public void insert(String w) {                 // O(m)
+        TrieNode n = root;
+        for (char c : w.toCharArray()) {
+            int i = c - 'a';
+            if (n.child[i] == null) n.child[i] = new TrieNode();
+            n = n.child[i];
+        }
+        n.end = true;
+    }
+    public boolean startsWith(String prefix) {      // O(m) — basis for autocomplete
+        TrieNode n = root;
+        for (char c : prefix.toCharArray()) {
+            int i = c - 'a';
+            if (n.child[i] == null) return false;
+            n = n.child[i];
+        }
+        return true;
+    }
+}
+```
+
+#### Union-Find (Disjoint Set Union)
+- **Type**: a forest of trees, one per disjoint set; each node points to its parent; each tree's root is the set's representative
+- **makeSet(x)**: O(1) — create a singleton set
+- **find(x)**: near O(1) amortised with path compression (returns the representative of x's set)
+- **union(x, y)**: near O(1) amortised with union-by-size/rank (merges two sets)
+- **k operations on n elements**: O(k · α(n)) total, where α is the inverse Ackermann function — effectively a constant for every realistic input size
+- **Best for**: Kruskal's minimum spanning tree, connected components, cycle detection in undirected graphs, network/percolation connectivity
+- **Memory**: O(n) — a parent array plus a size/rank array
+
+**Two heuristics, both required for near-linear performance:**
+- **Union by size/rank** — attach the smaller tree under the larger tree's root, keeping trees shallow
+- **Path compression** — during `find`, repoint every visited node directly to the root, flattening the tree for next time
+
+##### Pros
+- **Near O(1) per operation** with both heuristics — total cost O(k · α(n))
+- **Tiny implementation** — just a parent array and a size/rank array
+- **Answers "same group?" directly** without listing group members
+
+##### Cons
+- **No enumeration of a set's members** without a full scan
+- **No split** — a union cannot be undone
+- **`find` mutates the structure** (path compression), so the tree shape is not preserved across queries
+
+```java
+class UnionFind {
+    private final int[] parent, size;
+    UnionFind(int n) {
+        parent = new int[n]; size = new int[n];
+        for (int i = 0; i < n; i++) { parent[i] = i; size[i] = 1; }
+    }
+    int find(int x) {                                   // path compression
+        if (parent[x] != x) parent[x] = find(parent[x]);
+        return parent[x];
+    }
+    void union(int a, int b) {                          // union by size
+        int ra = find(a), rb = find(b);
+        if (ra == rb) return;
+        if (size[ra] < size[rb]) { parent[ra] = rb; size[rb] += size[ra]; }
+        else                     { parent[rb] = ra; size[ra] += size[rb]; }
+    }
+    boolean connected(int a, int b) { return find(a) == find(b); }
 }
 ```
 
@@ -321,6 +527,19 @@ factorial(3)
   `T(n) = 2·T(n-1) + O(1)` → O(2ⁿ) (naïve Fibonacci).
 - **Space:** O(depth of recursion) for the stack.
 
+#### Recurrence analysis — the Master Theorem (divide-and-conquer shortcut)
+Most divide-and-conquer recurrences have the form `T(n) = a·T(n/b) + f(n)`, where `a` = number of subproblems, `b` = factor the input shrinks by, and `f(n)` = work done outside the recursive calls. Compare `f(n)` against `n^(log_b a)`:
+
+| Case | Condition | Result |
+|---|---|---|
+| **1** | `f(n)` grows *slower* than `n^(log_b a)` | `T(n) = Θ(n^(log_b a))` |
+| **2** | `f(n)` grows at the *same rate* as `n^(log_b a)` | `T(n) = Θ(n^(log_b a) · log n)` |
+| **3** | `f(n)` grows *faster* than `n^(log_b a)` | `T(n) = Θ(f(n))` |
+
+- Merge sort: `T(n) = 2·T(n/2) + Θ(n)` → Case 2 → **O(n log n)**
+- Binary search: `T(n) = T(n/2) + O(1)` → Case 2 → **O(log n)**
+- Naïve Fibonacci: `T(n) = 2·T(n-1) + O(1)` → does not fit the theorem (it shrinks by subtraction, not division); solve by expansion → **O(2ⁿ)**
+
 #### When to use
 ✅ Tree/graph traversal, divide & conquer, problems with naturally recursive structure.
 ❌ Avoid when iterative solution is trivial OR depth can exceed ~10 000 (stack risk).
@@ -372,6 +591,14 @@ return solution
 #### Complexity
 Usually dominated by the sort: **O(n log n)**.
 
+#### How to prove a greedy algorithm correct — the exchange argument
+The standard proof technique:
+1. Assume an optimal solution `OPT` that differs from the greedy solution `G`.
+2. Find the first position where they differ, and show that swapping `OPT`'s choice there to match `G`'s does not make `OPT` worse.
+3. Repeating the swap turns `OPT` into `G` without ever losing optimality — therefore `G` is itself optimal.
+
+*Worked sketch (activity selection):* sort by finish time. If `OPT` picks activity `x` where greedy picks `y` with `finish(y) ≤ finish(x)`, swapping `x` → `y` in `OPT` still leaves room for every later activity, so `OPT` is no worse. Repeat ⇒ the greedy order is optimal.
+
 📁 **See:** [src/algorithm.implementation/greedy/GreedyBasics.java](../src/main/java/algorithm/implementation/greedy/GreedyBasics.java)
 
 ### 3. Backtracking
@@ -415,6 +642,12 @@ void backtrack(state, choices) {
 A naïve search visits all `O(branching^depth)` nodes. Backtracking cuts entire
 subtrees by checking constraints **before** recursing → massive speedup in practice
 (though worst-case complexity is still exponential).
+
+#### Pruning techniques in practice
+- **Feasibility pruning** (check before recursing): reject a choice that already violates a hard constraint — for example, in N-Queens verify the column and both diagonals are free before placing the next queen. The most common and most effective form, and it is free because you must validate anyway.
+- **Bound pruning (branch-and-bound)**: compute an optimistic best-possible value reachable from the current partial state; if it cannot beat the best complete solution found so far, discard the whole subtree. Used in optimization problems (e.g. 0/1 knapsack by backtracking).
+- **Symmetry pruning**: skip states that are rotations or reflections of ones already explored (e.g. the symmetric N-Queens first-row placements).
+- **Duplicate elimination**: when choices may repeat (permutations of a multiset), skip a value already tried at the same recursion depth.
 
 #### Classic problems
 - **N-Queens** — place N queens on an N×N board.
@@ -497,6 +730,42 @@ dfs(node):
 | **Topological Sort**       | Order DAG vertices                   | O(V + E)        |
 | **Union-Find**             | Disjoint sets / cycle detection      | ~O(α(n))        |
 
+#### Named graph algorithms — mechanics
+
+##### Dijkstra — single-source shortest path (non-negative weights)
+Breadth First Search generalized with a min-priority queue: always expand the *closest* unsettled vertex (the greedy step), and for each neighbour apply **edge relaxation** — if `dist[u] + w(u,v) < dist[v]`, lower `dist[v]` and re-enqueue `v`.
+
+```
+dist[] = ∞;  dist[source] = 0;  pq = {(0, source)}
+while pq not empty:
+    (d, u) = pq.poll()                 // closest vertex
+    for each edge u → v of weight w:
+        if dist[u] + w < dist[v]:
+            dist[v] = dist[u] + w
+            pq.offer((dist[v], v))
+```
+- **Fails on negative edges**: a vertex already settled might later be reachable more cheaply, and Dijkstra never revisits it.
+- **Complexity**: O((V + E) log V) with a binary-heap priority queue.
+
+##### Bellman-Ford — single-source shortest path (negative weights allowed)
+Relax *every* edge `V − 1` times; after `k` rounds, `dist[v]` is the shortest path using at most `k` edges (a shortest simple path uses at most `V − 1` edges). One extra round that still improves a distance proves a **negative-weight cycle**.
+```
+dist[] = ∞;  dist[source] = 0
+repeat (V-1) times:
+    for each edge (u, v, w):  if dist[u] + w < dist[v]: dist[v] = dist[u] + w
+for each edge (u, v, w):      if dist[u] + w < dist[v]: → negative cycle
+```
+- **Complexity**: O(V · E).
+
+##### Topological sort — ordering a Directed Acyclic Graph
+Two equivalent O(V + E) approaches:
+- **Depth First Search-based**: run a Depth First Search; when a vertex finishes (all descendants visited), prepend it to the result list.
+- **Kahn's algorithm (in-degree, Breadth First Search-based)**: enqueue all in-degree-0 vertices; repeatedly dequeue one into the result and decrement its neighbours' in-degrees, enqueuing any that reach 0. If fewer than `V` vertices come out, the graph has a cycle.
+- **Uses**: dependency resolution, course prerequisites, build ordering, compiler scheduling.
+
+##### Union-Find for graphs
+The disjoint-set structure (full detail under [Data Structures → Union-Find](#union-find-disjoint-set-union)) drives **Kruskal's minimum spanning tree** (add the next-cheapest edge unless its endpoints are already connected — which would form a cycle), **connected-components** counting, and **cycle detection in undirected graphs**, each at effectively O(α(n)) per operation.
+
 📁 **See:** [src/algorithm.implementation/graphs/GraphBasics.java](../src/main/java/algorithm/implementation/graphs/GraphBasics.java)
 
 ### 5. Dynamic Programming
@@ -562,6 +831,17 @@ return Dynamic Programming[n];
 | Longest Common Subsequence    | `Dynamic Programming[i][j]` = LCS of A[..i], B[..j] |
 | Edit distance                 | `Dynamic Programming[i][j]` = ops to convert A[..i] → B[..j] |
 
+#### Classic recurrences (what you write on the whiteboard)
+| Problem | Recurrence |
+|---|---|
+| Fibonacci | `dp[i] = dp[i-1] + dp[i-2]` |
+| Climbing stairs | `dp[i] = dp[i-1] + dp[i-2]` (ways to reach step i) |
+| 0/1 Knapsack | `dp[i][w] = max(dp[i-1][w], dp[i-1][w-wt[i]] + val[i])` if `wt[i] ≤ w`, else `dp[i-1][w]` |
+| Coin change (min coins) | `dp[a] = min(dp[a-coin] + 1)` over each `coin ≤ a`; base `dp[0] = 0` |
+| Longest Common Subsequence | `dp[i][j] = dp[i-1][j-1] + 1` if chars match, else `max(dp[i-1][j], dp[i][j-1])` |
+| Edit distance | `dp[i][j] = dp[i-1][j-1]` if chars match, else `1 + min(dp[i-1][j], dp[i][j-1], dp[i-1][j-1])` |
+| Longest Increasing Subsequence | `dp[i] = 1 + max(dp[j])` over all `j < i` with `arr[j] < arr[i]`; base `dp[i] = 1` |
+
 #### Complexity
 Usually **O(states × transitions per state)**. E.g., 1D problem with constant
 transition → O(n).
@@ -613,6 +893,19 @@ Notation to measure algorithm.implementation efficiency in terms of time and spa
 - **O(2ⁿ) Exponential**: Doubles with each input increase. Example: Recursive fibonacci, power set generation
 - **O(n!) Factorial**: Grows extremely fast. Example: Generating all permutations, traveling salesman (brute force)
 
+##### Companion notations (the full picture)
+Big-O alone is only an *upper* bound. The full family:
+
+| Notation | Meaning | When it is used |
+|---|---|---|
+| **O(f(n))** (Big-O) | Upper bound — runs *at most* this fast | The everyday meaning of "time complexity" |
+| **Ω(f(n))** (Big-Omega) | Lower bound — runs *at least* this fast | Proving optimality (e.g. comparison sorting is Ω(n log n)) |
+| **Θ(f(n))** (Big-Theta) | Tight bound — upper *and* lower bound coincide | The most precise claim (e.g. merge sort is Θ(n log n) in every case) |
+
+##### Amortized and space complexity
+- **Amortized complexity** — the average cost per operation across a long sequence, even if individual operations occasionally spike. `ArrayList.add` is O(n) on the resize step but **O(1) amortised**, because the doubling cost is spread over the preceding cheap adds; `HashMap.put` is O(1) amortised including occasional rehashing.
+- **Space complexity** — auxiliary memory beyond the input: in-place sorts (heap sort, quicksort) use O(1); merge sort uses O(n) for the merge buffer; recursive Depth First Search uses O(V) stack depth; a Dynamic Programming table uses O(states), often reducible with rolling arrays (Fibonacci in O(1)).
+
 #### Algorithm Categories
 
 ##### String Manipulation
@@ -658,6 +951,12 @@ Notation to measure algorithm.implementation efficiency in terms of time and spa
 - **Tricks**: XOR for finding unique, AND for checking bits
 - **Examples**: Set operations, single number, counting bits, power of two, reverse bits
 
+##### Prefix Sums
+- **What**: Precompute a running-sum array so the sum of any subarray `[i, j]` is answered in O(1) as `prefix[j+1] - prefix[i]`
+- **Complexity**: O(n) preprocessing, O(1) per range query
+- **Build**: `prefix[0] = 0; prefix[i] = prefix[i-1] + arr[i-1]`
+- **Examples**: range-sum queries, subarray sum equals target (with a HashMap of seen prefixes), 2D matrix prefix sums for rectangle queries
+
 ##### Graphs
 - **What**: Algorithms for traversing and analyzing graphs
 - **Data structures**: Adjacency list, adjacency matrix, union-find
@@ -678,22 +977,28 @@ Notation to measure algorithm.implementation efficiency in terms of time and spa
 | **SelectionSort** | Repeatedly select the minimum of the unsorted part and move it to the front | O(n²) | No |
 | **MergeSort** | Split in halves, sort each recursively, merge the two sorted halves | O(n log n) | Yes |
 | **QuickSort** | Pick a pivot, partition smaller/larger around it, recurse on both sides | O(n log n), O(n²) worst | No |
+| **InsertionSort** | Grow a sorted prefix; shift each new element left into place | O(n²), O(n) best (nearly sorted) | Yes |
+| **HeapSort** | Build a max-heap in place, then repeatedly extract the maximum to the end | O(n log n) average and worst | No |
+| **CountingSort** | Count occurrences of each integer key in range [0, k), then rebuild in order (not comparison-based) | O(n + k), O(n + k) worst | Yes |
+| **RadixSort** | Stable bucket-sort digit by digit, least-significant first | O(d·(n + k)), same worst | Yes |
+| **BucketSort** | Scatter into k range-buckets, sort each, concatenate | O(n + k), O(n²) worst (skewed data) | Yes (with a stable per-bucket sort) |
 
 - *Stable* = elements that compare equal keep their original relative order — it matters when sorting by several keys in sequence
 - In practice call `Arrays.sort()` / `List.sort()`: primitives use a tuned quicksort, objects use TimSort (a merge-sort derivative, stable)
+- **Comparison sorts cannot beat O(n log n)** in the worst case (a proven lower bound). When keys are bounded integers, the non-comparison sorts break that barrier: CountingSort and BucketSort run in O(n + k), and RadixSort extends this to multi-digit keys in O(d·(n + k))
+- **InsertionSort** is the fastest choice for very small or nearly-sorted arrays — TimSort itself falls back to it for short runs
+- **HeapSort** guarantees O(n log n) worst case with O(1) extra space, but its poor cache locality usually leaves it slower than quicksort/merge sort in practice
 
 #### Arrays/Matrix: MxN bidimensional arrays, iteration to find patterns, values
 
 #### Search: Iterate to find a pattern, element
 
 > 💻 Code: [BinarySearch](../src/main/java/algorithm/implementation/search/BinarySearch.java) · [BreadthFirstSearch](../src/main/java/algorithm/implementation/search/bfs/BreadthFirstSearch.java) · [DepthFirstSearch](../src/main/java/algorithm/implementation/search/dfs/DepthFirstSearch.java) · [Tree traversals](../src/main/java/algorithm/implementation/trees/BreadthFirstSearch.java)
-- **Binary search**
-- **Depth First Search**: Searches a structure deep inside a node before asking his children. Uses recursion and Queues
-- **Breadth First Search**: Searches a structure wide first asking neighbors before going deep. Iterates using Queues
-- Graphs
-- Trees
-- Recursion
-- Dynamic programming
+- **Linear search**: scan every element; O(n) time, O(1) space; the only option on unsorted data
+- **Binary search**: needs a sorted, random-access structure; halve the search space each step; O(log n) time, O(1) space iterative (`lo=0, hi=n-1; mid=(lo+hi)>>>1; compare and move lo or hi`)
+- **Depth First Search**: explores as deep as possible along a branch before backtracking; uses a call stack (recursion) or an explicit Stack; O(V + E) time, O(V) space; used for cycle detection, topological sort, connected components, path finding
+- **Breadth First Search**: explores all neighbours at the current depth before going deeper; uses a Queue; O(V + E) time, O(V) space; finds the shortest path in unweighted graphs and trees
+- Applies across: Graphs, Trees, matrices (each cell is a node), Recursion, Dynamic Programming
 
 #### Recursion: Functions that call itself, contain an exit condition
 - fibonacci
@@ -833,6 +1138,18 @@ String is immutable by design, for three reasons:
 - **Polymorphism**: The same call (`animal.speak()`) executes different behavior depending on the actual object behind the reference — the mechanism that lets code depend on abstractions
 - **Abstraction**: Expose *what* a type does (interface, abstract class), hide *how* it does it — callers program against the contract, not the algorithm.implementation
 
+##### Interface vs Abstract Class
+| | Abstract class | Interface |
+|---|---|---|
+| **Instantiation** | Cannot be instantiated directly (must be extended) | Cannot be instantiated directly (must be implemented) |
+| **State (fields)** | Can hold instance variables of any access level | Constants only (`public static final`, implicitly) |
+| **Constructor** | Has a constructor, invoked by the subclass via `super()` | Has no constructor |
+| **Method bodies** | Concrete methods of any access level | `default` and `static` methods **(Java 8)**; everything else is `public abstract` implicitly |
+| **Inheritance** | Single — a class may `extends` only one | Multiple — a class may `implements` many |
+| **When to use** | Shared state + shared implementation behind a strong "is-a" (e.g. `AbstractList`) | A contract with no implied state — the preferred tool for loose coupling |
+
+Rule of thumb: **program to interfaces, not implementations**. When torn between the two, choose the interface — it leaves the single-inheritance slot free and allows many implementations without coupling.
+
 ##### Key Concept: reference type vs object type
 ```java
 Animal a = new Lion();   // reference type: Animal — object type: Lion
@@ -843,6 +1160,29 @@ Animal a = new Lion();   // reference type: Animal — object type: Lion
 ##### Override vs Overload
 - **Override**: same signature redefined in a subclass → resolved at RUNTIME from the object's actual type (dynamic dispatch)
 - **Overload**: same method name, different parameter lists in the same class → resolved at COMPILE time from the declared types of the arguments
+
+##### Access Modifiers
+| Modifier | Same class | Same package | Subclass (other package) | Anywhere else |
+|---|---|---|---|---|
+| `public` | Yes | Yes | Yes | Yes |
+| `protected` | Yes | Yes | Yes (through inheritance only) | No |
+| *(default / package-private)* | Yes | Yes | No | No |
+| `private` | Yes | No | No | No |
+
+A subclass in another package reaches a `protected` member only *through inheritance*, never through a superclass-typed reference. Local variables take no access modifier — the only modifier they allow is `final`.
+
+##### final, static, and Initialization Order
+- **`final` variable**: assignable exactly once; a `final` instance field must be set by the end of the constructor; a `final` local is a "blank final" until first assigned
+- **`final` method**: cannot be overridden; **`final` class**: cannot be extended (`String` is `final`)
+- **`static` member**: belongs to the class, shared across instances, reachable without an object; a `static final` constant is named `ALL_CAPS`
+- **Class initialization** (once per load): static fields and `static { }` blocks run top-to-bottom; a throwing static block is wrapped in `ExceptionInInitializerError`
+- **Object creation** (every `new`): superclass constructors run first up to `Object` (so `super()` is the first statement), then instance-field initializers and `{ }` blocks top-to-bottom, then the constructor body
+
+```java
+class Parent { static { } { } Parent() { } }   // Parent static init → Parent instance init → Parent ctor
+class Child extends Parent { static { } { } Child() { } }
+// new Child(): Parent static, Child static (once) → Parent instance, Parent ctor → Child instance, Child ctor
+```
 
 ##### equals()/hashCode()
 
@@ -866,6 +1206,28 @@ public int hashCode() {
     return Objects.hash(id, name);                   // SAME fields used in equals()
 }
 ```
+
+##### The equals()/hashCode() contract in full
+**`equals()` must be:**
+- **Reflexive** — `x.equals(x)` is `true`
+- **Symmetric** — `x.equals(y)` implies `y.equals(x)`
+- **Transitive** — `x.equals(y)` and `y.equals(z)` imply `x.equals(z)`
+- **Consistent** — repeated calls return the same result while the compared fields are unchanged
+- **Null-safe** — `x.equals(null)` returns `false`, never throws
+
+**`hashCode()` must be:**
+- **Consistent** — same value across calls within one Java Virtual Machine run while the `equals` fields are unchanged
+- **Equal-implies-equal** — if `x.equals(y)`, then `x.hashCode() == y.hashCode()`; the converse need not hold (unequal objects may share a hash code — a *collision*)
+- It is legal but pathological for every object to return the same constant — the hash collection still works correctly, just degrading to O(n)
+
+##### Immutability — the five rules for a truly immutable class
+1. All fields `private` and `final`
+2. No setters
+3. The class itself `final` (so no subclass reintroduces mutability)
+4. Mutable referenced objects are defensively copied in (constructor) and out (getters) — never shared by reference
+5. Every field is set once, at construction
+
+The wrapper classes, `String`, and all `java.time` types follow this pattern. Because `java.time` objects are immutable, every manipulation method returns a *new* object — you must assign the result or the change is silently lost.
 
 #### Exceptions
 
@@ -936,17 +1298,16 @@ How a `put(key, value)` works, step by step:
 | **Collections.synchronizedMap()** | One single lock on the whole map | Thread safe, but every operation blocks all the others |
 | **ConcurrentHashMap** **(Java 5)** | Fine-grained locking per bucket, lock-free reads | Thread safe and scalable under concurrent access |
 
-##### Comparable<T>
-- Natural order
-- implements int objOne.compareTo(T objTwo)
-- returns 0 if = arg, returns -1 if < arg, returns 1 if > arg
-- Only one sort sequence can be created
+##### Comparable\<T\>
+- Defines the type's single **natural order**, baked into the class itself
+- Implement `int compareTo(T other)`: negative if `this < other`, `0` if equal, positive if `this > other` — use `Integer.compare(a, b)` rather than `a - b`, which overflows
+- Only one natural order per class; used automatically by `TreeSet`, `TreeMap`, and `Collections.sort()` when no comparator is given
+- **Contract**: antisymmetric (`sgn(x.compareTo(y)) == -sgn(y.compareTo(x))`) and transitive; should be *consistent with equals* (`compareTo == 0` ⇔ `equals` is `true`), otherwise sorted collections — which judge equality by `compareTo`, not `equals` — behave unexpectedly
 
-##### Comparator<T>
-- Multiple, defined by programmer
-- implements int compare(T objOne, T objTwo);
-- returns objOne.getAttribute().compareTo(objTwo.getAttribute())
-- Many sort sequences can be created
+##### Comparator\<T\>
+- Defines an **external** order; many can exist for one type, without touching the class
+- Implement `int compare(T a, T b)` with the same sign convention as `compareTo`
+- **(Java 8)** composition: `Comparator.comparing()`, `thenComparing()`, `reversed()`, `naturalOrder()`, `nullsFirst()` / `nullsLast()`
 
 ```java
 // Comparable: the type's single natural order, baked into the class
@@ -962,6 +1323,26 @@ players.sort(Comparator.comparingInt(Player::score).reversed()   // highest scor
 ##### Conversions
 - **Arrays**: collection.toArray()
 - **List and Set**: List list = Arrays.asList(array)
+
+##### Autoboxing, Unboxing, and the Integer Cache **(Java 5)**
+**Autoboxing** converts a primitive to its wrapper automatically (`list.add(42)` → `Integer`); **unboxing** is the reverse. Two traps:
+- **Integer cache**: the Java Virtual Machine caches `Integer` instances for **-128 to 127**, so `==` returns `true` for boxed values in that range and `false` outside it — always compare wrappers with `equals()`. The same caching applies to `Boolean`, `Byte`, `Short`, and `Character` (` `–``).
+- **NullPointerException on unboxing**: unboxing a `null` wrapper into a primitive throws — a frequent trap with auto-unboxed ternaries and return types.
+
+```java
+Integer a = 100, b = 100;  System.out.println(a == b);   // true  — cached
+Integer x = 200, y = 200;  System.out.println(x == y);   // false — distinct objects
+System.out.println(x.equals(y));                          // true  — same value
+```
+
+##### Varargs **(Java 5)**
+A variable-length argument list (`Type... name`) accepts zero or more values as an array. It must be the **last** parameter, and there can be only one. Inside the method it is a normal array; the caller may pass individual values, an array, or nothing (yielding an empty array, never `null`).
+
+```java
+void log(String prefix, Object... args) { /* args is Object[] */ }
+log("info", "msg", 42, true);   // three args
+log("info");                    // zero args — empty array
+```
 
 #### Functional Interfaces **(Java 8)**
 
@@ -1066,6 +1447,107 @@ Wrapper that could contain a value or not
   - A platform thread is heavy (around one megabyte of stack, a few thousand maximum); a virtual thread is light (a few kilobytes, millions are possible)
   - When a virtual thread blocks on input/output, it releases its carrier platform thread instead of wasting it
   - Best fit: input/output bound work such as one-thread-per-request in a microservice — increasingly asked in microservices interviews
+
+#### Generics **(Java 5)**
+
+Generics parameterize a class, interface, or method by type, giving **compile-time type safety** with no casts. Before them, collections held `Object` and a wrong type failed only at runtime (`ClassCastException`).
+
+```java
+List<String> names = new ArrayList<>();
+String s = names.get(0);          // no cast — compiler enforces the element type
+```
+
+- **Naming conventions**: `E` element, `K`/`V` key/value, `T`/`S`/`U` general, `N` number
+- **Type erasure**: generics exist only at compile time — the compiler checks types, erases the parameters, and inserts casts. Consequences: `instanceof List<String>` is illegal (only `List` exists at runtime), primitives cannot be type arguments (use wrappers), and a static field cannot use a class-level type parameter
+- **Generic method**: declares its own parameter before the return type — `public static <T> Crate<T> ship(T item)`
+
+##### Bounded wildcards and Producer Extends Consumer Super (PECS)
+| Form | Syntax | Meaning | Use |
+|---|---|---|---|
+| **Unbounded** | `List<?>` | Any type — read-only view (cannot add) | Operate on a list of unknown type |
+| **Upper-bounded** | `List<? extends Number>` | `Number` or a subtype — read-only (cannot add) | A source you only **read** from |
+| **Lower-bounded** | `List<? super Integer>` | `Integer` or a supertype — can add `Integer` | A sink you only **write** to |
+
+The **Producer Extends, Consumer Super (PECS)** rule: use `? extends T` for a producer you read from, `? super T` for a consumer you write to.
+
+```java
+void printAll(List<? extends Number> source) { for (Number n : source) {} } // producer → extends
+void addInts(List<? super Integer> dest)      { dest.add(1); dest.add(2); }   // consumer → super
+```
+
+#### Enums **(Java 5)**
+
+A type-safe fixed set of named constant instances. More robust than `int` constants — the compiler rejects any value outside the set.
+
+- Compared with `==` (they are singletons); `values()` lists them in declaration order; `ordinal()` is the position (avoid it in logic — reordering changes it); `name()`/`valueOf(String)` convert to and from text
+- Cannot extend a class or be extended (it implicitly extends `java.lang.Enum`), but **can implement interfaces**
+- Can carry fields, a `private` constructor, and methods — even a per-constant method body (an abstract method overridden by each constant)
+- `EnumSet` and `EnumMap` are bit-vector / array-backed and far faster than `HashSet`/`HashMap` when the keys are enum constants
+- In a `switch`, case labels use the **unqualified** constant name
+
+```java
+public enum Operation {
+    PLUS  { public double apply(double x, double y) { return x + y; } },
+    MINUS { public double apply(double x, double y) { return x - y; } };
+    public abstract double apply(double x, double y);   // value-specific bodies
+}
+```
+
+#### Nested, Inner, Anonymous, and Local Classes
+
+| Kind | `static`? | Sees outer instance | When to use |
+|---|---|---|---|
+| **Static nested** | Yes | No (needs an explicit reference) | Logical grouping without the outer instance (e.g. a `Builder`) |
+| **Member inner** | No | Yes (implicit `Outer.this`) | Helper bound to one outer instance (rare in modern code) |
+| **Local** | No | Yes (inside an instance method) | An implementation needed in exactly one method |
+| **Anonymous** | No | Yes | A one-off interface/abstract-class implementation — mostly replaced by lambdas **(Java 8)** |
+
+- A member inner class cannot declare `static` members (only `static final` constants); a local class takes no access modifier
+- Local and anonymous classes capture only **effectively final** local variables (relaxed from "must be `final`" in **(Java 8)**)
+- The compiler emits `Outer.class` and `Outer$Inner.class`
+
+#### Annotations **(Java 5)**
+
+Metadata attached to a program element for the compiler, tools, or the runtime.
+
+- **Built-in**: `@Override` (compile error if nothing is overridden), `@Deprecated` (warning at call sites), `@SuppressWarnings`, `@FunctionalInterface` **(Java 8)**, `@SafeVarargs`
+- **Meta-annotations** (annotations on annotations): `@Retention` — `SOURCE` (compiler only), `CLASS` (in the `.class`, default), or `RUNTIME` (visible via reflection); `@Target` (which elements it may annotate); `@Documented`; `@Inherited`
+- **Why it matters**: Spring and Hibernate are annotation-driven (`@Component`, `@Autowired`, `@Entity`). `@Retention(RUNTIME)` is exactly what lets a framework read them by reflection at startup; `@Override` is `SOURCE`-retained because only the compiler consumes it
+
+#### Java Input/Output (IO) and New Input/Output 2 (NIO.2)
+
+**Legacy `java.io`** uses byte streams (`InputStream`/`OutputStream`) and character streams (`Reader`/`Writer`), often wrapped in a `BufferedReader`/`BufferedWriter` for efficiency. Every IO type is `Closeable`, so use **try-with-resources** **(Java 7)** — resources close in reverse declaration order, even on exception.
+
+**NIO.2 (`java.nio.file`) (Java 7)** is the modern file-system Application Programming Interface, built on three types:
+- **`Path`** — a file/directory location (`Path.of("dir/file.txt")`, **Java 11**); does not require the file to exist
+- **`Paths`** — the factory (`Paths.get(...)`); the singular `Path` is the instance, the plural `Paths` is the factory
+- **`Files`** — static operations: `exists`, `copy`, `move`, `delete`/`deleteIfExists`, `readAllLines`, `write`, plus lazy `Stream`-returning `lines()`, `walk()`, and `find()` **(Java 8)** that must be closed with try-with-resources
+
+```java
+try (BufferedReader in  = Files.newBufferedReader(source);
+     BufferedWriter out = Files.newBufferedWriter(target)) {
+    String line;
+    while ((line = in.readLine()) != null) out.write(line);
+}   // out then in — closed in reverse order
+```
+
+#### Date/Time Application Programming Interface **(Java 8)**
+
+`java.time` replaced the mutable, non-thread-safe, zero-indexed-month legacy `Date`/`Calendar`/`SimpleDateFormat`. All `java.time` types are **immutable**; manipulation methods return new objects.
+
+| Type | Holds | Example |
+|---|---|---|
+| `LocalDate` | Date only | a birthday `2025-06-15` |
+| `LocalTime` | Time only | `09:30` |
+| `LocalDateTime` | Date + time, no zone | `2025-12-31T23:59` |
+| `ZonedDateTime` | Date + time + zone | `09:00 US/Eastern` |
+| `Instant` | Machine timestamp (since the Unix epoch) | logging, elapsed time |
+| `Period` | Date-based amount (`P1Y2M3D`) | "3 months later" |
+| `Duration` | Time-based amount (`PT2H`) | "90 minutes" |
+
+- Created through **static factories** (`LocalDate.now()`, `LocalDate.of(2025, Month.JUNE, 15)`) — constructors are not public
+- Fluent `plus`/`minus` return a new object: `LocalDate.now().plusDays(10).minusMonths(1)` — assign it or lose it
+- `DateTimeFormatter` (thread-safe, reusable as a constant) formats and parses: `LocalDate.parse("15/06/2025", DateTimeFormatter.ofPattern("dd/MM/yyyy"))`
 
 #### Concurrency
 
@@ -2595,6 +3077,29 @@ The Spring framework provides several implementations of the ApplicationContext 
 - Field/setter injection hides the cycle (Spring resolves it with early references); constructor injection surfaces it immediately at startup — which is a feature, not a bug
 - The right fix: redesign — extract the shared logic into a third bean — rather than patching with `@Lazy`
 
+##### Controller → Service → Repository Layering
+A standard Representational State Transfer (REST) application is structured in three horizontal layers, each a constructor-injected interface depending only on the layer below:
+
+| Layer | Annotation | Responsibility |
+|---|---|---|
+| Web (Controller) | `@RestController` + `@RequestMapping` | Parse the HTTP request, call the service, return the response (serialized to JSON by Jackson) |
+| Service | `@Service` | Business logic and orchestration; owns the transaction boundary (`@Transactional`) |
+| Repository | `@Repository` | Data access; translates persistence exceptions into Spring's `DataAccessException` hierarchy |
+
+- Prefer **package-by-feature** (`user`, `order`) over package-by-layer, so the tree communicates the domain
+- A custom exception annotated `@ResponseStatus(HttpStatus.NOT_FOUND)` is mapped to a 404 automatically when it leaves a controller
+
+##### Data Transfer Object (DTO) Mapping
+A Data Transfer Object (DTO) carries data across a layer boundary. The discipline: **never expose the persistence entity directly** — that mixes serialization with persistence and risks leaking internal fields (such as a password hash).
+- **Request DTO**: holds the deserialized `@RequestBody`; validation annotations live here
+- **Response DTO**: defines exactly what Jackson serializes; an API-contract change touches only this class, not the entity
+
+```java
+public record UserDto(UUID id, String email) {            // no password field
+    static UserDto from(User user) { return new UserDto(user.getId(), user.getEmail()); }
+}
+```
+
 #### 🚀 Spring Boot
 
 ##### Annotations
@@ -2631,14 +3136,39 @@ The Spring framework provides several implementations of the ApplicationContext 
 - **@Primary**: Marks the default candidate among several beans of the same type
 - **@Bean vs @Component**: `@Component` annotates a class you own (detected by component scanning); `@Bean` annotates a method inside a `@Configuration` class, for objects you do not own (third-party classes)
 
-###### Configuration Binding
-- **@Value("${property}")**: Injects a single property value
-- **@ConfigurationProperties(prefix = "app")**: Binds a whole property prefix to a typed class — preferred over many @Value (validation, completion metadata, refactorable)
-- **@Profile("dev")**: The bean is only created when that profile is active
+###### Configuration Binding and Profiles
+- **@Value("${property}")**: Injects a single property value; `@Value("${app.timeout:30}")` supplies a colon-delimited default
+- **@ConfigurationProperties(prefix = "app")**: Binds a whole property prefix to a typed class — preferred over many `@Value` (supports Jakarta Bean Validation, completion metadata, refactoring)
+- **@Profile("dev")**: The bean is only registered when that profile is active — swap implementations per environment (stub gateway in `dev`, real one in `prod`)
+- **Externalized configuration**: Spring Boot reads `application.properties` / `application.yml`; a profile file `application-{profile}.properties` overrides the base when its profile is active
+- **Property precedence** (highest wins): command-line args → environment variables → `application-{profile}.properties` → `application.properties`
+- **Activation**: `--spring.profiles.active=prod` (argument) or `SPRING_PROFILES_ACTIVE=prod` (environment, via relaxed binding); `@ActiveProfiles("test")` activates one for a test class
 
 ###### Exception Handling Annotations
-- **@ControllerAdvice / @RestControllerAdvice**: Global, cross-controller exception handling component
-- **@ExceptionHandler(MyException.class)**: Method that converts one exception type into a clean HTTP error response — know how to build a consistent error envelope with these two
+- **@ControllerAdvice / @RestControllerAdvice**: Declares a global, cross-controller exception handling component applied to every controller
+- **@ExceptionHandler(SomeException.class)**: Marks a method that converts one exception type into a structured HTTP response (the argument type selects the exception)
+- **Consistent error envelope** — the answer interviewers want:
+
+```java
+@RestControllerAdvice
+public class GlobalExceptionHandler {
+    @ExceptionHandler(MethodArgumentNotValidException.class)   // @Valid failures
+    @ResponseStatus(HttpStatus.BAD_REQUEST)
+    public Map<String, Object> handleValidation(MethodArgumentNotValidException ex) {
+        var errors = ex.getBindingResult().getFieldErrors().stream()
+            .map(fe -> Map.of("field", fe.getField(), "message", fe.getDefaultMessage()))
+            .toList();
+        return Map.of("errors", errors);                       // same JSON shape on every 400
+    }
+    @ExceptionHandler(ResourceNotFoundException.class)
+    @ResponseStatus(HttpStatus.NOT_FOUND)
+    public Map<String, String> handleNotFound(ResourceNotFoundException ex) {
+        return Map.of("error", ex.getMessage());
+    }
+}
+```
+- **`@ResponseStatus` on the exception class** handles simple cases; `@ControllerAdvice` gives more control (logging, custom body)
+- **Spring Boot 3**: `spring.mvc.problemdetails.enabled=true` emits RFC 9457 `ProblemDetail` error bodies with no custom code
 
 ###### Transactional
 - **@EnableTransactionManagement**: Use in a @Configuration class to enable transactional support
@@ -2656,19 +3186,71 @@ The Spring framework provides several implementations of the ApplicationContext 
 - **CommandLineRunner**: Receives argument
 - **ApplicationRunner**
 
+##### Bean Validation (Jakarta Bean Validation, Java Specification Request 380)
+Hibernate Validator (the reference implementation of Java Specification Request, JSR-380) integrates with Spring MVC so a single `@Valid` on a controller parameter runs all constraint checks before the method body. Flow: JSON → Jackson deserializes into the request Data Transfer Object → Spring validates → on failure throws `MethodArgumentNotValidException` *before* the service is reached → `@ControllerAdvice` turns it into a 400.
+
+```java
+public record CreateUserParameters(@NotBlank @Email String email,
+                                   @NotNull @Size(min = 8, max = 100) String password) {}
+
+@PostMapping @ResponseStatus(HttpStatus.CREATED)
+public UserDto create(@Valid @RequestBody CreateUserParameters p) { ... }   // @Valid triggers checks
+```
+
+| Annotation | Validates |
+|---|---|
+| `@NotNull` | Not null (does not reject a blank string) |
+| `@NotBlank` | Not null and at least one non-whitespace character (strings only) |
+| `@Size(min, max)` | String length or collection size within bounds (inclusive) |
+| `@Min` / `@Max` | Numeric value at or above / at or below a bound (inclusive) |
+| `@Email` / `@Pattern(regexp)` | Email format / matches a regular expression |
+| `@Past` / `@Future` | Temporal value before / after now |
+
+Custom rule: write an annotation plus a `ConstraintValidator<A, T>`, link them with `@Constraint(validatedBy = ...)`; Spring beans can be injected into the validator.
+
 ##### How Auto-Configuration Actually Works (senior question)
 1. `@EnableAutoConfiguration` loads the candidate configuration classes listed in `META-INF/spring/org.springframework.boot.autoconfigure.AutoConfiguration.imports` (formerly `spring.factories`)
 2. Each candidate is guarded by conditions: **@ConditionalOnClass** (a library is on the classpath), **@ConditionalOnMissingBean** (you did not define your own bean), **@ConditionalOnProperty**, and the rest of the @Conditional family
 3. **Starters** are simply curated dependency sets: they put the right classes on the classpath so the matching auto-configurations activate
 4. To override: declare your own bean (it wins, thanks to @ConditionalOnMissingBean) or exclude the auto-configuration (`@SpringBootApplication(exclude = ...)`)
 
+##### Starters and Actuator
+A **starter** is one dependency that pulls in a curated, tested set of libraries; the classes it adds to the classpath activate the matching auto-configuration.
+
+| Starter | What it brings |
+|---|---|
+| `spring-boot-starter-web` | Embedded Tomcat, Spring MVC, Jackson |
+| `spring-boot-starter-data-jpa` | Hibernate, Spring Data JPA, a transaction manager |
+| `spring-boot-starter-security` | Spring Security filter chain and authentication scaffolding |
+| `spring-boot-starter-test` | JUnit 5, Mockito, MockMvc, AssertJ |
+| `spring-boot-starter-actuator` | Production endpoints (`/actuator/health`, `/info`, `/metrics`) |
+
+**Spring Boot Actuator** exposes production-ready endpoints over HTTP (or Java Management Extensions) with no application code: `/actuator/health` (the Kubernetes liveness/readiness probe target), `/actuator/metrics` (Micrometer metrics — Java Virtual Machine memory, garbage collection, request latencies). Endpoints are restricted by default; expose them selectively with `management.endpoints.web.exposure.include=health,info,metrics`.
+
 ##### Testing Spring Applications
-- **@SpringBootTest**: Loads the full application context — slow, reserve it for integration tests
-- **@WebMvcTest(MyController.class)**: Controller slice only, using **MockMvc** to perform simulated HTTP requests
-- **@DataJpaTest**: Repository slice only, with an embedded database and transactions rolled back after each test
-- **@MockBean vs @Mock**: `@MockBean` replaces a bean inside the Spring context with a Mockito mock; plain `@Mock` knows nothing about Spring
+- **@SpringBootTest**: Loads the full application context — slow, reserve it for integration tests; add `@AutoConfigureMockMvc` to get a `MockMvc` wired into the full context
+- **@WebMvcTest(MyController.class)**: Controller slice only; `MockMvc` is auto-wired — supply a `@MockBean` for each service the controller needs
+- **@DataJpaTest**: Repository slice only, with an embedded database; each test runs in a transaction rolled back on completion, so data mutations need no cleanup
+- **@MockBean vs @Mock**: `@MockBean` replaces a bean inside the Spring context with a Mockito mock (injected everywhere that type is used); plain `@Mock` knows nothing about Spring and suits pure unit tests
 - **Testcontainers**: Real PostgreSQL/Kafka running in Docker during integration tests — closer to production than embedded fakes, and a strong senior signal
-- **Test pyramid**: Many unit tests, fewer integration tests, few end-to-end tests
+- **Test pyramid**: Many unit tests, fewer slice/integration tests, few end-to-end tests
+
+```java
+@WebMvcTest(UserRestController.class)
+class UserRestControllerTest {
+    @Autowired MockMvc mvc;
+    @MockBean  UserService service;
+
+    @Test void createUser_returnsCreated() throws Exception {
+        given(service.create(any(), any())).willReturn(new UserDto(UUID.randomUUID(), "a@b.com"));
+        mvc.perform(post("/api/users").contentType(MediaType.APPLICATION_JSON)
+                .content("{\"email\":\"a@b.com\",\"password\":\"secret99\"}"))
+           .andExpect(status().isCreated())                 // HTTP 201
+           .andExpect(jsonPath("$.email").value("a@b.com")); // body assertion
+    }
+}
+// status(), jsonPath(), content() are static imports from MockMvcResultMatchers / RequestBuilders
+```
 
 #### 🌐 Spring MVC
 
@@ -3022,7 +3604,15 @@ Both do build-time dependency injection and target fast, lean, native-ready serv
 - **Availability**: Data is available at any time
 - **Partition Tolerance**: System does not fail regardless any data drop or updated in any node
 
-*Only two of these requirements can be achieved at a time. Not all three may be possible*
+*Only two of these requirements can be achieved at a time: choose Consistency + Partition tolerance (CP) or Availability + Partition tolerance (AP), but not all three.*
+
+- **CP systems** (e.g. HBase, ZooKeeper): refuse to return stale data — become unavailable during a partition
+- **AP systems** (e.g. Cassandra, DynamoDB): stay available but may return stale data — eventually consistent
+- **CA** is only meaningful on a single node — a real distributed system cannot opt out of partitions, so it must choose C or A *when one occurs*
+- The "consistency" in the Consistency-Availability-Partition (CAP) theorem specifically means **linearizability** (the system behaves as if there is a single, up-to-date copy of the data) — which is a different guarantee from the Consistency in Atomicity-Consistency-Isolation-Durability (ACID)
+
+#### Partition-or-Else, Latency-or-Consistency (PACELC)
+The CAP theorem only describes behaviour *during* a partition. PACELC extends it: **if a Partition occurs, trade Availability against Consistency; Else (normal operation), trade Latency against Consistency.** It makes explicit that even with no failures, stronger consistency costs latency — a trade-off distributed systems pay every day, not just under failure.
 
 ### 🗃️ SQL
 
@@ -3120,12 +3710,45 @@ SELECT * FROM ranked WHERE rk <= 3;
 - **Deliberate denormalization**: Accepting duplication to avoid joins on read-heavy paths — a conscious trade-off, never an accident
 
 #### Indexes In Depth
-- **Structure**: B-tree — a balanced tree kept sorted; lookups and range scans in O(log n)
-- **When they help**: Columns used in WHERE, in JOIN conditions and in ORDER BY
-- **When they hurt**: Every INSERT, UPDATE or DELETE must also maintain each index — costly on write-heavy tables
-- **Composite index — column order matters**: An index on (a, b) serves queries filtering on `a` or on `a AND b`, but not on `b` alone (leftmost prefix rule)
-- **Covering index**: Contains every column the query needs, so the table itself is never touched
-- **EXPLAIN / execution plan**: Shows whether the database uses an index or scans the whole table — be ready to tell the story of a slow query you actually diagnosed and fixed
+
+##### Storage engine: B-Tree vs Log-Structured Merge-tree (LSM-tree)
+Two families of storage engine, each with a different on-disk index structure:
+
+| Dimension | B-Tree (page-oriented) | Log-Structured Merge-tree (LSM-tree) |
+|---|---|---|
+| Core mechanism | Fixed-size pages (typically 4 KB), updated in place | Append-only Sorted String Table (SSTable) files, merged by compaction |
+| Write path | Write-ahead log, then overwrite the page (≥ 2 disk writes) | Append to an in-memory memtable, flush to an SSTable (sequential write) |
+| Reads | Generally faster — one path down the tree, O(log n) | Generally slower — must check the memtable then several SSTables |
+| Writes | Slower — random writes and page splits | Faster — sequential appends, higher write throughput |
+| Disk space | Fragmentation from partly-empty pages | Compact — compaction reclaims space |
+| Used by | All major relational databases (PostgreSQL, MySQL/InnoDB, Oracle) | Cassandra, HBase, RocksDB, LevelDB, Lucene |
+
+Rule of thumb: LSM-trees tend to win on writes, B-trees on reads — but benchmarks are workload-sensitive.
+
+##### Clustered, secondary, and covering indexes
+- **Clustered index**: the row data lives inside the index, ordered by the key. In MySQL/InnoDB the primary key is always clustered; there is at most one per table
+- **Secondary (non-clustered) index**: stores a pointer to the row (in InnoDB, the primary-key value), so reads do a second lookup to fetch the full row
+- **Covering index**: includes every column a query needs, so the table is never touched — fast reads at the cost of extra storage and write overhead
+
+##### When they help and hurt
+- **Help**: columns in `WHERE`, `JOIN ... ON`, and `ORDER BY`
+- **Hurt**: every `INSERT`/`UPDATE`/`DELETE` must maintain each index — real cost on write-heavy tables
+- **Composite index — leftmost-prefix rule**: an index on `(a, b, c)` serves filters on `a`, `a AND b`, or `a AND b AND c`, but not on `b` or `c` alone — column order matters
+- **EXPLAIN / execution plan**: shows whether the database uses an index or scans the whole table — be ready to tell the story of a slow query you actually diagnosed and fixed
+
+#### Database Engine Types — Online Transaction Processing vs Online Analytical Processing
+| Dimension | Online Transaction Processing (OLTP) | Online Analytical Processing (OLAP) |
+|---|---|---|
+| Workload | Many short, low-latency reads and writes (lookups by key) | Few complex queries scanning millions of rows (aggregations) |
+| Primary user | End users through an application | Analysts and data scientists |
+| Rows touched per query | Few (index lookup) | A large fraction of the dataset (scan) |
+| Bottleneck | Disk seek time (random input/output) | Disk bandwidth (sequential input/output) |
+| Storage layout | Row-oriented — a row's columns stored together | Column-oriented — a column's values stored together |
+| Typical systems | PostgreSQL, MySQL, Oracle, SQL Server | Redshift, Snowflake, BigQuery, Vertica |
+
+- **Row-oriented** storage keeps each row contiguous — fast for whole-record reads, wasteful when analytics need only a few columns from millions of rows
+- **Column-oriented** storage keeps each column together — an analytic query reading 3 of 100 columns loads only those 3, compresses well (repeated values per column), and enables vectorized processing; the trade-off is write-unfriendliness (a row insert touches every column file)
+- Online Analytical Processing systems are usually fed from Online Transaction Processing systems by an Extract-Transform-Load (ETL) pipeline, isolating production databases from heavy analytical scans
 
 #### Database Tuning Techniques
 - **Indexing**: CREATE INDEX index_name ON table (column);
@@ -3137,24 +3760,41 @@ SELECT * FROM ranked WHERE rk <= 3;
 
 #### Concurrency
 ##### Locks
-- **Exclusive locking (write lock)**: while one transaction is running with update/insert/delete statements, this lock prevents other transactions from accessing the same data until the first transaction finishes
-- **Shared locking (read lock)**: While one transaction is running select, other transactions are prevented from update/insert/delete the same data until the read finishes. Other transactions can read the data.
+- **Shared lock (read lock)**: many transactions may hold a shared lock on the same data at once (concurrent readers); any transaction wanting to write must wait for all shared locks to release
+- **Exclusive lock (write lock)**: while held, no other transaction may read or write the data — the holder has sole access until it commits or aborts
+- **Granularity**: most databases lock at the **row** level; a **table** lock blocks all concurrent access to the whole table
+
+##### Two-Phase Locking (the classic route to serializability)
+- **Growing phase**: the transaction acquires locks as it reads and writes, releasing none
+- **Shrinking phase**: on commit or abort, all locks are released together
+- Writers block readers and readers block writers (the opposite of snapshot isolation, below) — this removes all anomalies but raises contention and tail latency
 
 #### ACID Properties
-- **Atomicity**: A transaction should be executed as a single unit
-- **Consistency**: Data should be consistent with the restrictions/rules
-- **Isolation**: One operation should not affect the result of other transactions
-- **Durability**: There's no data loss in case of failure
+Each letter carries a precise meaning:
+- **Atomicity**: if a multi-write transaction hits a fault partway, every write is discarded — it commits fully or rolls back entirely. The sharper word is *abortability*: the guarantee is the ability to abort cleanly on error. (It is *not* about concurrency — that is Isolation.)
+- **Consistency**: the database holds the application's invariants (balances reconcile, foreign keys resolve). This is really a property of the *application* — the database only enforces the constraints you declare; it is the odd letter out, "tossed in to make the acronym work"
+- **Isolation**: concurrent transactions do not step on each other. The ideal is *serializability* — the result equals some serial order — but full serializability is costly, so databases offer weaker isolation levels (below)
+- **Durability**: once committed, data survives a crash — written to a non-volatile write-ahead log on a single node, or replicated to enough nodes in a cluster. Perfect durability does not exist; disk + replication + backups layer to reduce risk
 
 #### Isolation Levels and Their Anomalies
-From most permissive to strictest — each level eliminates one more anomaly:
+From most permissive to strictest — each level prevents one more anomaly (✓ prevented / ✗ possible):
 
-| Isolation level | Anomaly still possible | What the anomaly means |
-|---|---|---|
-| READ UNCOMMITTED | Dirty read | Reading data from a transaction that may still roll back |
-| READ COMMITTED | Non-repeatable read | The same row read twice returns different values |
-| REPEATABLE READ | Phantom read | The same query run twice returns newly inserted rows |
-| SERIALIZABLE | None | Transactions behave as if executed one after the other |
+| Isolation level | Dirty read | Non-repeatable read | Phantom read | Lost update | Write skew |
+|---|---|---|---|---|---|
+| READ UNCOMMITTED | ✗ possible | ✗ possible | ✗ possible | ✗ possible | ✗ possible |
+| READ COMMITTED | ✓ prevented | ✗ possible | ✗ possible | ✗ possible | ✗ possible |
+| REPEATABLE READ | ✓ prevented | ✓ prevented | ✗ possible | ✓ prevented (most engines) | ✗ possible |
+| SNAPSHOT ISOLATION | ✓ prevented | ✓ prevented | ✓ prevented | ✓ prevented (auto-detected) | ✗ possible |
+| SERIALIZABLE | ✓ prevented | ✓ prevented | ✓ prevented | ✓ prevented | ✓ prevented |
+
+**The anomalies:**
+- **Dirty read**: reading another transaction's uncommitted data, which may still roll back
+- **Non-repeatable read**: re-reading a row inside one transaction returns a different value, because another transaction committed in between
+- **Phantom read**: re-running a query inside one transaction returns new or vanished rows, because another transaction inserted/deleted matching rows
+- **Lost update**: two read-modify-write cycles run concurrently and the second overwrites the first without incorporating it — one update is silently lost
+- **Write skew**: two transactions read the same rows, each makes a decision, then each updates *different* rows; the combined result violates a constraint neither broke alone (e.g. both on-call doctors go off-call because each saw the other still on-call)
+
+**Snapshot isolation and Multi-Version Concurrency Control (MVCC)**: each transaction reads from a consistent snapshot taken at its start, so later commits are invisible to it. The engine keeps several committed versions of each row side by side (tagged with the writer's transaction ID), so **readers never block writers and writers never block readers**; old versions are garbage-collected once no in-flight transaction needs them. PostgreSQL/MySQL call this level "Repeatable Read", Oracle calls it "Serializable" — neither is true serializability, and snapshot isolation still permits **write skew**. PostgreSQL's *Serializable Snapshot Isolation (SSI)* adds optimistic conflict detection to reach genuine serializability at modest cost.
 
 #### Optimistic vs Pessimistic Locking
 - **Optimistic** (a `@Version` column in Java Persistence API): No lock is taken; the update checks the version and fails if someone modified the row meanwhile. Best when conflicts are rare
@@ -3164,6 +3804,40 @@ From most permissive to strictest — each level eliminates one more anomaly:
 - **How they happen**: Transaction A locks row 1 then wants row 2; transaction B locks row 2 then wants row 1 — a circular wait
 - **How the database reacts**: It detects the cycle and kills one transaction (the victim) so the other can proceed
 - **How to prevent them**: Always acquire locks in the same global order; keep transactions short
+
+### 🔄 Replication
+Keeping a copy of the same data on several nodes — for fault tolerance, read scalability, and lower latency (replicas closer to users).
+
+#### Topologies
+| Topology | Where writes go | Trade-offs |
+|---|---|---|
+| Single-leader (primary-replica) | All writes to the leader, which streams to followers | Simple, strong reads from the leader; the leader is a write bottleneck and a single point of failure |
+| Multi-leader (active-active) | Several leaders each accept writes and replicate to each other | Higher write availability, cross-datacenter friendly; **write conflicts** must be resolved (last-write-wins, merge, or app logic) |
+| Leaderless (Dynamo-style) | Writes sent to many replicas (write quorum), reads from many (read quorum) | High availability, no failover; eventually consistent unless `w + r > n`; harder to reason about |
+
+#### Synchronous vs asynchronous
+- **Synchronous**: the leader waits for a follower to confirm before acknowledging — durable across a leader crash, but a slow follower blocks writes (usually run "semi-synchronous": one sync follower, the rest async)
+- **Asynchronous**: the leader acknowledges immediately — highest throughput, but writes not yet replicated are lost if the leader fails
+
+#### Replication lag and its read anomalies
+Asynchronous replicas trail the leader by the *replication lag* (milliseconds normally, seconds under load):
+- **Read-your-writes**: a user who just wrote reads a lagging replica and misses their own change — fix by reading recently-written data from the leader
+- **Monotonic reads**: successive reads hit replicas with different lag, so time appears to go backwards — fix by pinning a user to one replica
+- **Consistent prefix**: across shards, writes can be observed out of causal order — fix by routing causally-related writes to the same shard
+- **Quorum**: with `n` replicas, `w + r > n` guarantees a read overlaps the latest write (common: `n=3, w=2, r=2`); edge cases still permit staleness
+
+### 📦 Partitioning / Sharding
+Splitting a large dataset across nodes so each holds a subset — to scale beyond one machine's storage and throughput.
+
+| Strategy | How a partition is chosen | Pros | Cons |
+|---|---|---|---|
+| By key range | Sorted keys, each partition owns a contiguous range | Efficient range scans (keys stay sorted) | Hot spots when access concentrates on one range (e.g. today's date) |
+| By hash of key | A hash maps each key to a partition | Even distribution, fewer hot spots | Range scans become scatter-gather across all partitions |
+
+- **Consistent hashing (hash-ring)**: maps both nodes and keys onto a ring; a key belongs to the next node clockwise, so adding a node remaps only a fraction of keys — unlike `hash(key) mod N`, which remaps almost everything. Virtual nodes even out the load
+- **Hot spots**: one very popular key can still overload a partition — add a random prefix/suffix to spread it, at the cost of scatter-gather reads
+- **Secondary indexes**: *local (document-partitioned)* indexes make writes cheap but reads scatter-gather; *global (term-partitioned)* indexes make reads targeted but writes touch several partitions
+- **Rebalancing**: moving partitions as nodes are added/removed; use a fixed partition count or dynamic splitting — never the modulo approach, which moves almost all data
 
 ### 🔗 ORM
 
@@ -3220,8 +3894,12 @@ From most permissive to strictest — each level eliminates one more anomaly:
 - Default fetch types: `@ManyToOne` and `@OneToOne` are eager; `@OneToMany` and `@ManyToMany` are lazy — prefer lazy everywhere and fetch explicitly where needed
 
 #### Pagination
-- Pass a **Pageable** (page number, size, sort) to the repository method
-- **Page** runs an extra count query (total number of elements known); **Slice** only knows whether a next page exists (cheaper)
+- **Offset-based**: pass a **Pageable** (page number, size, sort) to the repository method
+  - **Page** runs an extra `COUNT(*)` query so it knows the total (for "page 3 of 47"); **Slice** fetches `size + 1` rows to know only whether a next page exists (cheaper, ideal for infinite scroll)
+  - Degrades with depth — `LIMIT n OFFSET k` makes the database scan and discard `k` rows, so deep pages are slow
+- **Keyset (seek) pagination**: filter on the last row seen instead of an offset — `WHERE (created_at, id) < (:lastCreatedAt, :lastId) ORDER BY created_at DESC, id DESC LIMIT 20`
+  - O(log n) regardless of page depth, because the index seeks straight to the cursor
+  - Needs a composite index on the ordering columns and a unique tie-breaker (a surrogate key); the trade-off is no random "jump to page 500", only forward/backward navigation
 
 ### 🐻 Hibernate
 
@@ -3608,9 +4286,52 @@ public void deleteUser() { }
 - **Detecting failures**: Monitoring, Logging
 
 #### Scalability
-- **Vertical**: Adding compute power (Scale up)
-- **Horizontal**: Adding servers/replicas (Scale out)
-- **Elasticity**: Ability to acquire resources as needed and release them when not needed
+- **Vertical scaling (scale up)**: Add power (CPU, memory, disk) to one machine — simple, but capped by hardware limits and a Single Point Of Failure (SPOF) risk
+- **Horizontal scaling (scale out)**: Add more servers/replicas — the route to large scale; requires a stateless application tier so any server can serve any request
+- **Stateless web tier**: Push session state out of the web servers into a shared store (Redis, a database) so instances are interchangeable and auto-scaling is trivial
+- **Elasticity**: Acquire resources automatically as load rises and release them when it falls
+- **Message queue for async**: A durable queue decouples producer from consumer in time, absorbs spikes, and lets each side scale independently
+
+#### Scaling Building Blocks
+
+##### Load Balancer
+Distributes incoming traffic across a pool of servers. Clients reach the load balancer's public Internet Protocol (IP) address; backend servers talk over private IPs and are never directly reachable. Removes the web tier's single point of failure and lets servers be added or drained transparently.
+
+##### Content Delivery Network (CDN)
+A geographically distributed network of edge servers that cache static assets (images, scripts, video) close to users. On a miss the edge fetches from origin, stores it, and serves until the Time-To-Live (TTL) expires. Tune the TTL (too short re-fetches often, too long serves stale), version URLs for invalidation, and fall back to origin if an edge is down.
+
+##### Caching
+An in-memory store (Redis, Memcached) for expensive or hot data, cutting database load and latency.
+- **Read strategies**: *cache-aside* (the app checks the cache, on a miss reads the database and populates it — most common) and *read-through* (the cache fetches from the database itself)
+- **Write strategies**: *write-through* (write cache and database synchronously — consistent, slower) and *write-back* (write cache, flush to the database asynchronously — fast, risks loss on cache failure)
+
+| Eviction policy | Rule |
+|---|---|
+| Least Recently Used (LRU) | Evict the entry untouched for the longest (the usual default) |
+| Least Frequently Used (LFU) | Evict the entry accessed fewest times overall |
+| First In First Out (FIFO) | Evict the oldest inserted entry, regardless of access |
+
+Avoid caching rapidly-changing data; replicate the cache across availability zones (a single node is a single point of failure); cache and database are not updated atomically, so brief staleness is possible.
+
+##### Consistent Hashing
+Modular hashing (`key % N`) remaps almost all keys when a node is added or removed. Consistent hashing places nodes and keys on a hash ring; a key maps to the first node clockwise, so a membership change only redistributes the keys in the affected arc (`k/n` on average). **Virtual nodes** (each server holds many ring positions) even out the distribution. Used by Dynamo, Cassandra, and content delivery networks. (See also [Database → Partitioning](#-partitioning--sharding).)
+
+##### Rate Limiting
+Caps how many requests a client may make per window — defending against Denial-of-Service (DoS) abuse, brute force, and runaway clients; counters usually live in Redis.
+
+| Algorithm | Mechanism | Strength | Weakness |
+|---|---|---|---|
+| **Token bucket** | A bucket of N tokens refilled at a fixed rate; each request spends one | Allows short bursts up to the bucket size | Two parameters to tune (size, refill rate) |
+| **Leaking bucket** | A First In First Out queue drained at a fixed rate | Smooths output to a constant rate | A burst fills the queue and starves later arrivals |
+| **Fixed window counter** | A per-window counter, rejected over the threshold | Memory-efficient and simple | Edge burst — up to 2× can slip across a boundary |
+| **Sliding window log** | Store each request's timestamp, count those in the rolling window | Accurate at every instant | Memory-heavy — even rejected timestamps are kept |
+| **Sliding window counter** | Current window count + previous count × overlap fraction | Accurate and memory-efficient | Approximates by assuming an even prior-window spread |
+
+##### Back-of-the-Envelope Estimation
+A quick capacity check early in a design discussion. State assumptions, use round numbers, label every unit, and derive Queries Per Second (QPS), peak QPS, storage per year, cache size, and server count.
+- **Powers**: 1 KB = 10³, 1 MB = 10⁶, 1 GB = 10⁹, 1 TB = 10¹² bytes
+- **Latencies**: main memory ~100 ns, solid-state disk read ~100 µs, same-datacenter round-trip ~0.5 ms, cross-region ~150 ms
+- **Availability**: 99% ≈ 3.65 days/year downtime, 99.9% ≈ 8.7 hours, 99.99% ≈ 52 minutes
 
 #### Performance
 - **Latency**: Time to get a response
@@ -3749,20 +4470,32 @@ public void deleteUser() { }
 > 💻 Code — Spring incarnations: [Strategy via Spring](../src/main/java/algorithm/concepts/spring/strategy/StrategyPatternExample.java) · [Observer via Spring events](../src/main/java/algorithm/concepts/spring/events/ApplicationEventsExample.java) · [Proxy via Spring aspects](../src/main/java/algorithm/concepts/spring/aop/AopProxyExample.java)
 
 #### Creational
-- **Factory**: Delegates the creation to another class, hides creation logic — Spring's `BeanFactory` is the canonical example
-- **Singleton**: Returns a single instance of an object — Spring beans are singletons *per container*, not static Java Virtual Machine-wide singletons
-- **Builder**: Makes a complex object immutable upon construction, avoids the telescoping constructor problem (constructors with ever-growing parameter lists) — Lombok `@Builder`
+- **Factory Method**: Lets subclasses decide which class to instantiate; delegates creation to a method rather than a constructor — Spring's `BeanFactory` and `@Bean` factory methods
+- **Abstract Factory**: Creates families of related objects without naming their concrete classes — a `@Configuration` class declaring a related family of beans
+- **Singleton**: One instance with a global access point — Spring beans are singletons *per container*, not static Java Virtual Machine-wide singletons; prefer the Spring-managed form
+- **Builder**: Separates construction of a complex object from its representation; avoids the telescoping-constructor problem — Lombok `@Builder`, `UriComponentsBuilder`, `MockMvcRequestBuilders`
+- **Prototype**: Creates objects by cloning an existing instance rather than building from scratch — Java's `Cloneable`/copy constructors; useful when construction is expensive
 
 #### Behavioral
-- **Strategy**: Use composition to delegate behaviors — in Spring, inject a `Map<String, PaymentStrategy>` of beans and pick by key; eliminates switch statements. **The most useful pattern to demonstrate in a code challenge**
-- **Template Method**: A base class fixes the skeleton of an algorithm.implementation, subclasses fill in the steps — `JdbcTemplate` and `RestTemplate` (the naming is literal)
-- **Observer**: Subscribers react to events published by a subject — Spring `ApplicationEvent` and `@EventListener`; the foundation of event-driven thinking
+- **Strategy**: Encapsulates interchangeable algorithms behind a common interface — in Spring, inject a `Map<String, PaymentStrategy>` and pick by key; eliminates switch statements. **The most useful pattern to demonstrate in a code challenge**
+- **Template Method**: A base class fixes the skeleton of an algorithm and subclasses fill in steps — `JdbcTemplate` and `RestTemplate` (the naming is literal)
+- **Observer**: A one-to-many dependency where dependents are notified automatically of state changes — Spring `ApplicationEvent` and `@EventListener`; the foundation of event-driven thinking
 - **Chain of Responsibility**: A request crosses a chain of handlers, each deciding to process and/or pass it along — servlet filters, the Spring Security filter chain
+- **Command**: Encapsulates a request as an object so it can be queued, logged, or undone — Spring's `@Async` tasks and `TaskExecutor`; editor undo/redo stacks
+- **State**: An object changes behavior as its internal state changes, as if changing class — model an order/workflow lifecycle as explicit state objects instead of nested if/else; Spring State Machine
+- **Iterator**: Sequential access to a collection without exposing its internals — Java's `Iterable`/`Iterator`; Spring Data's `Page`/`Slice`
+- **Mediator**: Centralizes how a set of objects interact, cutting direct dependencies — Spring's `ApplicationEventPublisher`
+- **Memento**: Captures and restores an object's state without breaking encapsulation — undo history, checkpointing
+- **Visitor**: Adds operations over an object structure without modifying the element classes — `JsonSerializer`/`JsonDeserializer` visiting object graphs
 
 #### Structural
-- **Adapter**: Create new interfaces that act as a bridge between incompatible interfaces — wrap third-party clients behind your own interfaces
-- **Proxy**: An object stands in front of another to add behavior transparently — exactly how `@Transactional` and Spring Aspect Oriented Programming work (Java Development Kit dynamic proxy for interfaces, CGLIB subclassing otherwise)
-- **Decorator**: Adds behavior by wrapping, without inheritance — the Java input/output streams: `new BufferedInputStream(new FileInputStream(...))`
+- **Adapter**: Converts one interface into another that clients expect — wrap third-party clients or legacy data access behind your own interfaces; Spring's `HandlerAdapter` bridges requests to controller methods
+- **Proxy**: A surrogate that controls access to another object — exactly how `@Transactional` and Spring Aspect-Oriented Programming (AOP) work (Java Development Kit dynamic proxy for interfaces, CGLIB subclassing for concrete classes); also Hibernate lazy-loading proxies
+- **Decorator**: Adds responsibilities by wrapping, without subclassing — the Java input/output streams (`new BufferedInputStream(new FileInputStream(...))`); `HttpServletRequestWrapper`
+- **Facade**: A simplified unified interface over a complex subsystem — a `PaymentService` orchestrating fraud-check, charge, and receipt behind one call; `RestTemplate`/`WebClient` over HTTP plumbing
+- **Composite**: Treats individual objects and trees of objects uniformly (part-whole hierarchies) — composite discount rules; Spring Security's composite authorization manager
+- **Bridge**: Decouples an abstraction from its implementation so each varies independently — separate a notification channel (email vs SMS) from its rendering (HTML vs plain text) without a subclass explosion
+- **Flyweight**: Shares many fine-grained objects by splitting intrinsic (shared) from extrinsic (per-use) state — the `String` intern pool, the `Integer.valueOf()` small-integer cache
 
 #### Architectural Patterns
 - **Repository / Service Layer / Data Transfer Object (DTO)**: The entity is NOT the API contract — map entities to Data Transfer Objects at the service boundary, with a dedicated mapper
@@ -3855,13 +4588,17 @@ Asynchronous messaging is what makes patterns like **Saga** (choreography throug
 - **When a simple queue beats Kafka**: low-volume task distribution with no replay requirement — a plain queue is operationally much simpler
 
 #### Resilience Patterns (know the names AND the why)
-- **Circuit Breaker** (Resilience4j): Three states — **closed** (calls pass, failures are counted) → **open** (threshold exceeded: calls fail fast without hitting the sick dependency) → **half-open** (a few trial calls; success closes the circuit again)
-- **Retry**: With **exponential backoff plus jitter**; only safe if the retried operation is idempotent
-- **Bulkhead**: Isolate thread pools and connection pools per dependency, so one slow dependency cannot drown the whole service
-- **Timeout**: Always set explicit timeouts; library defaults (often infinite) are dangerous
-- **Rate limiting**: Protect yourself from abusive or runaway clients
-- **Fallback**: Return a degraded response (cached data, default value) rather than an error
-- **Libraries**: Resilience4j (Java), Polly (.NET)
+
+| Pattern | Mechanism | Why it matters |
+|---|---|---|
+| **Circuit Breaker** | Three states: **Closed** (calls pass, failures counted) → **Open** (threshold exceeded, calls fail fast without hitting the sick dependency) → **Half-Open** (a probe batch; success returns to Closed, failure stays Open) | Stops a sick dependency from cascading into total failure — Resilience4j |
+| **Retry** | Re-attempt with **exponential backoff** (wait doubles) plus **jitter** (random offset prevents retry storms) | Safe only when the operation is idempotent; never retry non-idempotent writes without an idempotency key |
+| **Bulkhead** | Isolate thread and connection pools per dependency | One slow dependency cannot exhaust the shared pool and drown the whole service (named after ship compartments) |
+| **Timeout** | Set an explicit deadline on every outbound call | Library defaults are often infinite, so a hanging dependency would hold threads forever |
+| **Rate limiting** | Cap requests accepted per window | Protects the service from abusive or runaway clients |
+| **Fallback** | Return cached data or a default when the primary path fails | Degrades gracefully instead of surfacing an error to the user |
+
+**Libraries**: Resilience4j (Java), Polly (.NET)
 
 #### Data Management Across Services (where interviews get hard)
 - **Why not distributed transactions**: Two-Phase Commit (2PC) blocks every participant on a central coordinator — it kills availability and autonomy, so microservices avoid it
@@ -3880,12 +4617,38 @@ Asynchronous messaging is what makes patterns like **Saga** (choreography throug
 - **Health checks**: Spring Boot Actuator exposes **liveness** (is the process alive — restart it if not) and **readiness** (can it serve traffic — remove it from load balancing if not)
 
 #### Entry & Deployment Patterns
-- **API Gateway / Backend For Frontend**: acts as a single entry point for the frontend calls
-- **Shared Event Bus / Message Queues**: asynchronous communication between microservices through messages
-- **Service Registry**: Keeps a directory of the services with addresses for discovery
-- **Blue/Green deployment**: Swap the passive environment (running the new code) with the active one; instant rollback by swapping back
+- **API Gateway / Backend For Frontend (BFF)**: A single entry point for frontend calls handling routing, authentication, rate limiting, and protocol translation; the BFF variant tailors a gateway per client type (mobile, web)
+- **Shared Event Bus / Message Queues**: Asynchronous communication between microservices through messages, decoupling producers from consumers in time and availability
+- **Service Registry**: A live directory of service instances and addresses for discovery; in Kubernetes, native Domain Name System (DNS) resolution makes a dedicated registry (Eureka) unnecessary
+- **Blue/Green deployment**: Two identical environments; the passive one runs the new version, a router switch cuts traffic over instantly, and rollback is an equally instant switch back — zero-downtime at the cost of double infrastructure
+- **Canary deployment**: Route a small percentage of live traffic to the new version, watch error rates and latency, then grow the percentage or roll back — lower risk than blue/green for a large user base
 
 ### Architecture Types
+
+#### Layered Architecture (N-Tier)
+Horizontal layers, each with a distinct role: **Presentation → Business → Persistence → Database**. Requests flow down through each closed layer in turn.
+- **Strength**: well understood, easy to build and test (mock lower layers)
+- **Weakness**: tends to deploy as a monolith; the "architecture sinkhole" anti-pattern appears when requests pass through layers that add no logic
+- **When**: the default starting point when domain boundaries are not yet clear
+
+#### Event-Driven Architecture
+Decoupled, single-purpose components process events asynchronously. Two topologies:
+- **Mediator**: a central mediator orchestrates a multi-step event by dispatching sub-events in sequence
+- **Broker**: components publish to a broker and react to each other, with no central brain
+- **Strength**: high scalability and adaptability; components decoupled in time and availability
+- **Weakness**: complex error handling and flow tracing; eventual consistency
+
+#### Microkernel Architecture (Plugin)
+A minimal **core system** holds only what is needed to run; all extra features are independent **plug-ins** registered in a registry. The core stays stable; new capability means a new plug-in.
+- **Examples**: the Eclipse IDE, browser extensions, claims processing with per-region rules as plug-ins
+- **Strength**: high agility and testability; plug-ins can be deployed at runtime
+- **Weakness**: usually a single deployable unit (low scalability); designing the plug-in contract is hard
+
+#### Space-Based Architecture
+Removes the central-database bottleneck with replicated **in-memory data grids**: multiple processing units each hold the full data set in memory, behind a virtualized middleware (messaging, data, processing grids) that routes and replicates. Units spin up and down with load.
+- **Strength**: near-linear horizontal scalability; in-memory speed
+- **Weakness**: expensive and complex; eventual consistency between units; unsuited to large relational datasets
+- **When**: highly variable, unpredictable concurrent load (auctions, ticket booking)
 
 #### DB Centric Architecture
 Has a database at the center of the application and its divided in the layers:

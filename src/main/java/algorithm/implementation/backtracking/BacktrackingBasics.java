@@ -66,8 +66,7 @@ public class BacktrackingBasics {
         return result;
     }
 
-    private static void permute(int[] nums, boolean[] used,
-                                List<Integer> current, List<List<Integer>> out) {
+    private static void permute(int[] nums, boolean[] used, List<Integer> current, List<List<Integer>> out) {
         if (current.size() == nums.length) {       // SOLUTION FOUND
             out.add(new ArrayList<>(current));     // copy! lists are mutable
             return;
