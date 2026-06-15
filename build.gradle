@@ -12,16 +12,6 @@ java {
     }
 }
 
-// The project keeps its original FLAT layout: every source file lives directly
-// under src/ (not the conventional src/main/java). Point Gradle at it.
-sourceSets {
-    main {
-        java {
-            srcDirs = ['src']
-        }
-    }
-}
-
 repositories {
     mavenCentral()
     mavenLocal()   // reuse anything already cached in the local Maven repository
@@ -33,13 +23,13 @@ ext {
 
 dependencies {
     // Spring core container: inversion of control, dependency injection, events,
-    // aspect support — everything the concepts/spring examples use.
+    // aspect support — everything the algorithm.concepts/spring examples use.
     implementation "org.springframework:spring-context:${springVersion}"
 
-    // Pointcut parsing for @Aspect-style aspects (concepts/spring/aop).
+    // Pointcut parsing for @Aspect-style aspects (algorithm.concepts/spring/aop).
     implementation 'org.aspectj:aspectjweaver:1.9.22'
 
-    // @PostConstruct / @PreDestroy (concepts/spring/lifecycle).
+    // @PostConstruct / @PreDestroy (algorithm.concepts/spring/lifecycle).
     implementation 'jakarta.annotation:jakarta.annotation-api:2.1.1'
 
     // Lombok: compile-time only, plus its annotation processor.
@@ -52,7 +42,7 @@ tasks.withType(JavaCompile).configureEach {
 }
 
 // Run any example's main() from the command line:
-//   gradle runClass -PmainClass=concepts.spring.ioc.IocContainerExample
+//   gradle runClass -PmainClass=algorithm.concepts.spring.ioc.IocContainerExample
 tasks.register('runClass', JavaExec) {
     group = 'application'
     description = 'Runs a single main class. Pass -PmainClass=<fully.qualified.Name>'
@@ -61,7 +51,7 @@ tasks.register('runClass', JavaExec) {
     doFirst {
         if (!mainClass.get()) {
             throw new GradleException(
-                "Provide a class, e.g. gradle runClass -PmainClass=concepts.spring.ioc.IocContainerExample")
+                "Provide a class, e.g. gradle runClass -PmainClass=algorithm.concepts.spring.ioc.IocContainerExample")
         }
     }
 }
