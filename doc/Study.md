@@ -91,6 +91,15 @@ Everything server-side in one place: the data structures and algorithm.implement
 - **Resize operation is expensive**
 - **Wasted capacity**
 
+```java
+List<String> list = new ArrayList<>();
+list.add("a");                 // append — O(1) amortized, may trigger a resize
+list.add(0, "b");              // insert at index — O(n), shifts everything right
+String first = list.get(0);    // random access by index — O(1)
+list.set(0, "c");              // update by index — O(1)
+list.remove(0);                // delete by index — O(n), shifts everything left
+```
+
 #### LinkedList
 - **Type**: Double linked list to next and prev node, implements List and Queue
 - **Read/Access**: O(n) Must traverse from head/tail
@@ -116,6 +125,16 @@ Everything server-side in one place: the data structures and algorithm.implement
 - **Not cache-friendly (scattered in memory)**
 - **Poor for read-heavy operations**
 
+```java
+LinkedList<String> list = new LinkedList<>();
+list.add("a");                 // append at tail — O(1)
+list.addFirst("b");            // insert at head — O(1), just relinks pointers
+String head = list.getFirst(); // O(1) at either end…
+String mid  = list.get(2);     // …but random access is O(n), must traverse
+list.removeFirst();            // delete at head — O(1)
+// Also implements Deque/Queue: offer() / poll() / peek() for FIFO use
+```
+
 #### Queues
 
 > 💻 Code: [BreadthFirstSearch (Queue in action)](../src/main/java/algorithm/implementation/search/bfs/BreadthFirstSearch.java)
@@ -137,7 +156,6 @@ Everything server-side in one place: the data structures and algorithm.implement
 - **No random access** — only head visible
 - `LinkedList` as a `Queue` has higher memory overhead (two pointers per node)
 
-##### Java
 ```java
 // Prefer ArrayDeque over LinkedList for Queue — better cache locality, no null elements
 Queue<String> queue = new ArrayDeque<>();
@@ -174,7 +192,6 @@ String task = bq.take();    // blocks if empty
 - **No random access**
 - `Stack<E>` (the legacy class) synchronizes every operation, making it slow in single-threaded code — avoid it
 
-##### Java
 ```java
 // Never use java.util.Stack — it extends Vector and is synchronized unnecessarily
 // Use Deque<E> backed by ArrayDeque<E> instead (same push/pop/peek API)
@@ -214,7 +231,6 @@ while (!dfsStack.isEmpty()) {
 - **No random access**
 - `ArrayDeque` disallows `null` elements — use `LinkedList` only when nulls or arbitrary-position access are needed
 
-##### Java
 ```java
 // ArrayDeque is the recommended general-purpose Deque implementation
 Deque<Integer> deque = new ArrayDeque<>();
@@ -242,6 +258,19 @@ deque.peekLast();           // view back
 - **Search**: O(log n)
 - **Deletion rebalancing**: Take the leftmost child of the right child of the deleted node (El mas izquierdo del hijo derecho del nodo eliminado)
   - Retain rule of smaller to the left, greater to the right
+
+```java
+// A node holds one value and two child links
+class Node { int value; Node left, right; }
+
+// Insert keeps the invariant "smaller to the left, greater to the right" — O(log n) when balanced
+Node insert(Node root, int value) {
+    if (root == null) return new Node(value);
+    if (value < root.value) root.left  = insert(root.left, value);
+    else                    root.right = insert(root.right, value);
+    return root;
+}
+```
 
 ---
 
@@ -825,6 +854,19 @@ Animal a = new Lion();   // reference type: Animal — object type: Lion
 - If you override one, you must override both
 - Consequence of breaking the contract in a HashMap key: the object is stored in one bucket but searched in another, so `get()` returns null even though the key is "in" the map
 
+```java
+@Override
+public boolean equals(Object o) {
+    if (this == o) return true;
+    if (!(o instanceof User other)) return false;   // pattern matching for instanceof (Java 16)
+    return id == other.id && Objects.equals(name, other.name);
+}
+@Override
+public int hashCode() {
+    return Objects.hash(id, name);                   // SAME fields used in equals()
+}
+```
+
 #### Exceptions
 
 > 📘 Full guide: [⚠️ Exceptions](#-exceptions)
@@ -905,6 +947,17 @@ How a `put(key, value)` works, step by step:
 - implements int compare(T objOne, T objTwo);
 - returns objOne.getAttribute().compareTo(objTwo.getAttribute())
 - Many sort sequences can be created
+
+```java
+// Comparable: the type's single natural order, baked into the class
+class Player implements Comparable<Player> {
+    public int compareTo(Player other) { return Integer.compare(this.score, other.score); }
+}
+
+// Comparator: many external orders, composable without touching the class
+players.sort(Comparator.comparingInt(Player::score).reversed()   // highest score first…
+                       .thenComparing(Player::name));            // …ties broken by name
+```
 
 ##### Conversions
 - **Arrays**: collection.toArray()
@@ -3009,6 +3062,13 @@ LIMIT -- limits number of results
 - **CROSS JOIN**: product between two tables, each row in the first table with each row in the second table
 - **COALESCE**((query),0) AS name: replaces null values with 0
 
+```sql
+SELECT * FROM a INNER JOIN      b ON a.b_id = b.id; -- only rows that match on both sides
+SELECT * FROM a LEFT  JOIN      b ON a.b_id = b.id; -- all of a, nulls where b has no match
+SELECT * FROM a RIGHT JOIN      b ON a.b_id = b.id; -- all of b, nulls where a has no match
+SELECT * FROM a FULL  OUTER JOIN b ON a.b_id = b.id; -- all rows from both, nulls where either is missing
+```
+
 #### Advanced Operations
 - **UNIONS**: combines queries in the same resultset if the columns match the number and types
 - **CREATE VIEW** name AS query: virtual table from query
@@ -3017,6 +3077,14 @@ LIMIT -- limits number of results
 #### Aggregation
 - **GROUP BY**: Groups rows so aggregate functions apply per group (COUNT, SUM, AVG, MIN, MAX)
 - **WHERE vs HAVING**: WHERE filters rows *before* aggregation; HAVING filters groups *after* aggregation
+
+```sql
+SELECT department, COUNT(*) AS headcount, AVG(salary) AS avg_salary
+FROM employees
+WHERE active = true        -- filters individual rows BEFORE grouping
+GROUP BY department
+HAVING COUNT(*) > 5;       -- filters whole groups AFTER aggregation
+```
 
 #### Window Functions (increasingly asked)
 Aggregate-like computations that keep every row, instead of collapsing them like GROUP BY
