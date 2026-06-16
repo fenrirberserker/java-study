@@ -1,4 +1,4 @@
-# Study — Main Entry Point
+# Study
 
 Everything lives in this single file, so every link in the index is a **same-file jump** that IntelliJ's Markdown preview resolves. The four top-level areas are **Backend · Frontend · DevOps · AI**; every other topic sits under its area in the content below.
 
@@ -10,41 +10,319 @@ Throughout, a 💻 line links a concept to the runnable Java file under [src/](.
 
 - [⚙️ Backend](#-backend)
   - [📑 Data Structures](#-data-structures)
+    - [ArrayList](#arraylist)
+    - [LinkedList](#linkedlist)
+    - [Queues](#queues)
+    - [Stacks](#stacks)
+    - [Deques](#deques)
+    - [Heap / Priority Queue](#heap--priority-queue)
+    - [Hash Table](#hash-table)
+    - [Binary Search Tree](#binary-search-tree)
+    - [Balanced Binary Search Trees (AVL and Red-Black)](#balanced-binary-search-trees-avl-and-red-black)
+    - [Trie (Prefix Tree)](#trie-prefix-tree)
+    - [Union-Find (Disjoint Set Union)](#union-find-disjoint-set-union)
+    - [Java Collections Framework](#java-collections-framework)
   - [📘 Algorithms](#-algorithms)
+    - [1. Recursion](#1-recursion)
+      - [Core ingredients](#core-ingredients)
+      - [Mental model — the call stack](#mental-model--the-call-stack)
+      - [Two flavors](#two-flavors)
+      - [Complexity](#complexity)
+      - [Recurrence analysis — the Master Theorem (divide-and-conquer shortcut)](#recurrence-analysis--the-master-theorem-divide-and-conquer-shortcut)
+      - [When to use](#when-to-use)
+      - [Common pitfalls](#common-pitfalls)
+    - [2. Greedy](#2-greedy)
+      - [Core idea](#core-idea)
+      - [When greedy works (formal properties)](#when-greedy-works-formal-properties)
+      - [Classic correct greedy problems](#classic-correct-greedy-problems)
+      - [Classic greedy *failures*](#classic-greedy-failures)
+      - [Algorithm template](#algorithm-template)
+      - [Complexity](#complexity-1)
+      - [How to prove a greedy algorithm correct — the exchange argument](#how-to-prove-a-greedy-algorithm-correct--the-exchange-argument)
+    - [3. Backtracking](#3-backtracking)
+      - [Mental model — DFS through a decision tree](#mental-model--dfs-through-a-decision-tree)
+      - [Algorithm template](#algorithm-template-1)
+      - [The key optimization — pruning](#the-key-optimization--pruning)
+      - [Pruning techniques in practice](#pruning-techniques-in-practice)
+      - [Classic problems](#classic-problems)
+      - [Recursion vs. Backtracking](#recursion-vs-backtracking)
+      - [Complexity](#complexity-2)
+    - [4. Graph Algorithms](#4-graph-algorithms)
+      - [Graph representations](#graph-representations)
+      - [Graph types](#graph-types)
+      - [The two foundational traversals](#the-two-foundational-traversals)
+      - [Other essential algorithm.implementation (named, not all implemented in basics file)](#other-essential-algorithmimplementation-named-not-all-implemented-in-basics-file)
+      - [Named graph algorithms — mechanics](#named-graph-algorithms--mechanics)
+    - [5. Dynamic Programming](#5-dynamic-programming)
+      - [When to use Dynamic Programming — the two required properties](#when-to-use-dynamic-programming--the-two-required-properties)
+      - [The two Dynamic Programming styles](#the-two-dynamic-programming-styles)
+      - [How to design a Dynamic Programming solution (5-step recipe)](#how-to-design-a-dynamic-programming-solution-5-step-recipe)
+      - [Classic problems](#classic-problems-1)
+      - [Classic recurrences (what you write on the whiteboard)](#classic-recurrences-what-you-write-on-the-whiteboard)
+      - [Complexity](#complexity-3)
+      - [Recursion vs. Memoization vs. Tabulation](#recursion-vs-memoization-vs-tabulation)
+    - [🆚 Quick Comparison Table](#-quick-comparison-table)
+      - [How to run any example](#how-to-run-any-example)
+    - [Appendix — Big O & Algorithm Categories (Quick Reference)](#appendix--big-o--algorithm-categories-quick-reference)
+      - [Big O Notation](#big-o-notation)
+      - [Algorithm Categories](#algorithm-categories)
+      - [Sorting](#sorting)
+      - [Arrays/Matrix: MxN bidimensional arrays, iteration to find patterns, values](#arraysmatrix-mxn-bidimensional-arrays-iteration-to-find-patterns-values)
+      - [Search: Iterate to find a pattern, element](#search-iterate-to-find-a-pattern-element)
+      - [Recursion: Functions that call itself, contain an exit condition](#recursion-functions-that-call-itself-contain-an-exit-condition)
+    - [🎯 Top Interview Questions](#-top-interview-questions)
+      - [Graphs](#graphs-1)
+      - [Arrays](#arrays)
+      - [Stacks](#stacks-1)
+      - [Binary Trees](#binary-trees)
+      - [Dynamic Programming](#dynamic-programming-1)
+      - [Binary Search](#binary-search)
+      - [Strings](#strings)
+      - [Heap](#heap)
+      - [Recursion](#recursion)
+    - [🧭 Code Challenge Strategy](#-code-challenge-strategy)
+      - [Realistic Scope for a Senior Java Role](#realistic-scope-for-a-senior-java-role)
+      - [Practice Priorities (in this order)](#practice-priorities-in-this-order)
+      - [Method During a Live Challenge](#method-during-a-live-challenge)
+      - [System Design Lite (for senior roles)](#system-design-lite-for-senior-roles)
   - [💻 Programming Languages](#-programming-languages)
     - [☕ Java](#-java)
-      - [🧵 Concurrency & Parallelism](#-concurrency-and-parallelism)
+      - [Core](#core)
+      - [OOP](#oop)
+      - [Exceptions](#exceptions)
+      - [Errors](#errors)
+      - [Collections](#collections)
+      - [Functional Interfaces **(Java 8)**](#functional-interfaces-java-8)
+      - [Streams **(Java 8)**](#streams-java-8)
+      - [Optional **(Java 8)**](#optional-java-8)
+      - [Modern Java (9–21) — shows you keep current](#modern-java-921--shows-you-keep-current)
+      - [Generics **(Java 5)**](#generics-java-5)
+      - [Enums **(Java 5)**](#enums-java-5)
+      - [Nested, Inner, Anonymous, and Local Classes](#nested-inner-anonymous-and-local-classes)
+      - [Annotations **(Java 5)**](#annotations-java-5)
+      - [Java Input/Output (IO) and New Input/Output 2 (NIO.2)](#java-inputoutput-io-and-new-inputoutput-2-nio2)
+      - [Date/Time Application Programming Interface **(Java 8)**](#datetime-application-programming-interface-java-8)
+      - [Concurrency](#concurrency)
+      - [🧵 Concurrency and Parallelism](#-concurrency-and-parallelism)
       - [⚠️ Exceptions](#-exceptions)
     - [🟪 Kotlin](#-kotlin)
+      - [Why it matters for a Java developer](#why-it-matters-for-a-java-developer)
+      - [Variables and Types](#variables-and-types)
+      - [Null Safety](#null-safety)
+      - [Functions](#functions)
+      - [Classes and Objects](#classes-and-objects)
+      - [Functional Style and Scope Functions](#functional-style-and-scope-functions)
+      - [Coroutines (concurrency)](#coroutines-concurrency)
+      - [Kotlin vs Java](#kotlin-vs-java)
     - [🐍 Python](#-python)
+      - [Why it matters for a Java developer](#why-it-matters-for-a-java-developer-1)
+      - [Variables and Typing](#variables-and-typing)
+      - [Core Data Structures](#core-data-structures)
+      - [Functions](#functions-1)
+      - [Object-Oriented Python](#object-oriented-python)
+      - [Functional Features and Generators](#functional-features-and-generators)
+      - [Concurrency — and the Global Interpreter Lock](#concurrency--and-the-global-interpreter-lock)
+      - [Ecosystem](#ecosystem)
+      - [Python vs Java](#python-vs-java)
   - [🧩 Frameworks](#-frameworks)
+    - [🆚 Framework Comparison](#-framework-comparison)
     - [🌱 Spring](#-spring)
+      - [Spring Core](#spring-core)
+      - [🚀 Spring Boot](#-spring-boot)
+      - [🌐 Spring MVC](#-spring-mvc)
+      - [⚡ Spring WebFlux](#-spring-webflux)
+      - [Project Reactor (Reactive Library)](#project-reactor-reactive-library)
+      - [ServerWebExchange](#serverwebexchange)
+      - [Functional Endpoints](#functional-endpoints)
+      - [💻 Runnable Code Examples](#-runnable-code-examples)
     - [⚡ Quarkus](#-quarkus)
+      - [Core Idea: build-time processing](#core-idea-build-time-processing)
+      - [Dependency Injection (Jakarta CDI / ArC)](#dependency-injection-jakarta-cdi--arc)
+      - [Web endpoint example](#web-endpoint-example)
+      - [Key Features](#key-features)
+      - [When to reach for it](#when-to-reach-for-it)
     - [🚀 Micronaut](#-micronaut)
+      - [Core Idea: ahead-of-time, reflection-free](#core-idea-ahead-of-time-reflection-free)
+      - [Dependency Injection (Jakarta annotations)](#dependency-injection-jakarta-annotations)
+      - [Web endpoint example](#web-endpoint-example-1)
+      - [Key Features](#key-features-1)
+      - [Micronaut vs Quarkus](#micronaut-vs-quarkus)
   - [🗄️ Database](#-database)
+    - [CAP Theorem](#cap-theorem)
+      - [Partition-or-Else, Latency-or-Consistency (PACELC)](#partition-or-else-latency-or-consistency-pacelc)
+    - [🗃️ SQL](#-sql)
+      - [Database Operations](#database-operations)
+      - [Query Operations](#query-operations)
+      - [Joins](#joins)
+      - [Advanced Operations](#advanced-operations)
+      - [Aggregation](#aggregation)
+      - [Window Functions (increasingly asked)](#window-functions-increasingly-asked)
+      - [Common Table Expressions (the WITH clause)](#common-table-expressions-the-with-clause)
+      - [Relations](#relations)
+      - [Normalization (in plain words)](#normalization-in-plain-words)
+      - [Indexes In Depth](#indexes-in-depth)
+      - [Database Engine Types — Online Transaction Processing vs Online Analytical Processing](#database-engine-types--online-transaction-processing-vs-online-analytical-processing)
+      - [Database Tuning Techniques](#database-tuning-techniques)
+      - [Concurrency](#concurrency-1)
+      - [ACID Properties](#acid-properties)
+      - [Isolation Levels and Their Anomalies](#isolation-levels-and-their-anomalies)
+      - [Optimistic vs Pessimistic Locking](#optimistic-vs-pessimistic-locking)
+      - [Deadlocks](#deadlocks)
+    - [🔄 Replication](#-replication)
+      - [Topologies](#topologies)
+      - [Synchronous vs asynchronous](#synchronous-vs-asynchronous)
+      - [Replication lag and its read anomalies](#replication-lag-and-its-read-anomalies)
+    - [📦 Partitioning / Sharding](#-partitioning--sharding)
+    - [🔗 ORM](#-orm)
+      - [Definitions](#definitions)
+      - [JPA vs Hibernate](#jpa-vs-hibernate)
+    - [📊 Spring Data JPA](#-spring-data-jpa)
+      - [Annotations](#annotations-1)
+      - [Constants](#constants)
+      - [Repository](#repository)
+      - [The N+1 Problem (guaranteed question)](#the-n1-problem-guaranteed-question)
+      - [Fetching Pitfalls](#fetching-pitfalls)
+      - [Pagination](#pagination)
+    - [🐻 Hibernate](#-hibernate)
+      - [Hibernate Objects](#hibernate-objects)
+      - [Configuration Steps](#configuration-steps)
+      - [persistence.xml Example](#persistencexml-example)
+      - [Mapping Annotations](#mapping-annotations)
+      - [Relationships](#relationships)
+      - [SessionFactory](#sessionfactory)
+      - [Session](#session)
+      - [Entity Lifecycle](#entity-lifecycle)
+      - [Cascade Types](#cascade-types)
+    - [📄 NoSQL](#-nosql)
+      - [Database Types](#database-types)
+      - [Database Mapping](#database-mapping)
+      - [🍃 MongoDB](#-mongodb)
+      - [Commands](#commands)
+      - [Query Operators](#query-operators)
+      - [Query Projection](#query-projection)
+      - [Concern](#concern)
+      - [⚡ DynamoDB](#-dynamodb)
   - [🔒 Security](#-security)
+    - [Authentication vs Authorization](#authentication-vs-authorization)
+    - [Authentication Methods](#authentication-methods)
+      - [Session-Based Authentication](#session-based-authentication)
+      - [Token-Based Authentication (JWT)](#token-based-authentication-jwt)
+      - [OAuth 2.0](#oauth-20)
+      - [Single Sign-On (SSO)](#single-sign-on-sso)
+      - [Multi-Factor Authentication (MFA/2FA)](#multi-factor-authentication-mfa2fa)
+      - [API Keys](#api-keys)
+      - [Basic Authentication](#basic-authentication)
+      - [Certificate-Based Authentication](#certificate-based-authentication)
+    - [Authorization Methods](#authorization-methods)
+      - [Role-Based Access Control (RBAC)](#role-based-access-control-rbac)
+      - [Attribute-Based Access Control (ABAC)](#attribute-based-access-control-abac)
+      - [Access Control Lists (ACL)](#access-control-lists-acl)
+    - [Security Best Practices](#security-best-practices)
+      - [Token Storage](#token-storage)
+      - [Token Refresh Strategy](#token-refresh-strategy)
+      - [Password Security](#password-security)
+      - [Common Attacks & Prevention](#common-attacks--prevention)
+    - [Spring Security](#spring-security)
+    - [Recommended Stack](#recommended-stack)
+      - [Modern Web App](#modern-web-app)
+      - [Enterprise](#enterprise)
+    - [Legacy Security Concepts](#legacy-security-concepts)
   - [🏢 System Design](#-system-design)
-    - [🎨 Design Patterns](#design-patterns-each-with-its-spring-incarnation)
+    - [System Design Principles](#system-design-principles)
+      - [High Availability](#high-availability)
+      - [Scalability](#scalability)
+      - [Scaling Building Blocks](#scaling-building-blocks)
+      - [Performance](#performance)
+      - [Durability](#durability)
+      - [Consistency](#consistency)
+    - [Hardware](#hardware)
+      - [Compute Environment](#compute-environment)
+    - [Communication](#communication)
+      - [Request/Response](#requestresponse)
+      - [Async Messaging](#async-messaging)
+      - [Network Protocols](#network-protocols)
+    - [🌍 API Design](#-api-design)
+      - [API Styles — the main options in the industry](#api-styles--the-main-options-in-the-industry)
+      - [REST — the default style](#rest--the-default-style)
+      - [GraphQL](#graphql)
+      - [gRPC](#grpc)
+      - [Real-Time Push: WebSockets and Server-Sent Events](#real-time-push-websockets-and-server-sent-events)
+      - [Webhooks](#webhooks)
+    - [SOLID Principles (explain with examples, not definitions)](#solid-principles-explain-with-examples-not-definitions)
+    - [Clean Code Habits (verbalize them during a code challenge)](#clean-code-habits-verbalize-them-during-a-code-challenge)
+    - [Design Principles](#design-principles)
+    - [Design Patterns (each with its Spring incarnation)](#design-patterns-each-with-its-spring-incarnation)
+      - [Creational](#creational)
+      - [Behavioral](#behavioral)
+      - [Structural](#structural)
+      - [Architectural Patterns](#architectural-patterns)
     - [🌐 Distributed Design Patterns](#-distributed-design-patterns)
-      - [📨 Messaging → Kafka](#-messaging)
+      - [Monolith vs Microservices — the honest trade-off](#monolith-vs-microservices--the-honest-trade-off)
+      - [How to Split Services](#how-to-split-services)
+      - [Communication Patterns](#communication-patterns)
+      - [📨 Messaging](#-messaging)
+      - [Resilience Patterns (know the names AND the why)](#resilience-patterns-know-the-names-and-the-why)
+      - [Data Management Across Services (where interviews get hard)](#data-management-across-services-where-interviews-get-hard)
+      - [Observability — the three pillars](#observability--the-three-pillars)
+      - [Entry & Deployment Patterns](#entry--deployment-patterns)
+    - [Architecture Types](#architecture-types)
+      - [Layered Architecture (N-Tier)](#layered-architecture-n-tier)
+      - [Event-Driven Architecture](#event-driven-architecture)
+      - [Microkernel Architecture (Plugin)](#microkernel-architecture-plugin)
+      - [Space-Based Architecture](#space-based-architecture)
+      - [DB Centric Architecture](#db-centric-architecture)
+      - [Domain Centric Architecture](#domain-centric-architecture)
+      - [Functional Organization](#functional-organization)
+    - [Design Tips](#design-tips)
+    - [Requirements](#requirements)
+      - [Functional Requirements](#functional-requirements)
+      - [Non-Functional Requirements](#non-functional-requirements)
   - [🧪 Testing](#-testing)
-  - [🔤 Data Formats](#data-formats)
+    - [⚙️ Unit Testing](#-unit-testing)
+    - [🔗 Integration Testing](#-integration-testing)
+    - [🚀 Performance Testing](#-performance-testing)
+  - [Data Formats](#data-formats)
 - [🌐 Frontend](#-frontend)
   - [HTML5](#html5)
   - [CSS](#css)
   - [JavaScript](#javascript)
   - [TypeScript](#typescript)
     - [Testing](#testing)
-    - [Features](#features)
+      - [Features](#features-1)
     - [React](#react)
 - [🔧 DevOps](#-devops)
-  - [Features](#features-1)
+  - [Features](#features-2)
   - [SDLC](#sdlc)
   - [Docker](#docker)
+    - [Images](#images)
+    - [Containers](#containers)
+    - [Dockerfile](#dockerfile)
+    - [Docker for Java Applications](#docker-for-java-applications)
   - [Kubernetes](#kubernetes)
+    - [Structure](#structure)
+    - [Core Objects (from the smallest unit to the entry point)](#core-objects-from-the-smallest-unit-to-the-entry-point)
+    - [Nodes](#nodes)
+    - [Components](#components)
+    - [Configuration & Spring Boot Integration](#configuration--spring-boot-integration)
+    - [Resources & the Java Virtual Machine](#resources--the-java-virtual-machine)
+    - [Commands](#commands-1)
   - [Cloud](#cloud)
+    - [AWS](#aws)
+      - [Computing](#computing)
+      - [Storage](#storage)
+      - [Networking](#networking)
+      - [Monitoring](#monitoring)
+      - [Events](#events)
+      - [Containers](#containers-1)
+      - [CI/CD](#cicd)
+    - [Azure](#azure)
+      - [Mapping AWS Knowledge to Azure Equivalents](#mapping-aws-knowledge-to-azure-equivalents)
+      - [Talking Points for the Interview](#talking-points-for-the-interview)
   - [Infrastructure as Code](#infrastructure-as-code)
+    - [Terraform](#terraform)
+    - [Commands](#commands-2)
   - [Git](#git)
+    - [Concepts](#concepts)
   - [Jenkins](#jenkins)
 - [🤖 AI](#-ai)
   - [Large Language Model Fundamentals](#large-language-model-fundamentals)
@@ -64,7 +342,7 @@ Everything server-side in one place: the data structures and algorithm.implement
 
 ## 📑 Data Structures
 
-> 💻 Code: [LinkedListExample](../src/main/java/algorithm/concepts/datastructures/collections/Lists/LinkedListExample.java) · [SetExample](../src/main/java/algorithm/concepts/datastructures/collections/Sets/SetExample.java) · [MapExample](../src/main/java/algorithm/concepts/datastructures/collections/Maps/MapExample.java) · [Binary Search Tree](../src/main/java/algorithm/implementation/search/search/trees/BST.java) · [Trie](../src/main/java/algorithm/implementation/search/trie/Trie.java) · [Least Recently Used cache](../src/main/java/algorithm/implementation/search/lru/demo1/LRUCache.java)
+> 💻 Code: [LinkedListExample](../src/main/java/algorithm/concepts/datastructures/collections/Lists/LinkedListExample.java) · [OrderList](../src/main/java/algorithm/concepts/datastructures/collections/Lists/OrderList.java) · [SetExample](../src/main/java/algorithm/concepts/datastructures/collections/Sets/SetExample.java) · [MapExample](../src/main/java/algorithm/concepts/datastructures/collections/Maps/MapExample.java) · [Binary Search Tree](../src/main/java/algorithm/implementation/search/search/trees/BST.java) · [Trie](../src/main/java/algorithm/implementation/search/trie/Trie.java) · [Least Recently Used cache](../src/main/java/algorithm/implementation/search/lru/demo1/LRUCache.java) · [Conversions](../src/main/java/algorithm/concepts/convert/ArraysAndLists.java) · [Comparators](../src/main/java/algorithm/implementation/sorting/SortPlayersByScoreDecreasing.java)
 
 #### ArrayList
 - **Type**: Resizable array, implements List
@@ -316,6 +594,21 @@ int count = freq.getOrDefault("banana", 0);    // O(1) expected, null-safe read
 ```
 - **Load factor** λ = entries ÷ capacity; for separate chaining keep λ below ~0.75 (Java's default), for open addressing keep λ below ~0.5 to avoid clustering
 
+##### HashMap Internals (classic interview question)
+How a `put(key, value)` works, step by step:
+1. The `hashCode()` of the key is computed and compressed into a **bucket index** (`index = hash & (capacity - 1)`)
+2. If the bucket is empty, the entry is stored there
+3. If the bucket already holds entries (a **collision**), `equals()` decides between *replace* (same key) and *append* (different key)
+4. Since Java 8, when a single bucket accumulates **8 entries**, its linked list is converted into a **red-black tree** (worst-case lookup becomes O(log n) instead of O(n))
+5. When size exceeds **capacity × load factor (0.75 by default)**, the table is resized: capacity doubles and every entry is redistributed
+
+##### Thread Safety: the three map options
+| Implementation | Locking strategy | Consequence |
+|---|---|---|
+| **HashMap** | No locking at all | Fastest, but not thread safe |
+| **Collections.synchronizedMap()** | One single lock on the whole map | Thread safe, but every operation blocks all the others |
+| **ConcurrentHashMap** **(Java 5)** | Fine-grained locking per bucket, lock-free reads | Thread safe and scalable under concurrent access |
+
 #### Binary Search Tree
 - **Structure**: Data structure with 1 data value and 2 pointers left and right
 - **Insertion**: O(log n)
@@ -476,6 +769,66 @@ class UnionFind {
     }
     boolean connected(int a, int b) { return find(a) == find(b); }
 }
+```
+
+#### Java Collections Framework
+
+> The detailed structures above are the building blocks; this is how the `java.util` framework exposes them through interfaces and utilities.
+
+##### Hierarchy
+- **Collection**: Super interface of all the other collections
+- **Collections**: Utility class that contains methods to work with collections
+
+##### Interfaces and their implementations
+- **List** — ordered, allows duplicates, indexed: `ArrayList` (backing array, best general performance), `LinkedList` (doubly linked, also a `Queue`)
+- **Set** — enforces uniqueness via `equals`/`hashCode`: `HashSet` (backed by a `HashMap`), `TreeSet` (implements `SortedSet`/`NavigableSet`, keeps elements sorted, O(log n)), `LinkedHashSet` (preserves insertion order)
+- **Queue** — first-in, first-out (FIFO) ordering: `LinkedList` (also a list, less efficient), `ArrayDeque` (resizable array, pure queue/double-ended queue, more efficient)
+- **Map** — key→value, no duplicate keys: `HashMap` (hash table), `TreeMap` (red-black tree, sorted keys, O(log n)), `LinkedHashMap` (preserves insertion order)
+
+##### Comparable\<T\>
+- Defines the type's single **natural order**, baked into the class itself
+- Implement `int compareTo(T other)`: negative if `this < other`, `0` if equal, positive if `this > other` — use `Integer.compare(a, b)` rather than `a - b`, which overflows
+- Only one natural order per class; used automatically by `TreeSet`, `TreeMap`, and `Collections.sort()` when no comparator is given
+- **Contract**: antisymmetric (`sgn(x.compareTo(y)) == -sgn(y.compareTo(x))`) and transitive; should be *consistent with equals* (`compareTo == 0` ⇔ `equals` is `true`), otherwise sorted collections — which judge equality by `compareTo`, not `equals` — behave unexpectedly
+
+##### Comparator\<T\>
+- Defines an **external** order; many can exist for one type, without touching the class
+- Implement `int compare(T a, T b)` with the same sign convention as `compareTo`
+- **(Java 8)** composition: `Comparator.comparing()`, `thenComparing()`, `reversed()`, `naturalOrder()`, `nullsFirst()` / `nullsLast()`
+
+```java
+// Comparable: the type's single natural order, baked into the class
+class Player implements Comparable<Player> {
+    public int compareTo(Player other) { return Integer.compare(this.score, other.score); }
+}
+
+// Comparator: many external orders, composable without touching the class
+players.sort(Comparator.comparingInt(Player::score).reversed()   // highest score first…
+                       .thenComparing(Player::name));            // …ties broken by name
+```
+
+##### Conversions
+- **Arrays**: collection.toArray()
+- **List and Set**: List list = Arrays.asList(array)
+
+##### Autoboxing, Unboxing, and the Integer Cache **(Java 5)**
+**Autoboxing** converts a primitive to its wrapper automatically (`list.add(42)` → `Integer`); **unboxing** is the reverse. Two traps:
+- **Integer cache**: the Java Virtual Machine caches `Integer` instances for **-128 to 127**, so `==` returns `true` for boxed values in that range and `false` outside it — always compare wrappers with `equals()`. The same caching applies to `Boolean`, `Byte`, `Short`, and `Character`.
+- **NullPointerException on unboxing**: unboxing a `null` wrapper into a primitive throws — a frequent trap with auto-unboxed ternaries and return types.
+
+```java
+Integer a = 100, b = 100;  System.out.println(a == b);   // true  — cached
+Integer x = 200, y = 200;  System.out.println(x == y);   // false — distinct objects
+System.out.println(x.equals(y));                          // true  — same value
+```
+
+##### Varargs **(Java 5)**
+A variable-length argument list (`Type... name`) accepts zero or more values as an array. It must be the **last** parameter, and there can be only one. Inside the method it is a normal array; the caller may pass individual values, an array, or nothing (yielding an empty array, never `null`).
+
+```java
+void log(String prefix, Object... args) { /* args is Object[] */ }
+log("info", "msg", 42, true);   // three args
+log("info");                    // zero args — empty array
 ```
 
 ---
@@ -1255,94 +1608,10 @@ The wrapper classes, `String`, and all `java.time` types follow this pattern. Be
 
 #### Collections
 
+> 📘 Full guide: [📑 Data Structures](#-data-structures)
 > 💻 Code: [OrderList](../src/main/java/algorithm/concepts/datastructures/collections/Lists/OrderList.java) · [SetExample](../src/main/java/algorithm/concepts/datastructures/collections/Sets/SetExample.java) · [MapExample](../src/main/java/algorithm/concepts/datastructures/collections/Maps/MapExample.java) · [Conversions](../src/main/java/algorithm/concepts/convert/ArraysAndLists.java) · [Comparators](../src/main/java/algorithm/implementation/sorting/SortPlayersByScoreDecreasing.java)
 
-##### Hierarchy
-- **Collection**: Super class of all the other collections
-- **Collections**: Utility class that contains methods to work with collections
-
-##### List (Interface)
-- **Properties**: Ordered, Duplicated, Indexed
-- **ArrayList**: Has a backing array (init size 10 doubling as req), best performance, O(1)
-- **LinkedList**: Double linked (next node, previous node), also implements Queue, lower performance, O(n), add/remove from Head and Tail
-
-##### Set (Interface)
-- Uses the equals/hashcode method to define uniqueness
-- **SortedSet (Interface)**: Order insertion
-- **HashSet**: Based on HashMap
-- **TreeSet**: Implements SortedSet, elements are sorted, tree structure, implements SortedSet (Ordered) and NavigableSet
-
-##### Queue (Interface)
-- Orders elements as FIFO, supports ordering
-- **LinkedList**: Works as a queue and list, less efficient
-- **ArrayDeque**: Double ended queue, stores in a resizable array, pure, more efficient
-
-##### Map (Interface)
-- Maps key value pairs, no duplicates
-- **HashMap**: Stores keys in a hash table
-- **TreeMap**: Stores keys in a sorted way (red-black tree, all operations in O(log n))
-- **LinkedHashMap**: Stores keys in the insertion order
-
-###### HashMap Internals (classic interview question)
-How a `put(key, value)` works, step by step:
-1. The `hashCode()` of the key is computed and compressed into a **bucket index** (`index = hash & (capacity - 1)`)
-2. If the bucket is empty, the entry is stored there
-3. If the bucket already holds entries (a **collision**), `equals()` decides between *replace* (same key) and *append* (different key)
-4. Since Java 8, when a single bucket accumulates **8 entries**, its linked list is converted into a **red-black tree** (worst-case lookup becomes O(log n) instead of O(n))
-5. When size exceeds **capacity × load factor (0.75 by default)**, the table is resized: capacity doubles and every entry is redistributed
-
-###### Thread Safety: the three map options
-| Implementation | Locking strategy | Consequence |
-|---|---|---|
-| **HashMap** | No locking at all | Fastest, but not thread safe |
-| **Collections.synchronizedMap()** | One single lock on the whole map | Thread safe, but every operation blocks all the others |
-| **ConcurrentHashMap** **(Java 5)** | Fine-grained locking per bucket, lock-free reads | Thread safe and scalable under concurrent access |
-
-##### Comparable\<T\>
-- Defines the type's single **natural order**, baked into the class itself
-- Implement `int compareTo(T other)`: negative if `this < other`, `0` if equal, positive if `this > other` — use `Integer.compare(a, b)` rather than `a - b`, which overflows
-- Only one natural order per class; used automatically by `TreeSet`, `TreeMap`, and `Collections.sort()` when no comparator is given
-- **Contract**: antisymmetric (`sgn(x.compareTo(y)) == -sgn(y.compareTo(x))`) and transitive; should be *consistent with equals* (`compareTo == 0` ⇔ `equals` is `true`), otherwise sorted collections — which judge equality by `compareTo`, not `equals` — behave unexpectedly
-
-##### Comparator\<T\>
-- Defines an **external** order; many can exist for one type, without touching the class
-- Implement `int compare(T a, T b)` with the same sign convention as `compareTo`
-- **(Java 8)** composition: `Comparator.comparing()`, `thenComparing()`, `reversed()`, `naturalOrder()`, `nullsFirst()` / `nullsLast()`
-
-```java
-// Comparable: the type's single natural order, baked into the class
-class Player implements Comparable<Player> {
-    public int compareTo(Player other) { return Integer.compare(this.score, other.score); }
-}
-
-// Comparator: many external orders, composable without touching the class
-players.sort(Comparator.comparingInt(Player::score).reversed()   // highest score first…
-                       .thenComparing(Player::name));            // …ties broken by name
-```
-
-##### Conversions
-- **Arrays**: collection.toArray()
-- **List and Set**: List list = Arrays.asList(array)
-
-##### Autoboxing, Unboxing, and the Integer Cache **(Java 5)**
-**Autoboxing** converts a primitive to its wrapper automatically (`list.add(42)` → `Integer`); **unboxing** is the reverse. Two traps:
-- **Integer cache**: the Java Virtual Machine caches `Integer` instances for **-128 to 127**, so `==` returns `true` for boxed values in that range and `false` outside it — always compare wrappers with `equals()`. The same caching applies to `Boolean`, `Byte`, `Short`, and `Character` (` `–``).
-- **NullPointerException on unboxing**: unboxing a `null` wrapper into a primitive throws — a frequent trap with auto-unboxed ternaries and return types.
-
-```java
-Integer a = 100, b = 100;  System.out.println(a == b);   // true  — cached
-Integer x = 200, y = 200;  System.out.println(x == y);   // false — distinct objects
-System.out.println(x.equals(y));                          // true  — same value
-```
-
-##### Varargs **(Java 5)**
-A variable-length argument list (`Type... name`) accepts zero or more values as an array. It must be the **last** parameter, and there can be only one. Inside the method it is a normal array; the caller may pass individual values, an array, or nothing (yielding an empty array, never `null`).
-
-```java
-void log(String prefix, Object... args) { /* args is Object[] */ }
-log("info", "msg", 42, true);   // three args
-log("info");                    // zero args — empty array
-```
+The `java.util` Collections Framework — `List`, `Set`, `Queue`, `Map` and their implementations, plus `Comparable`/`Comparator`, conversions, autoboxing and varargs — is covered in full under [📑 Data Structures](#-data-structures). See the [Java Collections Framework](#java-collections-framework) overview for the interface hierarchy and the [Hash Table](#hash-table) entry for `HashMap` internals and the thread-safety options.
 
 #### Functional Interfaces **(Java 8)**
 
