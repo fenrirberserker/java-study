@@ -4,61 +4,28 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * ============================================================================
- *  BACKTRACKING — BASICS
- * ============================================================================
+ * Backtracking basics: a recursive depth-first walk through a decision tree that
+ * abandons a partial candidate the moment it can't lead to a valid solution, and
+ * undoes each choice on the way back up.
  *
- *  Backtracking = recursive DFS through a "decision tree" that ABANDONS a
- *  partial candidate as soon as it cannot possibly be completed into a valid
- *  full solution. Whenever we go back up the tree, we UNDO the choice we made.
- *
- *  TEMPLATE
- *  --------
- *      void backtrack(state, choices):
- *          if isSolution(state):
- *              record(state)
- *              return
- *          for choice in choices:
- *              if isValid(state, choice):
- *                  apply(state, choice)        // CHOOSE
- *                  backtrack(state, choices)   // EXPLORE
- *                  undo(state, choice)         // UN-CHOOSE  ← the "back" in "backtracking"
- *
- *  COMPLEXITY
- *  ----------
- *  Worst case O(b^d) (branching factor ^ depth). Pruning ("isValid" check
- *  BEFORE recursing) is what makes backtracking practical.
- *
- *  EXAMPLES IN THIS CLASS
- *  ----------------------
- *    1) permutations([1,2,3])  — generate all n! orderings
- *    2) subsets([1,2,3])       — generate the 2^n subsets (powerset)
- *    3) solveNQueens(4)        — classic constraint problem with pruning
- * ============================================================================
+ * Examples here: permutations (all n! orderings), subsets (the 2^n powerset),
+ * and the classic N-Queens constraint problem.
  */
 public class BacktrackingBasics {
 
     public static void main(String[] args) {
         System.out.println("=== Backtracking Basics ===");
-
-        // 1) Permutations of [1,2,3]  → 3! = 6 results
         System.out.println("permutations([1,2,3]) = " + permutations(new int[]{1, 2, 3}));
-
-        // 2) Subsets of [1,2,3]       → 2^3 = 8 results
         System.out.println("subsets([1,2,3])      = " + subsets(new int[]{1, 2, 3}));
 
-        // 3) N-Queens for N=4 → 2 distinct solutions
-        List<int[]> sols = solveNQueens(4);
-        System.out.println("N-Queens(4) → " + sols.size() + " solution(s):");
-        for (int[] s : sols) printBoard(s);
+        List<int[]> queens = solveNQueens(4);
+        System.out.println("N-Queens(4) -> " + queens.size() + " solution(s):");
+        for (int[] solution : queens) printBoard(solution);
     }
 
-    /* ----------------------------------------------------------------- */
-    /* 1) PERMUTATIONS                                                    */
-    /* ----------------------------------------------------------------- */
     /**
-     * Generates all orderings of the input numbers.
-     * State = "current permutation built so far" + "used[] flags".
+     * All orderings of the input. The state is the permutation built so far plus
+     * a used[] flag per number so the same one is never placed twice.
      */
     public static List<List<Integer>> permutations(int[] nums) {
         List<List<Integer>> result = new ArrayList<>();
@@ -67,29 +34,24 @@ public class BacktrackingBasics {
     }
 
     private static void permute(int[] nums, boolean[] used, List<Integer> current, List<List<Integer>> out) {
-        if (current.size() == nums.length) {       // SOLUTION FOUND
-            out.add(new ArrayList<>(current));     // copy! lists are mutable
+        if (current.size() == nums.length) {       // a complete ordering
+            out.add(new ArrayList<>(current));     // copy it, since current keeps mutating
             return;
         }
         for (int i = 0; i < nums.length; i++) {
-            if (used[i]) continue;                 // PRUNE: can't reuse a number
+            if (used[i]) continue;                 // skip numbers already in this permutation
 
-            used[i] = true;                        // CHOOSE
+            used[i] = true;                        // take nums[i]
             current.add(nums[i]);
-
-            permute(nums, used, current, out);     // EXPLORE
-
-            used[i] = false;                       // UN-CHOOSE (backtrack!)
+            permute(nums, used, current, out);     // recurse with that choice in place
+            used[i] = false;                       // undo it and let the next number try this slot
             current.remove(current.size() - 1);
         }
     }
 
-    /* ----------------------------------------------------------------- */
-    /* 2) SUBSETS (powerset)                                              */
-    /* ----------------------------------------------------------------- */
     /**
-     * For each element we make a binary choice: include it or skip it.
-     * That gives us 2^n subsets.
+     * The 2^n subsets. At each index there is one binary decision: leave the
+     * element out, or put it in.
      */
     public static List<List<Integer>> subsets(int[] nums) {
         List<List<Integer>> result = new ArrayList<>();
@@ -97,32 +59,24 @@ public class BacktrackingBasics {
         return result;
     }
 
-    private static void buildSubsets(int[] nums, int index,
-                                     List<Integer> current, List<List<Integer>> out) {
-        if (index == nums.length) {                // SOLUTION FOUND (one subset)
+    private static void buildSubsets(int[] nums, int index, List<Integer> current, List<List<Integer>> out) {
+        if (index == nums.length) {                // every element has been decided
             out.add(new ArrayList<>(current));
             return;
         }
-
-        // Choice A: SKIP nums[index]
+        // branch that leaves nums[index] out
         buildSubsets(nums, index + 1, current, out);
 
-        // Choice B: INCLUDE nums[index]
-        current.add(nums[index]);                  // CHOOSE
-        buildSubsets(nums, index + 1, current, out); // EXPLORE
-        current.remove(current.size() - 1);        // UN-CHOOSE
+        // branch that includes nums[index], then undoes it before returning
+        current.add(nums[index]);
+        buildSubsets(nums, index + 1, current, out);
+        current.remove(current.size() - 1);
     }
 
-    /* ----------------------------------------------------------------- */
-    /* 3) N-QUEENS — backtracking with constraint pruning                 */
-    /* ----------------------------------------------------------------- */
     /**
-     * Place N queens on an N×N board so that no two attack each other
-     * (no shared row, column, or diagonal).
-     *
-     * State: queens[row] = column of the queen placed in `row`.
-     * We place one queen per row (rows can't repeat by construction),
-     * so we only need to check column + diagonal conflicts.
+     * Place n queens on an n×n board with no two sharing a row, column or
+     * diagonal. One queen goes in each row, so queens[row] holds its column and
+     * only column and diagonal clashes need checking.
      */
     public static List<int[]> solveNQueens(int n) {
         List<int[]> solutions = new ArrayList<>();
@@ -131,26 +85,25 @@ public class BacktrackingBasics {
     }
 
     private static void placeQueen(int row, int[] queens, List<int[]> solutions) {
-        int n = queens.length;
-        if (row == n) {                            // SOLUTION FOUND
+        if (row == queens.length) {                // a queen sits safely in every row
             solutions.add(queens.clone());
             return;
         }
-        for (int col = 0; col < n; col++) {
-            if (isSafe(queens, row, col)) {        // PRUNE invalid placements
-                queens[row] = col;                 // CHOOSE
-                placeQueen(row + 1, queens, solutions); // EXPLORE
-                // UN-CHOOSE is implicit: next iteration overwrites queens[row]
+        for (int col = 0; col < queens.length; col++) {
+            if (isSafe(queens, row, col)) {        // prune clashing columns before recursing
+                queens[row] = col;
+                placeQueen(row + 1, queens, solutions);
+                // no explicit undo needed: the next column just overwrites queens[row]
             }
         }
     }
 
-    /** Returns true if placing a queen at (row, col) does not attack any earlier queen. */
+    /** True if a queen at (row, col) attacks none of the queens already placed above it. */
     private static boolean isSafe(int[] queens, int row, int col) {
         for (int r = 0; r < row; r++) {
             int c = queens[r];
-            if (c == col) return false;                       // same column
-            if (Math.abs(c - col) == Math.abs(r - row)) return false; // same diagonal
+            if (c == col) return false;                                 // same column
+            if (Math.abs(c - col) == Math.abs(r - row)) return false;   // same diagonal
         }
         return true;
     }
@@ -158,9 +111,9 @@ public class BacktrackingBasics {
     private static void printBoard(int[] queens) {
         int n = queens.length;
         for (int r = 0; r < n; r++) {
-            StringBuilder sb = new StringBuilder();
-            for (int c = 0; c < n; c++) sb.append(queens[r] == c ? "Q " : ". ");
-            System.out.println("   " + sb);
+            StringBuilder row = new StringBuilder();
+            for (int c = 0; c < n; c++) row.append(queens[r] == c ? "Q " : ". ");
+            System.out.println("   " + row);
         }
         System.out.println();
     }

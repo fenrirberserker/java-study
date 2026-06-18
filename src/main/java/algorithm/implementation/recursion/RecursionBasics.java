@@ -1,97 +1,52 @@
 package algorithm.implementation.recursion;
 
 /**
- * ============================================================================
- *  RECURSION — BASICS
- * ============================================================================
+ * Recursion basics: a method that calls itself on a smaller input until it
+ * reaches a base case that returns a known answer. The call stack remembers
+ * every pending call, so the recursion depth is the extra space it costs.
  *
- *  A recursive method calls itself with a "smaller" input until it hits a
- *  BASE CASE that returns a known answer. The JVM uses the call stack to
- *  remember each pending call.
+ * Each method needs three things: a base case that stops it, a recursive case
+ * that calls itself, and progress so every call moves toward the base case.
  *
- *  ANATOMY OF A RECURSIVE METHOD
- *  -----------------------------
- *    1) BASE CASE       → stops the recursion (mandatory!)
- *    2) RECURSIVE CASE  → calls itself with a smaller input
- *    3) PROGRESS        → each call must move toward the base case
- *
- *  COMPLEXITY
- *  ----------
- *    • Time:  depends on the recurrence (e.g. factorial → O(n), naive fib → O(2^n))
- *    • Space: O(depth of recursion) for the call stack
- *
- *  WARNING
- *  -------
- *    Java does NOT optimize tail calls. Very deep recursion → StackOverflowError.
- *
- *  This class shows the four most-iconic introductory examples:
- *    1) factorial(n)        — single recursive call
- *    2) sumToN(n)           — accumulator pattern
- *    3) fibonacci(n)        — multiple recursive calls (exponential!)
- *    4) reverseString(s)    — recursion on data, not numbers
- * ============================================================================
+ * Examples here: factorial (one recursive call), sumToN (the same shape),
+ * fibonacci (two calls per step, so exponential), and reversing a string
+ * (recursion over data rather than numbers).
  */
 public class RecursionBasics {
 
     public static void main(String[] args) {
         System.out.println("=== Recursion Basics ===");
-
-        // 1) factorial: 5! = 5*4*3*2*1 = 120
-        System.out.println("factorial(5)      = " + factorial(5));
-
-        // 2) sum from 1 to n: 1+2+3+4+5 = 15
-        System.out.println("sumToN(5)         = " + sumToN(5));
-
-        // 3) fibonacci: 0,1,1,2,3,5,8 → fib(6) = 8
-        System.out.println("fibonacci(6)      = " + fibonacci(6));
-
-        // 4) reverse a string
+        System.out.println("factorial(5)      = " + factorial(5));        // 120
+        System.out.println("sumToN(5)         = " + sumToN(5));           // 15
+        System.out.println("fibonacci(6)      = " + fibonacci(6));        // 8
         System.out.println("reverse(\"hello\") = " + reverseString("hello"));
     }
 
-    /* ----------------------------------------------------------------- */
-    /* 1) FACTORIAL — classic single-branch recursion                    */
-    /* ----------------------------------------------------------------- */
-    /**
-     * factorial(n) = n * (n-1) * (n-2) * ... * 1
-     * Base case:    factorial(0) = 1
-     */
+    /** factorial(n) = n * (n-1) * ... * 1, with factorial(0) = 1. Time O(n). */
     public static long factorial(int n) {
-        if (n == 0) return 1;             // BASE CASE
-        return n * factorial(n - 1);      // RECURSIVE CASE (n shrinks → progress)
+        if (n == 0) return 1;             // nothing left to multiply
+        return n * factorial(n - 1);      // n shrinks each call, so it always reaches 0
     }
 
-    /* ----------------------------------------------------------------- */
-    /* 2) SUM 1..N — same shape, different operation                     */
-    /* ----------------------------------------------------------------- */
+    /** Sum of 1..n. Same single-branch shape as factorial, with addition. */
     public static int sumToN(int n) {
-        if (n <= 0) return 0;             // BASE CASE
-        return n + sumToN(n - 1);         // RECURSIVE CASE
+        if (n <= 0) return 0;
+        return n + sumToN(n - 1);
     }
 
-    /* ----------------------------------------------------------------- */
-    /* 3) FIBONACCI — TWO recursive calls per step (tree recursion)      */
-    /* ----------------------------------------------------------------- */
     /**
-     * fib(n) = fib(n-1) + fib(n-2),  fib(0)=0, fib(1)=1
-     *
-     * NOTE: this algorithm.implementation is O(2^n). Try fibonacci(40) and feel the lag.
-     *       To fix it, see the Dynamic Programming chapter (memoization).
+     * fib(n) = fib(n-1) + fib(n-2), with fib(0)=0 and fib(1)=1. Two calls per
+     * step make this O(2^n): it recomputes the same values repeatedly. The
+     * Dynamic Programming chapter fixes that with memoization.
      */
     public static int fibonacci(int n) {
-        if (n <= 1) return n;                              // BASE CASES (0,1)
-        return fibonacci(n - 1) + fibonacci(n - 2);        // RECURSIVE CASE
+        if (n <= 1) return n;                              // fib(0)=0, fib(1)=1
+        return fibonacci(n - 1) + fibonacci(n - 2);
     }
 
-    /* ----------------------------------------------------------------- */
-    /* 4) REVERSE STRING — recursion on a data structure                 */
-    /* ----------------------------------------------------------------- */
-    /**
-     * reverse("hello") = reverse("ello") + "h" = "olleh"
-     */
+    /** reverse("hello") peels off the first char and appends it after reversing the rest. */
     public static String reverseString(String s) {
-        if (s == null || s.length() <= 1) return s;        // BASE CASE
-        return reverseString(s.substring(1)) + s.charAt(0); // RECURSIVE CASE
+        if (s == null || s.length() <= 1) return s;        // empty or single char is its own reverse
+        return reverseString(s.substring(1)) + s.charAt(0);
     }
-
 }

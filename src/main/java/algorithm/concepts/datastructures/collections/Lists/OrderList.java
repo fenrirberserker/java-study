@@ -1,4 +1,4 @@
-package algorithm.concepts.datastructures.collections.Lists;
+package algorithm.concepts.datastructures.collections.lists;
 
 import java.util.Comparator;
 import java.util.List;

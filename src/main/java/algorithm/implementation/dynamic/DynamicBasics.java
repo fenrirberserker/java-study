@@ -5,130 +5,72 @@ import java.util.HashMap;
 import java.util.Map;
 
 /**
- * ============================================================================
- *  DYNAMIC PROGRAMMING — BASICS
- * ============================================================================
+ * Dynamic Programming basics. It applies when a problem has optimal substructure
+ * (the best answer is built from the best answers of subproblems) and overlapping
+ * subproblems (a naive recursion keeps solving the same ones).
  *
- *  DP solves problems that exhibit BOTH:
- *    1) OPTIMAL SUBSTRUCTURE     — optimal answer is built from optimal
- *                                   answers of subproblems.
- *    2) OVERLAPPING SUBPROBLEMS  — the same subproblems are solved again and
- *                                   again by a naive recursion.
+ * Two styles appear here. Top-down (memoization) keeps the natural recursion but
+ * caches each result. Bottom-up (tabulation) fills a table from the smallest
+ * subproblem upward, with no recursion and often less memory.
  *
- *  TWO STYLES OF DP
- *  ----------------
- *    • TOP-DOWN (MEMOIZATION)
- *        Recurse naturally, but CACHE each computed answer.
- *        Easy to write once you have the recursion.
- *
- *    • BOTTOM-UP (TABULATION)
- *        Fill a table from the smallest subproblem upward, iteratively.
- *        Usually more memory- and cache-friendly. No recursion.
- *
- *  5-STEP DESIGN RECIPE
- *  --------------------
- *    1. Define the STATE:    what does dp[i] (or dp[i][j]) mean?
- *    2. Write the RECURRENCE: how is dp[i] built from smaller states?
- *    3. Identify BASE CASES.
- *    4. Pick the ITERATION ORDER (smaller states first).
- *    5. Read the ANSWER out of the table.
- *
- *  EXAMPLES IN THIS CLASS
- *  ----------------------
- *    1) fibMemo(n)       — classic Fibonacci, top-down with a HashMap
- *    2) fibTab(n)        — classic Fibonacci, bottom-up with an array
- *    3) fibTabRolling(n) — bottom-up with O(1) extra space
- *    4) climbStairs(n)   — count ways to reach step n (1 or 2 at a time)
- *    5) coinChange(...)  — MIN coins to make `amount` (where greedy fails!)
- * ============================================================================
+ * Examples: Fibonacci in all three forms (memoized, tabulated, and rolling with
+ * O(1) space), counting ways to climb stairs, and the minimum-coins problem
+ * where a greedy choice can be wrong but Dynamic Programming is always right.
  */
 public class DynamicBasics {
 
     public static void main(String[] args) {
         System.out.println("=== Dynamic Programming Basics ===");
-
-        // 1) Fibonacci — three styles, same answer
         System.out.println("fibMemo(10)       = " + fibMemo(10));        // 55
         System.out.println("fibTab(10)        = " + fibTab(10));         // 55
         System.out.println("fibTabRolling(10) = " + fibTabRolling(10));  // 55
-
-        // 2) Climb stairs — fib-like
         System.out.println("climbStairs(5)    = " + climbStairs(5));     // 8
 
-        // 3) Coin change — classic DP win where greedy fails
-        int[] coins = {1, 3, 4};
-        int amount = 6;
-        // Best: 3+3 = 2 coins (greedy would pick 4+1+1 = 3 → wrong)
-        System.out.println("coinChange(6, {1,3,4}) = " + coinChange(coins, amount));
+        // greedy would pick 4+1+1 = 3 coins here; the real minimum is 3+3 = 2
+        System.out.println("coinChange(6, {1,3,4}) = " + coinChange(new int[]{1, 3, 4}, 6));
     }
 
-    /* ----------------------------------------------------------------- */
-    /* 1) FIBONACCI — TOP-DOWN (memoization)                              */
-    /* ----------------------------------------------------------------- */
-    /**
-     *   fib(n) = fib(n-1) + fib(n-2), fib(0)=0, fib(1)=1
-     *
-     *   Naive recursion is O(2^n). Memoization caches each result → O(n).
-     */
+    /** Fibonacci, top-down. Caching each result turns the O(2^n) recursion into O(n). */
     public static long fibMemo(int n) {
-        return fibMemoHelper(n, new HashMap<>());
+        return fibMemo(n, new HashMap<>());
     }
 
-    private static long fibMemoHelper(int n, Map<Integer, Long> memo) {
-        if (n <= 1) return n;                              // BASE CASES
-        if (memo.containsKey(n)) return memo.get(n);       // CACHE HIT
-
-        long result = fibMemoHelper(n - 1, memo)
-                    + fibMemoHelper(n - 2, memo);          // RECURRENCE
-        memo.put(n, result);                               // CACHE IT
+    private static long fibMemo(int n, Map<Integer, Long> memo) {
+        if (n <= 1) return n;
+        if (memo.containsKey(n)) return memo.get(n);       // already computed, reuse it
+        long result = fibMemo(n - 1, memo) + fibMemo(n - 2, memo);
+        memo.put(n, result);
         return result;
     }
 
-    /* ----------------------------------------------------------------- */
-    /* 2) FIBONACCI — BOTTOM-UP (tabulation)                              */
-    /* ----------------------------------------------------------------- */
-    /**
-     * Build the answer iteratively, smallest subproblem first.
-     * Time O(n), Space O(n).
-     */
+    /** Fibonacci, bottom-up. Fill dp[i] from the two values below it. Time O(n), space O(n). */
     public static long fibTab(int n) {
         if (n <= 1) return n;
         long[] dp = new long[n + 1];
-        dp[0] = 0;                                         // BASE CASE
-        dp[1] = 1;                                         // BASE CASE
+        dp[0] = 0;
+        dp[1] = 1;
         for (int i = 2; i <= n; i++) {
-            dp[i] = dp[i - 1] + dp[i - 2];                 // RECURRENCE
+            dp[i] = dp[i - 1] + dp[i - 2];
         }
-        return dp[n];                                      // ANSWER
+        return dp[n];
     }
 
-    /* ----------------------------------------------------------------- */
-    /* 3) FIBONACCI — BOTTOM-UP with O(1) SPACE (rolling variables)       */
-    /* ----------------------------------------------------------------- */
-    /**
-     * We only ever need the last two values → two variables are enough.
-     * Time O(n), Space O(1). This is the pattern you'll use in production.
-     */
+    /** Fibonacci with only the last two values kept, so space drops to O(1). */
     public static long fibTabRolling(int n) {
         if (n <= 1) return n;
-        long prev2 = 0, prev1 = 1, cur = 0;
+        long prev2 = 0, prev1 = 1, current = 0;
         for (int i = 2; i <= n; i++) {
-            cur = prev1 + prev2;
+            current = prev1 + prev2;
             prev2 = prev1;
-            prev1 = cur;
+            prev1 = current;
         }
-        return cur;
+        return current;
     }
 
-    /* ----------------------------------------------------------------- */
-    /* 4) CLIMB STAIRS                                                    */
-    /* ----------------------------------------------------------------- */
     /**
-     * You're at the bottom of a staircase with n steps. Each move you can
-     * climb 1 or 2 steps. How many distinct ways can you reach the top?
-     *
-     * ways(n) = ways(n-1) + ways(n-2)   ← Fibonacci-shaped recurrence
-     * ways(0) = 1 (one way: do nothing),  ways(1) = 1
+     * Ways to climb a staircase of n steps taking 1 or 2 at a time. Reaching
+     * step i means arriving from step i-1 or i-2, so the count is Fibonacci-shaped:
+     * ways(i) = ways(i-1) + ways(i-2), with one way to stand at the bottom.
      */
     public static int climbStairs(int n) {
         if (n <= 1) return 1;
@@ -141,35 +83,24 @@ public class DynamicBasics {
         return dp[n];
     }
 
-    /* ----------------------------------------------------------------- */
-    /* 5) COIN CHANGE — MIN COINS                                         */
-    /* ----------------------------------------------------------------- */
     /**
-     * Given denominations `coins` and a target `amount`, return the MINIMUM
-     * number of coins needed to make `amount`, or -1 if impossible.
-     *
-     * STATE:        dp[a] = minimum coins needed to make amount `a`
-     * BASE CASE:    dp[0] = 0
-     * RECURRENCE:   dp[a] = 1 + min(dp[a - c])  for every coin c ≤ a
-     * ANSWER:       dp[amount]   (or -1 if still "infinity")
-     *
-     * Time: O(amount × coins.length)    Space: O(amount)
-     *
-     * ⚠ This is the canonical example where GREEDY IS WRONG but DP is right.
+     * Minimum number of coins that sum to amount, or -1 if it can't be made.
+     * dp[a] is the fewest coins for amount a: for each coin that fits, a is one
+     * coin more than the amount a-coin, so dp[a] = 1 + min(dp[a-coin]).
+     * Time O(amount * coins.length), space O(amount).
      */
     public static int coinChange(int[] coins, int amount) {
-        int INF = amount + 1;                              // sentinel > any real answer
+        int unreachable = amount + 1;                      // larger than any real coin count
         int[] dp = new int[amount + 1];
-        Arrays.fill(dp, INF);
-        dp[0] = 0;                                         // BASE CASE
-
+        Arrays.fill(dp, unreachable);
+        dp[0] = 0;                                         // zero coins make amount 0
         for (int a = 1; a <= amount; a++) {
-            for (int c : coins) {
-                if (c <= a && dp[a - c] + 1 < dp[a]) {
-                    dp[a] = dp[a - c] + 1;                 // RECURRENCE
+            for (int coin : coins) {
+                if (coin <= a && dp[a - coin] + 1 < dp[a]) {
+                    dp[a] = dp[a - coin] + 1;
                 }
             }
         }
-        return dp[amount] >= INF ? -1 : dp[amount];        // ANSWER
+        return dp[amount] >= unreachable ? -1 : dp[amount];
     }
 }

@@ -1,4 +1,4 @@
-package algorithm.concepts.datastructures.collections.Maps;
+package algorithm.concepts.datastructures.collections.maps;
 
 import java.util.*;
 import java.util.stream.Collectors;

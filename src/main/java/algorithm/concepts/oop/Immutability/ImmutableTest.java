@@ -1,4 +1,4 @@
-package algorithm.concepts.oop.Immutability;
+package algorithm.concepts.oop.immutability;
 
 public class ImmutableTest {
 

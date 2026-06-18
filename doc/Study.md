@@ -1,350 +1,338 @@
-# Study
+<style>
+body { background:#1e1e1e; color:#ffffff; }
+h1,h2,h3,h4,h5,h6,p,li,td,th,blockquote { color:#ffffff; }
+p code, li code, td code, th code, h1 code, h2 code, h3 code, h4 code, h5 code, h6 code, blockquote code { color:#d8a35c; background:rgba(255,255,255,.08); padding:1px 5px; border-radius:4px; }
+a { color:#6cb6ff; }
+table, th, td { border-color:rgba(255,255,255,.25); }
+</style>
+
+<h1 id="study" style="font-size:42px;font-weight:800;margin:34px 0 14px;">📖 Study</h1>
 
 Everything lives in this single file, so every link in the index is a **same-file jump** that IntelliJ's Markdown preview resolves. The four top-level areas are **Backend · Frontend · DevOps · AI**; every other topic sits under its area in the content below.
 
 Throughout, a 💻 line links a concept to the runnable Java file under [src/](../src/) that demonstrates it with prints.
 
----
-
-## 📑 Index
-
-- [⚙️ Backend](#-backend)
-  - [📑 Data Structures](#-data-structures)
-    - [ArrayList](#arraylist)
-    - [LinkedList](#linkedlist)
-    - [Queues](#queues)
-    - [Stacks](#stacks)
-    - [Deques](#deques)
-    - [Heap / Priority Queue](#heap--priority-queue)
-    - [Hash Table](#hash-table)
-    - [Binary Search Tree](#binary-search-tree)
-    - [Balanced Binary Search Trees (AVL and Red-Black)](#balanced-binary-search-trees-avl-and-red-black)
-    - [Trie (Prefix Tree)](#trie-prefix-tree)
-    - [Union-Find (Disjoint Set Union)](#union-find-disjoint-set-union)
-    - [Java Collections Framework](#java-collections-framework)
-  - [📘 Algorithms](#-algorithms)
-    - [1. Recursion](#1-recursion)
-      - [Core ingredients](#core-ingredients)
-      - [Mental model — the call stack](#mental-model--the-call-stack)
-      - [Two flavors](#two-flavors)
-      - [Complexity](#complexity)
-      - [Recurrence analysis — the Master Theorem (divide-and-conquer shortcut)](#recurrence-analysis--the-master-theorem-divide-and-conquer-shortcut)
-      - [When to use](#when-to-use)
-      - [Common pitfalls](#common-pitfalls)
-    - [2. Greedy](#2-greedy)
-      - [Core idea](#core-idea)
-      - [When greedy works (formal properties)](#when-greedy-works-formal-properties)
-      - [Classic correct greedy problems](#classic-correct-greedy-problems)
-      - [Classic greedy *failures*](#classic-greedy-failures)
-      - [Algorithm template](#algorithm-template)
-      - [Complexity](#complexity-1)
-      - [How to prove a greedy algorithm correct — the exchange argument](#how-to-prove-a-greedy-algorithm-correct--the-exchange-argument)
-    - [3. Backtracking](#3-backtracking)
-      - [Mental model — DFS through a decision tree](#mental-model--dfs-through-a-decision-tree)
-      - [Algorithm template](#algorithm-template-1)
-      - [The key optimization — pruning](#the-key-optimization--pruning)
-      - [Pruning techniques in practice](#pruning-techniques-in-practice)
-      - [Classic problems](#classic-problems)
-      - [Recursion vs. Backtracking](#recursion-vs-backtracking)
-      - [Complexity](#complexity-2)
-    - [4. Graph Algorithms](#4-graph-algorithms)
-      - [Graph representations](#graph-representations)
-      - [Graph types](#graph-types)
-      - [The two foundational traversals](#the-two-foundational-traversals)
-      - [Other essential algorithm.implementation (named, not all implemented in basics file)](#other-essential-algorithmimplementation-named-not-all-implemented-in-basics-file)
-      - [Named graph algorithms — mechanics](#named-graph-algorithms--mechanics)
-    - [5. Dynamic Programming](#5-dynamic-programming)
-      - [When to use Dynamic Programming — the two required properties](#when-to-use-dynamic-programming--the-two-required-properties)
-      - [The two Dynamic Programming styles](#the-two-dynamic-programming-styles)
-      - [How to design a Dynamic Programming solution (5-step recipe)](#how-to-design-a-dynamic-programming-solution-5-step-recipe)
-      - [Classic problems](#classic-problems-1)
-      - [Classic recurrences (what you write on the whiteboard)](#classic-recurrences-what-you-write-on-the-whiteboard)
-      - [Complexity](#complexity-3)
-      - [Recursion vs. Memoization vs. Tabulation](#recursion-vs-memoization-vs-tabulation)
-    - [🆚 Quick Comparison Table](#-quick-comparison-table)
-      - [How to run any example](#how-to-run-any-example)
-    - [Appendix — Big O & Algorithm Categories (Quick Reference)](#appendix--big-o--algorithm-categories-quick-reference)
-      - [Big O Notation](#big-o-notation)
-      - [Algorithm Categories](#algorithm-categories)
-      - [Sorting](#sorting)
-      - [Arrays/Matrix: MxN bidimensional arrays, iteration to find patterns, values](#arraysmatrix-mxn-bidimensional-arrays-iteration-to-find-patterns-values)
-      - [Search: Iterate to find a pattern, element](#search-iterate-to-find-a-pattern-element)
-      - [Recursion: Functions that call itself, contain an exit condition](#recursion-functions-that-call-itself-contain-an-exit-condition)
-    - [🎯 Top Interview Questions](#-top-interview-questions)
-      - [Graphs](#graphs-1)
-      - [Arrays](#arrays)
-      - [Stacks](#stacks-1)
-      - [Binary Trees](#binary-trees)
-      - [Dynamic Programming](#dynamic-programming-1)
-      - [Binary Search](#binary-search)
-      - [Strings](#strings)
-      - [Heap](#heap)
-      - [Recursion](#recursion)
-    - [🧭 Code Challenge Strategy](#-code-challenge-strategy)
-      - [Realistic Scope for a Senior Java Role](#realistic-scope-for-a-senior-java-role)
-      - [Practice Priorities (in this order)](#practice-priorities-in-this-order)
-      - [Method During a Live Challenge](#method-during-a-live-challenge)
-      - [System Design Lite (for senior roles)](#system-design-lite-for-senior-roles)
-  - [💻 Programming Languages](#-programming-languages)
-    - [☕ Java](#-java)
-      - [Core](#core)
-      - [OOP](#oop)
-      - [Exceptions](#exceptions)
-      - [Errors](#errors)
-      - [Collections](#collections)
-      - [Functional Interfaces **(Java 8)**](#functional-interfaces-java-8)
-      - [Streams **(Java 8)**](#streams-java-8)
-      - [Optional **(Java 8)**](#optional-java-8)
-      - [Modern Java (9–21) — shows you keep current](#modern-java-921--shows-you-keep-current)
-      - [Generics **(Java 5)**](#generics-java-5)
-      - [Enums **(Java 5)**](#enums-java-5)
-      - [Nested, Inner, Anonymous, and Local Classes](#nested-inner-anonymous-and-local-classes)
-      - [Annotations **(Java 5)**](#annotations-java-5)
-      - [Java Input/Output (IO) and New Input/Output 2 (NIO.2)](#java-inputoutput-io-and-new-inputoutput-2-nio2)
-      - [Date/Time Application Programming Interface **(Java 8)**](#datetime-application-programming-interface-java-8)
-      - [Concurrency](#concurrency)
-      - [🧵 Concurrency and Parallelism](#-concurrency-and-parallelism)
-      - [⚠️ Exceptions](#-exceptions)
-    - [🟪 Kotlin](#-kotlin)
-      - [Why it matters for a Java developer](#why-it-matters-for-a-java-developer)
-      - [Variables and Types](#variables-and-types)
-      - [Null Safety](#null-safety)
-      - [Functions](#functions)
-      - [Classes and Objects](#classes-and-objects)
-      - [Functional Style and Scope Functions](#functional-style-and-scope-functions)
-      - [Coroutines (concurrency)](#coroutines-concurrency)
-      - [Kotlin vs Java](#kotlin-vs-java)
-    - [🐍 Python](#-python)
-      - [Why it matters for a Java developer](#why-it-matters-for-a-java-developer-1)
-      - [Variables and Typing](#variables-and-typing)
-      - [Core Data Structures](#core-data-structures)
-      - [Functions](#functions-1)
-      - [Object-Oriented Python](#object-oriented-python)
-      - [Functional Features and Generators](#functional-features-and-generators)
-      - [Concurrency — and the Global Interpreter Lock](#concurrency--and-the-global-interpreter-lock)
-      - [Ecosystem](#ecosystem)
-      - [Python vs Java](#python-vs-java)
-  - [🧩 Frameworks](#-frameworks)
-    - [🆚 Framework Comparison](#-framework-comparison)
-    - [🌱 Spring](#-spring)
-      - [Spring Core](#spring-core)
-      - [🚀 Spring Boot](#-spring-boot)
-      - [🌐 Spring MVC](#-spring-mvc)
-      - [⚡ Spring WebFlux](#-spring-webflux)
-      - [Project Reactor (Reactive Library)](#project-reactor-reactive-library)
-      - [ServerWebExchange](#serverwebexchange)
-      - [Functional Endpoints](#functional-endpoints)
-      - [💻 Runnable Code Examples](#-runnable-code-examples)
-    - [⚡ Quarkus](#-quarkus)
-      - [Core Idea: build-time processing](#core-idea-build-time-processing)
-      - [Dependency Injection (Jakarta CDI / ArC)](#dependency-injection-jakarta-cdi--arc)
-      - [Web endpoint example](#web-endpoint-example)
-      - [Key Features](#key-features)
-      - [When to reach for it](#when-to-reach-for-it)
-    - [🚀 Micronaut](#-micronaut)
-      - [Core Idea: ahead-of-time, reflection-free](#core-idea-ahead-of-time-reflection-free)
-      - [Dependency Injection (Jakarta annotations)](#dependency-injection-jakarta-annotations)
-      - [Web endpoint example](#web-endpoint-example-1)
-      - [Key Features](#key-features-1)
-      - [Micronaut vs Quarkus](#micronaut-vs-quarkus)
-  - [🗄️ Database](#-database)
-    - [CAP Theorem](#cap-theorem)
-      - [Partition-or-Else, Latency-or-Consistency (PACELC)](#partition-or-else-latency-or-consistency-pacelc)
-    - [🗃️ SQL](#-sql)
-      - [Database Operations](#database-operations)
-      - [Query Operations](#query-operations)
-      - [Joins](#joins)
-      - [Advanced Operations](#advanced-operations)
-      - [Aggregation](#aggregation)
-      - [Window Functions (increasingly asked)](#window-functions-increasingly-asked)
-      - [Common Table Expressions (the WITH clause)](#common-table-expressions-the-with-clause)
-      - [Relations](#relations)
-      - [Normalization (in plain words)](#normalization-in-plain-words)
-      - [Indexes In Depth](#indexes-in-depth)
-      - [Database Engine Types — Online Transaction Processing vs Online Analytical Processing](#database-engine-types--online-transaction-processing-vs-online-analytical-processing)
-      - [Database Tuning Techniques](#database-tuning-techniques)
-      - [Concurrency](#concurrency-1)
-      - [ACID Properties](#acid-properties)
-      - [Isolation Levels and Their Anomalies](#isolation-levels-and-their-anomalies)
-      - [Optimistic vs Pessimistic Locking](#optimistic-vs-pessimistic-locking)
-      - [Deadlocks](#deadlocks)
-    - [🔄 Replication](#-replication)
-      - [Topologies](#topologies)
-      - [Synchronous vs asynchronous](#synchronous-vs-asynchronous)
-      - [Replication lag and its read anomalies](#replication-lag-and-its-read-anomalies)
-    - [📦 Partitioning / Sharding](#-partitioning--sharding)
-    - [🔗 ORM](#-orm)
-      - [Definitions](#definitions)
-      - [JPA vs Hibernate](#jpa-vs-hibernate)
-    - [📊 Spring Data JPA](#-spring-data-jpa)
-      - [Annotations](#annotations-1)
-      - [Constants](#constants)
-      - [Repository](#repository)
-      - [The N+1 Problem (guaranteed question)](#the-n1-problem-guaranteed-question)
-      - [Fetching Pitfalls](#fetching-pitfalls)
-      - [Pagination](#pagination)
-    - [🐻 Hibernate](#-hibernate)
-      - [Hibernate Objects](#hibernate-objects)
-      - [Configuration Steps](#configuration-steps)
-      - [persistence.xml Example](#persistencexml-example)
-      - [Mapping Annotations](#mapping-annotations)
-      - [Relationships](#relationships)
-      - [SessionFactory](#sessionfactory)
-      - [Session](#session)
-      - [Entity Lifecycle](#entity-lifecycle)
-      - [Cascade Types](#cascade-types)
-    - [📄 NoSQL](#-nosql)
-      - [Database Types](#database-types)
-      - [Database Mapping](#database-mapping)
-      - [🍃 MongoDB](#-mongodb)
-      - [Commands](#commands)
-      - [Query Operators](#query-operators)
-      - [Query Projection](#query-projection)
-      - [Concern](#concern)
-      - [⚡ DynamoDB](#-dynamodb)
-  - [🔒 Security](#-security)
-    - [Authentication vs Authorization](#authentication-vs-authorization)
-    - [Authentication Methods](#authentication-methods)
-      - [Session-Based Authentication](#session-based-authentication)
-      - [Token-Based Authentication (JWT)](#token-based-authentication-jwt)
-      - [OAuth 2.0](#oauth-20)
-      - [Single Sign-On (SSO)](#single-sign-on-sso)
-      - [Multi-Factor Authentication (MFA/2FA)](#multi-factor-authentication-mfa2fa)
-      - [API Keys](#api-keys)
-      - [Basic Authentication](#basic-authentication)
-      - [Certificate-Based Authentication](#certificate-based-authentication)
-    - [Authorization Methods](#authorization-methods)
-      - [Role-Based Access Control (RBAC)](#role-based-access-control-rbac)
-      - [Attribute-Based Access Control (ABAC)](#attribute-based-access-control-abac)
-      - [Access Control Lists (ACL)](#access-control-lists-acl)
-    - [Security Best Practices](#security-best-practices)
-      - [Token Storage](#token-storage)
-      - [Token Refresh Strategy](#token-refresh-strategy)
-      - [Password Security](#password-security)
-      - [Common Attacks & Prevention](#common-attacks--prevention)
-    - [Spring Security](#spring-security)
-    - [Recommended Stack](#recommended-stack)
-      - [Modern Web App](#modern-web-app)
-      - [Enterprise](#enterprise)
-    - [Legacy Security Concepts](#legacy-security-concepts)
-  - [🏢 System Design](#-system-design)
-    - [System Design Principles](#system-design-principles)
-      - [High Availability](#high-availability)
-      - [Scalability](#scalability)
-      - [Scaling Building Blocks](#scaling-building-blocks)
-      - [Performance](#performance)
-      - [Durability](#durability)
-      - [Consistency](#consistency)
-    - [Hardware](#hardware)
-      - [Compute Environment](#compute-environment)
-    - [Communication](#communication)
-      - [Request/Response](#requestresponse)
-      - [Async Messaging](#async-messaging)
-      - [Network Protocols](#network-protocols)
-    - [🌍 API Design](#-api-design)
-      - [API Styles — the main options in the industry](#api-styles--the-main-options-in-the-industry)
-      - [REST — the default style](#rest--the-default-style)
-      - [GraphQL](#graphql)
-      - [gRPC](#grpc)
-      - [Real-Time Push: WebSockets and Server-Sent Events](#real-time-push-websockets-and-server-sent-events)
-      - [Webhooks](#webhooks)
-    - [SOLID Principles (explain with examples, not definitions)](#solid-principles-explain-with-examples-not-definitions)
-    - [Clean Code Habits (verbalize them during a code challenge)](#clean-code-habits-verbalize-them-during-a-code-challenge)
-    - [Design Principles](#design-principles)
-    - [Design Patterns (each with its Spring incarnation)](#design-patterns-each-with-its-spring-incarnation)
-      - [Creational](#creational)
-      - [Behavioral](#behavioral)
-      - [Structural](#structural)
-      - [Architectural Patterns](#architectural-patterns)
-    - [🌐 Distributed Design Patterns](#-distributed-design-patterns)
-      - [Monolith vs Microservices — the honest trade-off](#monolith-vs-microservices--the-honest-trade-off)
-      - [How to Split Services](#how-to-split-services)
-      - [Communication Patterns](#communication-patterns)
-      - [📨 Messaging](#-messaging)
-      - [Resilience Patterns (know the names AND the why)](#resilience-patterns-know-the-names-and-the-why)
-      - [Data Management Across Services (where interviews get hard)](#data-management-across-services-where-interviews-get-hard)
-      - [Observability — the three pillars](#observability--the-three-pillars)
-      - [Entry & Deployment Patterns](#entry--deployment-patterns)
-    - [Architecture Types](#architecture-types)
-      - [Layered Architecture (N-Tier)](#layered-architecture-n-tier)
-      - [Event-Driven Architecture](#event-driven-architecture)
-      - [Microkernel Architecture (Plugin)](#microkernel-architecture-plugin)
-      - [Space-Based Architecture](#space-based-architecture)
-      - [DB Centric Architecture](#db-centric-architecture)
-      - [Domain Centric Architecture](#domain-centric-architecture)
-      - [Functional Organization](#functional-organization)
-    - [Design Tips](#design-tips)
-    - [Requirements](#requirements)
-      - [Functional Requirements](#functional-requirements)
-      - [Non-Functional Requirements](#non-functional-requirements)
-  - [🧪 Testing](#-testing)
-    - [⚙️ Unit Testing](#-unit-testing)
-    - [🔗 Integration Testing](#-integration-testing)
-    - [🚀 Performance Testing](#-performance-testing)
-  - [Data Formats](#data-formats)
-- [🌐 Frontend](#-frontend)
-  - [HTML5](#html5)
-  - [CSS](#css)
-  - [JavaScript](#javascript)
-  - [TypeScript](#typescript)
-    - [Testing](#testing)
-      - [Features](#features-1)
-    - [React](#react)
-- [🔧 DevOps](#-devops)
-  - [Features](#features-2)
-  - [SDLC](#sdlc)
-  - [Docker](#docker)
-    - [Images](#images)
-    - [Containers](#containers)
-    - [Dockerfile](#dockerfile)
-    - [Docker for Java Applications](#docker-for-java-applications)
-  - [Kubernetes](#kubernetes)
-    - [Structure](#structure)
-    - [Core Objects (from the smallest unit to the entry point)](#core-objects-from-the-smallest-unit-to-the-entry-point)
-    - [Nodes](#nodes)
-    - [Components](#components)
-    - [Configuration & Spring Boot Integration](#configuration--spring-boot-integration)
-    - [Resources & the Java Virtual Machine](#resources--the-java-virtual-machine)
-    - [Commands](#commands-1)
-  - [Cloud](#cloud)
-    - [AWS](#aws)
-      - [Computing](#computing)
-      - [Storage](#storage)
-      - [Networking](#networking)
-      - [Monitoring](#monitoring)
-      - [Events](#events)
-      - [Containers](#containers-1)
-      - [CI/CD](#cicd)
-    - [Azure](#azure)
-      - [Mapping AWS Knowledge to Azure Equivalents](#mapping-aws-knowledge-to-azure-equivalents)
-      - [Talking Points for the Interview](#talking-points-for-the-interview)
-  - [Infrastructure as Code](#infrastructure-as-code)
-    - [Terraform](#terraform)
-    - [Commands](#commands-2)
-  - [Git](#git)
-    - [Concepts](#concepts)
-  - [Jenkins](#jenkins)
-- [🤖 AI](#-ai)
-  - [Large Language Model Fundamentals](#large-language-model-fundamentals)
-  - [Prompt Engineering](#prompt-engineering)
-  - [Retrieval-Augmented Generation (RAG)](#retrieval-augmented-generation-rag)
-  - [Agents & Tool Use](#agents--tool-use)
-  - [Java Ecosystem](#java-ecosystem)
-  - [Evaluation & Safety](#evaluation--safety)
+> **Heading hierarchy:** Markdown renders the deeper heading levels at nearly the same size, so each heading is written as an `<h1>`…`<h6>` tag carrying an inline `font-size`. The level-by-level size step makes titles, subtitles and details unmistakable in IntelliJ's preview, with no setup — the size for each level lives right in its tag if you ever want to tune it.
 
 ---
 
-# ⚙️ Backend
+<h2 id="-index" style="font-size:33px;font-weight:800;margin:30px 0 12px;">📑 Index</h2>
 
-Everything server-side in one place: the data structures and algorithm.implementation underneath, the Java language and its deep dives (threads, exceptions), the Spring ecosystem, persistence, messaging, security, system design and testing. Wherever a concept has a runnable demonstration, a 💻 line links to the Java file under [src/](../src/) that prints the idea in action.
+<div style="margin:2px 0;margin-left:0px">⚙️ <a href="#-backend">Backend</a></div>
+<div style="margin:2px 0;margin-left:24px">📑 <a href="#-data-structures">Data Structures</a></div>
+<div style="margin:2px 0;margin-left:48px">📇 <a href="#arraylist">ArrayList</a></div>
+<div style="margin:2px 0;margin-left:48px">⛓️ <a href="#linkedlist">LinkedList</a></div>
+<div style="margin:2px 0;margin-left:48px">🎟️ <a href="#queues">Queues</a></div>
+<div style="margin:2px 0;margin-left:48px">🥞 <a href="#stacks">Stacks</a></div>
+<div style="margin:2px 0;margin-left:48px">↕️ <a href="#deques">Deques</a></div>
+<div style="margin:2px 0;margin-left:48px">🔺 <a href="#heap--priority-queue">Heap / Priority Queue</a></div>
+<div style="margin:2px 0;margin-left:48px">#️⃣ <a href="#hash-table">Hash Table</a></div>
+<div style="margin:2px 0;margin-left:48px">🌲 <a href="#binary-search-tree">Binary Search Tree</a></div>
+<div style="margin:2px 0;margin-left:48px">🌳 <a href="#balanced-binary-search-trees-avl-and-red-black">Balanced Binary Search Trees (AVL and Red-Black)</a></div>
+<div style="margin:2px 0;margin-left:48px">🌴 <a href="#trie-prefix-tree">Trie (Prefix Tree)</a></div>
+<div style="margin:2px 0;margin-left:48px">🪢 <a href="#union-find-disjoint-set-union">Union-Find (Disjoint Set Union)</a></div>
+<div style="margin:2px 0;margin-left:48px">📚 <a href="#java-collections-framework">Java Collections Framework</a></div>
+<div style="margin:2px 0;margin-left:24px">📘 <a href="#-algorithms">Algorithms</a></div>
+<div style="margin:2px 0;margin-left:48px">🔁 <a href="#recursion">Recursion</a></div>
+<div style="margin:2px 0;margin-left:72px">🔁 <a href="#core-ingredients">Core ingredients</a></div>
+<div style="margin:2px 0;margin-left:72px">🔁 <a href="#mental-model--the-call-stack">Mental model — the call stack</a></div>
+<div style="margin:2px 0;margin-left:72px">🔁 <a href="#two-flavors">Two flavors</a></div>
+<div style="margin:2px 0;margin-left:72px">🔁 <a href="#complexity">Complexity</a></div>
+<div style="margin:2px 0;margin-left:72px">🔁 <a href="#recurrence-analysis--the-master-theorem-divide-and-conquer-shortcut">Recurrence analysis — the Master Theorem (divide-and-conquer shortcut)</a></div>
+<div style="margin:2px 0;margin-left:72px">🔁 <a href="#when-to-use">When to use</a></div>
+<div style="margin:2px 0;margin-left:72px">🔁 <a href="#common-pitfalls">Common pitfalls</a></div>
+<div style="margin:2px 0;margin-left:48px">💰 <a href="#greedy">Greedy</a></div>
+<div style="margin:2px 0;margin-left:72px">💰 <a href="#core-idea">Core idea</a></div>
+<div style="margin:2px 0;margin-left:72px">💰 <a href="#when-greedy-works-formal-properties">When greedy works (formal properties)</a></div>
+<div style="margin:2px 0;margin-left:72px">💰 <a href="#classic-correct-greedy-problems">Classic correct greedy problems</a></div>
+<div style="margin:2px 0;margin-left:72px">💰 <a href="#classic-greedy-failures">Classic greedy <em>failures</em></a></div>
+<div style="margin:2px 0;margin-left:72px">💰 <a href="#algorithm-template">Algorithm template</a></div>
+<div style="margin:2px 0;margin-left:72px">💰 <a href="#complexity-1">Complexity</a></div>
+<div style="margin:2px 0;margin-left:72px">💰 <a href="#how-to-prove-a-greedy-algorithm-correct--the-exchange-argument">How to prove a greedy algorithm correct — the exchange argument</a></div>
+<div style="margin:2px 0;margin-left:48px">🔙 <a href="#backtracking">Backtracking</a></div>
+<div style="margin:2px 0;margin-left:72px">🔙 <a href="#mental-model--dfs-through-a-decision-tree">Mental model — DFS through a decision tree</a></div>
+<div style="margin:2px 0;margin-left:72px">🔙 <a href="#algorithm-template-1">Algorithm template</a></div>
+<div style="margin:2px 0;margin-left:72px">🔙 <a href="#the-key-optimization--pruning">The key optimization — pruning</a></div>
+<div style="margin:2px 0;margin-left:72px">🔙 <a href="#pruning-techniques-in-practice">Pruning techniques in practice</a></div>
+<div style="margin:2px 0;margin-left:72px">🔙 <a href="#classic-problems">Classic problems</a></div>
+<div style="margin:2px 0;margin-left:72px">🔙 <a href="#recursion-vs-backtracking">Recursion vs. Backtracking</a></div>
+<div style="margin:2px 0;margin-left:72px">🔙 <a href="#complexity-2">Complexity</a></div>
+<div style="margin:2px 0;margin-left:48px">🕸️ <a href="#graph-algorithms">Graph Algorithms</a></div>
+<div style="margin:2px 0;margin-left:72px">🕸️ <a href="#graph-representations">Graph representations</a></div>
+<div style="margin:2px 0;margin-left:72px">🕸️ <a href="#graph-types">Graph types</a></div>
+<div style="margin:2px 0;margin-left:72px">🕸️ <a href="#the-two-foundational-traversals">The two foundational traversals</a></div>
+<div style="margin:2px 0;margin-left:72px">🕸️ <a href="#other-essential-algorithms-named-not-all-implemented-in-the-basics-file">Other essential algorithms (named, not all implemented in the basics file)</a></div>
+<div style="margin:2px 0;margin-left:72px">🕸️ <a href="#named-graph-algorithms--mechanics">Named graph algorithms — mechanics</a></div>
+<div style="margin:2px 0;margin-left:48px">🧩 <a href="#dynamic-programming">Dynamic Programming</a></div>
+<div style="margin:2px 0;margin-left:72px">🧩 <a href="#when-to-use-dynamic-programming--the-two-required-properties">When to use Dynamic Programming — the two required properties</a></div>
+<div style="margin:2px 0;margin-left:72px">🧩 <a href="#the-two-dynamic-programming-styles">The two Dynamic Programming styles</a></div>
+<div style="margin:2px 0;margin-left:72px">🧩 <a href="#how-to-design-a-dynamic-programming-solution-5-step-recipe">How to design a Dynamic Programming solution (5-step recipe)</a></div>
+<div style="margin:2px 0;margin-left:72px">🧩 <a href="#classic-problems-1">Classic problems</a></div>
+<div style="margin:2px 0;margin-left:72px">🧩 <a href="#classic-recurrences-what-you-write-on-the-whiteboard">Classic recurrences (what you write on the whiteboard)</a></div>
+<div style="margin:2px 0;margin-left:72px">🧩 <a href="#complexity-3">Complexity</a></div>
+<div style="margin:2px 0;margin-left:72px">🧩 <a href="#recursion-vs-memoization-vs-tabulation">Recursion vs. Memoization vs. Tabulation</a></div>
+<div style="margin:2px 0;margin-left:48px">🆚 <a href="#quick-comparison-table">Quick Comparison Table</a></div>
+<div style="margin:2px 0;margin-left:72px">🆚 <a href="#how-to-run-any-example">How to run any example</a></div>
+<div style="margin:2px 0;margin-left:48px">📎 <a href="#appendix--big-o--algorithm-categories-quick-reference">Appendix — Big O &amp; Algorithm Categories (Quick Reference)</a></div>
+<div style="margin:2px 0;margin-left:72px">📎 <a href="#big-o-notation">Big O Notation</a></div>
+<div style="margin:2px 0;margin-left:72px">📎 <a href="#algorithm-categories">Algorithm Categories</a></div>
+<div style="margin:2px 0;margin-left:72px">📎 <a href="#sorting">Sorting</a></div>
+<div style="margin:2px 0;margin-left:72px">📎 <a href="#search-iterate-to-find-a-pattern-element">Search: Iterate to find a pattern, element</a></div>
+<div style="margin:2px 0;margin-left:24px">💻 <a href="#-programming-languages">Programming Languages</a></div>
+<div style="margin:2px 0;margin-left:48px">☕ <a href="#java">Java</a></div>
+<div style="margin:2px 0;margin-left:72px">🧠 <a href="#core">Core</a></div>
+<div style="margin:2px 0;margin-left:72px">🧬 <a href="#oop">OOP</a></div>
+<div style="margin:2px 0;margin-left:72px">💥 <a href="#errors">Errors</a></div>
+<div style="margin:2px 0;margin-left:72px">📚 <a href="#collections">Collections</a></div>
+<div style="margin:2px 0;margin-left:72px">🔌 <a href="#functional-interfaces-java-8">Functional Interfaces <strong>(Java 8)</strong></a></div>
+<div style="margin:2px 0;margin-left:72px">🌊 <a href="#streams-java-8">Streams <strong>(Java 8)</strong></a></div>
+<div style="margin:2px 0;margin-left:72px">❓ <a href="#optional-java-8">Optional <strong>(Java 8)</strong></a></div>
+<div style="margin:2px 0;margin-left:72px">✨ <a href="#modern-java-921--shows-you-keep-current">Modern Java (9–21) — shows you keep current</a></div>
+<div style="margin:2px 0;margin-left:72px">🔤 <a href="#generics-java-5">Generics <strong>(Java 5)</strong></a></div>
+<div style="margin:2px 0;margin-left:72px">🔢 <a href="#enums-java-5">Enums <strong>(Java 5)</strong></a></div>
+<div style="margin:2px 0;margin-left:72px">🏷️ <a href="#annotations-java-5">Annotations <strong>(Java 5)</strong></a></div>
+<div style="margin:2px 0;margin-left:72px">🪞 <a href="#reflection">Reflection</a></div>
+<div style="margin:2px 0;margin-left:72px">☕ <a href="#java-inputoutput-io-and-new-inputoutput-2-nio2">Java Input/Output (IO) and New Input/Output 2 (NIO.2)</a></div>
+<div style="margin:2px 0;margin-left:72px">☕ <a href="#datetime-application-programming-interface-java-8">Date/Time Application Programming Interface <strong>(Java 8)</strong></a></div>
+<div style="margin:2px 0;margin-left:72px">🧵 <a href="#concurrency">Concurrency</a></div>
+<div style="margin:2px 0;margin-left:72px">⚠️ <a href="#exceptions">Exceptions</a></div>
+<div style="margin:2px 0;margin-left:48px">🟪 <a href="#kotlin">Kotlin</a></div>
+<div style="margin:2px 0;margin-left:72px">🟪 <a href="#why-it-matters-for-a-java-developer">Why it matters for a Java developer</a></div>
+<div style="margin:2px 0;margin-left:72px">🟪 <a href="#variables-and-types">Variables and Types</a></div>
+<div style="margin:2px 0;margin-left:72px">🟪 <a href="#null-safety">Null Safety</a></div>
+<div style="margin:2px 0;margin-left:72px">🟪 <a href="#functions">Functions</a></div>
+<div style="margin:2px 0;margin-left:72px">🟪 <a href="#classes-and-objects">Classes and Objects</a></div>
+<div style="margin:2px 0;margin-left:72px">🟪 <a href="#functional-style-and-scope-functions">Functional Style and Scope Functions</a></div>
+<div style="margin:2px 0;margin-left:72px">🟪 <a href="#coroutines-concurrency">Coroutines (concurrency)</a></div>
+<div style="margin:2px 0;margin-left:72px">🟪 <a href="#kotlin-vs-java">Kotlin vs Java</a></div>
+<div style="margin:2px 0;margin-left:48px">🐍 <a href="#python">Python</a></div>
+<div style="margin:2px 0;margin-left:72px">🐍 <a href="#why-it-matters-for-a-java-developer-1">Why it matters for a Java developer</a></div>
+<div style="margin:2px 0;margin-left:72px">🐍 <a href="#variables-and-typing">Variables and Typing</a></div>
+<div style="margin:2px 0;margin-left:72px">🐍 <a href="#core-data-structures">Core Data Structures</a></div>
+<div style="margin:2px 0;margin-left:72px">🐍 <a href="#functions-1">Functions</a></div>
+<div style="margin:2px 0;margin-left:72px">🐍 <a href="#object-oriented-python">Object-Oriented Python</a></div>
+<div style="margin:2px 0;margin-left:72px">🐍 <a href="#functional-features-and-generators">Functional Features and Generators</a></div>
+<div style="margin:2px 0;margin-left:72px">🧵 <a href="#concurrency--and-the-global-interpreter-lock">Concurrency — and the Global Interpreter Lock</a></div>
+<div style="margin:2px 0;margin-left:72px">🐍 <a href="#ecosystem">Ecosystem</a></div>
+<div style="margin:2px 0;margin-left:72px">🐍 <a href="#python-vs-java">Python vs Java</a></div>
+<div style="margin:2px 0;margin-left:24px">🧩 <a href="#-frameworks">Frameworks</a></div>
+<div style="margin:2px 0;margin-left:48px">🆚 <a href="#framework-comparison">Framework Comparison</a></div>
+<div style="margin:2px 0;margin-left:48px">🌱 <a href="#spring">Spring</a></div>
+<div style="margin:2px 0;margin-left:72px">🧩 <a href="#spring-core">Spring Core</a></div>
+<div style="margin:2px 0;margin-left:72px">🚀 <a href="#spring-boot">Spring Boot</a></div>
+<div style="margin:2px 0;margin-left:72px">🌐 <a href="#spring-mvc">Spring MVC</a></div>
+<div style="margin:2px 0;margin-left:72px">🌊 <a href="#spring-webflux">Spring WebFlux</a></div>
+<div style="margin:2px 0;margin-left:72px">💻 <a href="#runnable-code-examples">Runnable Code Examples</a></div>
+<div style="margin:2px 0;margin-left:48px">⚡ <a href="#quarkus">Quarkus</a></div>
+<div style="margin:2px 0;margin-left:72px">⚡ <a href="#core-idea-build-time-processing">Core Idea: build-time processing</a></div>
+<div style="margin:2px 0;margin-left:72px">⚡ <a href="#dependency-injection-jakarta-cdi--arc">Dependency Injection (Jakarta CDI / ArC)</a></div>
+<div style="margin:2px 0;margin-left:72px">⚡ <a href="#web-endpoint-example">Web endpoint example</a></div>
+<div style="margin:2px 0;margin-left:72px">⚡ <a href="#key-features">Key Features</a></div>
+<div style="margin:2px 0;margin-left:72px">⚡ <a href="#when-to-reach-for-it">When to reach for it</a></div>
+<div style="margin:2px 0;margin-left:48px">🚀 <a href="#micronaut">Micronaut</a></div>
+<div style="margin:2px 0;margin-left:72px">🚀 <a href="#core-idea-ahead-of-time-reflection-free">Core Idea: ahead-of-time, reflection-free</a></div>
+<div style="margin:2px 0;margin-left:72px">🚀 <a href="#dependency-injection-jakarta-annotations">Dependency Injection (Jakarta annotations)</a></div>
+<div style="margin:2px 0;margin-left:72px">🚀 <a href="#web-endpoint-example-1">Web endpoint example</a></div>
+<div style="margin:2px 0;margin-left:72px">🚀 <a href="#key-features-1">Key Features</a></div>
+<div style="margin:2px 0;margin-left:72px">🚀 <a href="#micronaut-vs-quarkus">Micronaut vs Quarkus</a></div>
+<div style="margin:2px 0;margin-left:24px">🗄️ <a href="#-database">Database</a></div>
+<div style="margin:2px 0;margin-left:48px">⚖️ <a href="#cap-theorem">CAP Theorem</a></div>
+<div style="margin:2px 0;margin-left:72px">⚖️ <a href="#partition-or-else-latency-or-consistency-pacelc">Partition-or-Else, Latency-or-Consistency (PACELC)</a></div>
+<div style="margin:2px 0;margin-left:48px">🗃️ <a href="#sql">SQL</a></div>
+<div style="margin:2px 0;margin-left:72px">🗃️ <a href="#database-operations">Database Operations</a></div>
+<div style="margin:2px 0;margin-left:72px">🗃️ <a href="#query-operations">Query Operations</a></div>
+<div style="margin:2px 0;margin-left:72px">🗃️ <a href="#joins">Joins</a></div>
+<div style="margin:2px 0;margin-left:72px">🗃️ <a href="#advanced-operations">Advanced Operations</a></div>
+<div style="margin:2px 0;margin-left:72px">🗃️ <a href="#aggregation">Aggregation</a></div>
+<div style="margin:2px 0;margin-left:72px">🗃️ <a href="#window-functions-increasingly-asked">Window Functions (increasingly asked)</a></div>
+<div style="margin:2px 0;margin-left:72px">🗃️ <a href="#common-table-expressions-the-with-clause">Common Table Expressions (the WITH clause)</a></div>
+<div style="margin:2px 0;margin-left:72px">🗃️ <a href="#relations">Relations</a></div>
+<div style="margin:2px 0;margin-left:72px">🗃️ <a href="#normalization-in-plain-words">Normalization (in plain words)</a></div>
+<div style="margin:2px 0;margin-left:72px">🗃️ <a href="#indexes-in-depth">Indexes In Depth</a></div>
+<div style="margin:2px 0;margin-left:72px">🗃️ <a href="#database-engine-types--online-transaction-processing-vs-online-analytical-processing">Database Engine Types — Online Transaction Processing vs Online Analytical Processing</a></div>
+<div style="margin:2px 0;margin-left:72px">🗃️ <a href="#database-tuning-techniques">Database Tuning Techniques</a></div>
+<div style="margin:2px 0;margin-left:72px">🧵 <a href="#concurrency-1">Concurrency</a></div>
+<div style="margin:2px 0;margin-left:72px">🗃️ <a href="#acid-properties">ACID Properties</a></div>
+<div style="margin:2px 0;margin-left:72px">🗃️ <a href="#isolation-levels-and-their-anomalies">Isolation Levels and Their Anomalies</a></div>
+<div style="margin:2px 0;margin-left:72px">🗃️ <a href="#optimistic-vs-pessimistic-locking">Optimistic vs Pessimistic Locking</a></div>
+<div style="margin:2px 0;margin-left:72px">🗃️ <a href="#deadlocks">Deadlocks</a></div>
+<div style="margin:2px 0;margin-left:48px">🔄 <a href="#replication">Replication</a></div>
+<div style="margin:2px 0;margin-left:72px">🔄 <a href="#topologies">Topologies</a></div>
+<div style="margin:2px 0;margin-left:72px">🔄 <a href="#synchronous-vs-asynchronous">Synchronous vs asynchronous</a></div>
+<div style="margin:2px 0;margin-left:72px">🔄 <a href="#replication-lag-and-its-read-anomalies">Replication lag and its read anomalies</a></div>
+<div style="margin:2px 0;margin-left:48px">📦 <a href="#partitioning--sharding">Partitioning / Sharding</a></div>
+<div style="margin:2px 0;margin-left:48px">🔗 <a href="#orm">ORM</a></div>
+<div style="margin:2px 0;margin-left:72px">🔗 <a href="#definitions">Definitions</a></div>
+<div style="margin:2px 0;margin-left:72px">🔗 <a href="#jpa-vs-hibernate">JPA vs Hibernate</a></div>
+<div style="margin:2px 0;margin-left:48px">📊 <a href="#spring-data-jpa">Spring Data JPA</a></div>
+<div style="margin:2px 0;margin-left:72px">🏷️ <a href="#annotations-1">Annotations</a></div>
+<div style="margin:2px 0;margin-left:72px">📊 <a href="#constants">Constants</a></div>
+<div style="margin:2px 0;margin-left:72px">📊 <a href="#repository">Repository</a></div>
+<div style="margin:2px 0;margin-left:72px">📊 <a href="#the-n1-problem-guaranteed-question">The N+1 Problem (guaranteed question)</a></div>
+<div style="margin:2px 0;margin-left:72px">📊 <a href="#fetching-pitfalls">Fetching Pitfalls</a></div>
+<div style="margin:2px 0;margin-left:72px">📊 <a href="#pagination">Pagination</a></div>
+<div style="margin:2px 0;margin-left:48px">🐻 <a href="#hibernate">Hibernate</a></div>
+<div style="margin:2px 0;margin-left:72px">🐻 <a href="#hibernate-objects">Hibernate Objects</a></div>
+<div style="margin:2px 0;margin-left:72px">🐻 <a href="#configuration-steps">Configuration Steps</a></div>
+<div style="margin:2px 0;margin-left:72px">🐻 <a href="#persistencexml-example">persistence.xml Example</a></div>
+<div style="margin:2px 0;margin-left:72px">🐻 <a href="#mapping-annotations">Mapping Annotations</a></div>
+<div style="margin:2px 0;margin-left:72px">🐻 <a href="#relationships">Relationships</a></div>
+<div style="margin:2px 0;margin-left:72px">🐻 <a href="#sessionfactory">SessionFactory</a></div>
+<div style="margin:2px 0;margin-left:72px">🐻 <a href="#session">Session</a></div>
+<div style="margin:2px 0;margin-left:72px">🐻 <a href="#entity-lifecycle">Entity Lifecycle</a></div>
+<div style="margin:2px 0;margin-left:72px">🐻 <a href="#cascade-types">Cascade Types</a></div>
+<div style="margin:2px 0;margin-left:48px">📄 <a href="#nosql">NoSQL</a></div>
+<div style="margin:2px 0;margin-left:72px">📄 <a href="#database-types">Database Types</a></div>
+<div style="margin:2px 0;margin-left:72px">📄 <a href="#database-mapping">Database Mapping</a></div>
+<div style="margin:2px 0;margin-left:72px">📄 <a href="#mongodb">MongoDB</a></div>
+<div style="margin:2px 0;margin-left:72px">📄 <a href="#commands">Commands</a></div>
+<div style="margin:2px 0;margin-left:72px">📄 <a href="#query-operators">Query Operators</a></div>
+<div style="margin:2px 0;margin-left:72px">📄 <a href="#query-projection">Query Projection</a></div>
+<div style="margin:2px 0;margin-left:72px">📄 <a href="#concern">Concern</a></div>
+<div style="margin:2px 0;margin-left:72px">📄 <a href="#dynamodb">DynamoDB</a></div>
+<div style="margin:2px 0;margin-left:24px">🔒 <a href="#-security">Security</a></div>
+<div style="margin:2px 0;margin-left:48px">🪪 <a href="#authentication-vs-authorization">Authentication vs Authorization</a></div>
+<div style="margin:2px 0;margin-left:48px">🔑 <a href="#authentication-methods">Authentication Methods</a></div>
+<div style="margin:2px 0;margin-left:72px">🔑 <a href="#session-based-authentication">Session-Based Authentication</a></div>
+<div style="margin:2px 0;margin-left:72px">🔑 <a href="#token-based-authentication-jwt">Token-Based Authentication (JWT)</a></div>
+<div style="margin:2px 0;margin-left:72px">🔑 <a href="#oauth-20">OAuth 2.0</a></div>
+<div style="margin:2px 0;margin-left:72px">🔑 <a href="#single-sign-on-sso">Single Sign-On (SSO)</a></div>
+<div style="margin:2px 0;margin-left:72px">🔑 <a href="#multi-factor-authentication-mfa2fa">Multi-Factor Authentication (MFA/2FA)</a></div>
+<div style="margin:2px 0;margin-left:72px">🔑 <a href="#api-keys">API Keys</a></div>
+<div style="margin:2px 0;margin-left:72px">🔑 <a href="#basic-authentication">Basic Authentication</a></div>
+<div style="margin:2px 0;margin-left:72px">🔑 <a href="#certificate-based-authentication">Certificate-Based Authentication</a></div>
+<div style="margin:2px 0;margin-left:48px">🛂 <a href="#authorization-methods">Authorization Methods</a></div>
+<div style="margin:2px 0;margin-left:72px">🛂 <a href="#role-based-access-control-rbac">Role-Based Access Control (RBAC)</a></div>
+<div style="margin:2px 0;margin-left:72px">🛂 <a href="#attribute-based-access-control-abac">Attribute-Based Access Control (ABAC)</a></div>
+<div style="margin:2px 0;margin-left:72px">🛂 <a href="#access-control-lists-acl">Access Control Lists (ACL)</a></div>
+<div style="margin:2px 0;margin-left:48px">🛡️ <a href="#security-best-practices">Security Best Practices</a></div>
+<div style="margin:2px 0;margin-left:72px">🛡️ <a href="#token-storage">Token Storage</a></div>
+<div style="margin:2px 0;margin-left:72px">🛡️ <a href="#token-refresh-strategy">Token Refresh Strategy</a></div>
+<div style="margin:2px 0;margin-left:72px">🛡️ <a href="#password-security">Password Security</a></div>
+<div style="margin:2px 0;margin-left:72px">🛡️ <a href="#common-attacks--prevention">Common Attacks &amp; Prevention</a></div>
+<div style="margin:2px 0;margin-left:48px">🔐 <a href="#spring-security">Spring Security</a></div>
+<div style="margin:2px 0;margin-left:48px">🧱 <a href="#recommended-stack">Recommended Stack</a></div>
+<div style="margin:2px 0;margin-left:72px">🧱 <a href="#modern-web-app">Modern Web App</a></div>
+<div style="margin:2px 0;margin-left:72px">🧱 <a href="#enterprise">Enterprise</a></div>
+<div style="margin:2px 0;margin-left:48px">🗝️ <a href="#legacy-security-concepts">Legacy Security Concepts</a></div>
+<div style="margin:2px 0;margin-left:24px">🏢 <a href="#-system-design">System Design</a></div>
+<div style="margin:2px 0;margin-left:48px">🏗️ <a href="#system-design-principles">System Design Principles</a></div>
+<div style="margin:2px 0;margin-left:72px">🏗️ <a href="#high-availability">High Availability</a></div>
+<div style="margin:2px 0;margin-left:72px">🏗️ <a href="#scalability">Scalability</a></div>
+<div style="margin:2px 0;margin-left:72px">🏗️ <a href="#scaling-building-blocks">Scaling Building Blocks</a></div>
+<div style="margin:2px 0;margin-left:72px">🏗️ <a href="#performance">Performance</a></div>
+<div style="margin:2px 0;margin-left:72px">🏗️ <a href="#durability">Durability</a></div>
+<div style="margin:2px 0;margin-left:72px">🏗️ <a href="#consistency">Consistency</a></div>
+<div style="margin:2px 0;margin-left:48px">🖥️ <a href="#hardware">Hardware</a></div>
+<div style="margin:2px 0;margin-left:72px">🖥️ <a href="#compute-environment">Compute Environment</a></div>
+<div style="margin:2px 0;margin-left:48px">📡 <a href="#communication">Communication</a></div>
+<div style="margin:2px 0;margin-left:72px">📡 <a href="#requestresponse">Request/Response</a></div>
+<div style="margin:2px 0;margin-left:72px">📡 <a href="#async-messaging">Async Messaging</a></div>
+<div style="margin:2px 0;margin-left:72px">📡 <a href="#network-protocols">Network Protocols</a></div>
+<div style="margin:2px 0;margin-left:48px">🌍 <a href="#api-design">API Design</a></div>
+<div style="margin:2px 0;margin-left:72px">🌍 <a href="#api-styles--the-main-options-in-the-industry">API Styles — the main options in the industry</a></div>
+<div style="margin:2px 0;margin-left:72px">🌍 <a href="#rest--the-default-style">REST — the default style</a></div>
+<div style="margin:2px 0;margin-left:72px">🌍 <a href="#graphql">GraphQL</a></div>
+<div style="margin:2px 0;margin-left:72px">🌍 <a href="#grpc">gRPC</a></div>
+<div style="margin:2px 0;margin-left:72px">🌍 <a href="#real-time-push-websockets-and-server-sent-events">Real-Time Push: WebSockets and Server-Sent Events</a></div>
+<div style="margin:2px 0;margin-left:72px">🌍 <a href="#webhooks">Webhooks</a></div>
+<div style="margin:2px 0;margin-left:48px">🧱 <a href="#solid-principles-explain-with-examples-not-definitions">SOLID Principles (explain with examples, not definitions)</a></div>
+<div style="margin:2px 0;margin-left:48px">🧭 <a href="#clean-code-habits-verbalize-them-during-a-code-challenge">Clean Code Habits (verbalize them during a code challenge)</a></div>
+<div style="margin:2px 0;margin-left:48px">📐 <a href="#design-principles">Design Principles</a></div>
+<div style="margin:2px 0;margin-left:48px">🧩 <a href="#design-patterns-each-with-its-spring-incarnation">Design Patterns (each with its Spring incarnation)</a></div>
+<div style="margin:2px 0;margin-left:72px">🏭 <a href="#creational">Creational</a></div>
+<div style="margin:2px 0;margin-left:72px">🎭 <a href="#behavioral">Behavioral</a></div>
+<div style="margin:2px 0;margin-left:72px">🏗️ <a href="#structural">Structural</a></div>
+<div style="margin:2px 0;margin-left:72px">🏛️ <a href="#architectural-patterns">Architectural Patterns</a></div>
+<div style="margin:2px 0;margin-left:48px">🕸️ <a href="#distributed-design-patterns">Distributed Design Patterns</a></div>
+<div style="margin:2px 0;margin-left:72px">🕸️ <a href="#monolith-vs-microservices--the-honest-trade-off">Monolith vs Microservices — the honest trade-off</a></div>
+<div style="margin:2px 0;margin-left:72px">🕸️ <a href="#how-to-split-services">How to Split Services</a></div>
+<div style="margin:2px 0;margin-left:72px">🕸️ <a href="#communication-patterns">Communication Patterns</a></div>
+<div style="margin:2px 0;margin-left:72px">🕸️ <a href="#messaging">Messaging</a></div>
+<div style="margin:2px 0;margin-left:72px">🕸️ <a href="#resilience-patterns-know-the-names-and-the-why">Resilience Patterns (know the names AND the why)</a></div>
+<div style="margin:2px 0;margin-left:72px">🕸️ <a href="#data-management-across-services-where-interviews-get-hard">Data Management Across Services (where interviews get hard)</a></div>
+<div style="margin:2px 0;margin-left:72px">🕸️ <a href="#observability--the-three-pillars">Observability — the three pillars</a></div>
+<div style="margin:2px 0;margin-left:72px">🕸️ <a href="#entry--deployment-patterns">Entry &amp; Deployment Patterns</a></div>
+<div style="margin:2px 0;margin-left:48px">🏛️ <a href="#architecture-types">Architecture Types</a></div>
+<div style="margin:2px 0;margin-left:72px">🏛️ <a href="#layered-architecture-n-tier">Layered Architecture (N-Tier)</a></div>
+<div style="margin:2px 0;margin-left:72px">🏛️ <a href="#event-driven-architecture">Event-Driven Architecture</a></div>
+<div style="margin:2px 0;margin-left:72px">🏛️ <a href="#microkernel-architecture-plugin">Microkernel Architecture (Plugin)</a></div>
+<div style="margin:2px 0;margin-left:72px">🏛️ <a href="#space-based-architecture">Space-Based Architecture</a></div>
+<div style="margin:2px 0;margin-left:72px">🏛️ <a href="#db-centric-architecture">DB Centric Architecture</a></div>
+<div style="margin:2px 0;margin-left:72px">🏛️ <a href="#domain-centric-architecture">Domain Centric Architecture</a></div>
+<div style="margin:2px 0;margin-left:72px">🏛️ <a href="#functional-organization">Functional Organization</a></div>
+<div style="margin:2px 0;margin-left:48px">💡 <a href="#design-tips">Design Tips</a></div>
+<div style="margin:2px 0;margin-left:48px">📋 <a href="#requirements">Requirements</a></div>
+<div style="margin:2px 0;margin-left:72px">📋 <a href="#functional-requirements">Functional Requirements</a></div>
+<div style="margin:2px 0;margin-left:72px">📋 <a href="#non-functional-requirements">Non-Functional Requirements</a></div>
+<div style="margin:2px 0;margin-left:24px">🧪 <a href="#-testing">Testing</a></div>
+<div style="margin:2px 0;margin-left:48px">🧪 <a href="#unit-testing">Unit Testing</a></div>
+<div style="margin:2px 0;margin-left:48px">🧪 <a href="#integration-testing">Integration Testing</a></div>
+<div style="margin:2px 0;margin-left:48px">🧪 <a href="#performance-testing">Performance Testing</a></div>
+<div style="margin:2px 0;margin-left:24px">📄 <a href="#data-formats">Data Formats</a></div>
+<div style="margin:2px 0;margin-left:0px">🌐 <a href="#-frontend">Frontend</a></div>
+<div style="margin:2px 0;margin-left:24px">📄 <a href="#html5">HTML5</a></div>
+<div style="margin:2px 0;margin-left:24px">🎨 <a href="#css">CSS</a></div>
+<div style="margin:2px 0;margin-left:24px">🟨 <a href="#javascript">JavaScript</a></div>
+<div style="margin:2px 0;margin-left:24px">🔷 <a href="#typescript">TypeScript</a></div>
+<div style="margin:2px 0;margin-left:48px">🧪 <a href="#testing">Testing</a></div>
+<div style="margin:2px 0;margin-left:72px">🧪 <a href="#features-1">Features</a></div>
+<div style="margin:2px 0;margin-left:48px">⚛️ <a href="#react">React</a></div>
+<div style="margin:2px 0;margin-left:0px">🔧 <a href="#-devops">DevOps</a></div>
+<div style="margin:2px 0;margin-left:24px">✨ <a href="#features-2">Features</a></div>
+<div style="margin:2px 0;margin-left:24px">🔄 <a href="#sdlc">SDLC</a></div>
+<div style="margin:2px 0;margin-left:24px">🐳 <a href="#docker">Docker</a></div>
+<div style="margin:2px 0;margin-left:48px">🖼️ <a href="#images">Images</a></div>
+<div style="margin:2px 0;margin-left:48px">📦 <a href="#containers">Containers</a></div>
+<div style="margin:2px 0;margin-left:48px">📋 <a href="#dockerfile">Dockerfile</a></div>
+<div style="margin:2px 0;margin-left:48px">☕ <a href="#docker-for-java-applications">Docker for Java Applications</a></div>
+<div style="margin:2px 0;margin-left:24px">☸️ <a href="#kubernetes">Kubernetes</a></div>
+<div style="margin:2px 0;margin-left:48px">🏗️ <a href="#structure">Structure</a></div>
+<div style="margin:2px 0;margin-left:48px">🔵 <a href="#core-objects-from-the-smallest-unit-to-the-entry-point">Core Objects (from the smallest unit to the entry point)</a></div>
+<div style="margin:2px 0;margin-left:48px">🔵 <a href="#nodes">Nodes</a></div>
+<div style="margin:2px 0;margin-left:48px">🧩 <a href="#components">Components</a></div>
+<div style="margin:2px 0;margin-left:48px">🌱 <a href="#configuration--spring-boot-integration">Configuration &amp; Spring Boot Integration</a></div>
+<div style="margin:2px 0;margin-left:48px">☕ <a href="#resources--the-java-virtual-machine">Resources &amp; the Java Virtual Machine</a></div>
+<div style="margin:2px 0;margin-left:48px">⌨️ <a href="#commands-1">Commands</a></div>
+<div style="margin:2px 0;margin-left:24px">☁️ <a href="#cloud">Cloud</a></div>
+<div style="margin:2px 0;margin-left:48px">☁️ <a href="#aws">AWS</a></div>
+<div style="margin:2px 0;margin-left:72px">☁️ <a href="#computing">Computing</a></div>
+<div style="margin:2px 0;margin-left:72px">☁️ <a href="#storage">Storage</a></div>
+<div style="margin:2px 0;margin-left:72px">☁️ <a href="#networking">Networking</a></div>
+<div style="margin:2px 0;margin-left:72px">☁️ <a href="#monitoring">Monitoring</a></div>
+<div style="margin:2px 0;margin-left:72px">☁️ <a href="#events">Events</a></div>
+<div style="margin:2px 0;margin-left:72px">☁️ <a href="#containers-1">Containers</a></div>
+<div style="margin:2px 0;margin-left:72px">☁️ <a href="#cicd">CI/CD</a></div>
+<div style="margin:2px 0;margin-left:48px">🔷 <a href="#azure">Azure</a></div>
+<div style="margin:2px 0;margin-left:72px">🔷 <a href="#mapping-aws-knowledge-to-azure-equivalents">Mapping AWS Knowledge to Azure Equivalents</a></div>
+<div style="margin:2px 0;margin-left:72px">🔷 <a href="#talking-points-for-the-interview">Talking Points for the Interview</a></div>
+<div style="margin:2px 0;margin-left:24px">🏗️ <a href="#infrastructure-as-code">Infrastructure as Code</a></div>
+<div style="margin:2px 0;margin-left:48px">🏗️ <a href="#terraform">Terraform</a></div>
+<div style="margin:2px 0;margin-left:48px">⌨️ <a href="#commands-2">Commands</a></div>
+<div style="margin:2px 0;margin-left:24px">🌿 <a href="#git">Git</a></div>
+<div style="margin:2px 0;margin-left:48px">💡 <a href="#concepts">Concepts</a></div>
+<div style="margin:2px 0;margin-left:24px">🤵 <a href="#jenkins">Jenkins</a></div>
+<div style="margin:2px 0;margin-left:0px">🤖 <a href="#-ai">AI</a></div>
+<div style="margin:2px 0;margin-left:24px">🧠 <a href="#large-language-model-fundamentals">Large Language Model Fundamentals</a></div>
+<div style="margin:2px 0;margin-left:24px">💬 <a href="#prompt-engineering">Prompt Engineering</a></div>
+<div style="margin:2px 0;margin-left:24px">🔎 <a href="#retrieval-augmented-generation-rag">Retrieval-Augmented Generation (RAG)</a></div>
+<div style="margin:2px 0;margin-left:24px">🤖 <a href="#agents--tool-use">Agents &amp; Tool Use</a></div>
+<div style="margin:2px 0;margin-left:24px">☕ <a href="#java-ecosystem">Java Ecosystem</a></div>
+<div style="margin:2px 0;margin-left:24px">🛡️ <a href="#evaluation--safety">Evaluation &amp; Safety</a></div>
 
 ---
 
-## 📑 Data Structures
+<h1 id="-backend" style="font-size:42px;font-weight:800;margin:34px 0 14px;">⚙️ Backend</h1>
 
-> 💻 Code: [LinkedListExample](../src/main/java/algorithm/concepts/datastructures/collections/Lists/LinkedListExample.java) · [OrderList](../src/main/java/algorithm/concepts/datastructures/collections/Lists/OrderList.java) · [SetExample](../src/main/java/algorithm/concepts/datastructures/collections/Sets/SetExample.java) · [MapExample](../src/main/java/algorithm/concepts/datastructures/collections/Maps/MapExample.java) · [Binary Search Tree](../src/main/java/algorithm/implementation/search/search/trees/BST.java) · [Trie](../src/main/java/algorithm/implementation/search/trie/Trie.java) · [Least Recently Used cache](../src/main/java/algorithm/implementation/search/lru/demo1/LRUCache.java) · [Conversions](../src/main/java/algorithm/concepts/convert/ArraysAndLists.java) · [Comparators](../src/main/java/algorithm/implementation/sorting/SortPlayersByScoreDecreasing.java)
+Everything server-side in one place: the data structures and algorithms underneath, the Java language and its deep dives (threads, exceptions), the Spring ecosystem, persistence, messaging, security, system design and testing. Wherever a concept has a runnable demonstration, a 💻 line links to the Java file under [src/](../src/) that prints the idea in action.
 
-#### ArrayList
+---
+
+<h2 id="-data-structures" style="font-size:33px;font-weight:800;margin:30px 0 12px;">📑 Data Structures</h2>
+
+> 💻 Code: [LinkedListExample](../src/main/java/algorithm/concepts/datastructures/collections/lists/LinkedListExample.java) · [OrderList](../src/main/java/algorithm/concepts/datastructures/collections/lists/OrderList.java) · [SetExample](../src/main/java/algorithm/concepts/datastructures/collections/sets/SetExample.java) · [MapExample](../src/main/java/algorithm/concepts/datastructures/collections/maps/MapExample.java) · [Binary Search Tree](../src/main/java/algorithm/implementation/trees/BST.java) · [Trie](../src/main/java/algorithm/implementation/search/trie/Trie.java) · [Least Recently Used cache](../src/main/java/algorithm/implementation/search/lru/LRUCache.java) · [Conversions](../src/main/java/algorithm/concepts/convert/ArraysAndLists.java) · [Comparators](../src/main/java/algorithm/implementation/sorting/SortPlayersByScoreDecreasing.java)
+
+<h4 id="arraylist" style="font-size:20px;font-weight:700;margin:22px 0 8px;">📇 ArrayList</h4>
 - **Type**: Resizable array, implements List
 - **Read/Access**: O(1) by index
 - **Write/Update**: O(1) Direct index modification
@@ -356,14 +344,14 @@ Everything server-side in one place: the data structures and algorithm.implement
 - **Best for**: Storing and accessing
 - **Memory**: Less memory
 
-##### Pros:
+<h5 id="pros" style="font-size:16px;font-weight:600;margin:18px 0 7px;">Pros</h5>
 
 - **Fast random access O(1)**
 - **Dynamic sizing**
 - **Cache-friendly**
 - **Good for read-heavy operations**
 
-##### Cons:
+<h5 id="cons" style="font-size:16px;font-weight:600;margin:18px 0 7px;">Cons</h5>
 
 - **Slow insertions/deletions in middle**
 - **Resize operation is expensive**
@@ -379,7 +367,7 @@ list.remove(0);                // delete by index — O(n), shifts everything le
 ```
 - **Resize mechanics**: the backing array starts at capacity 10; when full it is replaced by a larger array (Java's `ArrayList` grows by about 50%, `oldCapacity + oldCapacity/2`) and all elements are copied. Because the cost of growing is spread across many cheap appends, a run of n appends is O(n) total — **O(1) amortised** per append — even though an individual resize copy is O(n)
 
-#### LinkedList
+<h4 id="linkedlist" style="font-size:20px;font-weight:700;margin:22px 0 8px;">⛓️ LinkedList</h4>
 - **Type**: Double linked list to next and prev node, implements List and Queue
 - **Read/Access**: O(n) Must traverse from head/tail
 - **Write/Update**: O(n) Must find node first, then O(1) to update
@@ -391,13 +379,13 @@ list.remove(0);                // delete by index — O(n), shifts everything le
 - **Best for**: Manipulating
 - **Memory**: Most overhead - each node stores data + 2 pointers (next, prev)
 
-##### Pros:
+<h5 id="pros-1" style="font-size:16px;font-weight:600;margin:18px 0 7px;">Pros</h5>
 
 - **Fast insertions/deletions at head/tail O(1)**
 - **No resize needed**
 - **Good for queue/deque operations**
 
-##### Cons:
+<h5 id="cons-1" style="font-size:16px;font-weight:600;margin:18px 0 7px;">Cons</h5>
 
 - **Slow random access O(n)**
 - **More memory per element**
@@ -414,7 +402,7 @@ list.removeFirst();            // delete at head — O(1)
 // Also implements Deque/Queue: offer() / poll() / peek() for FIFO use
 ```
 
-#### Queues
+<h4 id="queues" style="font-size:20px;font-weight:700;margin:22px 0 8px;">🎟️ Queues</h4>
 
 > 💻 Code: [BreadthFirstSearch (Queue in action)](../src/main/java/algorithm/implementation/search/bfs/BreadthFirstSearch.java)
 
@@ -426,12 +414,12 @@ list.removeFirst();            // delete at head — O(1)
 - **Best for**: BFS traversal, task scheduling, producer-consumer pipelines
 - **Memory**: O(n); `ArrayDeque` uses less memory per element than `LinkedList`
 
-##### Pros
+<h5 id="pros-2" style="font-size:16px;font-weight:600;margin:18px 0 7px;">Pros</h5>
 - **Enforces FIFO ordering** — first request is first served
 - **O(1) enqueue and dequeue** with `ArrayDeque` (resizable circular array)
 - `BlockingQueue` variants handle producer-consumer coordination without explicit synchronization
 
-##### Cons
+<h5 id="cons-2" style="font-size:16px;font-weight:600;margin:18px 0 7px;">Cons</h5>
 - **No random access** — only head visible
 - `LinkedList` as a `Queue` has higher memory overhead (two pointers per node)
 
@@ -450,7 +438,7 @@ String task = bq.take();    // blocks if empty
 - `PriorityQueue` is **not** FIFO — it orders by natural order or `Comparator`; use only when priority ordering is the goal
 - In concurrent contexts always prefer `BlockingQueue` implementations over manual `wait`/`notify`
 
-#### Stacks
+<h4 id="stacks" style="font-size:20px;font-weight:700;margin:22px 0 8px;">🥞 Stacks</h4>
 
 > 💻 Code: [IsBalanced (bracket matching with a stack)](../src/main/java/algorithm/implementation/collections/stacks/IsBalanced.java) · [DepthFirstSearch (iterative DFS with a stack)](../src/main/java/algorithm/implementation/search/dfs/DepthFirstSearch.java)
 
@@ -462,12 +450,12 @@ String task = bq.take();    // blocks if empty
 - **Best for**: DFS traversal, call-stack simulation, expression parsing, bracket matching, undo/redo
 - **Memory**: O(n)
 
-##### Pros
+<h5 id="pros-3" style="font-size:16px;font-weight:600;margin:18px 0 7px;">Pros</h5>
 - **O(1) push, pop, peek**
 - **Natural model for depth-first and backtracking algorithms**
 - `ArrayDeque` is fast and cache-friendly with no synchronization overhead
 
-##### Cons
+<h5 id="cons-3" style="font-size:16px;font-weight:600;margin:18px 0 7px;">Cons</h5>
 - **No random access**
 - `Stack<E>` (the legacy class) synchronizes every operation, making it slow in single-threaded code — avoid it
 
@@ -491,7 +479,7 @@ while (!dfsStack.isEmpty()) {
 - `Deque` used as a stack: `push` = `addFirst`, `pop` = `removeFirst`, `peek` = `peekFirst`
 - **Monotonic stack** — maintain elements in strictly increasing or decreasing order to solve "next greater element" problems in O(n); a key interview pattern
 
-#### Deques
+<h4 id="deques" style="font-size:20px;font-weight:700;margin:22px 0 8px;">↕️ Deques</h4>
 - **Type**: Double-ended queue — O(1) add and remove at **both** head and tail; acts as both a Stack and a Queue
 - **addFirst / offerFirst**: O(1) — insert at head
 - **addLast / offerLast**: O(1) — insert at tail
@@ -501,12 +489,12 @@ while (!dfsStack.isEmpty()) {
 - **Search**: O(n)
 - **Best for**: Sliding-window maximum/minimum, work-stealing, browser history, palindrome checking
 
-##### Pros
+<h5 id="pros-4" style="font-size:16px;font-weight:600;margin:18px 0 7px;">Pros</h5>
 - **O(1) at both ends** — the most flexible linear data structure
 - **Replaces both Stack and Queue** in a single structure
 - `ArrayDeque` beats `Stack` (no synchronization) and beats `LinkedList` (array-based, better cache locality)
 
-##### Cons
+<h5 id="cons-4" style="font-size:16px;font-weight:600;margin:18px 0 7px;">Cons</h5>
 - **No random access**
 - `ArrayDeque` disallows `null` elements — use `LinkedList` only when nulls or arbitrary-position access are needed
 
@@ -530,7 +518,7 @@ deque.peekLast();           // view back
 ```
 - **Monotonic deque** — the sliding-window maximum/minimum problem: maintain candidates in decreasing/increasing order to answer each window query in O(1); total O(n) for the whole array
 
-#### Heap / Priority Queue
+<h4 id="heap--priority-queue" style="font-size:20px;font-weight:700;margin:22px 0 8px;">🔺 Heap / Priority Queue</h4>
 - **Type**: Complete binary tree satisfying the heap-order property — every node's key is ≤ its children's keys (min-heap) or ≥ its children's keys (max-heap). Stored implicitly in an array, so no node pointers are needed
 - **Insert (offer)**: O(log n) — append at the last position, then "bubble up" while smaller than the parent
 - **Remove min/max (poll)**: O(log n) — replace the root with the last element, then "bubble down"
@@ -540,13 +528,13 @@ deque.peekLast();           // view back
 - **Best for**: priority scheduling, Dijkstra's shortest path, Prim's minimum spanning tree, heap-sort, Top-K and streaming-median problems
 - **Memory**: O(n) — compact array; for the node at index `i`, parent is `(i-1)/2`, children are `2i+1` and `2i+2`
 
-##### Pros
+<h5 id="pros-5" style="font-size:16px;font-weight:600;margin:18px 0 7px;">Pros</h5>
 - **O(1) access to the minimum (or maximum)**
 - **Array-backed** — excellent cache locality, no per-node pointer overhead
 - **O(n) bulk construction** via bottom-up heapify
 - `java.util.PriorityQueue` is a min-heap by default; pass `Comparator.reverseOrder()` for a max-heap
 
-##### Cons
+<h5 id="cons-5" style="font-size:16px;font-weight:600;margin:18px 0 7px;">Cons</h5>
 - **Only the root is ordered** — there is no efficient sorted traversal of the whole structure
 - **Arbitrary removal is O(n)** unless you maintain a separate index map
 - **Not stable** — elements of equal priority may leave in any order
@@ -566,7 +554,7 @@ PriorityQueue<Integer> topK = new PriorityQueue<>(Comparator.reverseOrder());
 for (int x : data) { topK.offer(x); if (topK.size() > k) topK.poll(); }
 ```
 
-#### Hash Table
+<h4 id="hash-table" style="font-size:20px;font-weight:700;margin:22px 0 8px;">#️⃣ Hash Table</h4>
 - **Type**: Maps keys to array slots ("buckets") through a hash function; collisions are resolved by separate chaining (each bucket is a list/tree) or by open addressing (linear probing, quadratic probing, double hashing)
 - **Insert / lookup / delete**: O(1) expected, O(n) worst case (all keys collide into one bucket)
 - **Search**: O(1) expected
@@ -574,12 +562,12 @@ for (int x : data) { topK.offer(x); if (topK.size() > k) topK.poll(); }
 - **Best for**: frequency counting, deduplication, caching (for example a Least Recently Used cache), grouping by key
 - **Memory**: O(n + capacity); Java's `HashMap` starts at capacity 16 with a 0.75 load-factor threshold, doubling capacity and rehashing when exceeded
 
-##### Pros
+<h5 id="pros-6" style="font-size:16px;font-weight:600;margin:18px 0 7px;">Pros</h5>
 - **O(1) expected insert, lookup and delete** — the fastest general-purpose key lookup
 - **Any key type** that implements `hashCode()` and `equals()` correctly
 - **Amortised O(1) inserts** — occasional rehashing is spread across many cheap inserts
 
-##### Cons
+<h5 id="cons-6" style="font-size:16px;font-weight:600;margin:18px 0 7px;">Cons</h5>
 - **No ordering** — iteration order is undefined (`LinkedHashMap` preserves insertion order; `TreeMap` keeps keys sorted at O(log n) cost)
 - **Degrades to O(n)** under heavy collisions or a poor `hashCode()`
 - **Mutable keys are dangerous** — a key whose hash changes after insertion can never be found again
@@ -594,7 +582,7 @@ int count = freq.getOrDefault("banana", 0);    // O(1) expected, null-safe read
 ```
 - **Load factor** λ = entries ÷ capacity; for separate chaining keep λ below ~0.75 (Java's default), for open addressing keep λ below ~0.5 to avoid clustering
 
-##### HashMap Internals (classic interview question)
+<h5 id="hashmap-internals-classic-interview-question" style="font-size:16px;font-weight:600;margin:18px 0 7px;">HashMap Internals (classic interview question)</h5>
 How a `put(key, value)` works, step by step:
 1. The `hashCode()` of the key is computed and compressed into a **bucket index** (`index = hash & (capacity - 1)`)
 2. If the bucket is empty, the entry is stored there
@@ -602,23 +590,31 @@ How a `put(key, value)` works, step by step:
 4. Since Java 8, when a single bucket accumulates **8 entries**, its linked list is converted into a **red-black tree** (worst-case lookup becomes O(log n) instead of O(n))
 5. When size exceeds **capacity × load factor (0.75 by default)**, the table is resized: capacity doubles and every entry is redistributed
 
-##### Thread Safety: the three map options
+<h5 id="thread-safety-the-three-map-options" style="font-size:16px;font-weight:600;margin:18px 0 7px;">Thread Safety: the three map options</h5>
 | Implementation | Locking strategy | Consequence |
 |---|---|---|
 | **HashMap** | No locking at all | Fastest, but not thread safe |
 | **Collections.synchronizedMap()** | One single lock on the whole map | Thread safe, but every operation blocks all the others |
 | **ConcurrentHashMap** **(Java 5)** | Fine-grained locking per bucket, lock-free reads | Thread safe and scalable under concurrent access |
 
-#### Binary Search Tree
+<h4 id="binary-search-tree" style="font-size:20px;font-weight:700;margin:22px 0 8px;">🌲 Binary Search Tree</h4>
 - **Structure**: Data structure with 1 data value and 2 pointers left and right
 - **Insertion**: O(log n)
 - **Traversal**: O(n)
 - **Search**: O(log n)
-- **Deletion rebalancing**: Take the leftmost child of the right child of the deleted node (El mas izquierdo del hijo derecho del nodo eliminado)
-  - Retain rule of smaller to the left, greater to the right
+- **Deletion**: replace the deleted node with its in-order successor — the leftmost node of its right subtree — preserving the invariant "smaller to the left, greater to the right"
 - **Best for**: sorted maps and sets, range queries, in-order iteration
 - **Memory**: O(n) — one node per element, each holding two child pointers
 - **Worst-case height**: O(n) — inserting already-sorted keys degenerates the tree into a linked list and every operation degrades to O(n); the self-balancing variants below (AVL, Red-Black) restore the O(log n) guarantee
+
+<h5 id="pros-7" style="font-size:16px;font-weight:600;margin:18px 0 7px;">Pros</h5>
+- **In-order traversal yields the keys in sorted order** in O(n)
+- **Floor, ceiling and range queries** in O(log n) when balanced
+
+<h5 id="cons-7" style="font-size:16px;font-weight:600;margin:18px 0 7px;">Cons</h5>
+- **Unbalanced after sorted or reverse-sorted inserts** — height degrades to O(n)
+- **Deletion is the most intricate operation** (the rebalancing rule above)
+- In production you rarely hand-roll one — Java's `TreeMap` and `TreeSet` use a Red-Black tree internally
 
 ```java
 // A node holds one value and two child links
@@ -633,16 +629,7 @@ Node insert(Node root, int value) {
 }
 ```
 
-##### Pros
-- **In-order traversal yields the keys in sorted order** in O(n)
-- **Floor, ceiling and range queries** in O(log n) when balanced
-
-##### Cons
-- **Unbalanced after sorted or reverse-sorted inserts** — height degrades to O(n)
-- **Deletion is the most intricate operation** (the rebalancing rule above)
-- In production you rarely hand-roll one — Java's `TreeMap` and `TreeSet` use a Red-Black tree internally
-
-#### Balanced Binary Search Trees (AVL and Red-Black)
+<h4 id="balanced-binary-search-trees-avl-and-red-black" style="font-size:20px;font-weight:700;margin:22px 0 8px;">🌳 Balanced Binary Search Trees (AVL and Red-Black)</h4>
 - **Type**: self-balancing binary search trees that keep height at O(log n) by restructuring (rotations) on insert and delete
 - **Search**: O(log n) worst case
 - **Insert**: O(log n) — an AVL tree needs at most one rotation; a Red-Black tree needs O(1) structural changes
@@ -659,12 +646,12 @@ Node insert(Node root, int value) {
 | Best fit | Read-heavy workloads (stricter balance wins) | Write-heavy workloads (fewer restructurings per update) |
 | In the Java standard library | Not provided (use `TreeMap`) | `java.util.TreeMap` and `java.util.TreeSet` |
 
-##### Pros
+<h5 id="pros-8" style="font-size:16px;font-weight:600;margin:18px 0 7px;">Pros</h5>
 - **Guaranteed O(log n)** for search, insert and delete — removes the O(n) worst case of a plain binary search tree
 - **Sorted iteration** in O(n) via in-order traversal
 - **Order queries** (`firstKey`, `floorKey`, `ceilingKey`, `subMap`) in O(log n)
 
-##### Cons
+<h5 id="cons-8" style="font-size:16px;font-weight:600;margin:18px 0 7px;">Cons</h5>
 - **More complex** than a plain binary search tree — rotations and recolouring are easy to get wrong
 - **No access by position** — reaching the k-th element needs an order-statistics augmentation
 - **Pointer-heavy** — worse cache locality than an array-backed structure
@@ -682,7 +669,7 @@ int floor  = set.floor(4);   // 3 — largest element ≤ 4
 int higher = set.higher(3);  // 5 — smallest element > 3
 ```
 
-#### Trie (Prefix Tree)
+<h4 id="trie-prefix-tree" style="font-size:20px;font-weight:700;margin:22px 0 8px;">🌴 Trie (Prefix Tree)</h4>
 - **Type**: ordered tree where each edge is labelled with a character; the string at a node is the concatenation of edge labels from the root down to it
 - **Exact search**: O(m) — m = length of the query string; follow one child edge per character
 - **Insert**: O(m) — walk the existing path, then create nodes for the remaining suffix
@@ -691,12 +678,12 @@ int higher = set.higher(3);  // 5 — smallest element > 3
 - **Best for**: autocomplete, spell-checking, dictionaries, longest-prefix matching (for example network routing tables)
 - **Memory**: O(total characters × alphabet size) — large for wide alphabets; a compressed trie (Patricia/radix trie) collapses single-child chains to save space
 
-##### Pros
+<h5 id="pros-9" style="font-size:16px;font-weight:600;margin:18px 0 7px;">Pros</h5>
 - **Lookup is O(m), independent of the number of stored strings** — unlike a hash table, it never degrades under collisions
 - **Shared prefixes share nodes** — saves memory versus storing each string in full
 - **Natural prefix enumeration** in O(m + k) — ideal for autocomplete
 
-##### Cons
+<h5 id="cons-9" style="font-size:16px;font-weight:600;margin:18px 0 7px;">Cons</h5>
 - **Memory-hungry for wide alphabets** — an array of child links per node costs O(alphabet size) per node (a map per node trades memory for overhead)
 - **Poor cache locality** — nodes are individually allocated and scattered in memory
 - **Needs compression in practice** — plain tries waste many single-child nodes
@@ -727,7 +714,7 @@ class Trie {
 }
 ```
 
-#### Union-Find (Disjoint Set Union)
+<h4 id="union-find-disjoint-set-union" style="font-size:20px;font-weight:700;margin:22px 0 8px;">🪢 Union-Find (Disjoint Set Union)</h4>
 - **Type**: a forest of trees, one per disjoint set; each node points to its parent; each tree's root is the set's representative
 - **makeSet(x)**: O(1) — create a singleton set
 - **find(x)**: near O(1) amortised with path compression (returns the representative of x's set)
@@ -740,12 +727,12 @@ class Trie {
 - **Union by size/rank** — attach the smaller tree under the larger tree's root, keeping trees shallow
 - **Path compression** — during `find`, repoint every visited node directly to the root, flattening the tree for next time
 
-##### Pros
+<h5 id="pros-10" style="font-size:16px;font-weight:600;margin:18px 0 7px;">Pros</h5>
 - **Near O(1) per operation** with both heuristics — total cost O(k · α(n))
 - **Tiny implementation** — just a parent array and a size/rank array
 - **Answers "same group?" directly** without listing group members
 
-##### Cons
+<h5 id="cons-10" style="font-size:16px;font-weight:600;margin:18px 0 7px;">Cons</h5>
 - **No enumeration of a set's members** without a full scan
 - **No split** — a union cannot be undone
 - **`find` mutates the structure** (path compression), so the tree shape is not preserved across queries
@@ -771,27 +758,27 @@ class UnionFind {
 }
 ```
 
-#### Java Collections Framework
+<h4 id="java-collections-framework" style="font-size:20px;font-weight:700;margin:22px 0 8px;">📚 Java Collections Framework</h4>
 
 > The detailed structures above are the building blocks; this is how the `java.util` framework exposes them through interfaces and utilities.
 
-##### Hierarchy
+<h5 id="hierarchy" style="font-size:16px;font-weight:600;margin:18px 0 7px;">Hierarchy</h5>
 - **Collection**: Super interface of all the other collections
 - **Collections**: Utility class that contains methods to work with collections
 
-##### Interfaces and their implementations
+<h5 id="interfaces-and-their-implementations" style="font-size:16px;font-weight:600;margin:18px 0 7px;">Interfaces and their implementations</h5>
 - **List** — ordered, allows duplicates, indexed: `ArrayList` (backing array, best general performance), `LinkedList` (doubly linked, also a `Queue`)
 - **Set** — enforces uniqueness via `equals`/`hashCode`: `HashSet` (backed by a `HashMap`), `TreeSet` (implements `SortedSet`/`NavigableSet`, keeps elements sorted, O(log n)), `LinkedHashSet` (preserves insertion order)
 - **Queue** — first-in, first-out (FIFO) ordering: `LinkedList` (also a list, less efficient), `ArrayDeque` (resizable array, pure queue/double-ended queue, more efficient)
 - **Map** — key→value, no duplicate keys: `HashMap` (hash table), `TreeMap` (red-black tree, sorted keys, O(log n)), `LinkedHashMap` (preserves insertion order)
 
-##### Comparable\<T\>
+<h5 id="comparable" style="font-size:16px;font-weight:600;margin:18px 0 7px;">Comparable&lt;T&gt;</h5>
 - Defines the type's single **natural order**, baked into the class itself
 - Implement `int compareTo(T other)`: negative if `this < other`, `0` if equal, positive if `this > other` — use `Integer.compare(a, b)` rather than `a - b`, which overflows
 - Only one natural order per class; used automatically by `TreeSet`, `TreeMap`, and `Collections.sort()` when no comparator is given
 - **Contract**: antisymmetric (`sgn(x.compareTo(y)) == -sgn(y.compareTo(x))`) and transitive; should be *consistent with equals* (`compareTo == 0` ⇔ `equals` is `true`), otherwise sorted collections — which judge equality by `compareTo`, not `equals` — behave unexpectedly
 
-##### Comparator\<T\>
+<h5 id="comparator" style="font-size:16px;font-weight:600;margin:18px 0 7px;">Comparator&lt;T&gt;</h5>
 - Defines an **external** order; many can exist for one type, without touching the class
 - Implement `int compare(T a, T b)` with the same sign convention as `compareTo`
 - **(Java 8)** composition: `Comparator.comparing()`, `thenComparing()`, `reversed()`, `naturalOrder()`, `nullsFirst()` / `nullsLast()`
@@ -807,11 +794,11 @@ players.sort(Comparator.comparingInt(Player::score).reversed()   // highest scor
                        .thenComparing(Player::name));            // …ties broken by name
 ```
 
-##### Conversions
+<h5 id="conversions" style="font-size:16px;font-weight:600;margin:18px 0 7px;">Conversions</h5>
 - **Arrays**: collection.toArray()
 - **List and Set**: List list = Arrays.asList(array)
 
-##### Autoboxing, Unboxing, and the Integer Cache **(Java 5)**
+<h5 id="autoboxing-unboxing-and-the-integer-cache-java-5" style="font-size:16px;font-weight:600;margin:18px 0 7px;">Autoboxing, Unboxing, and the Integer Cache <strong>(Java 5)</strong></h5>
 **Autoboxing** converts a primitive to its wrapper automatically (`list.add(42)` → `Integer`); **unboxing** is the reverse. Two traps:
 - **Integer cache**: the Java Virtual Machine caches `Integer` instances for **-128 to 127**, so `==` returns `true` for boxed values in that range and `false` outside it — always compare wrappers with `equals()`. The same caching applies to `Boolean`, `Byte`, `Short`, and `Character`.
 - **NullPointerException on unboxing**: unboxing a `null` wrapper into a primitive throws — a frequent trap with auto-unboxed ternaries and return types.
@@ -822,7 +809,7 @@ Integer x = 200, y = 200;  System.out.println(x == y);   // false — distinct o
 System.out.println(x.equals(y));                          // true  — same value
 ```
 
-##### Varargs **(Java 5)**
+<h5 id="varargs-java-5" style="font-size:16px;font-weight:600;margin:18px 0 7px;">Varargs <strong>(Java 5)</strong></h5>
 A variable-length argument list (`Type... name`) accepts zero or more values as an array. It must be the **last** parameter, and there can be only one. Inside the method it is a normal array; the caller may pass individual values, an array, or nothing (yielding an empty array, never `null`).
 
 ```java
@@ -833,7 +820,7 @@ log("info");                    // zero args — empty array
 
 ---
 
-## 📘 Algorithms
+<h2 id="-algorithms" style="font-size:33px;font-weight:800;margin:30px 0 12px;">📘 Algorithms</h2>
 
 A precise, practical reference for the core algorithmic paradigms used in interviews,
 competitive programming, and real-world software engineering:
@@ -846,20 +833,20 @@ competitive programming, and real-world software engineering:
 
 Each chapter explains: what it is, when to use it, how it works mechanically,
 its time/space complexity, common pitfalls, and a runnable Java reference class
-located in `src/algorithm.implementation/<topic>/<Topic>Basics.java`.
+located in `src/main/java/algorithm/implementation/<topic>/<Topic>Basics.java`.
 
-### 1. Recursion
+<h3 id="recursion" style="font-size:26px;font-weight:700;margin:26px 0 10px;">🔁 Recursion</h3>
 
 > **Definition:** A function that solves a problem by calling itself with a smaller
 > input until it reaches a *base case*.
 
-#### Core ingredients
+<h4 id="core-ingredients" style="font-size:20px;font-weight:700;margin:22px 0 8px;">🔁 Core ingredients</h4>
 Every recursive function MUST have:
 1. **Base case** — the condition that stops recursion (otherwise: `StackOverflowError`).
 2. **Recursive case** — calls itself with input progressing toward the base case.
 3. **Progress guarantee** — each call must move closer to the base case.
 
-#### Mental model — the call stack
+<h4 id="mental-model--the-call-stack" style="font-size:20px;font-weight:700;margin:22px 0 8px;">🔁 Mental model — the call stack</h4>
 Each recursive call pushes a new *stack frame* onto the JVM call stack.
 When the base case returns, frames *unwind* (pop) one by one and combine results.
 
@@ -870,17 +857,17 @@ factorial(3)
                └─ 1   ← base case, unwind starts
 ```
 
-#### Two flavors
+<h4 id="two-flavors" style="font-size:20px;font-weight:700;margin:22px 0 8px;">🔁 Two flavors</h4>
 - **Head recursion**: recursive call happens *before* the work.
 - **Tail recursion**: recursive call is the *last* operation. Java does **not**
   optimize tail calls (no TCO), so deep tail recursion still overflows.
 
-#### Complexity
+<h4 id="complexity" style="font-size:20px;font-weight:700;margin:22px 0 8px;">🔁 Complexity</h4>
 - **Time:** depends on the recurrence. `T(n) = T(n-1) + O(1)` → O(n).
   `T(n) = 2·T(n-1) + O(1)` → O(2ⁿ) (naïve Fibonacci).
 - **Space:** O(depth of recursion) for the stack.
 
-#### Recurrence analysis — the Master Theorem (divide-and-conquer shortcut)
+<h4 id="recurrence-analysis--the-master-theorem-divide-and-conquer-shortcut" style="font-size:20px;font-weight:700;margin:22px 0 8px;">🔁 Recurrence analysis — the Master Theorem (divide-and-conquer shortcut)</h4>
 Most divide-and-conquer recurrences have the form `T(n) = a·T(n/b) + f(n)`, where `a` = number of subproblems, `b` = factor the input shrinks by, and `f(n)` = work done outside the recursive calls. Compare `f(n)` against `n^(log_b a)`:
 
 | Case | Condition | Result |
@@ -893,46 +880,46 @@ Most divide-and-conquer recurrences have the form `T(n) = a·T(n/b) + f(n)`, whe
 - Binary search: `T(n) = T(n/2) + O(1)` → Case 2 → **O(log n)**
 - Naïve Fibonacci: `T(n) = 2·T(n-1) + O(1)` → does not fit the theorem (it shrinks by subtraction, not division); solve by expansion → **O(2ⁿ)**
 
-#### When to use
+<h4 id="when-to-use" style="font-size:20px;font-weight:700;margin:22px 0 8px;">🔁 When to use</h4>
 ✅ Tree/graph traversal, divide & conquer, problems with naturally recursive structure.
 ❌ Avoid when iterative solution is trivial OR depth can exceed ~10 000 (stack risk).
 
-#### Common pitfalls
+<h4 id="common-pitfalls" style="font-size:20px;font-weight:700;margin:22px 0 8px;">🔁 Common pitfalls</h4>
 - Forgetting the base case → `StackOverflowError`.
 - Wrong base case (off-by-one).
-- Recomputing the same subproblems → fix with **memoization** (see Chapter 5).
+- Recomputing the same subproblems → fix with **memoization** (see the Dynamic Programming section).
 
-📁 **See:** [src/algorithm.implementation/recursion/RecursionBasics.java](../src/main/java/algorithm/implementation/recursion/RecursionBasics.java)
+📁 **See:** [src/main/java/algorithm/implementation/recursion/RecursionBasics.java](../src/main/java/algorithm/implementation/recursion/RecursionBasics.java)
 
-### 2. Greedy
+<h3 id="greedy" style="font-size:26px;font-weight:700;margin:26px 0 10px;">💰 Greedy</h3>
 
 > **Definition:** Build a solution piece-by-piece, always choosing the option that
 > looks **best at the current step**, never reconsidering past choices.
 
-#### Core idea
+<h4 id="core-idea" style="font-size:20px;font-weight:700;margin:22px 0 8px;">💰 Core idea</h4>
 At each step, pick the *locally optimal* choice and hope it leads to the
 *globally optimal* solution.
 
-#### When greedy works (formal properties)
+<h4 id="when-greedy-works-formal-properties" style="font-size:20px;font-weight:700;margin:22px 0 8px;">💰 When greedy works (formal properties)</h4>
 A greedy approach is correct ONLY if the problem has BOTH:
 1. **Greedy choice property** — a global optimum can be reached by local optimal choices.
 2. **Optimal substructure** — the optimal solution to the problem contains the optimal
    solutions to its subproblems.
 
-If you can't prove these, greedy may give a wrong answer (use Dynamic Programing/Backtracking instead).
+If you can't prove these, greedy may give a wrong answer (use Dynamic Programming or Backtracking instead).
 
-#### Classic correct greedy problems
+<h4 id="classic-correct-greedy-problems" style="font-size:20px;font-weight:700;margin:22px 0 8px;">💰 Classic correct greedy problems</h4>
 - **Activity selection** — pick non-overlapping intervals → sort by end time.
 - **Huffman coding** — always merge the two least-frequent nodes.
 - **Dijkstra's shortest path** (non-negative weights) — always expand the closest node.
 - **Coin change with canonical coin systems** (e.g., USD, EUR).
 
-#### Classic greedy *failures*
+<h4 id="classic-greedy-failures" style="font-size:20px;font-weight:700;margin:22px 0 8px;">💰 Classic greedy <em>failures</em></h4>
 - **Coin change with arbitrary denominations** (e.g., coins = `{1, 3, 4}`, amount = 6).
   Greedy picks `4 + 1 + 1` (3 coins). Optimal is `3 + 3` (2 coins). → Use Dynamic Programming.
 - **0/1 Knapsack** — greedy by value/weight ratio fails. → Use Dynamic Programming.
 
-#### Algorithm template
+<h4 id="algorithm-template" style="font-size:20px;font-weight:700;margin:22px 0 8px;">💰 Algorithm template</h4>
 ```
 sort or prioritize the input
 for each element in order:
@@ -941,10 +928,10 @@ for each element in order:
 return solution
 ```
 
-#### Complexity
+<h4 id="complexity-1" style="font-size:20px;font-weight:700;margin:22px 0 8px;">💰 Complexity</h4>
 Usually dominated by the sort: **O(n log n)**.
 
-#### How to prove a greedy algorithm correct — the exchange argument
+<h4 id="how-to-prove-a-greedy-algorithm-correct--the-exchange-argument" style="font-size:20px;font-weight:700;margin:22px 0 8px;">💰 How to prove a greedy algorithm correct — the exchange argument</h4>
 The standard proof technique:
 1. Assume an optimal solution `OPT` that differs from the greedy solution `G`.
 2. Find the first position where they differ, and show that swapping `OPT`'s choice there to match `G`'s does not make `OPT` worse.
@@ -952,15 +939,15 @@ The standard proof technique:
 
 *Worked sketch (activity selection):* sort by finish time. If `OPT` picks activity `x` where greedy picks `y` with `finish(y) ≤ finish(x)`, swapping `x` → `y` in `OPT` still leaves room for every later activity, so `OPT` is no worse. Repeat ⇒ the greedy order is optimal.
 
-📁 **See:** [src/algorithm.implementation/greedy/GreedyBasics.java](../src/main/java/algorithm/implementation/greedy/GreedyBasics.java)
+📁 **See:** [src/main/java/algorithm/implementation/greedy/GreedyBasics.java](../src/main/java/algorithm/implementation/greedy/GreedyBasics.java)
 
-### 3. Backtracking
+<h3 id="backtracking" style="font-size:26px;font-weight:700;margin:26px 0 10px;">🔙 Backtracking</h3>
 
 > **Definition:** A refined brute-force search that incrementally builds candidates
 > and **abandons** ("backtracks") a candidate as soon as it determines the candidate
 > cannot lead to a valid solution.
 
-#### Mental model — DFS through a decision tree
+<h4 id="mental-model--dfs-through-a-decision-tree" style="font-size:20px;font-weight:700;margin:22px 0 8px;">🔙 Mental model — DFS through a decision tree</h4>
 Backtracking explores a **state-space tree** depth-first. At each node:
 1. **Choose** — pick an option.
 2. **Explore** — recurse with this choice applied.
@@ -974,7 +961,7 @@ Backtracking explores a **state-space tree** depth-first. At each node:
       [1,2][1,3][2,3] ...
 ```
 
-#### Algorithm template
+<h4 id="algorithm-template-1" style="font-size:20px;font-weight:700;margin:22px 0 8px;">🔙 Algorithm template</h4>
 ```java
 void backtrack(state, choices) {
     if (isSolution(state)) {
@@ -991,42 +978,42 @@ void backtrack(state, choices) {
 }
 ```
 
-#### The key optimization — pruning
+<h4 id="the-key-optimization--pruning" style="font-size:20px;font-weight:700;margin:22px 0 8px;">🔙 The key optimization — pruning</h4>
 A naïve search visits all `O(branching^depth)` nodes. Backtracking cuts entire
 subtrees by checking constraints **before** recursing → massive speedup in practice
 (though worst-case complexity is still exponential).
 
-#### Pruning techniques in practice
+<h4 id="pruning-techniques-in-practice" style="font-size:20px;font-weight:700;margin:22px 0 8px;">🔙 Pruning techniques in practice</h4>
 - **Feasibility pruning** (check before recursing): reject a choice that already violates a hard constraint — for example, in N-Queens verify the column and both diagonals are free before placing the next queen. The most common and most effective form, and it is free because you must validate anyway.
 - **Bound pruning (branch-and-bound)**: compute an optimistic best-possible value reachable from the current partial state; if it cannot beat the best complete solution found so far, discard the whole subtree. Used in optimization problems (e.g. 0/1 knapsack by backtracking).
 - **Symmetry pruning**: skip states that are rotations or reflections of ones already explored (e.g. the symmetric N-Queens first-row placements).
 - **Duplicate elimination**: when choices may repeat (permutations of a multiset), skip a value already tried at the same recursion depth.
 
-#### Classic problems
+<h4 id="classic-problems" style="font-size:20px;font-weight:700;margin:22px 0 8px;">🔙 Classic problems</h4>
 - **N-Queens** — place N queens on an N×N board.
 - **Sudoku solver**.
 - **Permutations / combinations / subsets**.
 - **Word search in a grid**.
 - **Hamiltonian path**.
 
-#### Recursion vs. Backtracking
+<h4 id="recursion-vs-backtracking" style="font-size:20px;font-weight:700;margin:22px 0 8px;">🔙 Recursion vs. Backtracking</h4>
 - All backtracking is recursion.
 - Not all recursion is backtracking — backtracking specifically *undoes* state to
   explore alternatives.
 
-#### Complexity
+<h4 id="complexity-2" style="font-size:20px;font-weight:700;margin:22px 0 8px;">🔙 Complexity</h4>
 Worst case **O(b^d)** where `b` = branching factor, `d` = depth. Pruning makes the
 *average* case far better but is hard to bound formally.
 
-📁 **See:** [src/algorithm.implementation/backtracking/BacktrackingBasics.java](../src/main/java/algorithm/implementation/backtracking/BacktrackingBasics.java)
+📁 **See:** [src/main/java/algorithm/implementation/backtracking/BacktrackingBasics.java](../src/main/java/algorithm/implementation/backtracking/BacktrackingBasics.java)
 
-### 4. Graph Algorithms
+<h3 id="graph-algorithms" style="font-size:26px;font-weight:700;margin:26px 0 10px;">🕸️ Graph Algorithms</h3>
 
 > **Definition:** Algorithms operating on graphs `G = (V, E)` — sets of vertices `V`
 > connected by edges `E`. Graphs model networks, dependencies, maps, social
 > connections, etc.
 
-#### Graph representations
+<h4 id="graph-representations" style="font-size:20px;font-weight:700;margin:22px 0 8px;">🕸️ Graph representations</h4>
 
 | Representation        | Space      | Edge lookup | Best for                    |
 |-----------------------|------------|-------------|-----------------------------|
@@ -1034,15 +1021,15 @@ Worst case **O(b^d)** where `b` = branching factor, `d` = depth. Pruning makes t
 | **Adjacency List**    | O(V + E)   | O(degree)   | Sparse graphs (most cases)  |
 | **Edge List**         | O(E)       | O(E)        | Algorithms iterating edges  |
 
-#### Graph types
+<h4 id="graph-types" style="font-size:20px;font-weight:700;margin:22px 0 8px;">🕸️ Graph types</h4>
 - **Directed** vs **Undirected**
 - **Weighted** vs **Unweighted**
 - **Cyclic** vs **Acyclic** (DAG = Directed Acyclic Graph)
 - **Connected** vs **Disconnected**
 
-#### The two foundational traversals
+<h4 id="the-two-foundational-traversals" style="font-size:20px;font-weight:700;margin:22px 0 8px;">🕸️ The two foundational traversals</h4>
 
-##### BFS — Breadth-First Search
+<h5 id="bfs--breadth-first-search" style="font-size:16px;font-weight:600;margin:18px 0 7px;">BFS — Breadth-First Search</h5>
 - Uses a **Queue** (FIFO).
 - Explores **level by level**.
 - Finds **shortest path in unweighted graphs**.
@@ -1059,7 +1046,7 @@ while queue not empty:
             queue.add(neighbor)
 ```
 
-##### DFS — Depth-First Search
+<h5 id="dfs--depth-first-search" style="font-size:16px;font-weight:600;margin:18px 0 7px;">DFS — Depth-First Search</h5>
 - Uses a **Stack** (or recursion).
 - Explores as **deep as possible** before backtracking.
 - Used for **cycle detection**, **topological sort**, **connected components**.
@@ -1073,7 +1060,7 @@ dfs(node):
             dfs(neighbor)
 ```
 
-#### Other essential algorithm.implementation (named, not all implemented in basics file)
+<h4 id="other-essential-algorithms-named-not-all-implemented-in-the-basics-file" style="font-size:20px;font-weight:700;margin:22px 0 8px;">🕸️ Other essential algorithms (named, not all implemented in the basics file)</h4>
 | Algorithm                  | Purpose                              | Complexity      |
 |----------------------------|--------------------------------------|-----------------|
 | **Dijkstra**               | Shortest path, non-negative weights  | O((V+E) log V)  |
@@ -1083,9 +1070,9 @@ dfs(node):
 | **Topological Sort**       | Order DAG vertices                   | O(V + E)        |
 | **Union-Find**             | Disjoint sets / cycle detection      | ~O(α(n))        |
 
-#### Named graph algorithms — mechanics
+<h4 id="named-graph-algorithms--mechanics" style="font-size:20px;font-weight:700;margin:22px 0 8px;">🕸️ Named graph algorithms — mechanics</h4>
 
-##### Dijkstra — single-source shortest path (non-negative weights)
+<h5 id="dijkstra--single-source-shortest-path-non-negative-weights" style="font-size:16px;font-weight:600;margin:18px 0 7px;">Dijkstra — single-source shortest path (non-negative weights)</h5>
 Breadth First Search generalized with a min-priority queue: always expand the *closest* unsettled vertex (the greedy step), and for each neighbour apply **edge relaxation** — if `dist[u] + w(u,v) < dist[v]`, lower `dist[v]` and re-enqueue `v`.
 
 ```
@@ -1100,7 +1087,7 @@ while pq not empty:
 - **Fails on negative edges**: a vertex already settled might later be reachable more cheaply, and Dijkstra never revisits it.
 - **Complexity**: O((V + E) log V) with a binary-heap priority queue.
 
-##### Bellman-Ford — single-source shortest path (negative weights allowed)
+<h5 id="bellman-ford--single-source-shortest-path-negative-weights-allowed" style="font-size:16px;font-weight:600;margin:18px 0 7px;">Bellman-Ford — single-source shortest path (negative weights allowed)</h5>
 Relax *every* edge `V − 1` times; after `k` rounds, `dist[v]` is the shortest path using at most `k` edges (a shortest simple path uses at most `V − 1` edges). One extra round that still improves a distance proves a **negative-weight cycle**.
 ```
 dist[] = ∞;  dist[source] = 0
@@ -1110,24 +1097,24 @@ for each edge (u, v, w):      if dist[u] + w < dist[v]: → negative cycle
 ```
 - **Complexity**: O(V · E).
 
-##### Topological sort — ordering a Directed Acyclic Graph
+<h5 id="topological-sort--ordering-a-directed-acyclic-graph" style="font-size:16px;font-weight:600;margin:18px 0 7px;">Topological sort — ordering a Directed Acyclic Graph</h5>
 Two equivalent O(V + E) approaches:
 - **Depth First Search-based**: run a Depth First Search; when a vertex finishes (all descendants visited), prepend it to the result list.
 - **Kahn's algorithm (in-degree, Breadth First Search-based)**: enqueue all in-degree-0 vertices; repeatedly dequeue one into the result and decrement its neighbours' in-degrees, enqueuing any that reach 0. If fewer than `V` vertices come out, the graph has a cycle.
 - **Uses**: dependency resolution, course prerequisites, build ordering, compiler scheduling.
 
-##### Union-Find for graphs
+<h5 id="union-find-for-graphs" style="font-size:16px;font-weight:600;margin:18px 0 7px;">Union-Find for graphs</h5>
 The disjoint-set structure (full detail under [Data Structures → Union-Find](#union-find-disjoint-set-union)) drives **Kruskal's minimum spanning tree** (add the next-cheapest edge unless its endpoints are already connected — which would form a cycle), **connected-components** counting, and **cycle detection in undirected graphs**, each at effectively O(α(n)) per operation.
 
-📁 **See:** [src/algorithm.implementation/graphs/GraphBasics.java](../src/main/java/algorithm/implementation/graphs/GraphBasics.java)
+📁 **See:** [src/main/java/algorithm/implementation/graphs/GraphBasics.java](../src/main/java/algorithm/implementation/graphs/GraphBasics.java)
 
-### 5. Dynamic Programming
+<h3 id="dynamic-programming" style="font-size:26px;font-weight:700;margin:26px 0 10px;">🧩 Dynamic Programming</h3>
 
 > **Definition:** Solve complex problems by breaking them into **overlapping
 > subproblems**, solving each subproblem **once**, and **storing** the results
 > for reuse.
 
-#### When to use Dynamic Programming — the two required properties
+<h4 id="when-to-use-dynamic-programming--the-two-required-properties" style="font-size:20px;font-weight:700;margin:22px 0 8px;">🧩 When to use Dynamic Programming — the two required properties</h4>
 1. **Optimal substructure** — optimal solution can be built from optimal solutions
    of subproblems.
 2. **Overlapping subproblems** — the same subproblems are solved multiple times by
@@ -1135,9 +1122,9 @@ The disjoint-set structure (full detail under [Data Structures → Union-Find](#
 
 If a problem only has #1 (no overlap), use **divide-and-conquer** (e.g., merge sort).
 
-#### The two Dynamic Programming styles
+<h4 id="the-two-dynamic-programming-styles" style="font-size:20px;font-weight:700;margin:22px 0 8px;">🧩 The two Dynamic Programming styles</h4>
 
-##### Top-Down (Memoization)
+<h5 id="top-down-memoization" style="font-size:16px;font-weight:600;margin:18px 0 7px;">Top-Down (Memoization)</h5>
 - Write the **natural recursive** solution.
 - **Cache** each result in a Map/array keyed by the subproblem inputs.
 - Pros: intuitive, only computes needed states.
@@ -1153,38 +1140,38 @@ int solve(int n, Map<Integer,Integer> memo) {
 }
 ```
 
-##### Bottom-Up (Tabulation)
-- Define a **table** `Dynamic Programming[]` indexed by subproblem.
+<h5 id="bottom-up-tabulation" style="font-size:16px;font-weight:600;margin:18px 0 7px;">Bottom-Up (Tabulation)</h5>
+- Define a **table** `dp[]` indexed by subproblem.
 - Fill it iteratively from the smallest subproblem upward.
 - Pros: no recursion, often more memory-efficient (rolling arrays possible).
 - Cons: must figure out fill order; computes states even if unused.
 
 ```java
-Dynamic Programming[0] = base0; Dynamic Programming[1] = base1;
+dp[0] = base0; dp[1] = base1;
 for (int i = 2; i <= n; i++) {
-    Dynamic Programming[i] = Dynamic Programming[i-1] + Dynamic Programming[i-2];
+    dp[i] = dp[i-1] + dp[i-2];
 }
-return Dynamic Programming[n];
+return dp[n];
 ```
 
-#### How to design a Dynamic Programming solution (5-step recipe)
-1. **Define the state** — what does `Dynamic Programming[i]` (or `Dynamic Programming[i][j]`) mean? Be precise.
-2. **Write the recurrence** — express `Dynamic Programming[i]` in terms of smaller states.
+<h4 id="how-to-design-a-dynamic-programming-solution-5-step-recipe" style="font-size:20px;font-weight:700;margin:22px 0 8px;">🧩 How to design a Dynamic Programming solution (5-step recipe)</h4>
+1. **Define the state** — what does `dp[i]` (or `dp[i][j]`) mean? Be precise.
+2. **Write the recurrence** — express `dp[i]` in terms of smaller states.
 3. **Identify the base cases**.
 4. **Decide the iteration order** (topological order of state dependencies).
-5. **Read the answer** from the table (often `Dynamic Programming[n]`).
+5. **Read the answer** from the table (often `dp[n]`).
 
-#### Classic problems
+<h4 id="classic-problems-1" style="font-size:20px;font-weight:700;margin:22px 0 8px;">🧩 Classic problems</h4>
 | Problem                       | State                              |
 |-------------------------------|------------------------------------|
-| Fibonacci                     | `Dynamic Programming[i]` = i-th fibonacci number    |
-| Climbing stairs               | `Dynamic Programming[i]` = ways to reach step i     |
-| Coin change (min coins)       | `Dynamic Programming[a]` = min coins for amount a   |
-| 0/1 Knapsack                  | `Dynamic Programming[i][w]` = max value using first i items, capacity w |
-| Longest Common Subsequence    | `Dynamic Programming[i][j]` = LCS of A[..i], B[..j] |
-| Edit distance                 | `Dynamic Programming[i][j]` = ops to convert A[..i] → B[..j] |
+| Fibonacci                     | `dp[i]` = i-th Fibonacci number    |
+| Climbing stairs               | `dp[i]` = ways to reach step i     |
+| Coin change (min coins)       | `dp[a]` = min coins for amount a   |
+| 0/1 Knapsack                  | `dp[i][w]` = max value using first i items, capacity w |
+| Longest Common Subsequence    | `dp[i][j]` = LCS of A[..i], B[..j] |
+| Edit distance                 | `dp[i][j]` = ops to convert A[..i] → B[..j] |
 
-#### Classic recurrences (what you write on the whiteboard)
+<h4 id="classic-recurrences-what-you-write-on-the-whiteboard" style="font-size:20px;font-weight:700;margin:22px 0 8px;">🧩 Classic recurrences (what you write on the whiteboard)</h4>
 | Problem | Recurrence |
 |---|---|
 | Fibonacci | `dp[i] = dp[i-1] + dp[i-2]` |
@@ -1195,11 +1182,11 @@ return Dynamic Programming[n];
 | Edit distance | `dp[i][j] = dp[i-1][j-1]` if chars match, else `1 + min(dp[i-1][j], dp[i][j-1], dp[i-1][j-1])` |
 | Longest Increasing Subsequence | `dp[i] = 1 + max(dp[j])` over all `j < i` with `arr[j] < arr[i]`; base `dp[i] = 1` |
 
-#### Complexity
+<h4 id="complexity-3" style="font-size:20px;font-weight:700;margin:22px 0 8px;">🧩 Complexity</h4>
 Usually **O(states × transitions per state)**. E.g., 1D problem with constant
 transition → O(n).
 
-#### Recursion vs. Memoization vs. Tabulation
+<h4 id="recursion-vs-memoization-vs-tabulation" style="font-size:20px;font-weight:700;margin:22px 0 8px;">🧩 Recursion vs. Memoization vs. Tabulation</h4>
 | Approach          | Time     | Space     | Style    |
 |-------------------|----------|-----------|----------|
 | Naive recursion   | O(2ⁿ)    | O(n) stack| Top-down |
@@ -1207,9 +1194,9 @@ transition → O(n).
 | Tabulation        | O(n)     | O(n)      | Bottom-up|
 | Tabulation rolling| O(n)     | **O(1)**  | Bottom-up|
 
-📁 **See:** [src/algorithm.implementation/dynamic/DynamicBasics.java](../src/main/java/algorithm/implementation/dynamic/DynamicBasics.java)
+📁 **See:** [src/main/java/algorithm/implementation/dynamic/DynamicBasics.java](../src/main/java/algorithm/implementation/dynamic/DynamicBasics.java)
 
-### 🆚 Quick Comparison Table
+<h3 id="quick-comparison-table" style="font-size:26px;font-weight:700;margin:26px 0 10px;">🆚 Quick Comparison Table</h3>
 
 | Paradigm     | Strategy                                | Typical Complexity      | Use when…                                   |
 |--------------|-----------------------------------------|-------------------------|---------------------------------------------|
@@ -1219,7 +1206,7 @@ transition → O(n).
 | Graph algos  | Traverse vertices/edges (BFS/DFS/etc.)  | O(V + E) typical        | Data has nodes & relationships              |
 | Dynamic Prog.| Memoize / tabulate overlapping subprobs | O(states × transitions) | Optimal substruct. + overlapping subprobs   |
 
-#### How to run any example
+<h4 id="how-to-run-any-example" style="font-size:20px;font-weight:700;margin:22px 0 8px;">🆚 How to run any example</h4>
 
 From the project root (with the project compiled into `bin/`):
 ```bash
@@ -1233,20 +1220,20 @@ java -cp bin algorithm.implementation.dynamic.DynamicBasics
 Or simply run each class in your IDE — they all have a `main` method that
 prints the demo output.
 
-### Appendix — Big O & Algorithm Categories (Quick Reference)
+<h3 id="appendix--big-o--algorithm-categories-quick-reference" style="font-size:26px;font-weight:700;margin:26px 0 10px;">📎 Appendix — Big O &amp; Algorithm Categories (Quick Reference)</h3>
 
-#### Big O Notation
-Notation to measure algorithm.implementation efficiency in terms of time and space complexity
+<h4 id="big-o-notation" style="font-size:20px;font-weight:700;margin:22px 0 8px;">📎 Big O Notation</h4>
+Notation to measure algorithm efficiency in terms of time and space complexity
 
 - **O(1) Constant**: Time regardless of input size. Example: Array access by index, hash table lookup
 - **O(log n) Logarithmic**: Grows slower than input size, divides problem in half each step. Example: Binary search, balanced tree operations
 - **O(n) Linear**: Grows proportionally with input size. Example: Single loop, linear search
-- **O(n log n) Linearithmic**: Efficient sorting algorithm.implementation. Example: Merge sort, quick sort (average), heap sort
+- **O(n log n) Linearithmic**: Efficient sorting algorithms. Example: Merge sort, quick sort (average), heap sort
 - **O(n²) Quadratic**: Nested loops over input. Example: Bubble sort, selection sort, naive string matching
 - **O(2ⁿ) Exponential**: Doubles with each input increase. Example: Recursive fibonacci, power set generation
 - **O(n!) Factorial**: Grows extremely fast. Example: Generating all permutations, traveling salesman (brute force)
 
-##### Companion notations (the full picture)
+<h5 id="companion-notations-the-full-picture" style="font-size:16px;font-weight:600;margin:18px 0 7px;">Companion notations (the full picture)</h5>
 Big-O alone is only an *upper* bound. The full family:
 
 | Notation | Meaning | When it is used |
@@ -1255,72 +1242,72 @@ Big-O alone is only an *upper* bound. The full family:
 | **Ω(f(n))** (Big-Omega) | Lower bound — runs *at least* this fast | Proving optimality (e.g. comparison sorting is Ω(n log n)) |
 | **Θ(f(n))** (Big-Theta) | Tight bound — upper *and* lower bound coincide | The most precise claim (e.g. merge sort is Θ(n log n) in every case) |
 
-##### Amortized and space complexity
+<h5 id="amortized-and-space-complexity" style="font-size:16px;font-weight:600;margin:18px 0 7px;">Amortized and space complexity</h5>
 - **Amortized complexity** — the average cost per operation across a long sequence, even if individual operations occasionally spike. `ArrayList.add` is O(n) on the resize step but **O(1) amortised**, because the doubling cost is spread over the preceding cheap adds; `HashMap.put` is O(1) amortised including occasional rehashing.
 - **Space complexity** — auxiliary memory beyond the input: in-place sorts (heap sort, quicksort) use O(1); merge sort uses O(n) for the merge buffer; recursive Depth First Search uses O(V) stack depth; a Dynamic Programming table uses O(states), often reducible with rolling arrays (Fibonacci in O(1)).
 
-#### Algorithm Categories
+<h4 id="algorithm-categories" style="font-size:20px;font-weight:700;margin:22px 0 8px;">📎 Algorithm Categories</h4>
 
-##### String Manipulation
+<h5 id="string-manipulation" style="font-size:16px;font-weight:600;margin:18px 0 7px;">String Manipulation</h5>
 - **What**: Algorithms that process, transform, or analyze strings
 - **Techniques**: Character frequency counting, sliding window, two pointers
 - **Examples**: Palindromes, anagrams, reverse string, longest palindrome, valid anagram, string compression
 
-##### Multiple Pointers
+<h5 id="multiple-pointers" style="font-size:16px;font-weight:600;margin:18px 0 7px;">Multiple Pointers</h5>
 - **What**: Use two or more pointers to iterate through data structure
 - **Use cases**: Sorted arrays, linked lists, finding pairs/triplets
 - **Complexity**: Often reduces O(n²) to O(n)
 - **Examples**: Two pointers (start/end), fast/slow pointers, two sum (sorted), remove duplicates, container with most water, cycle detection
 
-##### HashTables
+<h5 id="hashtables" style="font-size:16px;font-weight:600;margin:18px 0 7px;">HashTables</h5>
 - **What**: Use hash map/set for O(1) lookup to optimize solutions
 - **Trade-off**: Space O(n) for time O(1) lookup
 - **Examples**: Frequency counting, caching results, two sum, group anagrams, contains duplicate, longest substring without repeating chars
 
-##### Sliding Window
+<h5 id="sliding-window" style="font-size:16px;font-weight:600;margin:18px 0 7px;">Sliding Window</h5>
 - **What**: Maintain a window that slides through array/string
 - **Complexity**: O(n) instead of O(n²)
 - **Examples**: Fixed-size window, variable-size window, maximum sum subarray, longest substring without repeating, minimum window substring
 
-##### Greedy
+<h5 id="greedy-1" style="font-size:16px;font-weight:600;margin:18px 0 7px;">Greedy</h5>
 - **What**: Make locally optimal choice at each step
 - **When to use**: When local optimum leads to global optimum
 - **Note**: Doesn't always work, need to prove correctness
 - **Examples**: Activity selection, coin change, interval scheduling, jump game, gas station, meeting rooms
 
-##### Backtracking
+<h5 id="backtracking-1" style="font-size:16px;font-weight:600;margin:18px 0 7px;">Backtracking</h5>
 - **What**: Explore all possibilities by building solution incrementally
 - **Complexity**: Often exponential O(2ⁿ) or O(n!)
 - **Examples**: Permutations, combinations, subsets, constraint satisfaction, N-Queens, sudoku solver, generate parentheses, word search
 
-##### Divide and Conquer
+<h5 id="divide-and-conquer" style="font-size:16px;font-weight:600;margin:18px 0 7px;">Divide and Conquer</h5>
 - **What**: Break problem into smaller subproblems, solve recursively, combine results
 - **Complexity**: Often O(n log n)
 - **Examples**: Split in half/solve/merge, merge sort, quick sort, binary search, closest pair of points
 
-##### Bit Manipulation
+<h5 id="bit-manipulation" style="font-size:16px;font-weight:600;margin:18px 0 7px;">Bit Manipulation</h5>
 - **What**: Use bitwise operations for optimization
 - **Operations**: AND (&), OR (|), XOR (^), NOT (~), shifts (<<, >>)
 - **Tricks**: XOR for finding unique, AND for checking bits
 - **Examples**: Set operations, single number, counting bits, power of two, reverse bits
 
-##### Prefix Sums
+<h5 id="prefix-sums" style="font-size:16px;font-weight:600;margin:18px 0 7px;">Prefix Sums</h5>
 - **What**: Precompute a running-sum array so the sum of any subarray `[i, j]` is answered in O(1) as `prefix[j+1] - prefix[i]`
 - **Complexity**: O(n) preprocessing, O(1) per range query
 - **Build**: `prefix[0] = 0; prefix[i] = prefix[i-1] + arr[i-1]`
 - **Examples**: range-sum queries, subarray sum equals target (with a HashMap of seen prefixes), 2D matrix prefix sums for rectangle queries
 
-##### Graphs
+<h5 id="graphs" style="font-size:16px;font-weight:600;margin:18px 0 7px;">Graphs</h5>
 - **What**: Algorithms for traversing and analyzing graphs
 - **Data structures**: Adjacency list, adjacency matrix, union-find
 - **Examples**: DFS, BFS, topological sort, shortest path, number of islands, course schedule, clone graph, word ladder, cycle detection
 
-##### Dynamic Programming
+<h5 id="dynamic-programming-1" style="font-size:16px;font-weight:600;margin:18px 0 7px;">Dynamic Programming</h5>
 - **What**: Break problem into overlapping subproblems, store results
 - **Complexity**: Trade space for time
 - **Examples**: Top-down (memoization), bottom-up (tabulation), fibonacci, coin change, longest common subsequence, knapsack
 
-#### Sorting
+<h4 id="sorting" style="font-size:20px;font-weight:700;margin:22px 0 8px;">📎 Sorting</h4>
 
 > 💻 Code: [BubbleSort](../src/main/java/algorithm/implementation/sorting/BubbleSort.java) · [MergeSort](../src/main/java/algorithm/implementation/sorting/MergeSort.java) · [QuickSort](../src/main/java/algorithm/implementation/sorting/QuickSort.java) · [Arrays.sort & comparators](../src/main/java/algorithm/implementation/sorting/ArraysSort.java)
 
@@ -1342,9 +1329,7 @@ Big-O alone is only an *upper* bound. The full family:
 - **InsertionSort** is the fastest choice for very small or nearly-sorted arrays — TimSort itself falls back to it for short runs
 - **HeapSort** guarantees O(n log n) worst case with O(1) extra space, but its poor cache locality usually leaves it slower than quicksort/merge sort in practice
 
-#### Arrays/Matrix: MxN bidimensional arrays, iteration to find patterns, values
-
-#### Search: Iterate to find a pattern, element
+<h4 id="search-iterate-to-find-a-pattern-element" style="font-size:20px;font-weight:700;margin:22px 0 8px;">📎 Search: Iterate to find a pattern, element</h4>
 
 > 💻 Code: [BinarySearch](../src/main/java/algorithm/implementation/search/BinarySearch.java) · [BreadthFirstSearch](../src/main/java/algorithm/implementation/search/bfs/BreadthFirstSearch.java) · [DepthFirstSearch](../src/main/java/algorithm/implementation/search/dfs/DepthFirstSearch.java) · [Tree traversals](../src/main/java/algorithm/implementation/trees/BreadthFirstSearch.java)
 - **Linear search**: scan every element; O(n) time, O(1) space; the only option on unsorted data
@@ -1353,90 +1338,9 @@ Big-O alone is only an *upper* bound. The full family:
 - **Breadth First Search**: explores all neighbours at the current depth before going deeper; uses a Queue; O(V + E) time, O(V) space; finds the shortest path in unweighted graphs and trees
 - Applies across: Graphs, Trees, matrices (each cell is a node), Recursion, Dynamic Programming
 
-#### Recursion: Functions that call itself, contain an exit condition
-- fibonacci
-
-### 🎯 Top Interview Questions
-
-#### Graphs
-
-0. [Clone Graph](https://lnkd.in/dV2P2TEs)
-1. [Course Schedule](https://lnkd.in/de8Q3NBS)
-2. [01 Matrix](https://lnkd.in/dV2P2TEs)
-3. [Number of Islands](https://lnkd.in/drT2MpTz)
-4. [Rotting Oranges](https://lnkd.in/dUQVwJ-d)
-
-#### Arrays
-
-5. [Insert Interval](https://lnkd.in/dfcEDFwB)
-6. [3Sum](https://lnkd.in/duGvuCjf)
-7. [Product of Array Except Self](https://lnkd.in/dkGkjQVk)
-8. [Combination Sum](https://lnkd.in/d3iStbGc)
-9. [Merge Intervals](https://lnkd.in/dmFZxrVQ)
-
-#### Stacks
-
-10. [Evaluate Reverse Polish Notation](https://lnkd.in/d-y7Zw4C)
-11. [Min Stack](https://lnkd.in/dqbh7PeV)
-12. [Trapping Rain Water](https://lnkd.in/dS_svBAm)
-
-#### Binary Trees
-
-13. [Binary Tree Level Order Traversal](https://lnkd.in/dM-VYbVB)
-14. [Lowest Common Ancestor of a Binary Tree](https://lnkd.in/dUvJykgA)
-15. [Serialize and Deserialize Binary Tree](https://lnkd.in/dW2cP5Wn)
-
-#### Dynamic Programming
-
-16. [Maximum Subarray](https://lnkd.in/dvjYye6E)
-17. [Coin Change](https://lnkd.in/d7zZRg7H)
-
-#### Binary Search
-
-18. [Search in Rotated Sorted Array](https://lnkd.in/dEuh3gie)
-19. [Time-Based Key-Value Store](https://lnkd.in/dbERGKUB)
-
-#### Strings
-
-20. [Longest Substring Without Repeating Characters](https://lnkd.in/d_vZrZda)
-21. [Minimum Window Substring](https://lnkd.in/de8aeeQD)
-
-#### Heap
-
-22. [K Closest Points to Origin](https://lnkd.in/dUtCqYf4)
-23. [Find Median from Data Stream](https://lnkd.in/ddDgWqUv)
-
-#### Recursion
-
-24. [Permutations](https://lnkd.in/dTUqmAfy)
-
-### 🧭 Code Challenge Strategy
-
-#### Realistic Scope for a Senior Java Role
-Most Java developer challenges are NOT LeetCode-hard. Expect: string manipulation, HashMap frequency problems, collections manipulation with Streams, basic recursion; possibly two pointers, sliding window, or simple graph traversals.
-
-#### Practice Priorities (in this order)
-1. **Streams one-liners**: grouping, counting, averaging, flattening, top-N — fluency here impresses in Java-specific challenges
-2. **HashMap frequency patterns**: half of the easy/medium string problems reduce to this
-3. **Comparator chains**: `Comparator.comparing(X::getA).thenComparing(X::getB).reversed()`
-4. Implement `equals()` and `hashCode()` by hand, at least once
-5. A small create/read/update/delete REST service from an empty project in under 30 minutes (controller → service → repository, exception handler, validation) — practice it timed
-
-#### Method During a Live Challenge
-1. **Clarify the requirements before coding**: edge cases, input constraints, expected scale
-2. **Think out loud** — the evaluation is about reasoning, not only the final answer
-3. Start with the naive solution, state its complexity, then optimize
-4. Walk through test cases verbally (or write an actual test)
-5. Handle edge cases explicitly: null, empty, single element, duplicates
-
-#### System Design Lite (for senior roles)
-Be ready for: "design a URL shortener / a notification service / an order processing system".
-- The method, always in the same order: clarify requirements → design the API → data model → high-level components → scale considerations (caching, queues, partitioning)
-- Mention spontaneously: idempotency, asynchronous processing for slow work, cache-aside with Redis, statelessness as the precondition for horizontal scaling
-
 ---
 
-## 💻 Programming Languages
+<h2 id="-programming-languages" style="font-size:33px;font-weight:800;margin:30px 0 12px;">💻 Programming Languages</h2>
 
 A backend engineer is rarely single-language anymore. This section covers the three that matter most on the Java Virtual Machine and beyond, ordered from the one you know deepest to the one most different:
 
@@ -1446,52 +1350,52 @@ A backend engineer is rarely single-language anymore. This section covers the th
 
 The goal is not to relearn programming three times, but to map concept you already own onto each language's idioms and trade-offs.
 
-### ☕ Java
+<h3 id="java" style="font-size:26px;font-weight:700;margin:26px 0 10px;">☕ Java</h3>
 
 > 🏷️ **Version markers** like **(Java 8)** indicate the release that introduced the feature — it remains available in every later version. They are placed next to the feature wherever it appears, not grouped into a "by version" section.
 
-#### Core
+<h4 id="core" style="font-size:20px;font-weight:700;margin:22px 0 8px;">🧠 Core</h4>
 
-##### Memory Management
+<h5 id="memory-management" style="font-size:16px;font-weight:600;margin:18px 0 7px;">Memory Management</h5>
 - **Heap**: Stores objects; shared by all threads
 - **Stack**: Stores method frames, local variables and references; one stack per thread
 
-##### Garbage Collection
+<h5 id="garbage-collection" style="font-size:16px;font-weight:600;margin:18px 0 7px;">Garbage Collection</h5>
 - **Generational hypothesis**: Most objects die young, so the heap is split into generations
   - **Young generation**: New objects; collected often and cheaply (minor collections)
   - **Old generation**: Long-lived survivors; collected rarely and expensively (major collections)
 - **Garbage First Garbage Collector (G1GC)** **(Java 7; default since Java 9)**: The default collector; divides the heap into regions and targets a pause-time goal
 - **Z Garbage Collector (ZGC)** **(Java 11 experimental; production-ready Java 15)**: For very low latency requirements; sub-millisecond pauses even on large heaps
 
-##### Common Memory Leaks in Java
+<h5 id="common-memory-leaks-in-java" style="font-size:16px;font-weight:600;margin:18px 0 7px;">Common Memory Leaks in Java</h5>
 - Static collections that only grow and are never cleaned
 - Unclosed resources (streams, connections) — prevented with try-with-resources **(Java 7)**
 - `ThreadLocal` values in thread pools (pool threads never die, so their values are never released)
 - Listeners or callbacks registered but never unregistered
 
-##### Diagnosing OutOfMemoryError
+<h5 id="diagnosing-outofmemoryerror" style="font-size:16px;font-weight:600;margin:18px 0 7px;">Diagnosing OutOfMemoryError</h5>
 - Take a heap dump and inspect it: `jmap`, VisualVM, Eclipse Memory Analyzer
 - Monitor garbage collection statistics live with `jstat`
 
-##### String Immutability
+<h5 id="string-immutability" style="font-size:16px;font-weight:600;margin:18px 0 7px;">String Immutability</h5>
 
-> 💻 Code: [StringPools](../src/main/java/algorithm/implementation/strings/StringPools.java) · [ImmutableTest](../src/main/java/algorithm/concepts/oop/Immutability/ImmutableTest.java)
+> 💻 Code: [StringPools](../src/main/java/algorithm/implementation/strings/StringPools.java) · [ImmutableTest](../src/main/java/algorithm/concepts/oop/immutability/ImmutableTest.java)
 String is immutable by design, for three reasons:
 - **Security**: Values such as file paths or connection parameters cannot be altered after validation
 - **Caching**: The **string pool** can safely share one instance between many references, and the hash code is computed once then reused
 - **Thread safety**: An immutable object can be shared between threads without any synchronization
 
-#### OOP
+<h4 id="oop" style="font-size:20px;font-weight:700;margin:22px 0 8px;">🧬 OOP</h4>
 
 > 💻 Code: [Polymorphism](../src/main/java/algorithm/concepts/oop/Polymorphism.java) · [PlayWithAnimal](../src/main/java/algorithm/concepts/oop/polimorfism/PlayWithAnimal.java) · [AbstractClassTest](../src/main/java/algorithm/concepts/oop/abstractclasses/AbstractClassTest.java) · [Interfaces](../src/main/java/algorithm/concepts/oop/interfaces/MyImpl.java) · [Default methods](../src/main/java/algorithm/concepts/oop/defaults/DefaultImpl.java)
 
-##### Four Pillars
+<h5 id="four-pillars" style="font-size:16px;font-weight:600;margin:18px 0 7px;">Four Pillars</h5>
 - **Inheritance**: A class reuses and extends another class (`extends`); the subclass inherits fields and methods and can specialize behavior. Prefer it for true "is-a" relationships only — otherwise favor composition
 - **Encapsulation**: Fields are private, access goes through methods; the class controls its own invariants and can change its internals without breaking callers
 - **Polymorphism**: The same call (`animal.speak()`) executes different behavior depending on the actual object behind the reference — the mechanism that lets code depend on abstractions
-- **Abstraction**: Expose *what* a type does (interface, abstract class), hide *how* it does it — callers program against the contract, not the algorithm.implementation
+- **Abstraction**: Expose *what* a type does (interface, abstract class), hide *how* it does it — callers program against the contract, not the implementation
 
-##### Interface vs Abstract Class
+<h5 id="interface-vs-abstract-class" style="font-size:16px;font-weight:600;margin:18px 0 7px;">Interface vs Abstract Class</h5>
 | | Abstract class | Interface |
 |---|---|---|
 | **Instantiation** | Cannot be instantiated directly (must be extended) | Cannot be instantiated directly (must be implemented) |
@@ -1503,18 +1407,18 @@ String is immutable by design, for three reasons:
 
 Rule of thumb: **program to interfaces, not implementations**. When torn between the two, choose the interface — it leaves the single-inheritance slot free and allows many implementations without coupling.
 
-##### Key Concept: reference type vs object type
+<h5 id="key-concept-reference-type-vs-object-type" style="font-size:16px;font-weight:600;margin:18px 0 7px;">Key Concept: reference type vs object type</h5>
 ```java
 Animal a = new Lion();   // reference type: Animal — object type: Lion
 ```
 - The **compiler** checks calls against the REFERENCE type (left side): only methods declared in `Animal` are visible
 - The **runtime** executes the OBJECT's version (right side): if `Lion` overrides `speak()`, the lion's version runs (dynamic dispatch)
 
-##### Override vs Overload
+<h5 id="override-vs-overload" style="font-size:16px;font-weight:600;margin:18px 0 7px;">Override vs Overload</h5>
 - **Override**: same signature redefined in a subclass → resolved at RUNTIME from the object's actual type (dynamic dispatch)
 - **Overload**: same method name, different parameter lists in the same class → resolved at COMPILE time from the declared types of the arguments
 
-##### Access Modifiers
+<h5 id="access-modifiers" style="font-size:16px;font-weight:600;margin:18px 0 7px;">Access Modifiers</h5>
 | Modifier | Same class | Same package | Subclass (other package) | Anywhere else |
 |---|---|---|---|---|
 | `public` | Yes | Yes | Yes | Yes |
@@ -1524,7 +1428,7 @@ Animal a = new Lion();   // reference type: Animal — object type: Lion
 
 A subclass in another package reaches a `protected` member only *through inheritance*, never through a superclass-typed reference. Local variables take no access modifier — the only modifier they allow is `final`.
 
-##### final, static, and Initialization Order
+<h5 id="final-static-and-initialization-order" style="font-size:16px;font-weight:600;margin:18px 0 7px;">final, static, and Initialization Order</h5>
 - **`final` variable**: assignable exactly once; a `final` instance field must be set by the end of the constructor; a `final` local is a "blank final" until first assigned
 - **`final` method**: cannot be overridden; **`final` class**: cannot be extended (`String` is `final`)
 - **`static` member**: belongs to the class, shared across instances, reachable without an object; a `static final` constant is named `ALL_CAPS`
@@ -1537,7 +1441,7 @@ class Child extends Parent { static { } { } Child() { } }
 // new Child(): Parent static, Child static (once) → Parent instance, Parent ctor → Child instance, Child ctor
 ```
 
-##### equals()/hashCode()
+<h5 id="equalshashcode" style="font-size:16px;font-weight:600;margin:18px 0 7px;">equals()/hashCode()</h5>
 
 > 💻 Code: [HashTest](../src/main/java/algorithm/concepts/oop/hashcode/HashTest.java)
 - **equals()**: Compares if two objects are meaningfully equal
@@ -1560,7 +1464,7 @@ public int hashCode() {
 }
 ```
 
-##### The equals()/hashCode() contract in full
+<h5 id="the-equalshashcode-contract-in-full" style="font-size:16px;font-weight:600;margin:18px 0 7px;">The equals()/hashCode() contract in full</h5>
 **`equals()` must be:**
 - **Reflexive** — `x.equals(x)` is `true`
 - **Symmetric** — `x.equals(y)` implies `y.equals(x)`
@@ -1573,7 +1477,7 @@ public int hashCode() {
 - **Equal-implies-equal** — if `x.equals(y)`, then `x.hashCode() == y.hashCode()`; the converse need not hold (unequal objects may share a hash code — a *collision*)
 - It is legal but pathological for every object to return the same constant — the hash collection still works correctly, just degrading to O(n)
 
-##### Immutability — the five rules for a truly immutable class
+<h5 id="immutability--the-five-rules-for-a-truly-immutable-class" style="font-size:16px;font-weight:600;margin:18px 0 7px;">Immutability — the five rules for a truly immutable class</h5>
 1. All fields `private` and `final`
 2. No setters
 3. The class itself `final` (so no subclass reintroduces mutability)
@@ -1582,38 +1486,32 @@ public int hashCode() {
 
 The wrapper classes, `String`, and all `java.time` types follow this pattern. Because `java.time` objects are immutable, every manipulation method returns a *new* object — you must assign the result or the change is silently lost.
 
-#### Exceptions
+<h5 id="nested-inner-anonymous-and-local-classes" style="font-size:16px;font-weight:600;margin:18px 0 7px;">Nested, Inner, Anonymous, and Local Classes</h5>
 
-> 📘 Full guide: [⚠️ Exceptions](#-exceptions)
+| Kind | `static`? | Sees outer instance | When to use |
+|---|---|---|---|
+| **Static nested** | Yes | No (needs an explicit reference) | Logical grouping without the outer instance (e.g. a `Builder`) |
+| **Member inner** | No | Yes (implicit `Outer.this`) | Helper bound to one outer instance (rare in modern code) |
+| **Local** | No | Yes (inside an instance method) | An implementation needed in exactly one method |
+| **Anonymous** | No | Yes | A one-off interface/abstract-class implementation — mostly replaced by lambdas **(Java 8)** |
 
-##### Checked
-- Extend from Exception. Compile time
-- You can recover
-- IOException, SQLException, ClassNotFoundException
+- A member inner class cannot declare `static` members (only `static final` constants); a local class takes no access modifier
+- Local and anonymous classes capture only **effectively final** local variables (relaxed from "must be `final`" in **(Java 8)**)
+- The compiler emits `Outer.class` and `Outer$Inner.class`
 
-##### Unchecked
-- Extend from RuntimeException. Run time
-- You can't recover
-- NullPointerException, ClassCastException, IndexOutOfBoundException, ArithmeticException
-
-##### Best Practices
-- Modern lean: **prefer unchecked exceptions for business logic** — checked exceptions pollute method signatures and compose badly with lambdas and streams
-- **try-with-resources** **(Java 7)**: Any `AutoCloseable` **(Java 7)** declared in the try parentheses is closed automatically, in reverse declaration order, even when an exception is thrown
-- **Custom hierarchy for an API**: One base exception, then specific subclasses (NotFound, Validation, Conflict); map each one to an HTTP status code in a global exception handler
-
-#### Errors
+<h4 id="errors" style="font-size:20px;font-weight:700;margin:22px 0 8px;">💥 Errors</h4>
 - Errors represent serious problems that are typically beyond the control of the application, such as system failures or resource exhaustion
 - Errors are subclasses of the java.lang.Error class, and they are not meant to be caught or handled by regular application code
 - Examples of errors include OutOfMemoryError and StackOverflowError
 
-#### Collections
+<h4 id="collections" style="font-size:20px;font-weight:700;margin:22px 0 8px;">📚 Collections</h4>
 
 > 📘 Full guide: [📑 Data Structures](#-data-structures)
-> 💻 Code: [OrderList](../src/main/java/algorithm/concepts/datastructures/collections/Lists/OrderList.java) · [SetExample](../src/main/java/algorithm/concepts/datastructures/collections/Sets/SetExample.java) · [MapExample](../src/main/java/algorithm/concepts/datastructures/collections/Maps/MapExample.java) · [Conversions](../src/main/java/algorithm/concepts/convert/ArraysAndLists.java) · [Comparators](../src/main/java/algorithm/implementation/sorting/SortPlayersByScoreDecreasing.java)
+> 💻 Code: [OrderList](../src/main/java/algorithm/concepts/datastructures/collections/lists/OrderList.java) · [SetExample](../src/main/java/algorithm/concepts/datastructures/collections/sets/SetExample.java) · [MapExample](../src/main/java/algorithm/concepts/datastructures/collections/maps/MapExample.java) · [Conversions](../src/main/java/algorithm/concepts/convert/ArraysAndLists.java) · [Comparators](../src/main/java/algorithm/implementation/sorting/SortPlayersByScoreDecreasing.java)
 
 The `java.util` Collections Framework — `List`, `Set`, `Queue`, `Map` and their implementations, plus `Comparable`/`Comparator`, conversions, autoboxing and varargs — is covered in full under [📑 Data Structures](#-data-structures). See the [Java Collections Framework](#java-collections-framework) overview for the interface hierarchy and the [Hash Table](#hash-table) entry for `HashMap` internals and the thread-safety options.
 
-#### Functional Interfaces **(Java 8)**
+<h4 id="functional-interfaces-java-8" style="font-size:20px;font-weight:700;margin:22px 0 8px;">🔌 Functional Interfaces <strong>(Java 8)</strong></h4>
 
 > 💻 Code: [FunctionAndBiFunction](../src/main/java/algorithm/concepts/functionalinterfaces/FunctionAndBiFunction.java) · [PredicateAndBiPredicate](../src/main/java/algorithm/concepts/functionalinterfaces/PredicateAndBiPredicate.java) · [ConsumerAndBiConsumer](../src/main/java/algorithm/concepts/functionalinterfaces/ConsumerAndBiConsumer.java) · [SupplierExample](../src/main/java/algorithm/concepts/functionalinterfaces/SupplierExample.java) · [UnaryAndBinaryOperator](../src/main/java/algorithm/concepts/functionalinterfaces/UnaryOperatorAndBinaryOperator.java) · [Lambdas](../src/main/java/algorithm/concepts/lambda/FindMatchingAnimals.java)
 
@@ -1627,13 +1525,13 @@ Supplier<StringBuilder> sb2 = () -> new StringBuilder(); sb2.get();
 UnaryOperator<String> u2 = x -> x.toUpperCase(); u2.apply("chirp");
 ```
 
-#### Streams **(Java 8)**
+<h4 id="streams-java-8" style="font-size:20px;font-weight:700;margin:22px 0 8px;">🌊 Streams <strong>(Java 8)</strong></h4>
 
 > 💻 Code: [MapAndFlatMap](../src/main/java/algorithm/concepts/streams/MapAndFlatMap.java) · [Filter](../src/main/java/algorithm/concepts/streams/Filter.java) · [Grouping](../src/main/java/algorithm/concepts/streams/collect/Grouping.java) · [Partitioning](../src/main/java/algorithm/concepts/streams/collect/Partitioning.java) · [Reductor](../src/main/java/algorithm/concepts/streams/collect/Reductor.java) · [PrimitiveStreams](../src/main/java/algorithm/concepts/streams/PrimitiveStreams.java) · [Short-circuit matches](../src/main/java/algorithm/concepts/streams/AllMatchAnyMatchNoneMatch.java)
 
 It's like a wrapper for treatment and processing of big collections like a pipeline function
 
-##### Operation Types
+<h5 id="operation-types" style="font-size:16px;font-weight:600;margin:18px 0 7px;">Operation Types</h5>
 - **Intermediate operations**: Don't terminate the stream
 - **Terminal operations**: Terminate the stream. Collectors, reductors, forEach
   - **Need all**: Require all elements to operate
@@ -1645,7 +1543,7 @@ It's like a wrapper for treatment and processing of big collections like a pipel
 
 Streams should not affect external things, instead of altering a collection with foreach use collect, reduce
 
-##### Stream Constructors
+<h5 id="stream-constructors" style="font-size:16px;font-weight:600;margin:18px 0 7px;">Stream Constructors</h5>
 ```java
 collection.stream()
 Stream.empty()
@@ -1653,24 +1551,24 @@ Stream.of("one","two")
 Arrays.stream(array)
 ```
 
-##### Pattern Map/Filter/Reduce
+<h5 id="pattern-mapfilterreduce" style="font-size:16px;font-weight:600;margin:18px 0 7px;">Pattern Map/Filter/Reduce</h5>
 Transforms(apply functions, change type, maintain order) data → Filter(apply predicates, maintain types, remove objects) → Collect(apply bifunction, Aggregate) result
 
-##### Mapping Stream Types
+<h5 id="mapping-stream-types" style="font-size:16px;font-weight:600;margin:18px 0 7px;">Mapping Stream Types</h5>
 - **mapToObj**: primitives to objects
 - **mapToInt,Long,Double**: object to primitives
 
-##### Collectors
+<h5 id="collectors" style="font-size:16px;font-weight:600;margin:18px 0 7px;">Collectors</h5>
 ```java
 Map<K,V> map = Collectors.groupingBy(Function, collection); //returns multiple values
 Map<K,V> map = Collectors.partitioningBy(Predicate, collection); //returns only two values
 ```
-##### File to Stream
+<h5 id="file-to-stream" style="font-size:16px;font-weight:600;margin:18px 0 7px;">File to Stream</h5>
 ```java
 Stream<String> lines = Files.lines(path,encoding);
 ```
 
-##### Practical Notes
+<h5 id="practical-notes" style="font-size:16px;font-weight:600;margin:18px 0 7px;">Practical Notes</h5>
 - **Lazy evaluation**: Intermediate operations do nothing until a terminal operation runs
 - Classic interview exercise — "group employees by department and average their salary" in one expression:
 ```java
@@ -1681,7 +1579,7 @@ Map<String, Double> averages = employees.stream()
 - **When NOT to use streams**: trivial loops, performance-critical hot paths, code that throws checked exceptions (lambdas cannot propagate them)
 - **`Stream.toList()`** **(Java 16)**: shorthand for `.collect(Collectors.toList())`, returning an unmodifiable list
 
-#### Optional **(Java 8)**
+<h4 id="optional-java-8" style="font-size:20px;font-weight:700;margin:22px 0 8px;">❓ Optional <strong>(Java 8)</strong></h4>
 
 > 💻 Code: [OptionalExample](../src/main/java/algorithm/concepts/optional/OptionalExample.java) · [OptionalNull](../src/main/java/algorithm/concepts/optional/OptionalNull.java)
 
@@ -1694,11 +1592,11 @@ Wrapper that could contain a value or not
 - **orElseGet(Supplier s)**: if present returns value, else returns the supplier result
 - **orElseThrow(Supplier s)**: if present returns value, else throws exception created by calling supplier
 
-##### Best Practices
+<h5 id="best-practices" style="font-size:16px;font-weight:600;margin:18px 0 7px;">Best Practices</h5>
 - **orElse vs orElseGet**: `orElse(x)` always evaluates its argument (eager), `orElseGet(supplier)` calls the supplier only when the Optional is empty (lazy) — it matters when building the fallback is expensive
 - Use Optional as a **return type** only — never as a field or a method parameter
 
-#### Modern Java (9–21) — shows you keep current
+<h4 id="modern-java-921--shows-you-keep-current" style="font-size:20px;font-weight:700;margin:22px 0 8px;">✨ Modern Java (9–21) — shows you keep current</h4>
 
 > 💻 Code: [VirtualThreadsExample](../src/main/java/algorithm/concepts/threads/executors/VirtualThreadsExample.java)
 
@@ -1717,7 +1615,7 @@ Wrapper that could contain a value or not
   - When a virtual thread blocks on input/output, it releases its carrier platform thread instead of wasting it
   - Best fit: input/output bound work such as one-thread-per-request in a microservice — increasingly asked in microservices interviews
 
-#### Generics **(Java 5)**
+<h4 id="generics-java-5" style="font-size:20px;font-weight:700;margin:22px 0 8px;">🔤 Generics <strong>(Java 5)</strong></h4>
 
 Generics parameterize a class, interface, or method by type, giving **compile-time type safety** with no casts. Before them, collections held `Object` and a wrong type failed only at runtime (`ClassCastException`).
 
@@ -1730,7 +1628,7 @@ String s = names.get(0);          // no cast — compiler enforces the element t
 - **Type erasure**: generics exist only at compile time — the compiler checks types, erases the parameters, and inserts casts. Consequences: `instanceof List<String>` is illegal (only `List` exists at runtime), primitives cannot be type arguments (use wrappers), and a static field cannot use a class-level type parameter
 - **Generic method**: declares its own parameter before the return type — `public static <T> Crate<T> ship(T item)`
 
-##### Bounded wildcards and Producer Extends Consumer Super (PECS)
+<h5 id="bounded-wildcards-and-producer-extends-consumer-super-pecs" style="font-size:16px;font-weight:600;margin:18px 0 7px;">Bounded wildcards and Producer Extends Consumer Super (PECS)</h5>
 | Form | Syntax | Meaning | Use |
 |---|---|---|---|
 | **Unbounded** | `List<?>` | Any type — read-only view (cannot add) | Operate on a list of unknown type |
@@ -1744,7 +1642,7 @@ void printAll(List<? extends Number> source) { for (Number n : source) {} } // p
 void addInts(List<? super Integer> dest)      { dest.add(1); dest.add(2); }   // consumer → super
 ```
 
-#### Enums **(Java 5)**
+<h4 id="enums-java-5" style="font-size:20px;font-weight:700;margin:22px 0 8px;">🔢 Enums <strong>(Java 5)</strong></h4>
 
 A type-safe fixed set of named constant instances. More robust than `int` constants — the compiler rejects any value outside the set.
 
@@ -1762,20 +1660,7 @@ public enum Operation {
 }
 ```
 
-#### Nested, Inner, Anonymous, and Local Classes
-
-| Kind | `static`? | Sees outer instance | When to use |
-|---|---|---|---|
-| **Static nested** | Yes | No (needs an explicit reference) | Logical grouping without the outer instance (e.g. a `Builder`) |
-| **Member inner** | No | Yes (implicit `Outer.this`) | Helper bound to one outer instance (rare in modern code) |
-| **Local** | No | Yes (inside an instance method) | An implementation needed in exactly one method |
-| **Anonymous** | No | Yes | A one-off interface/abstract-class implementation — mostly replaced by lambdas **(Java 8)** |
-
-- A member inner class cannot declare `static` members (only `static final` constants); a local class takes no access modifier
-- Local and anonymous classes capture only **effectively final** local variables (relaxed from "must be `final`" in **(Java 8)**)
-- The compiler emits `Outer.class` and `Outer$Inner.class`
-
-#### Annotations **(Java 5)**
+<h4 id="annotations-java-5" style="font-size:20px;font-weight:700;margin:22px 0 8px;">🏷️ Annotations <strong>(Java 5)</strong></h4>
 
 Metadata attached to a program element for the compiler, tools, or the runtime.
 
@@ -1783,7 +1668,14 @@ Metadata attached to a program element for the compiler, tools, or the runtime.
 - **Meta-annotations** (annotations on annotations): `@Retention` — `SOURCE` (compiler only), `CLASS` (in the `.class`, default), or `RUNTIME` (visible via reflection); `@Target` (which elements it may annotate); `@Documented`; `@Inherited`
 - **Why it matters**: Spring and Hibernate are annotation-driven (`@Component`, `@Autowired`, `@Entity`). `@Retention(RUNTIME)` is exactly what lets a framework read them by reflection at startup; `@Override` is `SOURCE`-retained because only the compiler consumes it
 
-#### Java Input/Output (IO) and New Input/Output 2 (NIO.2)
+<h4 id="reflection" style="font-size:20px;font-weight:700;margin:22px 0 8px;">🪞 Reflection</h4>
+Extract and invoke methods from a class whose code we don't have access
+```java
+Method[] methods = obj.getClass().getMethods();
+String result = (String) method.invoke(obj);   // call it without compile-time access
+```
+
+<h4 id="java-inputoutput-io-and-new-inputoutput-2-nio2" style="font-size:20px;font-weight:700;margin:22px 0 8px;">☕ Java Input/Output (IO) and New Input/Output 2 (NIO.2)</h4>
 
 **Legacy `java.io`** uses byte streams (`InputStream`/`OutputStream`) and character streams (`Reader`/`Writer`), often wrapped in a `BufferedReader`/`BufferedWriter` for efficiency. Every IO type is `Closeable`, so use **try-with-resources** **(Java 7)** — resources close in reverse declaration order, even on exception.
 
@@ -1800,7 +1692,7 @@ try (BufferedReader in  = Files.newBufferedReader(source);
 }   // out then in — closed in reverse order
 ```
 
-#### Date/Time Application Programming Interface **(Java 8)**
+<h4 id="datetime-application-programming-interface-java-8" style="font-size:20px;font-weight:700;margin:22px 0 8px;">☕ Date/Time Application Programming Interface <strong>(Java 8)</strong></h4>
 
 `java.time` replaced the mutable, non-thread-safe, zero-indexed-month legacy `Date`/`Calendar`/`SimpleDateFormat`. All `java.time` types are **immutable**; manipulation methods return new objects.
 
@@ -1818,87 +1710,16 @@ try (BufferedReader in  = Files.newBufferedReader(source);
 - Fluent `plus`/`minus` return a new object: `LocalDate.now().plusDays(10).minusMonths(1)` — assign it or lose it
 - `DateTimeFormatter` (thread-safe, reusable as a constant) formats and parses: `LocalDate.parse("15/06/2025", DateTimeFormatter.ofPattern("dd/MM/yyyy"))`
 
-#### Concurrency
+<h4 id="concurrency" style="font-size:20px;font-weight:700;margin:22px 0 8px;">🧵 Concurrency</h4>
 
-> 📘 Full guide: [🧵 Concurrency and Parallelism](#-concurrency-and-parallelism)
 > 💻 Code: [ThreadBasics](../src/main/java/algorithm/concepts/threads/basics/ThreadBasics.java) · [ExecutorServiceExample](../src/main/java/algorithm/concepts/threads/executors/ExecutorServiceExample.java) · [CompletableFutureExample](../src/main/java/algorithm/concepts/threads/advanced/CompletableFutureExample.java) · [AtomicExample](../src/main/java/algorithm/concepts/threads/atomic/AtomicExample.java) · [SynchronizedExample](../src/main/java/algorithm/concepts/threads/synchronization/SynchronizedExample.java) · [ProducerConsumerExample](../src/main/java/algorithm/concepts/threads/communication/ProducerConsumerExample.java)
-
-##### Creation
-- Implement Runnable (void)
-- Implement Callable (<T> return result) **(Java 5)**
-- Extend Thread
-- **ExecutorService** **(Java 5)** (the whole `java.util.concurrent` Concurrency API arrived in Java 5):
-  - void execute() returns void
-  - Future<?> submit() returns a Future<?> object containing the result
-  - Future<T> contains the result of a thread execution
-  - ScheduledFuture<T> contains the result of a scheduled thread execution
-  - newSingleThreadExecutor: Single thread
-  - newSingleThreadScheduledExecutor: Scheduled single thread
-  - newCachedThreadPool: Dynamic thread pool
-  - newFixedThreadPool(int n): Thread pool with size
-  - newScheduledFixedThreadPool(int n): Scheduled Thread pool with size
-- **CyclicBarrier**: Sets a limit of workers, once reached, other threads can start working, and so on
-- **ForkJoinPool** **(Java 7)**: Uses recursion to finish a task
-  - RecursiveAction: Like execute()
-  - RecursiveTask<T>: Like submit()
-- **Virtual threads** **(Java 21)**: `Executors.newVirtualThreadPerTaskExecutor()` — lightweight threads for input/output-bound work (detailed under [Modern Java](#modern-java-921--shows-you-keep-current) and the [Concurrency deep dive](#-concurrency-and-parallelism))
-
-*Why never raw `new Thread()`: no reuse (creation is expensive), no bound on the number of threads, no lifecycle management — always go through a pool (`ExecutorService`)*
-
-##### CompletableFuture
-Composable asynchronous computations — the asynchronous equivalent of a Stream pipeline
-- **thenApply(Function)**: Transforms the result (the equivalent of map)
-- **thenCompose(Function)**: Chains another CompletableFuture (the equivalent of flatMap)
-- **thenCombine(other, BiFunction)**: Merges the results of two independent futures
-- **exceptionally(Function)**: Recovery path when the computation fails
-- **allOf(futures...)**: Completes when all the given futures complete
-
-##### Synchronization Mechanisms
-| Mechanism | What it provides | What it lacks |
-|---|---|---|
-| **synchronized** | Simple mutual exclusion, automatic lock release | No timeout, no fairness, single wait condition |
-| **ReentrantLock** | Mutual exclusion with timeout (`tryLock`), fairness, multiple conditions | Automatic release — you must unlock in a finally block |
-| **ReadWriteLock** | Many concurrent readers, one exclusive writer | Automatic release — and it is harder to reason about |
-
-##### volatile
-- Guarantees **visibility**: a write by one thread is immediately seen by all the others
-- Does NOT guarantee **atomicity**: `count++` on a volatile field remains a race condition (read, increment and write are three separate operations)
-
-##### Atomics
-Atomic classes (`AtomicInteger`, `AtomicLong`, `AtomicReference`) support thread safe operations without locks, using **compare-and-swap (CAS)**: the value is updated only if it still equals the expected value, otherwise the operation retries
-
-##### Classic Concurrency Problems
-- **Producer/consumer**: Implement with a `BlockingQueue` — `put()` blocks when the queue is full, `take()` blocks when it is empty; no manual wait/notify needed
-- **Deadlock**: Four conditions must hold simultaneously: mutual exclusion, hold and wait, no preemption, circular wait. Prevention: always acquire locks in the same global order
-- **Race condition**: Two threads read-modify-write shared state without coordination; fix with atomics, locks or immutability
-- **ThreadLocal leak**: In a thread pool the threads survive the task, so ThreadLocal values must be removed explicitly (`remove()` in a finally block)
-
-##### Java Reflection
-Extract and invoke methods from a class whose code we don't have access
-```java
-Method[] metodos=c.getClass().getMethods()
-String cadena=(String) m.invoke(c, null)
-```
-
-##### Reactive Programming
-Declarative asynchronous style of programming that reacts to events
-- Nonblocking
-- Asynchronous
-- Functional/Declarative
-
-**Interfaces**:
-- Publisher
-- Subscriber
-- CompletableFuture
-
-#### 🧵 Concurrency and Parallelism
 
 A focused, practical reference for **multithreading** and **concurrency** in
 Java: how threads work, how to coordinate them safely, and which high-level
-utils to reach for. Every section links to a runnable Java file under
-`src/algorithm.concepts/threads/<topic>/...`.
+tools to reach for. Every section links to a runnable Java file under
+`src/main/java/algorithm/concepts/threads/<topic>/...`.
 
-##### 1. Concepts & Vocabulary
+<h5 id="1-concepts--vocabulary" style="font-size:16px;font-weight:600;margin:18px 0 7px;">1. Concepts &amp; Vocabulary</h5>
 
 | Term | Meaning |
 |---|---|
@@ -1918,7 +1739,7 @@ utils to reach for. Every section links to a runnable Java file under
 | **Starvation** | A condition in which a thread is repeatedly passed over for a resource or for processor time, so it never gets the chance to make progress. |
 | **Daemon Thread** | A background-support thread that the Java Virtual Machine does not wait for at shutdown — once only daemon threads remain, the program exits immediately. |
 
-##### 2. `extends Thread` vs `implements Runnable`
+<h5 id="2-extends-thread-vs-implements-runnable" style="font-size:16px;font-weight:600;margin:18px 0 7px;">2. <code>extends Thread</code> vs <code>implements Runnable</code></h5>
 
 Java offers two foundational ways to define what a thread does. The keyword
 you use comes from how Java models them: `Thread` is a **class** (so you
@@ -1955,7 +1776,7 @@ free to extend something else. For thread creation, `Callable<V>` is the
 related interface used when the task must return a value or throw a checked
 exception.
 
-##### 3. Lambdas as Thread Tasks **(Java 8)**
+<h5 id="3-lambdas-as-thread-tasks-java-8" style="font-size:16px;font-weight:600;margin:18px 0 7px;">3. Lambdas as Thread Tasks <strong>(Java 8)</strong></h5>
 
 In multithreading code, a lambda is the most concise way to describe **the
 work a thread should run**. Every concurrency entry point in Java accepts a
@@ -1972,7 +1793,7 @@ Each line above hands a thread (or worker pool) a small bundle of work to
 execute. The lambda stands in for the thread's task; the runtime decides
 which thread actually runs it.
 
-##### 4. Creating Threads — three ways
+<h5 id="4-creating-threads--three-ways" style="font-size:16px;font-weight:600;margin:18px 0 7px;">4. Creating Threads — three ways</h5>
 
 | Approach | Pros | Cons |
 |---|---|---|
@@ -1984,9 +1805,9 @@ which thread actually runs it.
 new Thread(() -> System.out.println("hi")).start();
 ```
 
-📁 [src/algorithm.concepts/threads/basics/ThreadBasics.java](../src/main/java/algorithm/concepts/threads/basics/ThreadBasics.java)
+📁 [src/main/java/algorithm/concepts/threads/basics/ThreadBasics.java](../src/main/java/algorithm/concepts/threads/basics/ThreadBasics.java)
 
-##### 5. Thread Lifecycle, Sleep, Join, Interrupt, Daemon
+<h5 id="5-thread-lifecycle-sleep-join-interrupt-daemon" style="font-size:16px;font-weight:600;margin:18px 0 7px;">5. Thread Lifecycle, Sleep, Join, Interrupt, Daemon</h5>
 
 A thread moves through a fixed set of states during its life:
 `NEW → RUNNABLE → (BLOCKED | WAITING | TIMED_WAITING) → TERMINATED`.
@@ -2059,9 +1880,9 @@ try { Thread.sleep(...); }
 catch (InterruptedException e) { Thread.currentThread().interrupt(); }
 ```
 
-📁 [src/algorithm.concepts/threads/lifecycle/ThreadLifecycle.java](../src/main/java/algorithm/concepts/threads/lifecycle/ThreadLifecycle.java)
+📁 [src/main/java/algorithm/concepts/threads/lifecycle/ThreadLifecycle.java](../src/main/java/algorithm/concepts/threads/lifecycle/ThreadLifecycle.java)
 
-##### 6. Race Conditions
+<h5 id="6-race-conditions" style="font-size:16px;font-weight:600;margin:18px 0 7px;">6. Race Conditions</h5>
 
 A race condition appears whenever the program's correctness depends on
 the exact order in which threads happen to run. Because thread scheduling
@@ -2074,14 +1895,14 @@ value, **add one**, and **write** the new value back. Two threads can
 both read the same starting value, both add one, and both write the same
 result — silently losing one of the increments.
 
-📁 [src/algorithm.concepts/threads/synchronization/RaceConditionDemo.java](../src/main/java/algorithm/concepts/threads/synchronization/RaceConditionDemo.java)
+📁 [src/main/java/algorithm/concepts/threads/synchronization/RaceConditionDemo.java](../src/main/java/algorithm/concepts/threads/synchronization/RaceConditionDemo.java)
 
 The standard fixes (each covered in the sections that follow): wrap the
 critical section in `synchronized`, use an explicit lock, swap the field
 for an atomic variable, or hand data between threads through a concurrent
 collection instead of sharing it directly.
 
-##### 7. `synchronized` — intrinsic locks
+<h5 id="7-synchronized--intrinsic-locks" style="font-size:16px;font-weight:600;margin:18px 0 7px;">7. <code>synchronized</code> — intrinsic locks</h5>
 
 Every Java object carries an invisible **lock** (also called a *monitor*).
 Only one thread at a time can hold a given object's lock. The
@@ -2108,9 +1929,9 @@ of code that synchronizes on the same object can interfere with — or even
 deadlock — your locking strategy. A private dedicated lock object keeps
 that strategy under your control.
 
-📁 [src/algorithm.concepts/threads/synchronization/SynchronizedExample.java](../src/main/java/algorithm/concepts/threads/synchronization/SynchronizedExample.java)
+📁 [src/main/java/algorithm/concepts/threads/synchronization/SynchronizedExample.java](../src/main/java/algorithm/concepts/threads/synchronization/SynchronizedExample.java)
 
-##### 8. Explicit Locks (`ReentrantLock`, `ReadWriteLock`) **(Java 5; `StampedLock` Java 8)**
+<h5 id="8-explicit-locks-reentrantlock-readwritelock-java-5-stampedlock-java-8" style="font-size:16px;font-weight:600;margin:18px 0 7px;">8. Explicit Locks (<code>ReentrantLock</code>, <code>ReadWriteLock</code>) <strong>(Java 5; <code>StampedLock</code> Java 8)</strong></h5>
 
 The `java.util.concurrent.locks` package offers explicit lock objects that
 do everything `synchronized` does — and more. They cost a little more
@@ -2130,7 +1951,7 @@ over how a thread waits, fails, or recovers.
 | Class | Use |
 |---|---|
 | `ReentrantLock` | The standard general-purpose `Lock`. Reentrant — the same thread may acquire it multiple times — and supports an optional fair mode. |
-| `ReentrantReadWriteLock` | The standard `ReadWriteLock` algorithm.implementation. Both views are reentrant; supports lock downgrading (write → read) but not upgrading. |
+| `ReentrantReadWriteLock` | The standard `ReadWriteLock` implementation. Both views are reentrant; supports lock downgrading (write → read) but not upgrading. |
 | `StampedLock` | A high-performance lock with three modes — write, read, and **optimistic read**. Optimistic reads return a stamp that the caller validates afterward, allowing fully concurrent reads when there are no writers. Not reentrant. |
 | `LockSupport` | Low-level utility for parking and unparking threads (`park`, `parkNanos`, `unpark`). Building block for custom synchronizers; rarely used directly in application code. |
 
@@ -2153,17 +1974,17 @@ try { /* critical section */ }
 finally { lock.unlock(); }
 ```
 
-📁 [src/algorithm.concepts/threads/locks/ReentrantLockExample.java](../src/main/java/algorithm/concepts/threads/locks/ReentrantLockExample.java)
-📁 [src/algorithm.concepts/threads/locks/ReadWriteLockExample.java](../src/main/java/algorithm/concepts/threads/locks/ReadWriteLockExample.java)
-📁 [src/algorithm.concepts/threads/locks/ConditionExample.java](../src/main/java/algorithm/concepts/threads/locks/ConditionExample.java)
-📁 [src/algorithm.concepts/threads/locks/StampedLockExample.java](../src/main/java/algorithm/concepts/threads/locks/StampedLockExample.java)
+📁 [src/main/java/algorithm/concepts/threads/locks/ReentrantLockExample.java](../src/main/java/algorithm/concepts/threads/locks/ReentrantLockExample.java)
+📁 [src/main/java/algorithm/concepts/threads/locks/ReadWriteLockExample.java](../src/main/java/algorithm/concepts/threads/locks/ReadWriteLockExample.java)
+📁 [src/main/java/algorithm/concepts/threads/locks/ConditionExample.java](../src/main/java/algorithm/concepts/threads/locks/ConditionExample.java)
+📁 [src/main/java/algorithm/concepts/threads/locks/StampedLockExample.java](../src/main/java/algorithm/concepts/threads/locks/StampedLockExample.java)
 
 `ReadWriteLock` splits a lock into two cooperating views: any number of
 threads can hold the **read** lock at the same time, but the **write**
 lock is exclusive and blocks all readers and writers. It is ideal for
 data structures that are read very often and updated only occasionally.
 
-##### 9. Atomic Variables **(Java 5)**
+<h5 id="9-atomic-variables-java-5" style="font-size:16px;font-weight:600;margin:18px 0 7px;">9. Atomic Variables <strong>(Java 5)</strong></h5>
 
 The classes in `java.util.concurrent.atomic` provide thread-safe updates
 **without using any lock**. Internally they rely on the processor's
@@ -2214,9 +2035,9 @@ counter.incrementAndGet();                         // atomic ++
 counter.compareAndSet(0, 1);                       // CAS
 ```
 
-📁 [src/algorithm.concepts/threads/atomic/AtomicExample.java](../src/main/java/algorithm/concepts/threads/atomic/AtomicExample.java)
+📁 [src/main/java/algorithm/concepts/threads/atomic/AtomicExample.java](../src/main/java/algorithm/concepts/threads/atomic/AtomicExample.java)
 
-##### 10. Concurrent Collections **(Java 5)**
+<h5 id="10-concurrent-collections-java-5" style="font-size:16px;font-weight:600;margin:18px 0 7px;">10. Concurrent Collections <strong>(Java 5)</strong></h5>
 
 Wrapping a regular collection with `Collections.synchronizedList(...)`
 makes it safe but turns every access into a serialized chokepoint. The
@@ -2253,7 +2074,7 @@ inventory is grouped below by role.
 
 | Collection | Use |
 |---|---|
-| `ConcurrentLinkedQueue` | A non-blocking, unbounded first-in-first-out queue based on lock-free algorithm.implementation — fast under high contention. |
+| `ConcurrentLinkedQueue` | A non-blocking, unbounded first-in-first-out queue based on a lock-free algorithm — fast under high contention. |
 | `ConcurrentLinkedDeque` | A non-blocking, unbounded double-ended queue, also lock-free. Useful for work-stealing patterns. |
 
 **Blocking queues and deques**
@@ -2268,9 +2089,9 @@ inventory is grouped below by role.
 | `LinkedTransferQueue` | An unbounded `TransferQueue` that combines the throughput of `ConcurrentLinkedQueue` with optional blocking and direct hand-off via `transfer()`. |
 | `DelayQueue` | An unbounded blocking queue of `Delayed` elements; an element only becomes available to `take()` once its delay has elapsed. Ideal for scheduled work. |
 
-📁 [src/algorithm.concepts/threads/concurrent/ConcurrentCollectionsExample.java](../src/main/java/algorithm/concepts/threads/concurrent/ConcurrentCollectionsExample.java)
+📁 [src/main/java/algorithm/concepts/threads/concurrent/ConcurrentCollectionsExample.java](../src/main/java/algorithm/concepts/threads/concurrent/ConcurrentCollectionsExample.java)
 
-##### 11. The Concurrent Application Programming Interface — `ExecutorService`, `Callable`, `Future` **(Java 5)**
+<h5 id="11-the-concurrent-application-programming-interface--executorservice-callable-future-java-5" style="font-size:16px;font-weight:600;margin:18px 0 7px;">11. The Concurrent Application Programming Interface — <code>ExecutorService</code>, <code>Callable</code>, <code>Future</code> <strong>(Java 5)</strong></h5>
 
 **`ExecutorService`** is a managed pool of reusable worker threads.
 Instead of creating and destroying a `Thread` for every piece of work,
@@ -2292,10 +2113,10 @@ integrates cleanly with `Future` for results.
 
 | Class | Use |
 |---|---|
-| `ThreadPoolExecutor` | The configurable thread-pool algorithm.implementation behind most `Executors` factories. Lets you set core/max pool sizes, keep-alive time, work queue, `ThreadFactory`, and rejection policy. |
-| `ScheduledThreadPoolExecutor` | The configurable algorithm.implementation behind the scheduled factories. |
+| `ThreadPoolExecutor` | The configurable thread-pool implementation behind most `Executors` factories. Lets you set core/max pool sizes, keep-alive time, work queue, `ThreadFactory`, and rejection policy. |
+| `ScheduledThreadPoolExecutor` | The configurable implementation behind the scheduled factories. |
 | `ForkJoinPool` | A work-stealing pool optimized for divide-and-conquer tasks. Each worker has its own deque and steals from others when idle. Used by parallel streams via `commonPool()`. |
-| `ExecutorCompletionService<V>` | The standard `CompletionService` algorithm.implementation, wrapping any `Executor`. |
+| `ExecutorCompletionService<V>` | The standard `CompletionService` implementation, wrapping any `Executor`. |
 
 **Fork/Join task types**
 
@@ -2354,13 +2175,13 @@ pool.shutdown();                                    // no more tasks
 pool.awaitTermination(5, TimeUnit.SECONDS);
 ```
 
-📁 [src/algorithm.concepts/threads/executors/ExecutorServiceExample.java](../src/main/java/algorithm/concepts/threads/executors/ExecutorServiceExample.java)
-📁 [src/algorithm.concepts/threads/executors/CallableFutureExample.java](../src/main/java/algorithm/concepts/threads/executors/CallableFutureExample.java)
-📁 [src/algorithm.concepts/threads/executors/ScheduledExecutorExample.java](../src/main/java/algorithm/concepts/threads/executors/ScheduledExecutorExample.java)
-📁 [src/algorithm.concepts/threads/executors/ForkJoinExample.java](../src/main/java/algorithm/concepts/threads/executors/ForkJoinExample.java)
-📁 [src/algorithm.concepts/threads/executors/VirtualThreadsExample.java](../src/main/java/algorithm/concepts/threads/executors/VirtualThreadsExample.java)
+📁 [src/main/java/algorithm/concepts/threads/executors/ExecutorServiceExample.java](../src/main/java/algorithm/concepts/threads/executors/ExecutorServiceExample.java)
+📁 [src/main/java/algorithm/concepts/threads/executors/CallableFutureExample.java](../src/main/java/algorithm/concepts/threads/executors/CallableFutureExample.java)
+📁 [src/main/java/algorithm/concepts/threads/executors/ScheduledExecutorExample.java](../src/main/java/algorithm/concepts/threads/executors/ScheduledExecutorExample.java)
+📁 [src/main/java/algorithm/concepts/threads/executors/ForkJoinExample.java](../src/main/java/algorithm/concepts/threads/executors/ForkJoinExample.java)
+📁 [src/main/java/algorithm/concepts/threads/executors/VirtualThreadsExample.java](../src/main/java/algorithm/concepts/threads/executors/VirtualThreadsExample.java)
 
-##### 12. Thread Communication — `wait` / `notify`, Producer-Consumer
+<h5 id="12-thread-communication--wait--notify-producer-consumer" style="font-size:16px;font-weight:600;margin:18px 0 7px;">12. Thread Communication — <code>wait</code> / <code>notify</code>, Producer-Consumer</h5>
 
 `wait()`, `notify()`, and `notifyAll()` are the original way Java threads
 talk to each other. They live on `Object` itself — every object can act
@@ -2388,15 +2209,15 @@ several waiters were notified at once and another one already consumed
 the signal — looping ensures the thread only proceeds when the condition
 is genuinely true.
 
-📁 [src/algorithm.concepts/threads/communication/WaitNotifyExample.java](../src/main/java/algorithm/concepts/threads/communication/WaitNotifyExample.java)
+📁 [src/main/java/algorithm/concepts/threads/communication/WaitNotifyExample.java](../src/main/java/algorithm/concepts/threads/communication/WaitNotifyExample.java)
 
 For producer-consumer designs, prefer a `BlockingQueue` over hand-written
 `wait`/`notify` code. The queue takes care of all the synchronization,
 parking, and signaling for you, and it is much harder to get wrong:
 
-📁 [src/algorithm.concepts/threads/communication/ProducerConsumerExample.java](../src/main/java/algorithm/concepts/threads/communication/ProducerConsumerExample.java)
+📁 [src/main/java/algorithm/concepts/threads/communication/ProducerConsumerExample.java](../src/main/java/algorithm/concepts/threads/communication/ProducerConsumerExample.java)
 
-##### 13. `CompletableFuture` **(Java 8)**
+<h5 id="13-completablefuture-java-8" style="font-size:16px;font-weight:600;margin:18px 0 7px;">13. <code>CompletableFuture</code> <strong>(Java 8)</strong></h5>
 
 A `CompletableFuture` is a `Future` you can build pipelines on top of.
 Instead of blocking with `get()` and orchestrating threads yourself, you
@@ -2468,9 +2289,9 @@ running each one when its inputs are ready.
 | `orTimeout(t, unit)` (Java 9+) | Complete exceptionally with `TimeoutException` if the future has not finished within the deadline. |
 | `completeOnTimeout(value, t, unit)` (Java 9+) | Complete with the given fallback value if the future has not finished within the deadline. |
 
-📁 [src/algorithm.concepts/threads/advanced/CompletableFutureExample.java](../src/main/java/algorithm/concepts/threads/advanced/CompletableFutureExample.java)
+📁 [src/main/java/algorithm/concepts/threads/advanced/CompletableFutureExample.java](../src/main/java/algorithm/concepts/threads/advanced/CompletableFutureExample.java)
 
-##### 14. Coordination Primitives — `CountDownLatch`, `CyclicBarrier`, `Semaphore`, `Phaser`, `Exchanger` **(Java 5; `Phaser` Java 7)**
+<h5 id="14-coordination-primitives--countdownlatch-cyclicbarrier-semaphore-phaser-exchanger-java-5-phaser-java-7" style="font-size:16px;font-weight:600;margin:18px 0 7px;">14. Coordination Primitives — <code>CountDownLatch</code>, <code>CyclicBarrier</code>, <code>Semaphore</code>, <code>Phaser</code>, <code>Exchanger</code> <strong>(Java 5; <code>Phaser</code> Java 7)</strong></h5>
 
 These primitives let groups of threads synchronize at specific moments —
 when `N` events have happened, when everyone has reached the same point,
@@ -2498,13 +2319,13 @@ Semaphore permits = new Semaphore(2);
 permits.acquire(); try { ... } finally { permits.release(); }
 ```
 
-📁 [src/algorithm.concepts/threads/advanced/CountDownLatchExample.java](../src/main/java/algorithm/concepts/threads/advanced/CountDownLatchExample.java)
-📁 [src/algorithm.concepts/threads/advanced/CyclicBarrierExample.java](../src/main/java/algorithm/concepts/threads/advanced/CyclicBarrierExample.java)
-📁 [src/algorithm.concepts/threads/advanced/SemaphoreExample.java](../src/main/java/algorithm/concepts/threads/advanced/SemaphoreExample.java)
-📁 [src/algorithm.concepts/threads/advanced/PhaserExample.java](../src/main/java/algorithm/concepts/threads/advanced/PhaserExample.java)
-📁 [src/algorithm.concepts/threads/advanced/ExchangerExample.java](../src/main/java/algorithm/concepts/threads/advanced/ExchangerExample.java)
+📁 [src/main/java/algorithm/concepts/threads/advanced/CountDownLatchExample.java](../src/main/java/algorithm/concepts/threads/advanced/CountDownLatchExample.java)
+📁 [src/main/java/algorithm/concepts/threads/advanced/CyclicBarrierExample.java](../src/main/java/algorithm/concepts/threads/advanced/CyclicBarrierExample.java)
+📁 [src/main/java/algorithm/concepts/threads/advanced/SemaphoreExample.java](../src/main/java/algorithm/concepts/threads/advanced/SemaphoreExample.java)
+📁 [src/main/java/algorithm/concepts/threads/advanced/PhaserExample.java](../src/main/java/algorithm/concepts/threads/advanced/PhaserExample.java)
+📁 [src/main/java/algorithm/concepts/threads/advanced/ExchangerExample.java](../src/main/java/algorithm/concepts/threads/advanced/ExchangerExample.java)
 
-##### 15. Deadlock, Livelock, Starvation
+<h5 id="15-deadlock-livelock-starvation" style="font-size:16px;font-weight:600;margin:18px 0 7px;">15. Deadlock, Livelock, Starvation</h5>
 
 **Deadlock** — a circular dependency between threads holding locks: thread
 A waits for a lock held by thread B, while B waits for one held by A.
@@ -2532,7 +2353,7 @@ recently, or from higher-priority threads monopolizing the CPU. Counter
 it with fair locks, bounded queues that throttle producers, and balanced
 thread priorities.
 
-##### 16. Code Challenges
+<h5 id="16-code-challenges" style="font-size:16px;font-weight:600;margin:18px 0 7px;">16. Code Challenges</h5>
 
 | # | Challenge | Concepts | File |
 |---|---|---|---|
@@ -2540,7 +2361,7 @@ thread priorities.
 | 2 | Thread-safe bank account with deposits and withdrawals | critical section, atomic check + update | [BankAccountChallenge.java](../src/main/java/algorithm/concepts/threads/challenges/BankAccountChallenge.java) |
 | 3 | Build a deadlock, then fix it with consistent lock order | monitor locks, lock ordering | [DeadlockChallenge.java](../src/main/java/algorithm/concepts/threads/challenges/DeadlockChallenge.java) |
 
-###### More to try yourself
+<h6 id="more-to-try-yourself" style="font-size:13px;font-weight:600;opacity:.72;margin:14px 0 5px;">More to try yourself</h6>
 
 - **Producer / Consumer with multiple producers and consumers** using
   `BlockingQueue` and a poison-pill protocol.
@@ -2552,7 +2373,7 @@ thread priorities.
 - **Rate limiter** using a `Semaphore` and scheduled refills.
 - **Print numbers 1..N in order** with N threads, each printing one number.
 
-##### 🧠 Concurrency Cheat Sheet
+<h5 id="concurrency-cheat-sheet" style="font-size:16px;font-weight:600;margin:18px 0 7px;">Concurrency Cheat Sheet</h5>
 
 ```java
 // 1) Create a thread
@@ -2584,7 +2405,7 @@ CompletableFuture
     .exceptionally(this::recover);
 ```
 
-###### Decision flowchart
+<h6 id="decision-flowchart" style="font-size:13px;font-weight:600;opacity:.72;margin:14px 0 5px;">Decision flowchart</h6>
 
 ```
 need to share mutable state?
@@ -2605,14 +2426,14 @@ need to share mutable state?
 
 ---
 
-#### ⚠️ Exceptions
+<h4 id="exceptions" style="font-size:20px;font-weight:700;margin:22px 0 8px;">⚠️ Exceptions</h4>
 
 A focused, practical reference for Java's exception model: how throwing
 and catching work, which types belong to which family, and which idioms
 to reach for. Every section links to a runnable file under
-`src/algorithm.concepts/oop/exceptions/...`.
+`src/main/java/algorithm/concepts/oop/exceptions/...`.
 
-##### 1. Concepts & Vocabulary (Exceptions)
+<h5 id="1-concepts--vocabulary-exceptions" style="font-size:16px;font-weight:600;margin:18px 0 7px;">1. Concepts &amp; Vocabulary (Exceptions)</h5>
 
 | Term | Meaning |
 |---|---|
@@ -2634,7 +2455,7 @@ expected to be rare and that the calling code may want to react to.
 Don't use them for ordinary control flow: throwing and catching is
 significantly more expensive than a regular branch.
 
-##### 2. The `Throwable` hierarchy
+<h5 id="2-the-throwable-hierarchy" style="font-size:16px;font-weight:600;margin:18px 0 7px;">2. The <code>Throwable</code> hierarchy</h5>
 
 Every object that can be thrown in Java is a subclass of `Throwable`.
 Like every other class in Java, `Throwable` ultimately extends
@@ -2746,9 +2567,9 @@ concurrency utilities, and `java.lang.reflect` for reflection.
 reserved for **programming errors** the compiler does not force you to
 declare.
 
-📁 [src/algorithm.concepts/oop/exceptions/CheckedVsUncheckedExample.java](../src/main/java/algorithm/concepts/oop/exceptions/CheckedVsUncheckedExample.java)
+📁 [src/main/java/algorithm/concepts/oop/exceptions/CheckedVsUncheckedExample.java](../src/main/java/algorithm/concepts/oop/exceptions/CheckedVsUncheckedExample.java)
 
-##### 3. Core `Throwable` API
+<h5 id="3-core-throwable-api" style="font-size:16px;font-weight:600;margin:18px 0 7px;">3. Core <code>Throwable</code> API</h5>
 
 Every `Throwable` carries the metadata an exception handler needs to
 diagnose, log, or wrap it. These methods are inherited by every
@@ -2767,7 +2588,7 @@ exception class in Java.
 | `addSuppressed(Throwable)` | Attaches a secondary exception to this one. Called automatically by try-with-resources. |
 | `getSuppressed()` | Returns the array of suppressed exceptions attached during recovery. |
 
-##### 4. `try` / `catch` / `finally`
+<h5 id="4-try--catch--finally" style="font-size:16px;font-weight:600;margin:18px 0 7px;">4. <code>try</code> / <code>catch</code> / <code>finally</code></h5>
 
 A `try` block guards code that may throw. When an exception escapes the
 `try`, the runtime walks the attached `catch` clauses top-to-bottom and
@@ -2800,9 +2621,9 @@ try {
 - An exception thrown inside `finally` replaces (and hides) any exception thrown from the `try` block. Prefer try-with-resources, which preserves both via *suppressed* exceptions.
 - If the code can avoid throwing, prefer that to catching: exceptions are not free.
 
-📁 [src/algorithm.concepts/oop/exceptions/BasicTryCatch.java](../src/main/java/algorithm/concepts/oop/exceptions/BasicTryCatch.java)
+📁 [src/main/java/algorithm/concepts/oop/exceptions/BasicTryCatch.java](../src/main/java/algorithm/concepts/oop/exceptions/BasicTryCatch.java)
 
-##### 5. Multiple catches and multi-catch
+<h5 id="5-multiple-catches-and-multi-catch" style="font-size:16px;font-weight:600;margin:18px 0 7px;">5. Multiple catches and multi-catch</h5>
 
 Multiple `catch` clauses are tested top-down; the first one whose
 declared type is a supertype of the thrown exception runs. You must
@@ -2826,9 +2647,9 @@ actually reach that catch, you may declare the enclosing method as
 `throws IOException, SQLException` and rethrow `e` — without widening
 the signature to `throws Exception`.
 
-📁 [src/algorithm.concepts/oop/exceptions/MultipleCatchExample.java](../src/main/java/algorithm/concepts/oop/exceptions/MultipleCatchExample.java)
+📁 [src/main/java/algorithm/concepts/oop/exceptions/MultipleCatchExample.java](../src/main/java/algorithm/concepts/oop/exceptions/MultipleCatchExample.java)
 
-##### 6. `throw` vs `throws`
+<h5 id="6-throw-vs-throws" style="font-size:16px;font-weight:600;margin:18px 0 7px;">6. <code>throw</code> vs <code>throws</code></h5>
 
 Two related keywords that are easy to confuse: `throw` is a *statement*
 that raises an exception now; `throws` is a *clause* on a method header
@@ -2849,9 +2670,9 @@ that declares which checked exceptions the method might let escape.
 - When **overriding** a method, the override may throw the same checked exceptions or **narrower** ones (subclasses or fewer), never broader ones the caller did not expect.
 - Constructors can also declare `throws`.
 
-📁 [src/algorithm.concepts/oop/exceptions/ThrowsExample.java](../src/main/java/algorithm/concepts/oop/exceptions/ThrowsExample.java)
+📁 [src/main/java/algorithm/concepts/oop/exceptions/ThrowsExample.java](../src/main/java/algorithm/concepts/oop/exceptions/ThrowsExample.java)
 
-##### 7. Checked vs Unchecked
+<h5 id="7-checked-vs-unchecked" style="font-size:16px;font-weight:600;margin:18px 0 7px;">7. Checked vs Unchecked</h5>
 
 Java is one of the few mainstream languages that splits exceptions into
 two categories at compile time. The distinction is purely about
@@ -2872,9 +2693,9 @@ it without re-asserting the interrupt clears the thread's interrupted
 flag. Always either re-throw or call `Thread.currentThread().interrupt()`
 in the handler so cancellation is not silently lost.
 
-📁 [src/algorithm.concepts/oop/exceptions/CheckedVsUncheckedExample.java](../src/main/java/algorithm/concepts/oop/exceptions/CheckedVsUncheckedExample.java)
+📁 [src/main/java/algorithm/concepts/oop/exceptions/CheckedVsUncheckedExample.java](../src/main/java/algorithm/concepts/oop/exceptions/CheckedVsUncheckedExample.java)
 
-##### 8. Try-with-resources
+<h5 id="8-try-with-resources" style="font-size:16px;font-weight:600;margin:18px 0 7px;">8. Try-with-resources</h5>
 
 Try-with-resources and the `AutoCloseable` interface were both introduced in **(Java 7)**. Any object implementing `AutoCloseable` (or its subinterface `Closeable`)
 can be declared in the header of a `try` statement. Java guarantees
@@ -2894,9 +2715,9 @@ try (BufferedReader r = new BufferedReader(new FileReader("f.txt"))) {
 - (Java 9+) A variable that is already `final` or *effectively final* may be referenced directly in the resource header — you do not have to re-declare it inside the parentheses.
 - `AutoCloseable.close()` may throw any `Exception`; `Closeable.close()` is restricted to `IOException`. Streams, channels, readers, writers, JDBC connections, locks, and most I/O types implement one of them.
 
-📁 [src/algorithm.concepts/oop/exceptions/TryWithResourcesExample.java](../src/main/java/algorithm/concepts/oop/exceptions/TryWithResourcesExample.java)
+📁 [src/main/java/algorithm/concepts/oop/exceptions/TryWithResourcesExample.java](../src/main/java/algorithm/concepts/oop/exceptions/TryWithResourcesExample.java)
 
-##### 9. Exception chaining (causes)
+<h5 id="9-exception-chaining-causes" style="font-size:16px;font-weight:600;margin:18px 0 7px;">9. Exception chaining (causes)</h5>
 
 When you catch a low-level exception and throw a higher-level one,
 **preserve the original** as the cause. The chain travels with the
@@ -2918,7 +2739,7 @@ whenever you wrap an exception so a stack trace tells the full story.
 If a constructor of an exception class does not accept a cause, set it
 afterwards with `initCause(Throwable)` — but only once.
 
-##### 10. Stack traces
+<h5 id="10-stack-traces" style="font-size:16px;font-weight:600;margin:18px 0 7px;">10. Stack traces</h5>
 
 A stack trace is a snapshot of the call stack taken when the exception
 was constructed (specifically, by `fillInStackTrace()`, which the
@@ -2937,7 +2758,7 @@ name, method name, file name, and line number of one frame.
 site; each `at` line below is one frame further up the call stack. A
 `Caused by:` block beneath shows the chained cause's own stack trace.
 
-##### 11. Custom Exceptions
+<h5 id="11-custom-exceptions" style="font-size:16px;font-weight:600;margin:18px 0 7px;">11. Custom Exceptions</h5>
 
 Define your own exception class when no standard type fits, when you
 want callers to be able to catch your domain failures specifically, or
@@ -2961,10 +2782,10 @@ For richer reporting you can also add fields (account id, requested
 amount, …) with their own getters; expose them through `getMessage()`
 or dedicated accessors.
 
-📁 [src/algorithm.concepts/oop/exceptions/InsufficientFundsException.java](../src/main/java/algorithm/concepts/oop/exceptions/InsufficientFundsException.java)
-📁 [src/algorithm.concepts/oop/exceptions/CustomExceptionDemo.java](../src/main/java/algorithm/concepts/oop/exceptions/CustomExceptionDemo.java)
+📁 [src/main/java/algorithm/concepts/oop/exceptions/InsufficientFundsException.java](../src/main/java/algorithm/concepts/oop/exceptions/InsufficientFundsException.java)
+📁 [src/main/java/algorithm/concepts/oop/exceptions/CustomExceptionDemo.java](../src/main/java/algorithm/concepts/oop/exceptions/CustomExceptionDemo.java)
 
-##### 12. Common standard exceptions
+<h5 id="12-common-standard-exceptions" style="font-size:16px;font-weight:600;margin:18px 0 7px;">12. Common standard exceptions</h5>
 
 A reference of the exceptions you will encounter most often in everyday
 Java code, with the situation that produces each one.
@@ -2982,7 +2803,7 @@ Java code, with the situation that produces each one.
 | `StringIndexOutOfBoundsException` | `IndexOutOfBoundsException` | String index outside `0 .. length() - 1`. |
 | `ArithmeticException` | `RuntimeException` | Integer division by zero, decimal overflow, and similar arithmetic faults. |
 | `ClassCastException` | `RuntimeException` | A cast that does not match the actual runtime type of the object. |
-| `UnsupportedOperationException` | `RuntimeException` | An interface method that is required to exist but is not supported by this algorithm.implementation (e.g. `List.of(...).add(x)`). |
+| `UnsupportedOperationException` | `RuntimeException` | An interface method that is required to exist but is not supported by this implementation (e.g. `List.of(...).add(x)`). |
 | `ConcurrentModificationException` | `RuntimeException` | A collection was modified during iteration through a non-concurrent iterator. |
 | `ArrayStoreException` | `RuntimeException` | Storing a reference of the wrong type into a covariant array. |
 | `SecurityException` | `RuntimeException` | A security check (such as one performed by a `SecurityManager`) refused an operation. |
@@ -3012,7 +2833,7 @@ Java code, with the situation that produces each one.
 | `ExceptionInInitializerError` | `LinkageError` | A static initializer threw an exception. |
 | `AssertionError` | `Error` | A failed `assert` (with `-ea`) or a deliberate invariant failure. |
 
-##### 13. Best Practices
+<h5 id="13-best-practices" style="font-size:16px;font-weight:600;margin:18px 0 7px;">13. Best Practices</h5>
 
 - **Catch the most specific type** you can handle. Catching `Exception`
   or `Throwable` hides bugs.
@@ -3037,7 +2858,7 @@ Java code, with the situation that produces each one.
 - **Document each `throws`** in Javadoc with `@throws` and a description
   of the precondition that produces it.
 
-##### 🧠 Exceptions Cheat Sheet
+<h5 id="exceptions-cheat-sheet" style="font-size:16px;font-weight:600;margin:18px 0 7px;">Exceptions Cheat Sheet</h5>
 
 ```java
 // Basic
@@ -3076,16 +2897,16 @@ for (Throwable s : ex.getSuppressed()) log(s);
 
 ---
 
-### 🟪 Kotlin
+<h3 id="kotlin" style="font-size:26px;font-weight:700;margin:26px 0 10px;">🟪 Kotlin</h3>
 
 A modern statically-typed language for the Java Virtual Machine, created by JetBrains. It compiles to the same bytecode as Java, interoperates with Java in both directions, and is Google's preferred language for Android. Its design goals: **conciseness**, **null safety**, and **pragmatism** — keep what works in Java, fix the recurring pain points.
 
-#### Why it matters for a Java developer
+<h4 id="why-it-matters-for-a-java-developer" style="font-size:20px;font-weight:700;margin:22px 0 8px;">🟪 Why it matters for a Java developer</h4>
 - **100% interop**: Call Java from Kotlin and Kotlin from Java in the same project; migrate file by file
 - **Less ceremony**: No semicolons, type inference, no getters/setters/`equals`/`hashCode` boilerplate
 - **Null safety in the type system**: The "billion-dollar mistake" (`NullPointerException`) becomes a compile-time concern
 
-#### Variables and Types
+<h4 id="variables-and-types" style="font-size:20px;font-weight:700;margin:22px 0 8px;">🟪 Variables and Types</h4>
 ```kotlin
 val name = "Ada"        // immutable reference (like Java final) — prefer this
 var age = 30            // mutable reference
@@ -3094,7 +2915,7 @@ val total: Long = 5     // explicit type when inference is not enough
 - `val` = read-only (the reference cannot be reassigned), `var` = mutable
 - Types are inferred; everything is an object (no primitives at the language level, the compiler optimizes to primitives underneath)
 
-#### Null Safety
+<h4 id="null-safety" style="font-size:20px;font-weight:700;margin:22px 0 8px;">🟪 Null Safety</h4>
 Nullability is part of the type. A normal type cannot hold `null`; a nullable type is marked with `?`.
 ```kotlin
 var a: String = "x"     // cannot be null
@@ -3104,7 +2925,7 @@ val safe = b ?: "empty" // Elvis operator -> default when null
 val forced = b!!.length // asserts non-null -> throws if it is (avoid)
 ```
 
-#### Functions
+<h4 id="functions" style="font-size:20px;font-weight:700;margin:22px 0 8px;">🟪 Functions</h4>
 ```kotlin
 fun add(a: Int, b: Int = 0) = a + b        // default argument, expression body
 add(b = 5, a = 1)                          // named arguments
@@ -3114,7 +2935,7 @@ fun String.shout() = this.uppercase() + "!"
 "hi".shout()                               // -> "HI!"
 ```
 
-#### Classes and Objects
+<h4 id="classes-and-objects" style="font-size:20px;font-weight:700;margin:22px 0 8px;">🟪 Classes and Objects</h4>
 ```kotlin
 data class User(val id: Long, val name: String)   // auto equals/hashCode/toString/copy
 sealed interface Shape                              // restricted hierarchy (exhaustive when)
@@ -3125,7 +2946,7 @@ class Service { companion object { const val VERSION = "1.0" } }  // static-like
 - **object**: a language-level singleton; **companion object**: holds members shared by all instances (Kotlin has no `static`)
 - **sealed**: the compiler knows every subtype, enabling exhaustive `when` expressions
 
-#### Functional Style and Scope Functions
+<h4 id="functional-style-and-scope-functions" style="font-size:20px;font-weight:700;margin:22px 0 8px;">🟪 Functional Style and Scope Functions</h4>
 ```kotlin
 val names = users.filter { it.age > 18 }.map { it.name }   // collection pipeline
 val user = User(1, "Ada").apply { /* configure */ }        // apply: returns the receiver
@@ -3134,7 +2955,7 @@ val length = name?.let { it.length } ?: 0                   // let: run a block 
 - Lambdas use `{ }`; the single parameter is implicitly `it`
 - **Scope functions** (`let`, `run`, `with`, `apply`, `also`) reduce temporary variables; `apply`/`also` return the object, `let`/`run`/`with` return the lambda result
 
-#### Coroutines (concurrency)
+<h4 id="coroutines-concurrency" style="font-size:20px;font-weight:700;margin:22px 0 8px;">🟪 Coroutines (concurrency)</h4>
 Lightweight, cooperative units of work for asynchronous code — conceptually similar to Java virtual threads, but a library feature with structured concurrency.
 ```kotlin
 suspend fun fetch(): Data { ... }          // a function that can suspend without blocking a thread
@@ -3147,7 +2968,7 @@ coroutineScope {
 - `suspend` functions release the thread while waiting instead of blocking it
 - **Structured concurrency**: child coroutines are bound to a scope and cancelled together — no leaked work
 
-#### Kotlin vs Java
+<h4 id="kotlin-vs-java" style="font-size:20px;font-weight:700;margin:22px 0 8px;">🟪 Kotlin vs Java</h4>
 | Aspect | Java | Kotlin |
 |---|---|---|
 | Null handling | Runtime `NullPointerException` | Nullability checked at compile time |
@@ -3160,26 +2981,26 @@ coroutineScope {
 
 ---
 
-### 🐍 Python
+<h3 id="python" style="font-size:26px;font-weight:700;margin:26px 0 10px;">🐍 Python</h3>
 
 A high-level, interpreted, dynamically-typed language built for readability and developer speed. It is multi-paradigm (procedural, object-oriented, functional) and dominates scripting, automation, data science, machine learning, and increasingly backend web services. Where Java optimizes for large-team safety and performance, Python optimizes for expressiveness and time-to-result.
 
-#### Why it matters for a Java developer
+<h4 id="why-it-matters-for-a-java-developer-1" style="font-size:20px;font-weight:700;margin:22px 0 8px;">🐍 Why it matters for a Java developer</h4>
 - **Dynamic typing**: Types are checked at runtime, not declared — far less code, but errors surface later
 - **Batteries included**: A vast standard library and the largest third-party ecosystem (`pip`)
 - **The default language of data and AI**: pandas, NumPy, PyTorch, and most machine-learning tooling are Python-first
 
-#### Variables and Typing
+<h4 id="variables-and-typing" style="font-size:20px;font-weight:700;margin:22px 0 8px;">🐍 Variables and Typing</h4>
 ```python
 name = "Ada"            # no type declaration; the variable just binds a value
 age = 30                # re-binding to another type is legal: age = "thirty"
-total: int = 5          # optional type hint — documentation, checked by utils, not enforced at runtime
+total: int = 5          # optional type hint — documentation, checked by tools, not enforced at runtime
 ```
 - **Dynamic typing**: a name is just a label pointing at an object
 - **Duck typing**: "if it walks like a duck" — code depends on behavior (methods present), not on declared types
-- **Type hints** (`def f(x: int) -> str:`) are optional and verified by external utils such as mypy, never by the interpreter
+- **Type hints** (`def f(x: int) -> str:`) are optional and verified by external tools such as mypy, never by the interpreter
 
-#### Core Data Structures
+<h4 id="core-data-structures" style="font-size:20px;font-weight:700;margin:22px 0 8px;">🐍 Core Data Structures</h4>
 ```python
 nums   = [1, 2, 3]            # list   — ordered, mutable
 point  = (10, 20)            # tuple  — ordered, immutable
@@ -3189,7 +3010,7 @@ squares = [n * n for n in nums if n > 1]   # list comprehension
 ```
 - **Comprehensions** are the idiomatic replacement for map/filter loops — concise and fast
 
-#### Functions
+<h4 id="functions-1" style="font-size:20px;font-weight:700;margin:22px 0 8px;">🐍 Functions</h4>
 ```python
 def greet(name, greeting="Hello", *args, **kwargs):
     return f"{greeting}, {name}"          # f-string interpolation
@@ -3204,7 +3025,7 @@ def helper(): ...
 - `*args` collects extra positional arguments, `**kwargs` collects extra keyword arguments
 - **Decorators** (`@name`) wrap a function to add behavior — the mechanism behind framework routing, caching, authentication
 
-#### Object-Oriented Python
+<h4 id="object-oriented-python" style="font-size:20px;font-weight:700;margin:22px 0 8px;">🐍 Object-Oriented Python</h4>
 ```python
 class User:
     def __init__(self, id, name):   # constructor (a "dunder" — double-underscore method)
@@ -3218,7 +3039,7 @@ class User:
 - Encapsulation is by convention (`_name`), not enforced — Python trusts the developer
 - Supports multiple inheritance (resolved by a defined method-resolution order)
 
-#### Functional Features and Generators
+<h4 id="functional-features-and-generators" style="font-size:20px;font-weight:700;margin:22px 0 8px;">🐍 Functional Features and Generators</h4>
 ```python
 total = sum(map(lambda x: x * 2, nums))    # map/filter exist, comprehensions usually preferred
 
@@ -3229,19 +3050,19 @@ def countdown(n):                          # generator: produces values lazily, 
 ```
 - **Generators** (`yield`) stream values without building the whole collection in memory — the basis of Python's lazy iteration
 
-#### Concurrency — and the Global Interpreter Lock
+<h4 id="concurrency--and-the-global-interpreter-lock" style="font-size:20px;font-weight:700;margin:22px 0 8px;">🧵 Concurrency — and the Global Interpreter Lock</h4>
 | Tool | Use it for | Note |
 |---|---|---|
 | `threading` | Input/output-bound work (network, disk) | The **Global Interpreter Lock (GIL)** lets only one thread run Python bytecode at a time — no true parallel CPU |
 | `multiprocessing` | CPU-bound work | Separate processes, each with its own interpreter — real parallelism, higher overhead |
 | `asyncio` | Massive input/output concurrency | Single-threaded cooperative `async`/`await`, similar to JavaScript's event loop |
 
-#### Ecosystem
+<h4 id="ecosystem" style="font-size:20px;font-weight:700;margin:22px 0 8px;">🐍 Ecosystem</h4>
 - **pip** — package installer; **venv** — isolated per-project environments (the standard practice)
 - **Web**: Django (batteries-included), Flask (minimal), FastAPI (modern, async, type-hint driven)
 - **Data and AI**: pandas, NumPy, scikit-learn, PyTorch, TensorFlow
 
-#### Python vs Java
+<h4 id="python-vs-java" style="font-size:20px;font-weight:700;margin:22px 0 8px;">🐍 Python vs Java</h4>
 | Aspect | Java | Python |
 |---|---|---|
 | Typing | Static, checked at compile time | Dynamic, checked at runtime (optional hints) |
@@ -3252,11 +3073,11 @@ def countdown(n):                          # generator: produces values lazily, 
 
 ---
 
-## 🧩 Frameworks
+<h2 id="-frameworks" style="font-size:33px;font-weight:800;margin:30px 0 12px;">🧩 Frameworks</h2>
 
 Java backend frameworks provide the scaffolding every service needs — dependency injection, configuration, web endpoints, data access — so you write business logic instead of plumbing. **Spring** is the mature default; **Quarkus** and **Micronaut** are the newer cloud-native challengers built around one decisive idea: do at **build time** what Spring historically does at **runtime** (reflection, classpath scanning, proxy generation). That shift slashes startup time and memory, which matters when you run many small containers that scale to zero.
 
-### 🆚 Framework Comparison
+<h3 id="framework-comparison" style="font-size:26px;font-weight:700;margin:26px 0 10px;">🆚 Framework Comparison</h3>
 | Aspect | Spring (Boot) | Quarkus | Micronaut |
 |---|---|---|---|
 | Dependency injection | Runtime (reflection + proxies) | Build time (annotation processing) | Build time (annotation processing) |
@@ -3271,25 +3092,25 @@ Java backend frameworks provide the scaffolding every service needs — dependen
 
 ---
 
-### 🌱 Spring
+<h3 id="spring" style="font-size:26px;font-weight:700;margin:26px 0 10px;">🌱 Spring</h3>
 
-#### Spring Core
+<h4 id="spring-core" style="font-size:20px;font-weight:700;margin:22px 0 8px;">🧩 Spring Core</h4>
 
-##### Core Concepts
+<h5 id="core-concepts" style="font-size:16px;font-weight:600;margin:18px 0 7px;">Core Concepts</h5>
 - **Dependency Injection**: Allow to inject dependencies dynamically
 - **Inversion of Control**: Passing the control of how to create object from the programmer to the framework
 
-##### Core Container
+<h5 id="core-container" style="font-size:16px;font-weight:600;margin:18px 0 7px;">Core Container</h5>
 - **Factory for managing beans**: Spring container manages object lifecycle
 - **Application Context**: Main interface for Spring IoC container
 
-##### Infrastructure
+<h5 id="infrastructure" style="font-size:16px;font-weight:600;margin:18px 0 7px;">Infrastructure</h5>
 - **Aspect Oriented Programming**: Add functionality to objects declaratively. Logging, Security, Transactions
 - **AOP**: Aspects
 - **Instrumentation**: JMX (Java Management Extension) Remotely monitoring apps
 - **Messaging**
 
-##### Data Access Layer
+<h5 id="data-access-layer" style="font-size:16px;font-weight:600;margin:18px 0 7px;">Data Access Layer</h5>
 Handles JDBC
 - **JDBC**: Helper classes for managing DB
 - **ORM**
@@ -3297,56 +3118,56 @@ Handles JDBC
 - **OXM**
 - **JMS**: Messaging service
 
-##### Web Layer
+<h5 id="web-layer" style="font-size:16px;font-weight:600;margin:18px 0 7px;">Web Layer</h5>
 MVC Framework
 - **Servlet**
 - **Web Socket**
 - **Web**
 - **Portlet**
 
-##### Test Layer
+<h5 id="test-layer" style="font-size:16px;font-weight:600;margin:18px 0 7px;">Test Layer</h5>
 Support for TDD. Mocking objects and out of container testing
 - **Unit**
 - **Integration**
 - **Mock**
 
-##### Beans
+<h5 id="beans" style="font-size:16px;font-weight:600;margin:18px 0 7px;">Beans</h5>
 - A "Spring Bean" is simply a Java object
 - When Java objects are created by the Spring Container, then Spring refers to them as "Spring Beans"
 - Spring Beans are created from normal Java classes .... just like Java objects
 
-##### Scopes
+<h5 id="scopes" style="font-size:16px;font-weight:600;margin:18px 0 7px;">Scopes</h5>
 - **Singleton**: Only one instance per container (default scope)
 - **Prototype**: A bean instance for each container request
 - **Request**: Scoped to an http request
 - **Session**: Scoped to an http session
 - **Global session**: Scoped to a global session
 
-##### Bean Lifecycle
+<h5 id="bean-lifecycle" style="font-size:16px;font-weight:600;margin:18px 0 7px;">Bean Lifecycle</h5>
 Instantiation > Populate properties(injected, fileconfig) > BeanNameAware Context(aware to other resources) > BeanFactoryAware (aware to context) > ApplicationContextAware > PreInitialization > Init() > PostInitialization() > Ready > Container Shutdown > Destroy() > Terminated
 
-##### Application Context Implementations
+<h5 id="application-context-implementations" style="font-size:16px;font-weight:600;margin:18px 0 7px;">Application Context Implementations</h5>
 The Spring framework provides several implementations of the ApplicationContext interface: ClassPathXmlApplicationContext and FileSystemXmlApplicationContext for standalone applications, and WebApplicationContext for web applications
 
 **WebApplicationContext**: Creates objects and handles the lifecycle. Extends the ApplicationContext
 
-##### Injection Types
+<h5 id="injection-types" style="font-size:16px;font-weight:600;margin:18px 0 7px;">Injection Types</h5>
 - **Constructor injection**: Through constructor. When the class cannot function without the dependent class. Immutability
 - **Setter Injection**: Through setters. When the class can function without the dependent class. Changeable dependencies
 - **Field Injection**: Through fields. Avoid: tight coupling, breaks immutability and testability
 
-##### Why Constructor Injection Wins (be ready to justify it)
+<h5 id="why-constructor-injection-wins-be-ready-to-justify-it" style="font-size:16px;font-weight:600;margin:18px 0 7px;">Why Constructor Injection Wins (be ready to justify it)</h5>
 - **Immutability**: Dependencies can be declared final
 - **Testability**: The class can be instantiated with plain `new` in a unit test, no reflection or container needed
 - **Fail fast**: A missing dependency breaks at startup, not at first use
 - Since Spring 4.3, `@Autowired` is optional when the class has a single constructor
 
-##### Circular Dependencies
+<h5 id="circular-dependencies" style="font-size:16px;font-weight:600;margin:18px 0 7px;">Circular Dependencies</h5>
 - The situation: bean A needs B, and bean B needs A
 - Field/setter injection hides the cycle (Spring resolves it with early references); constructor injection surfaces it immediately at startup — which is a feature, not a bug
 - The right fix: redesign — extract the shared logic into a third bean — rather than patching with `@Lazy`
 
-##### Controller → Service → Repository Layering
+<h5 id="controller--service--repository-layering" style="font-size:16px;font-weight:600;margin:18px 0 7px;">Controller → Service → Repository Layering</h5>
 A standard Representational State Transfer (REST) application is structured in three horizontal layers, each a constructor-injected interface depending only on the layer below:
 
 | Layer | Annotation | Responsibility |
@@ -3358,7 +3179,7 @@ A standard Representational State Transfer (REST) application is structured in t
 - Prefer **package-by-feature** (`user`, `order`) over package-by-layer, so the tree communicates the domain
 - A custom exception annotated `@ResponseStatus(HttpStatus.NOT_FOUND)` is mapped to a 404 automatically when it leaves a controller
 
-##### Data Transfer Object (DTO) Mapping
+<h5 id="data-transfer-object-dto-mapping" style="font-size:16px;font-weight:600;margin:18px 0 7px;">Data Transfer Object (DTO) Mapping</h5>
 A Data Transfer Object (DTO) carries data across a layer boundary. The discipline: **never expose the persistence entity directly** — that mixes serialization with persistence and risks leaking internal fields (such as a password hash).
 - **Request DTO**: holds the deserialized `@RequestBody`; validation annotations live here
 - **Response DTO**: defines exactly what Jackson serializes; an API-contract change touches only this class, not the entity
@@ -3369,26 +3190,26 @@ public record UserDto(UUID id, String email) {            // no password field
 }
 ```
 
-#### 🚀 Spring Boot
+<h4 id="spring-boot" style="font-size:20px;font-weight:700;margin:22px 0 8px;">🚀 Spring Boot</h4>
 
-##### Annotations
+<h5 id="annotations" style="font-size:16px;font-weight:600;margin:18px 0 7px;">Annotations</h5>
 
-###### Component Annotations
+<h6 id="component-annotations" style="font-size:13px;font-weight:600;opacity:.72;margin:14px 0 5px;">Component Annotations</h6>
 - **@Component**: Generic stereotype for any Spring managed component, indicates a bean is created
 - **@Repository**: Stereotype for persistence layer, Provides the data, database interaction, mapping. Additionally translates persistence exceptions into Spring's unified DataAccessException hierarchy
 - **@Service**: Stereotype for service layer, Business logic, data manipulation, starts transactions
 - **@Controller**: Stereotype for presentation layer (spring mvc), Process requests, builds response
 - **@RestController** (@Controller & @ResponseBody): Stereotype for REST controller
 
-*Annotations should be placed on the algorithm.implementation, not the interface maintain decoupling*
+*Annotations should be placed on the implementation, not the interface, to maintain decoupling*
 
-###### Configuration Annotations
+<h6 id="configuration-annotations" style="font-size:13px;font-weight:600;opacity:.72;margin:14px 0 5px;">Configuration Annotations</h6>
 - **@Configuration**: Declares that the class contains @Bean methods to be processed by the Spring container
 - **@ComponentScan**: Configures which packages to scan for classes
 - **@EnableAutoConfiguration**: Autoconfigures beans based on the classpath
 - **@SpringBootApplication** (@SpringBootConfiguration, @EnableAutoConfiguration, @ComponentScan): Stereotype marking a class for bootstrapping and setting the @ComponentScan from that class level down
 
-###### Web Annotations
+<h6 id="web-annotations" style="font-size:13px;font-weight:600;opacity:.72;margin:14px 0 5px;">Web Annotations</h6>
 - **@RequestMapping**: Indicates the mapping of the request to a path
 - **@GetMapping, @PostMapping**, etc: Mark controller to respond to the http method
 - **@RestController**(@Controller && @ResponseBody): Marks as a controller that returns data
@@ -3399,13 +3220,13 @@ public record UserDto(UUID id, String email) {            // no password field
 - **@ResponseBody**: Serializes the object and sends it as a response (JSON)
 - **@Value**: For injecting values from the properties/yml file
 
-###### Injection & Disambiguation Annotations
+<h6 id="injection--disambiguation-annotations" style="font-size:13px;font-weight:600;opacity:.72;margin:14px 0 5px;">Injection &amp; Disambiguation Annotations</h6>
 - **@Autowired**: Injects by type, then narrows by name; optional on a single constructor since Spring 4.3
 - **@Qualifier("name")**: Selects one bean among several candidates of the same type, by name
 - **@Primary**: Marks the default candidate among several beans of the same type
 - **@Bean vs @Component**: `@Component` annotates a class you own (detected by component scanning); `@Bean` annotates a method inside a `@Configuration` class, for objects you do not own (third-party classes)
 
-###### Configuration Binding and Profiles
+<h6 id="configuration-binding-and-profiles" style="font-size:13px;font-weight:600;opacity:.72;margin:14px 0 5px;">Configuration Binding and Profiles</h6>
 - **@Value("${property}")**: Injects a single property value; `@Value("${app.timeout:30}")` supplies a colon-delimited default
 - **@ConfigurationProperties(prefix = "app")**: Binds a whole property prefix to a typed class — preferred over many `@Value` (supports Jakarta Bean Validation, completion metadata, refactoring)
 - **@Profile("dev")**: The bean is only registered when that profile is active — swap implementations per environment (stub gateway in `dev`, real one in `prod`)
@@ -3413,7 +3234,7 @@ public record UserDto(UUID id, String email) {            // no password field
 - **Property precedence** (highest wins): command-line args → environment variables → `application-{profile}.properties` → `application.properties`
 - **Activation**: `--spring.profiles.active=prod` (argument) or `SPRING_PROFILES_ACTIVE=prod` (environment, via relaxed binding); `@ActiveProfiles("test")` activates one for a test class
 
-###### Exception Handling Annotations
+<h6 id="exception-handling-annotations" style="font-size:13px;font-weight:600;opacity:.72;margin:14px 0 5px;">Exception Handling Annotations</h6>
 - **@ControllerAdvice / @RestControllerAdvice**: Declares a global, cross-controller exception handling component applied to every controller
 - **@ExceptionHandler(SomeException.class)**: Marks a method that converts one exception type into a structured HTTP response (the argument type selects the exception)
 - **Consistent error envelope** — the answer interviewers want:
@@ -3439,7 +3260,7 @@ public class GlobalExceptionHandler {
 - **`@ResponseStatus` on the exception class** handles simple cases; `@ControllerAdvice` gives more control (logging, custom body)
 - **Spring Boot 3**: `spring.mvc.problemdetails.enabled=true` emits RFC 9457 `ProblemDetail` error bodies with no custom code
 
-###### Transactional
+<h6 id="transactional" style="font-size:13px;font-weight:600;opacity:.72;margin:14px 0 5px;">Transactional</h6>
 - **@EnableTransactionManagement**: Use in a @Configuration class to enable transactional support
 - **@Transactional is proxy based**: Spring wraps the bean in a proxy that opens, commits or rolls back the transaction around the method call
   - **Self-invocation gotcha (classic question)**: A call from one method to another @Transactional method of the *same class* bypasses the proxy — no transaction is started
@@ -3447,15 +3268,15 @@ public class GlobalExceptionHandler {
   - **Propagation levels**: REQUIRED (default: join the current transaction or create one), REQUIRES_NEW (suspend the current one, open a fresh one), NESTED (savepoint inside the current one)
   - **readOnly = true**: Optimization hint for read paths (no dirty checking, possible routing to read replicas)
 
-###### Request/Response Entities
+<h6 id="requestresponse-entities" style="font-size:13px;font-weight:600;opacity:.72;margin:14px 0 5px;">Request/Response Entities</h6>
 - **RequestEntity**
 - **ResponseEntity**
 
-###### Run on Start
+<h6 id="run-on-start" style="font-size:13px;font-weight:600;opacity:.72;margin:14px 0 5px;">Run on Start</h6>
 - **CommandLineRunner**: Receives argument
 - **ApplicationRunner**
 
-##### Bean Validation (Jakarta Bean Validation, Java Specification Request 380)
+<h5 id="bean-validation-jakarta-bean-validation-java-specification-request-380" style="font-size:16px;font-weight:600;margin:18px 0 7px;">Bean Validation (Jakarta Bean Validation, Java Specification Request 380)</h5>
 Hibernate Validator (the reference implementation of Java Specification Request, JSR-380) integrates with Spring MVC so a single `@Valid` on a controller parameter runs all constraint checks before the method body. Flow: JSON → Jackson deserializes into the request Data Transfer Object → Spring validates → on failure throws `MethodArgumentNotValidException` *before* the service is reached → `@ControllerAdvice` turns it into a 400.
 
 ```java
@@ -3477,13 +3298,13 @@ public UserDto create(@Valid @RequestBody CreateUserParameters p) { ... }   // @
 
 Custom rule: write an annotation plus a `ConstraintValidator<A, T>`, link them with `@Constraint(validatedBy = ...)`; Spring beans can be injected into the validator.
 
-##### How Auto-Configuration Actually Works (senior question)
+<h5 id="how-auto-configuration-actually-works-senior-question" style="font-size:16px;font-weight:600;margin:18px 0 7px;">How Auto-Configuration Actually Works (senior question)</h5>
 1. `@EnableAutoConfiguration` loads the candidate configuration classes listed in `META-INF/spring/org.springframework.boot.autoconfigure.AutoConfiguration.imports` (formerly `spring.factories`)
 2. Each candidate is guarded by conditions: **@ConditionalOnClass** (a library is on the classpath), **@ConditionalOnMissingBean** (you did not define your own bean), **@ConditionalOnProperty**, and the rest of the @Conditional family
 3. **Starters** are simply curated dependency sets: they put the right classes on the classpath so the matching auto-configurations activate
 4. To override: declare your own bean (it wins, thanks to @ConditionalOnMissingBean) or exclude the auto-configuration (`@SpringBootApplication(exclude = ...)`)
 
-##### Starters and Actuator
+<h5 id="starters-and-actuator" style="font-size:16px;font-weight:600;margin:18px 0 7px;">Starters and Actuator</h5>
 A **starter** is one dependency that pulls in a curated, tested set of libraries; the classes it adds to the classpath activate the matching auto-configuration.
 
 | Starter | What it brings |
@@ -3496,7 +3317,7 @@ A **starter** is one dependency that pulls in a curated, tested set of libraries
 
 **Spring Boot Actuator** exposes production-ready endpoints over HTTP (or Java Management Extensions) with no application code: `/actuator/health` (the Kubernetes liveness/readiness probe target), `/actuator/metrics` (Micrometer metrics — Java Virtual Machine memory, garbage collection, request latencies). Endpoints are restricted by default; expose them selectively with `management.endpoints.web.exposure.include=health,info,metrics`.
 
-##### Testing Spring Applications
+<h5 id="testing-spring-applications" style="font-size:16px;font-weight:600;margin:18px 0 7px;">Testing Spring Applications</h5>
 - **@SpringBootTest**: Loads the full application context — slow, reserve it for integration tests; add `@AutoConfigureMockMvc` to get a `MockMvc` wired into the full context
 - **@WebMvcTest(MyController.class)**: Controller slice only; `MockMvc` is auto-wired — supply a `@MockBean` for each service the controller needs
 - **@DataJpaTest**: Repository slice only, with an embedded database; each test runs in a transaction rolled back on completion, so data mutations need no cleanup
@@ -3521,9 +3342,9 @@ class UserRestControllerTest {
 // status(), jsonPath(), content() are static imports from MockMvcResultMatchers / RequestBuilders
 ```
 
-#### 🌐 Spring MVC
+<h4 id="spring-mvc" style="font-size:20px;font-weight:700;margin:22px 0 8px;">🌐 Spring MVC</h4>
 
-##### Architecture
+<h5 id="architecture" style="font-size:16px;font-weight:600;margin:18px 0 7px;">Architecture</h5>
 Spring MVC follows the **Front Controller** pattern: a single servlet receives every request and dispatches it. The request flow:
 1. **Browser → DispatcherServlet**: All requests hit one entry point (the front controller)
 2. **DispatcherServlet → Controller**: It consults handler mappings to find the controller method for the URL, then invokes it
@@ -3533,143 +3354,282 @@ Spring MVC follows the **Front Controller** pattern: a single servlet receives e
 
 *For REST APIs the View step is skipped: `@ResponseBody` / `@RestController` serializes the returned object straight to JSON via an HttpMessageConverter.*
 
-##### Spring MVC Configuration
+<h5 id="configuration" style="font-size:16px;font-weight:600;margin:18px 0 7px;">Configuration</h5>
 - Configure DispatcherServlet
 - Setup URL mappings to the DispatcherServlet
 - Setup ComponentScanning
 - Configure conversion, formatting, validation
 - Configure ViewResolver
 
-##### Mapping Concepts
+<h5 id="mapping" style="font-size:16px;font-weight:600;margin:18px 0 7px;">Mapping</h5>
 - **Servlet Mapping**: Which web container of the Java servlet should be invoked for a given URL. The Servlet container decides which Servlet it should forward the request to
 - **Request Mapping**: Maps a Request to a controller method to invoke as a response to the request
 - **View Resolver**: Locates the view to rendered as a response to a request (application.properties prefix + suffix)
 
-##### Template Engine
+<h5 id="template-engine" style="font-size:16px;font-weight:600;margin:18px 0 7px;">Template Engine</h5>
 - **Thymeleaf**: Replace JSP
 
-#### ⚡ Spring WebFlux
+<h4 id="spring-webflux" style="font-size:20px;font-weight:700;margin:22px 0 8px;">🌊 Spring WebFlux</h4>
 
-##### Characteristics
-- **Nonblocking API** (Servlet v3.1)
-- **Asynchronous nature** (like callbacks) though messages
-- **Publisher/Subscriber model** through a Subscription
-- **Functional/Declarative style**
-- **Functional programming**: Pure functions, Lambdas, Immutability
-- **Concurrent connections** handles by few threads
-- **Continuous stream of data** live connection(MediaType.TEXT_EVENT_STREAM_VALUE)
+Spring's reactive, non-blocking web stack (Spring 5+), a parallel alternative to the servlet-based Spring MVC. A small pool of event-loop threads serves thousands of concurrent connections, and results flow back as an asynchronous stream of events instead of a blocked return value. It is built on the Reactive Streams specification and powered by Project Reactor.
 
-##### Reactive Streams
-1. Subscriber > subscribe() > Publisher
-2. Subscription is created
-3. Publisher > onSubscribe(Subscription) > Subscriber
-4. Subscriber > request() > Subscription
-5. Publisher > onNext() > Subscriber
-   - If no more elems: Publisher > onComplete() > Subscriber > Subscription cancelled
-   - If error: Publisher > onError() > Subscriber > Subscription cancelled
+<h5 id="overview-and-purpose" style="font-size:16px;font-weight:600;margin:18px 0 7px;">Overview and purpose</h5>
+- **What it buys you**: throughput and resource efficiency under high concurrency with slow or numerous input/output calls — not lower latency for a single request
+- **Use it when**: the whole chain is non-blocking (reactive web → reactive client → reactive database), or you need streaming (Server-Sent Events, WebSocket)
+- **Avoid it when**: a blocking relational database over Java Database Connectivity sits in the path — the blocking call cancels the benefit and Spring MVC is simpler. Reactive is all-or-nothing along a request
 
-**Properties**: ASYNC, NONBLOCKING, BACKPRESSURE
+<h5 id="architecture-and-logic" style="font-size:16px;font-weight:600;margin:18px 0 7px;">Architecture and logic</h5>
+- Runs on **Netty** (an event-loop server) by default, or any Servlet 3.1+ container (Tomcat, Jetty, Undertow) in non-blocking mode
+- Event-loop threads **never block**: a handler returns a `Publisher` immediately, and the framework subscribes and writes each element as it is produced
+- **Backpressure** is the core safety valve: the subscriber asks for only as many elements as it can handle (`request(n)`), so a fast producer never floods a slow consumer
+- Publishers are **lazy**: nothing happens until something subscribes — the framework subscribes for you when it serves the response
 
-###### Interfaces
+| Dimension | Spring MVC | Spring WebFlux |
+|---|---|---|
+| Concurrency model | One thread per request, blocking | Event loop, non-blocking |
+| Return types | `T`, `ResponseEntity<T>` | `Mono<T>`, `Flux<T>` |
+| Default server | Tomcat (Servlet) | Netty |
+| Data access | Java Persistence API / Java Database Connectivity (blocking) | R2DBC, reactive Mongo (non-blocking) |
+| Best fit | Standard create/read/update/delete on a blocking database | High concurrency, streaming, a fully reactive chain |
+
+<h5 id="reactive-foundations" style="font-size:16px;font-weight:600;margin:18px 0 7px;">Reactive foundations</h5>
+The building blocks every endpoint sits on — the Reactive Streams contract, the Project Reactor publishers, and the operators that drive them.
+
+<h6 id="reactive-streams-the-specification" style="font-size:13px;font-weight:600;opacity:.72;margin:14px 0 5px;">Reactive Streams (the specification)</h6>
+Four interfaces (mirrored by `java.util.concurrent.Flow`) that define asynchronous data flow with backpressure. The publish/subscribe handshake:
+1. `publisher.subscribe(subscriber)` — the subscriber registers
+2. the publisher calls `subscriber.onSubscribe(subscription)`, handing back a `Subscription`
+3. the subscriber calls `subscription.request(n)` to pull up to `n` elements (backpressure)
+4. the publisher pushes through `subscriber.onNext(item)`, at most `n` times
+5. it ends with `subscriber.onComplete()` on success or `subscriber.onError(error)` on failure; the subscriber may call `subscription.cancel()` at any point
+
+**Properties**: asynchronous, non-blocking, backpressured.
+
 ```java
-// PUBLISHER
+// publisher: a source of elements
 public interface Publisher<T> {
-    public void subscribe(Subscriber<? super T> s);
+    void subscribe(Subscriber<? super T> s);
 }
 
-// SUBSCRIBER
+// subscriber: consumes the elements
 public interface Subscriber<T> {
-    public void OnSubscribe(Subscription s);
-    public void onNext(T t);
-    public void onError(Throwable t);
-    public void onComplete();
+    void onSubscribe(Subscription s);   // receives the subscription handle
+    void onNext(T item);                // next element
+    void onError(Throwable t);          // terminal signal: failure
+    void onComplete();                  // terminal signal: success
 }
 
-// SUBSCRIPTION
-public interface Subscription<T> {
-    public void request(long n); // backpressure
-    public void cancel();
+// subscription: the link the subscriber drives for backpressure
+public interface Subscription {
+    void request(long n);               // demand n more elements
+    void cancel();                      // stop and release the source
 }
 
-// PROCESSOR
+// processor: a stage that is both subscriber and publisher — a transform step
+// sitting between two others. In Project Reactor, prefer Sinks over writing one.
+public interface Processor<T, R> extends Subscriber<T>, Publisher<R> {}
 ```
 
-#### Project Reactor (Reactive Library)
-- **FLUX**: Publish [0... n] for Object or void
-- **MONO**: Publish [0,1] for Lists
-- Flux and Mono are implementations of the Publisher interface
-
-#### ServerWebExchange
-Reactive container
-- **ServerHttpRequest**: Reactive request
-- **ServerHttpResponse**: Reactive response
-
-#### Functional Endpoints
-@Controllers become Router and Handler Function
-- **Handler function**: Take a ServerRequest, return a ServerResponse
-- **Router Function**: Routes the request to the appropriate handler function
+<h6 id="project-reactor--mono-and-flux" style="font-size:13px;font-weight:600;opacity:.72;margin:14px 0 5px;">Project Reactor — Mono and Flux</h6>
+The reactive library WebFlux is built on. Both types implement `Publisher`, and both are lazy and immutable (every operator returns a new publisher).
+- **`Mono<T>`** — 0 or 1 element: a single result or empty (find-by-id, a count, the saved entity)
+- **`Flux<T>`** — 0..N elements: a stream (a list, a paged query, a live feed)
 
 ```java
-// Router function
-public Mono<HandlerFunction> myRouterFunction(ServerRequest request){}
-RouterFunctions.route(RequestPredicate, HandlerFunction)
+Mono<User>    one   = Mono.just(user);                  // a known value
+Mono<User>    none  = Mono.empty();                      // completes with nothing
+Mono<User>    lazy  = Mono.fromCallable(() -> load());   // deferred, runs on subscribe
+Flux<Integer> many  = Flux.just(1, 2, 3);
+Flux<User>    from  = Flux.fromIterable(users);
+Flux<Long>    ticks = Flux.interval(Duration.ofSeconds(1)); // 0,1,2,... every second
+Mono<User>    fail  = Mono.error(new NotFoundException());
+```
 
-// Handler Function Interface
-interface HandlerFunction<T extends ServerResponse>{
-    Mono<T> handle(ServerRequest request)
+<h6 id="common-operators-the-functions-used-daily" style="font-size:13px;font-weight:600;opacity:.72;margin:14px 0 5px;">Common operators (the functions used daily)</h6>
+| Operator | On | Purpose |
+|---|---|---|
+| `map(fn)` | Mono/Flux | transform each element synchronously |
+| `flatMap(fn)` | Mono/Flux | map each element to a `Publisher` and flatten — async, order not preserved |
+| `concatMap(fn)` | Flux | like `flatMap` but sequential and order-preserving |
+| `filter(pred)` | Flux | keep only matching elements |
+| `zip` / `zipWith` | Mono/Flux | combine several publishers element by element |
+| `merge` / `concat` | Flux | join streams — interleaved vs one after another |
+| `collectList()` | Flux → Mono | gather a `Flux<T>` into a `Mono<List<T>>` |
+| `switchIfEmpty` / `defaultIfEmpty` | Mono/Flux | fallback when the source is empty |
+| `take(n)` / `skip(n)` | Flux | keep or drop a prefix |
+| `doOnNext` / `doOnError` / `doOnComplete` | Mono/Flux | side effects (logging) without changing the data |
+| `onErrorResume` / `onErrorReturn` / `retry` | Mono/Flux | recover from an error |
+| `subscribeOn` / `publishOn` | Mono/Flux | choose the scheduler (thread) up- or down-stream |
+| `timeout` / `delayElements` | Mono/Flux | time bounds and pacing |
+
+> `map` vs `flatMap`: use `map` for a plain value transform, `flatMap` when the transform itself returns a `Mono`/`Flux` (for example, calling another reactive service).
+
+<h6 id="subscribing-and-bridging--terminal-operations" style="font-size:13px;font-weight:600;opacity:.72;margin:14px 0 5px;">Subscribing and bridging — terminal operations</h6>
+A pipeline is only a blueprint until a **terminal** call subscribes to it. In a controller you almost never subscribe yourself — you **return** the `Mono`/`Flux` and let WebFlux subscribe when it writes the response. The terminal calls matter at the edges (tests, `main`, legacy blocking code):
+
+| Call | On | Effect |
+|---|---|---|
+| `subscribe(...)` | Mono/Flux | start the pipeline, react to signals through callbacks (fire-and-forget) |
+| `block()` | Mono | subscribe and **wait**, returning the single value (or `null`) — blocking |
+| `blockOptional()` | Mono | like `block()` but returns `Optional<T>` for the empty case |
+| `blockFirst()` / `blockLast()` | Flux | subscribe and wait for the first / last element |
+| `toFuture()` | Mono | bridge to a `CompletableFuture<T>` |
+| `toStream()` / `toIterable()` | Flux | bridge to a blocking `Stream` / `Iterable` |
+
+> **Never call `block()` inside a reactive chain or on an event-loop thread** — it stalls the loop and defeats WebFlux (recent Reactor versions throw `IllegalStateException` if you do). Use it only in tests, `main`, or a genuinely blocking layer; inside a pipeline, compose instead.
+
+**Sequencing terminals** keep you reactive instead of blocking:
+- `then()` — ignore the result, continue when the source completes (`Mono<Void>`)
+- `thenReturn(value)` — complete, then emit a fixed value
+- `thenMany(flux)` — complete a `Mono`, then switch to a `Flux`
+- `flatMapMany(fn)` — turn a `Mono` into a `Flux` by mapping it to a publisher
+
+<h5 id="building-a-rest-api" style="font-size:16px;font-weight:600;margin:18px 0 7px;">Building a REST API</h5>
+The two endpoint styles, plus the request-binding, response-building, and validation calls they share.
+
+<h6 id="annotated-controllers-the-common-style" style="font-size:13px;font-weight:600;opacity:.72;margin:14px 0 5px;">Annotated controllers (the common style)</h6>
+Identical annotations to Spring MVC; only the return types become `Mono`/`Flux`.
+```java
+@RestController
+@RequestMapping("/products")
+class ProductController {
+
+    private final ProductService service;          // its methods return Mono/Flux
+    ProductController(ProductService service) { this.service = service; }
+
+    @GetMapping                                     // GET /products -> stream of products
+    Flux<Product> all() { return service.findAll(); }
+
+    @GetMapping("/{id}")                            // GET /products/{id}
+    Mono<ResponseEntity<Product>> byId(@PathVariable String id) {
+        return service.findById(id)
+                .map(ResponseEntity::ok)
+                .defaultIfEmpty(ResponseEntity.notFound().build());
+    }
+
+    @PostMapping                                    // POST /products
+    @ResponseStatus(HttpStatus.CREATED)
+    Mono<Product> create(@RequestBody @Valid Mono<Product> body) {
+        return body.flatMap(service::save);
+    }
+
+    @DeleteMapping("/{id}")
+    Mono<Void> delete(@PathVariable String id) { return service.delete(id); }
+
+    @GetMapping(value = "/stream", produces = MediaType.TEXT_EVENT_STREAM_VALUE)
+    Flux<Product> stream() { return service.liveFeed(); }   // Server-Sent Events
 }
+```
 
-// Handler Class
-class <T>Handler{
-    public Mono<ServerResponse> myHandlerFunction(ServerRequest request){
-        Mono<T> t = request.bodyToMono(T.class); //or
-        Flux<T> t = request.bodyToFlux(T.class);
-        
-        return ServerResponse.ok().contentType(MediaType.APPLICATION_JSON).body(t);
+<h6 id="functional-endpoints-the-alternative-style" style="font-size:13px;font-weight:600;opacity:.72;margin:14px 0 5px;">Functional endpoints (the alternative style)</h6>
+Routes are declared as data instead of annotations: a `RouterFunction` maps a `RequestPredicate` to a `HandlerFunction`, and a handler takes a `ServerRequest` and returns a `Mono<ServerResponse>`.
+```java
+// a handler: ServerRequest in, Mono<ServerResponse> out
+class ProductHandler {
+    Mono<ServerResponse> get(ServerRequest req) {
+        Mono<Product> product = service.findById(req.pathVariable("id"));
+        return ServerResponse.ok().contentType(MediaType.APPLICATION_JSON).body(product, Product.class);
+    }
+    Mono<ServerResponse> save(ServerRequest req) {
+        Flux<Product> body = req.bodyToFlux(Product.class);     // or req.bodyToMono(...)
+        return ServerResponse.status(HttpStatus.CREATED).body(service.saveAll(body), Product.class);
     }
 }
-```
 
-##### RequestPredicate Class
+// the router: predicate -> handler, built fluently
+RouterFunction<ServerResponse> routes = RouterFunctions.route()
+        .GET("/products/{id}", handler::get)
+        .POST("/products", handler::save)
+        .build();
+```
+Common `RequestPredicates`: `GET`/`POST`/`PUT`/`DELETE(pattern)`, `path(pattern)`, `accept(mediaType)`, `contentType(mediaType)`, `method(httpMethod)` — combine them with `.and(...)` / `.or(...)`.
+
+<h6 id="reading-the-request--binding-the-inputs" style="font-size:13px;font-weight:600;opacity:.72;margin:14px 0 5px;">Reading the request — binding the inputs</h6>
+In annotated controllers Spring binds each part of the request to a method parameter; in functional handlers you pull the same data off `ServerRequest`.
+
+| Annotation (controller) | `ServerRequest` (handler) | Reads |
+|---|---|---|
+| `@PathVariable` | `pathVariable("id")` | a templated path segment (`/products/{id}`) |
+| `@RequestParam` | `queryParam("q")` | a query-string parameter (`?q=...`) |
+| `@RequestHeader` | `headers().firstHeader(...)` | a request header |
+| `@RequestBody Mono<T>` / `Flux<T>` | `bodyToMono(T.class)` / `bodyToFlux(T.class)` | the deserialized body |
+| `@CookieValue` | `cookies()` | a cookie |
+| `@RequestPart` | `multipartData()` | one part of a multipart/form-data upload |
+
+- **`ServerWebExchange`** is the low-level container for the whole exchange (`ServerHttpRequest` + `ServerHttpResponse`); inject it only when you need raw access — headers, status, the body as a `Flux<DataBuffer>` — that the binding annotations do not expose.
+
+<h6 id="writing-the-response--builders" style="font-size:13px;font-weight:600;opacity:.72;margin:14px 0 5px;">Writing the response — builders</h6>
+Both styles build the response fluently; only the return type differs.
 ```java
-public abstract class RequestPredicate{
-    static RequestPredicate accept(MediaType... mediaTypes) // tests if the request contains a particular accept header
-    static RequestPredicate GET(String pattern) // checks if the request pattern matches against the request path
-    static RequestPredicate method(HttpMethod method) // to test any request http method
-    static RequestPredicate path(String pattern) // test against the given path pattern
+// annotated controllers: wrap in ResponseEntity for explicit status and headers
+ResponseEntity.ok(body);                           // 200 with a body
+ResponseEntity.status(HttpStatus.CREATED).body(x); // any status + body
+ResponseEntity.created(uri).build();               // 201 + Location header
+ResponseEntity.noContent().build();                // 204
+ResponseEntity.notFound().build();                 // 404
+ResponseEntity.badRequest().body(error);           // 400
+
+// functional handlers: build a Mono<ServerResponse>
+ServerResponse.ok().bodyValue(product);                 // an already-resolved value
+ServerResponse.ok().body(productMono, Product.class);   // a publisher + its element type
+ServerResponse.status(HttpStatus.CREATED).build();      // no body
+```
+> `bodyValue(x)` takes a resolved object; `body(publisher, Class)` takes a `Mono`/`Flux` plus its element type. Passing a publisher to `bodyValue` serializes the publisher itself — a common mistake.
+
+<h6 id="validating-the-request-body" style="font-size:13px;font-weight:600;opacity:.72;margin:14px 0 5px;">Validating the request body</h6>
+Annotate the payload with Jakarta Bean Validation constraints and trigger them with `@Valid` (or `@Validated`).
+```java
+record CreateProduct(
+        @NotBlank String name,            // not null, and not empty or whitespace
+        @Positive BigDecimal price,       // strictly greater than zero
+        @Size(max = 280) String notes) {}
+
+@PostMapping
+Mono<Product> create(@RequestBody @Valid Mono<CreateProduct> body) {
+    return body.flatMap(service::create);
 }
 ```
+- Common constraints: `@NotNull`, `@NotBlank`, `@NotEmpty`, `@Size(min, max)`, `@Min` / `@Max`, `@Positive` / `@Negative`, `@Email`, `@Pattern(regexp)`
+- On failure WebFlux raises `WebExchangeBindException` (a `400 Bad Request`); handle it in a `@ControllerAdvice` `@ExceptionHandler` to shape the error body (ideally RFC 7807 "Problem Details")
+- For business rules inside the chain, fail the stream instead of throwing — `switchIfEmpty(Mono.error(new NotFoundException()))` or `onErrorMap(...)` — and let the advice translate the exception into a status code
 
-##### Functional Endpoint Example
+<h5 id="webclient--the-reactive-http-client" style="font-size:16px;font-weight:600;margin:18px 0 7px;">WebClient — the reactive HTTP client</h5>
+The non-blocking replacement for the blocking `RestTemplate`; returns `Mono`/`Flux`.
 ```java
-RouterFunctions<ServerResponse> myRoute =
-    RouterFunctions.route(
-        RequestPredicates.path(/products), // test if the request was made against the path
-        request->Response.ok().body(productFlux) // pass an algorithm.implementation of the handler function interface
-    );
-
-// or
-
-RouterFunctions<ServerResponse> myRoute =
-    RouterFunctions.route()
-    .RequestPredicates.GET("/product",handler::getProduct)
-    .RequestPredicates.POST("/product",handler::saveProduct)
-    .build();
+WebClient client = WebClient.create("https://api.example.com");
+Mono<Product> product = client.get().uri("/products/{id}", id)
+        .retrieve()
+        .bodyToMono(Product.class);
 ```
 
-#### 💻 Runnable Code Examples
+<h5 id="advanced-features" style="font-size:16px;font-weight:600;margin:18px 0 7px;">Advanced features</h5>
+- **Backpressure strategies**: when a producer outruns a consumer, control overflow with `onBackpressureBuffer`, `onBackpressureDrop`, or `limitRate(n)`
+- **Threading and schedulers**: event-loop threads must never block. Offload an unavoidable blocking call with `subscribeOn(Schedulers.boundedElastic())`; use `publishOn` to switch the downstream thread. `subscribeOn` affects the source, `publishOn` affects everything after it
+- **Error handling**: `onErrorResume` (fallback publisher), `onErrorReturn` (fallback value), `retry` / `retryWhen` (with backoff); globally, a `@ControllerAdvice` `@ExceptionHandler` or a custom `WebExceptionHandler`, ideally emitting RFC 7807 "Problem Details"
+- **Streaming**: return a `Flux` with `produces = MediaType.TEXT_EVENT_STREAM_VALUE` for Server-Sent Events, or a `Flux<ServerSentEvent<T>>` for full control; bidirectional streaming uses a `WebSocketHandler`
+- **Reactive data access**: Reactive Relational Database Connectivity (R2DBC) with `ReactiveCrudRepository`, or reactive MongoDB. Never place blocking Java Persistence API / Java Database Connectivity in a reactive chain — wrap it in `Schedulers.boundedElastic()` only if you truly must
+- **Sinks**: `Sinks.many()` / `Sinks.one()` push values into a `Flux`/`Mono` programmatically (the modern replacement for `Processor`) — useful for broadcasting events
+- **Testing**: `StepVerifier` asserts the sequence of emitted elements and the terminal signal; `@WebFluxTest` slices the web layer and `WebTestClient` drives endpoints without a running server
 
-Every core concept above is implemented as a self-contained, executable class (each with a `main` and prints) under [src/algorithm.concepts/spring/](../src/main/java/algorithm/concepts/spring/), following the same style as the algorithm.implementation `*Basics.java` guides. Dependencies are declared in [build.gradle](../build.gradle) (`spring-context`, `aspectjweaver`, `jakarta.annotation-api`). Run any class directly from the IDE, or from the command line with the Gradle wrapper:
+```java
+StepVerifier.create(service.findById("1"))
+        .expectNextMatches(product -> product.id().equals("1"))
+        .verifyComplete();
+```
+
+<h4 id="runnable-code-examples" style="font-size:20px;font-weight:700;margin:22px 0 8px;">💻 Runnable Code Examples</h4>
+
+Every core concept above is implemented as a self-contained, executable class (each with a `main` and prints) under [src/main/java/algorithm/concepts/spring/](../src/main/java/algorithm/concepts/spring/), following the same style as the algorithm `*Basics.java` guides. Dependencies are declared in [build.gradle](../build.gradle) (`spring-context`, `aspectjweaver`, `jakarta.annotation-api`). Run any class directly from the IDE, or from the command line with the Gradle wrapper:
 
 ```bash
 # Run any example's main() by its fully-qualified name
-./gradlew runClass -PmainClass=concept.spring.ioc.IocContainerExample
+./gradlew runClass -PmainClass=algorithm.concepts.spring.ioc.IocContainerExample
 
 # Or just compile everything
 ./gradlew compileJava
 ```
 
-##### 1. Inversion of Control & the container — [IocContainerExample.java](../src/main/java/algorithm/concepts/spring/ioc/IocContainerExample.java)
+<h5 id="1-inversion-of-control--the-container--ioccontainerexamplejavasrcmainjavaalgorithmconceptsspringiocioccontainerexamplejava" style="font-size:16px;font-weight:600;margin:18px 0 7px;">1. Inversion of Control &amp; the container — [IocContainerExample.java](../src/main/java/algorithm/concepts/spring/ioc/IocContainerExample.java)</h5>
 The container creates and wires the beans; `@Component` for classes you own, `@Bean` for classes you do not:
 ```java
 @Component
@@ -3688,7 +3648,7 @@ try (var context = new AnnotationConfigApplicationContext(IocContainerExample.cl
 }
 ```
 
-##### 2. The three injection types + disambiguation — [InjectionTypesExample.java](../src/main/java/algorithm/concepts/spring/di/InjectionTypesExample.java)
+<h5 id="2-the-three-injection-types--disambiguation--injectiontypesexamplejavasrcmainjavaalgorithmconceptsspringdiinjectiontypesexamplejava" style="font-size:16px;font-weight:600;margin:18px 0 7px;">2. The three injection types + disambiguation — [InjectionTypesExample.java](../src/main/java/algorithm/concepts/spring/di/InjectionTypesExample.java)</h5>
 ```java
 @Component @Primary  static class EmailChannel implements MessageChannel { ... }  // default pick
 @Component("sms")    static class SmsChannel   implements MessageChannel { ... }  // pick by name
@@ -3700,7 +3660,7 @@ NotificationService(MessageChannel defaultChannel) { this.defaultChannel = defau
 @Autowired @Qualifier("sms") private MessageChannel fieldInjectedChannel;
 ```
 
-##### 3. Bean lifecycle & scopes — [BeanLifecycleAndScopesExample.java](../src/main/java/algorithm/concepts/spring/lifecycle/BeanLifecycleAndScopesExample.java)
+<h5 id="3-bean-lifecycle--scopes--beanlifecycleandscopesexamplejavasrcmainjavaalgorithmconceptsspringlifecyclebeanlifecycleandscopesexamplejava" style="font-size:16px;font-weight:600;margin:18px 0 7px;">3. Bean lifecycle &amp; scopes — [BeanLifecycleAndScopesExample.java](../src/main/java/algorithm/concepts/spring/lifecycle/BeanLifecycleAndScopesExample.java)</h5>
 ```java
 @Component
 static class SingletonBean {
@@ -3714,7 +3674,7 @@ static class PrototypeBean { ... }        // NEW instance per getBean(); @PreDes
 ```
 The print order at runtime proves the story: constructor → `@PostConstruct` → container ready → `@PreDestroy` on close — and the prototype's `@PreDestroy` never fires because the container forgets prototypes after handing them out.
 
-##### 4. Proxies & the self-invocation gotcha — [AopProxyExample.java](../src/main/java/algorithm/concepts/spring/aop/AopProxyExample.java)
+<h5 id="4-proxies--the-self-invocation-gotcha--aopproxyexamplejavasrcmainjavaalgorithmconceptsspringaopaopproxyexamplejava" style="font-size:16px;font-weight:600;margin:18px 0 7px;">4. Proxies &amp; the self-invocation gotcha — [AopProxyExample.java](../src/main/java/algorithm/concepts/spring/aop/AopProxyExample.java)</h5>
 A custom `@Logged` annotation plays the role of `@Transactional`; a logging aspect plays the transaction interceptor:
 ```java
 @Aspect @Component
@@ -3733,7 +3693,7 @@ bank.transferTwice("alice", "bob");  // SELF-INVOCATION → 'this' is the raw ob
 ```
 Running it prints the injected type — `BankService$$SpringCGLIB$$0` — visible proof that the bean you receive is a generated proxy subclass, not your class.
 
-##### 5. Application events (Observer pattern) — [ApplicationEventsExample.java](../src/main/java/algorithm/concepts/spring/events/ApplicationEventsExample.java)
+<h5 id="5-application-events-observer-pattern--applicationeventsexamplejavasrcmainjavaalgorithmconceptsspringeventsapplicationeventsexamplejava" style="font-size:16px;font-weight:600;margin:18px 0 7px;">5. Application events (Observer pattern) — [ApplicationEventsExample.java](../src/main/java/algorithm/concepts/spring/events/ApplicationEventsExample.java)</h5>
 ```java
 record OrderPlaced(String orderId) {}                  // since Spring 4.2: any plain object
 
@@ -3744,8 +3704,8 @@ void on(OrderPlaced event) { ... }                     // each new reaction = on
 ```
 Listeners run synchronously on the caller thread by default (`@Async` + `@EnableAsync` to detach). Same thinking as Kafka events between services — here inside one Java Virtual Machine.
 
-##### 6. Strategy pattern via Map injection — [StrategyPatternExample.java](../src/main/java/algorithm/concepts/spring/strategy/StrategyPatternExample.java)
-The interview favorite — Spring injects every algorithm.implementation keyed by bean name, eliminating switch statements:
+<h5 id="6-strategy-pattern-via-map-injection--strategypatternexamplejavasrcmainjavaalgorithmconceptsspringstrategystrategypatternexamplejava" style="font-size:16px;font-weight:600;margin:18px 0 7px;">6. Strategy pattern via Map injection — [StrategyPatternExample.java](../src/main/java/algorithm/concepts/spring/strategy/StrategyPatternExample.java)</h5>
+The interview favorite — Spring injects every implementation keyed by bean name, eliminating switch statements:
 ```java
 @Component("card")   static class CardPayment   implements PaymentStrategy { ... }
 @Component("paypal") static class PaypalPayment implements PaymentStrategy { ... }
@@ -3756,7 +3716,7 @@ PaymentProcessor(Map<String, PaymentStrategy> strategies) {   // beanName -> bea
 // Adding "crypto" = ONE new @Component — zero existing code modified (Open/Closed principle)
 ```
 
-##### 7. @Value & @Profile — [ValueAndProfilesExample.java](../src/main/java/algorithm/concepts/spring/config/ValueAndProfilesExample.java)
+<h5 id="7-value--profile--valueandprofilesexamplejavasrcmainjavaalgorithmconceptsspringconfigvalueandprofilesexamplejava" style="font-size:16px;font-weight:600;margin:18px 0 7px;">7. @Value &amp; @Profile — [ValueAndProfilesExample.java](../src/main/java/algorithm/concepts/spring/config/ValueAndProfilesExample.java)</h5>
 ```java
 @Value("${app.name}")       private String name;             // resolved from the Environment
 @Value("${app.timeout:30}") private int timeoutSeconds;      // ':' introduces the default value
@@ -3768,14 +3728,14 @@ In Spring Boot the `${...}` resolver is registered automatically; the example re
 
 ---
 
-### ⚡ Quarkus
+<h3 id="quarkus" style="font-size:26px;font-weight:700;margin:26px 0 10px;">⚡ Quarkus</h3>
 
 A Kubernetes-native Java framework by Red Hat, marketed as "Supersonic Subatomic Java". It is built on proven standards (Jakarta EE and Eclipse MicroProfile) but re-engineered so that as much work as possible happens at **build time**, producing fast-starting, low-memory applications that compile cleanly to GraalVM native executables.
 
-#### Core Idea: build-time processing
+<h4 id="core-idea-build-time-processing" style="font-size:20px;font-weight:700;margin:22px 0 8px;">⚡ Core Idea: build-time processing</h4>
 Spring discovers and wires beans while the application boots, using reflection and classpath scanning. Quarkus moves that work into the build: its extensions process annotations during compilation, pre-compute the wiring, and emit minimal runtime code. The result is faster startup, lower memory, and native-image friendliness (reflection is the enemy of GraalVM).
 
-#### Dependency Injection (Jakarta CDI / ArC)
+<h4 id="dependency-injection-jakarta-cdi--arc" style="font-size:20px;font-weight:700;margin:22px 0 8px;">⚡ Dependency Injection (Jakarta CDI / ArC)</h4>
 Quarkus uses Contexts and Dependency Injection (the Jakarta standard), implemented by its build-time engine **ArC**.
 ```java
 @ApplicationScoped                 // one instance for the app (like a Spring singleton)
@@ -3796,7 +3756,7 @@ public class OrderService {
 | REST endpoint | `@RestController` + `@GetMapping` | `@Path` + `@GET` (Jakarta REST) |
 | Configuration value | `@Value` | `@ConfigProperty` (MicroProfile Config) |
 
-#### Web endpoint example
+<h4 id="web-endpoint-example" style="font-size:20px;font-weight:700;margin:22px 0 8px;">⚡ Web endpoint example</h4>
 ```java
 @Path("/orders")                   // Jakarta REST (formerly JAX-RS)
 public class OrderResource {
@@ -3806,25 +3766,25 @@ public class OrderResource {
 }
 ```
 
-#### Key Features
+<h4 id="key-features" style="font-size:20px;font-weight:700;margin:22px 0 8px;">⚡ Key Features</h4>
 - **Live coding (dev mode)**: `quarkus dev` hot-reloads code on each request — no manual restart
 - **Native compilation**: builds a standalone GraalVM executable that starts in tens of milliseconds and uses a fraction of the memory — ideal for serverless and scale-to-zero
 - **Extensions**: curated integrations (Hibernate, Kafka, REST clients) designed for build-time processing and native images
 - **MicroProfile**: standardized config, health checks, metrics, and fault tolerance out of the box
 
-#### When to reach for it
+<h4 id="when-to-reach-for-it" style="font-size:20px;font-weight:700;margin:22px 0 8px;">⚡ When to reach for it</h4>
 Greenfield microservices on Kubernetes, functions that must start instantly, and teams comfortable with the Jakarta/MicroProfile standards rather than the Spring ecosystem.
 
 ---
 
-### 🚀 Micronaut
+<h3 id="micronaut" style="font-size:26px;font-weight:700;margin:26px 0 10px;">🚀 Micronaut</h3>
 
 A modern Java framework by Object Computing, designed from the start for microservices and serverless. Like Quarkus, it resolves dependency injection and aspect-oriented behavior at **compile time** through annotation processing — but its defining trait is the near-total elimination of runtime reflection, which keeps startup, memory, and native-image builds extremely efficient regardless of how large the application grows.
 
-#### Core Idea: ahead-of-time, reflection-free
+<h4 id="core-idea-ahead-of-time-reflection-free" style="font-size:20px;font-weight:700;margin:22px 0 8px;">🚀 Core Idea: ahead-of-time, reflection-free</h4>
 Spring's dependency injection cost scales with the number of beans, because wiring is computed at startup via reflection. Micronaut generates the injection logic as ordinary code during compilation, so startup time and memory stay roughly **constant** as the codebase grows, and no reflection metadata is needed at runtime.
 
-#### Dependency Injection (Jakarta annotations)
+<h4 id="dependency-injection-jakarta-annotations" style="font-size:20px;font-weight:700;margin:22px 0 8px;">🚀 Dependency Injection (Jakarta annotations)</h4>
 ```java
 @Singleton                         // application-wide instance
 public class OrderService {
@@ -3845,7 +3805,7 @@ public class OrderService {
 | Route mapping | `@GetMapping("/x")` | `@Get("/x")` |
 | Configuration value | `@Value` | `@Value` / `@ConfigurationProperties` |
 
-#### Web endpoint example
+<h4 id="web-endpoint-example-1" style="font-size:20px;font-weight:700;margin:22px 0 8px;">🚀 Web endpoint example</h4>
 ```java
 @Controller("/orders")
 public class OrderController {
@@ -3854,21 +3814,21 @@ public class OrderController {
 }
 ```
 
-#### Key Features
+<h4 id="key-features-1" style="font-size:20px;font-weight:700;margin:22px 0 8px;">🚀 Key Features</h4>
 - **Compile-time everything**: dependency injection, aspect-oriented proxies, and configuration are generated by the annotation processor — no runtime reflection
 - **Fast and flat**: startup and memory do not degrade as the number of beans increases
 - **Reactive and cloud-native**: a non-blocking HTTP stack and built-in support for service discovery, distributed configuration, and cloud providers
 - **GraalVM native** support as a first-class target
 - **Polyglot**: first-class Java, Kotlin, and Groovy support
 
-#### Micronaut vs Quarkus
+<h4 id="micronaut-vs-quarkus" style="font-size:20px;font-weight:700;margin:22px 0 8px;">🚀 Micronaut vs Quarkus</h4>
 Both do build-time dependency injection and target fast, lean, native-ready services. Quarkus is anchored in the Jakarta EE / MicroProfile standards and the Red Hat ecosystem; Micronaut defines its own (Spring-like) application programming interface and pushes reflection-free compile-time processing the furthest. Choose by ecosystem fit and team familiarity rather than raw capability.
 
 ---
 
-## 🗄️ Database
+<h2 id="-database" style="font-size:33px;font-weight:800;margin:30px 0 12px;">🗄️ Database</h2>
 
-### CAP Theorem
+<h3 id="cap-theorem" style="font-size:26px;font-weight:700;margin:26px 0 10px;">⚖️ CAP Theorem</h3>
 - **Consistency**: Data is consistent across all the nodes
 - **Availability**: Data is available at any time
 - **Partition Tolerance**: System does not fail regardless any data drop or updated in any node
@@ -3880,12 +3840,12 @@ Both do build-time dependency injection and target fast, lean, native-ready serv
 - **CA** is only meaningful on a single node — a real distributed system cannot opt out of partitions, so it must choose C or A *when one occurs*
 - The "consistency" in the Consistency-Availability-Partition (CAP) theorem specifically means **linearizability** (the system behaves as if there is a single, up-to-date copy of the data) — which is a different guarantee from the Consistency in Atomicity-Consistency-Isolation-Durability (ACID)
 
-#### Partition-or-Else, Latency-or-Consistency (PACELC)
+<h4 id="partition-or-else-latency-or-consistency-pacelc" style="font-size:20px;font-weight:700;margin:22px 0 8px;">⚖️ Partition-or-Else, Latency-or-Consistency (PACELC)</h4>
 The CAP theorem only describes behaviour *during* a partition. PACELC extends it: **if a Partition occurs, trade Availability against Consistency; Else (normal operation), trade Latency against Consistency.** It makes explicit that even with no failures, stronger consistency costs latency — a trade-off distributed systems pay every day, not just under failure.
 
-### 🗃️ SQL
+<h3 id="sql" style="font-size:26px;font-weight:700;margin:26px 0 10px;">🗃️ SQL</h3>
 
-#### Database Operations
+<h4 id="database-operations" style="font-size:20px;font-weight:700;margin:22px 0 8px;">🗃️ Database Operations</h4>
 ```sql
 CREATE DATABASE name -- creates database
 CREATE TABLE name (id int, field1 varchar, field2 varchar) -- creates table
@@ -3895,7 +3855,7 @@ DROP TABLE name -- deletes a table
 DROP DATABASE name -- drops a database
 ```
 
-#### Query Operations
+<h4 id="query-operations" style="font-size:20px;font-weight:700;margin:22px 0 8px;">🗃️ Query Operations</h4>
 ```sql
 SELECT columns -- selects columns
 FROM tables -- specifies table
@@ -3908,7 +3868,7 @@ ORDER BY -- orders results
 LIMIT -- limits number of results
 ```
 
-#### Joins
+<h4 id="joins" style="font-size:20px;font-weight:700;margin:22px 0 8px;">🗃️ Joins</h4>
 - **INNER JOIN**: A inner join B on A.fk_b_id = B.id
     - join only in matching rows, all null matches are excluded
 - **LEFT OUTER JOIN**: A left join B on A.fk_b_id = B.id
@@ -3928,12 +3888,12 @@ SELECT * FROM a RIGHT JOIN      b ON a.b_id = b.id; -- all of b, nulls where a h
 SELECT * FROM a FULL  OUTER JOIN b ON a.b_id = b.id; -- all rows from both, nulls where either is missing
 ```
 
-#### Advanced Operations
+<h4 id="advanced-operations" style="font-size:20px;font-weight:700;margin:22px 0 8px;">🗃️ Advanced Operations</h4>
 - **UNIONS**: combines queries in the same resultset if the columns match the number and types
 - **CREATE VIEW** name AS query: virtual table from query
 - **CREATE INDEX** name ON table (fields): creates an index to accelerate search on those fields
 
-#### Aggregation
+<h4 id="aggregation" style="font-size:20px;font-weight:700;margin:22px 0 8px;">🗃️ Aggregation</h4>
 - **GROUP BY**: Groups rows so aggregate functions apply per group (COUNT, SUM, AVG, MIN, MAX)
 - **WHERE vs HAVING**: WHERE filters rows *before* aggregation; HAVING filters groups *after* aggregation
 
@@ -3945,7 +3905,7 @@ GROUP BY department
 HAVING COUNT(*) > 5;       -- filters whole groups AFTER aggregation
 ```
 
-#### Window Functions (increasingly asked)
+<h4 id="window-functions-increasingly-asked" style="font-size:20px;font-weight:700;margin:22px 0 8px;">🗃️ Window Functions (increasingly asked)</h4>
 Aggregate-like computations that keep every row, instead of collapsing them like GROUP BY
 ```sql
 SELECT name, department, salary,
@@ -3958,7 +3918,7 @@ FROM employees;
 - **LAG(col) / LEAD(col)**: Value taken from the previous / next row
 - **Classic exercises**: second highest salary; top 3 salaries per department (rank inside a Common Table Expression, then filter on the rank)
 
-#### Common Table Expressions (the WITH clause)
+<h4 id="common-table-expressions-the-with-clause" style="font-size:20px;font-weight:700;margin:22px 0 8px;">🗃️ Common Table Expressions (the WITH clause)</h4>
 A named subquery that improves readability and allows reuse and recursion
 ```sql
 WITH ranked AS (
@@ -3968,19 +3928,19 @@ WITH ranked AS (
 SELECT * FROM ranked WHERE rk <= 3;
 ```
 
-#### Relations
+<h4 id="relations" style="font-size:20px;font-weight:700;margin:22px 0 8px;">🗃️ Relations</h4>
 - **1 TO MANY**: By FK
 - **MANY TO MANY**: Should be avoided and modeled as a joining table
 
-#### Normalization (in plain words)
+<h4 id="normalization-in-plain-words" style="font-size:20px;font-weight:700;margin:22px 0 8px;">🗃️ Normalization (in plain words)</h4>
 - **First Normal Form (1NF)**: Atomic values only — no lists or repeating groups inside a column
 - **Second Normal Form (2NF)**: 1NF + every non-key column depends on the *whole* primary key (no partial dependency on part of a composite key)
 - **Third Normal Form (3NF)**: 2NF + no non-key column depends on another non-key column (no transitive dependency)
 - **Deliberate denormalization**: Accepting duplication to avoid joins on read-heavy paths — a conscious trade-off, never an accident
 
-#### Indexes In Depth
+<h4 id="indexes-in-depth" style="font-size:20px;font-weight:700;margin:22px 0 8px;">🗃️ Indexes In Depth</h4>
 
-##### Storage engine: B-Tree vs Log-Structured Merge-tree (LSM-tree)
+<h5 id="storage-engine-b-tree-vs-log-structured-merge-tree-lsm-tree" style="font-size:16px;font-weight:600;margin:18px 0 7px;">Storage engine: B-Tree vs Log-Structured Merge-tree (LSM-tree)</h5>
 Two families of storage engine, each with a different on-disk index structure:
 
 | Dimension | B-Tree (page-oriented) | Log-Structured Merge-tree (LSM-tree) |
@@ -3994,18 +3954,18 @@ Two families of storage engine, each with a different on-disk index structure:
 
 Rule of thumb: LSM-trees tend to win on writes, B-trees on reads — but benchmarks are workload-sensitive.
 
-##### Clustered, secondary, and covering indexes
+<h5 id="clustered-secondary-and-covering-indexes" style="font-size:16px;font-weight:600;margin:18px 0 7px;">Clustered, secondary, and covering indexes</h5>
 - **Clustered index**: the row data lives inside the index, ordered by the key. In MySQL/InnoDB the primary key is always clustered; there is at most one per table
 - **Secondary (non-clustered) index**: stores a pointer to the row (in InnoDB, the primary-key value), so reads do a second lookup to fetch the full row
 - **Covering index**: includes every column a query needs, so the table is never touched — fast reads at the cost of extra storage and write overhead
 
-##### When they help and hurt
+<h5 id="when-they-help-and-hurt" style="font-size:16px;font-weight:600;margin:18px 0 7px;">When they help and hurt</h5>
 - **Help**: columns in `WHERE`, `JOIN ... ON`, and `ORDER BY`
 - **Hurt**: every `INSERT`/`UPDATE`/`DELETE` must maintain each index — real cost on write-heavy tables
 - **Composite index — leftmost-prefix rule**: an index on `(a, b, c)` serves filters on `a`, `a AND b`, or `a AND b AND c`, but not on `b` or `c` alone — column order matters
 - **EXPLAIN / execution plan**: shows whether the database uses an index or scans the whole table — be ready to tell the story of a slow query you actually diagnosed and fixed
 
-#### Database Engine Types — Online Transaction Processing vs Online Analytical Processing
+<h4 id="database-engine-types--online-transaction-processing-vs-online-analytical-processing" style="font-size:20px;font-weight:700;margin:22px 0 8px;">🗃️ Database Engine Types — Online Transaction Processing vs Online Analytical Processing</h4>
 | Dimension | Online Transaction Processing (OLTP) | Online Analytical Processing (OLAP) |
 |---|---|---|
 | Workload | Many short, low-latency reads and writes (lookups by key) | Few complex queries scanning millions of rows (aggregations) |
@@ -4019,7 +3979,7 @@ Rule of thumb: LSM-trees tend to win on writes, B-trees on reads — but benchma
 - **Column-oriented** storage keeps each column together — an analytic query reading 3 of 100 columns loads only those 3, compresses well (repeated values per column), and enables vectorized processing; the trade-off is write-unfriendliness (a row insert touches every column file)
 - Online Analytical Processing systems are usually fed from Online Transaction Processing systems by an Extract-Transform-Load (ETL) pipeline, isolating production databases from heavy analytical scans
 
-#### Database Tuning Techniques
+<h4 id="database-tuning-techniques" style="font-size:20px;font-weight:700;margin:22px 0 8px;">🗃️ Database Tuning Techniques</h4>
 - **Indexing**: CREATE INDEX index_name ON table (column);
 - **Views**
 - **Partitioning**
@@ -4027,25 +3987,25 @@ Rule of thumb: LSM-trees tend to win on writes, B-trees on reads — but benchma
 - **Denormalization**, duplication with load balancers
 - **Separate write/read master/slave**
 
-#### Concurrency
-##### Locks
+<h4 id="concurrency-1" style="font-size:20px;font-weight:700;margin:22px 0 8px;">🧵 Concurrency</h4>
+<h5 id="locks" style="font-size:16px;font-weight:600;margin:18px 0 7px;">Locks</h5>
 - **Shared lock (read lock)**: many transactions may hold a shared lock on the same data at once (concurrent readers); any transaction wanting to write must wait for all shared locks to release
 - **Exclusive lock (write lock)**: while held, no other transaction may read or write the data — the holder has sole access until it commits or aborts
 - **Granularity**: most databases lock at the **row** level; a **table** lock blocks all concurrent access to the whole table
 
-##### Two-Phase Locking (the classic route to serializability)
+<h5 id="two-phase-locking-the-classic-route-to-serializability" style="font-size:16px;font-weight:600;margin:18px 0 7px;">Two-Phase Locking (the classic route to serializability)</h5>
 - **Growing phase**: the transaction acquires locks as it reads and writes, releasing none
 - **Shrinking phase**: on commit or abort, all locks are released together
 - Writers block readers and readers block writers (the opposite of snapshot isolation, below) — this removes all anomalies but raises contention and tail latency
 
-#### ACID Properties
+<h4 id="acid-properties" style="font-size:20px;font-weight:700;margin:22px 0 8px;">🗃️ ACID Properties</h4>
 Each letter carries a precise meaning:
 - **Atomicity**: if a multi-write transaction hits a fault partway, every write is discarded — it commits fully or rolls back entirely. The sharper word is *abortability*: the guarantee is the ability to abort cleanly on error. (It is *not* about concurrency — that is Isolation.)
 - **Consistency**: the database holds the application's invariants (balances reconcile, foreign keys resolve). This is really a property of the *application* — the database only enforces the constraints you declare; it is the odd letter out, "tossed in to make the acronym work"
 - **Isolation**: concurrent transactions do not step on each other. The ideal is *serializability* — the result equals some serial order — but full serializability is costly, so databases offer weaker isolation levels (below)
 - **Durability**: once committed, data survives a crash — written to a non-volatile write-ahead log on a single node, or replicated to enough nodes in a cluster. Perfect durability does not exist; disk + replication + backups layer to reduce risk
 
-#### Isolation Levels and Their Anomalies
+<h4 id="isolation-levels-and-their-anomalies" style="font-size:20px;font-weight:700;margin:22px 0 8px;">🗃️ Isolation Levels and Their Anomalies</h4>
 From most permissive to strictest — each level prevents one more anomaly (✓ prevented / ✗ possible):
 
 | Isolation level | Dirty read | Non-repeatable read | Phantom read | Lost update | Write skew |
@@ -4065,37 +4025,37 @@ From most permissive to strictest — each level prevents one more anomaly (✓ 
 
 **Snapshot isolation and Multi-Version Concurrency Control (MVCC)**: each transaction reads from a consistent snapshot taken at its start, so later commits are invisible to it. The engine keeps several committed versions of each row side by side (tagged with the writer's transaction ID), so **readers never block writers and writers never block readers**; old versions are garbage-collected once no in-flight transaction needs them. PostgreSQL/MySQL call this level "Repeatable Read", Oracle calls it "Serializable" — neither is true serializability, and snapshot isolation still permits **write skew**. PostgreSQL's *Serializable Snapshot Isolation (SSI)* adds optimistic conflict detection to reach genuine serializability at modest cost.
 
-#### Optimistic vs Pessimistic Locking
+<h4 id="optimistic-vs-pessimistic-locking" style="font-size:20px;font-weight:700;margin:22px 0 8px;">🗃️ Optimistic vs Pessimistic Locking</h4>
 - **Optimistic** (a `@Version` column in Java Persistence API): No lock is taken; the update checks the version and fails if someone modified the row meanwhile. Best when conflicts are rare
 - **Pessimistic** (`SELECT ... FOR UPDATE`): The row is locked while being worked on; other transactions wait. Best when conflicts are frequent
 
-#### Deadlocks
+<h4 id="deadlocks" style="font-size:20px;font-weight:700;margin:22px 0 8px;">🗃️ Deadlocks</h4>
 - **How they happen**: Transaction A locks row 1 then wants row 2; transaction B locks row 2 then wants row 1 — a circular wait
 - **How the database reacts**: It detects the cycle and kills one transaction (the victim) so the other can proceed
 - **How to prevent them**: Always acquire locks in the same global order; keep transactions short
 
-### 🔄 Replication
+<h3 id="replication" style="font-size:26px;font-weight:700;margin:26px 0 10px;">🔄 Replication</h3>
 Keeping a copy of the same data on several nodes — for fault tolerance, read scalability, and lower latency (replicas closer to users).
 
-#### Topologies
+<h4 id="topologies" style="font-size:20px;font-weight:700;margin:22px 0 8px;">🔄 Topologies</h4>
 | Topology | Where writes go | Trade-offs |
 |---|---|---|
 | Single-leader (primary-replica) | All writes to the leader, which streams to followers | Simple, strong reads from the leader; the leader is a write bottleneck and a single point of failure |
 | Multi-leader (active-active) | Several leaders each accept writes and replicate to each other | Higher write availability, cross-datacenter friendly; **write conflicts** must be resolved (last-write-wins, merge, or app logic) |
 | Leaderless (Dynamo-style) | Writes sent to many replicas (write quorum), reads from many (read quorum) | High availability, no failover; eventually consistent unless `w + r > n`; harder to reason about |
 
-#### Synchronous vs asynchronous
+<h4 id="synchronous-vs-asynchronous" style="font-size:20px;font-weight:700;margin:22px 0 8px;">🔄 Synchronous vs asynchronous</h4>
 - **Synchronous**: the leader waits for a follower to confirm before acknowledging — durable across a leader crash, but a slow follower blocks writes (usually run "semi-synchronous": one sync follower, the rest async)
 - **Asynchronous**: the leader acknowledges immediately — highest throughput, but writes not yet replicated are lost if the leader fails
 
-#### Replication lag and its read anomalies
+<h4 id="replication-lag-and-its-read-anomalies" style="font-size:20px;font-weight:700;margin:22px 0 8px;">🔄 Replication lag and its read anomalies</h4>
 Asynchronous replicas trail the leader by the *replication lag* (milliseconds normally, seconds under load):
 - **Read-your-writes**: a user who just wrote reads a lagging replica and misses their own change — fix by reading recently-written data from the leader
 - **Monotonic reads**: successive reads hit replicas with different lag, so time appears to go backwards — fix by pinning a user to one replica
 - **Consistent prefix**: across shards, writes can be observed out of causal order — fix by routing causally-related writes to the same shard
 - **Quorum**: with `n` replicas, `w + r > n` guarantees a read overlaps the latest write (common: `n=3, w=2, r=2`); edge cases still permit staleness
 
-### 📦 Partitioning / Sharding
+<h3 id="partitioning--sharding" style="font-size:26px;font-weight:700;margin:26px 0 10px;">📦 Partitioning / Sharding</h3>
 Splitting a large dataset across nodes so each holds a subset — to scale beyond one machine's storage and throughput.
 
 | Strategy | How a partition is chosen | Pros | Cons |
@@ -4108,22 +4068,22 @@ Splitting a large dataset across nodes so each holds a subset — to scale beyon
 - **Secondary indexes**: *local (document-partitioned)* indexes make writes cheap but reads scatter-gather; *global (term-partitioned)* indexes make reads targeted but writes touch several partitions
 - **Rebalancing**: moving partitions as nodes are added/removed; use a fixed partition count or dynamic splitting — never the modulo approach, which moves almost all data
 
-### 🔗 ORM
+<h3 id="orm" style="font-size:26px;font-weight:700;margin:26px 0 10px;">🔗 ORM</h3>
 
-#### Definitions
+<h4 id="definitions" style="font-size:20px;font-weight:700;margin:22px 0 8px;">🔗 Definitions</h4>
 - **ORM**: Object Relational Mapping
 - **JPA**: Java Persistence API
 - **JDBC**: Java Database Connectivity and provides a set of Java API for accessing the relational databases from Java
 
-#### JPA vs Hibernate
+<h4 id="jpa-vs-hibernate" style="font-size:20px;font-weight:700;margin:22px 0 8px;">🔗 JPA vs Hibernate</h4>
 - **JPA**: Specification
     - EntityManagerFactory
 - **Hibernate**: Implementation
     - SessionFactory
 
-### 📊 Spring Data JPA
+<h3 id="spring-data-jpa" style="font-size:26px;font-weight:700;margin:26px 0 10px;">📊 Spring Data JPA</h3>
 
-#### Annotations
+<h4 id="annotations-1" style="font-size:20px;font-weight:700;margin:22px 0 8px;">🏷️ Annotations</h4>
 ```java
 @Entity
 @Table(name="table_name")
@@ -4138,19 +4098,19 @@ Splitting a large dataset across nodes so each holds a subset — to scale beyon
 @Enumerated
 ```
 
-#### Constants
+<h4 id="constants" style="font-size:20px;font-weight:700;margin:22px 0 8px;">📊 Constants</h4>
 - **GenerationType**(strategy = TABLE,AUTO,IDENTITY,SEQUENCE)
 - **FetchType**(fetch = EAGER,LAZY)
 - **CascadeType**(ALL,PERSIST,MERGE,REMOVE,DETACH,LOCK,REFRESH,REPLICATE,SAVE_UPDATE)
 - **EnumType**(ORDINAL,STRING)
 
-#### Repository
+<h4 id="repository" style="font-size:20px;font-weight:700;margin:22px 0 8px;">📊 Repository</h4>
 - **CrudRepository<T,ID>**: Basic create/read/update/delete operations
 - **JpaRepository<T,ID>**: Adds Java Persistence API specifics (flush, batch deletes, pagination)
 - **Derived query methods**: `findByStatusAndCreatedAfter(...)` — Spring generates the query from the method name
 - **@Query**: Explicit Java Persistence Query Language (JPQL) or native SQL, when the method name is not expressive enough
 
-#### The N+1 Problem (guaranteed question)
+<h4 id="the-n1-problem-guaranteed-question" style="font-size:20px;font-weight:700;margin:22px 0 8px;">📊 The N+1 Problem (guaranteed question)</h4>
 - **What**: Loading N parent entities, then issuing one extra query per parent to fetch a lazy association — 1 + N queries instead of 1
 - **How to detect it**: Enable SQL logging and count the queries actually executed
 - **How to fix it**:
@@ -4158,11 +4118,11 @@ Splitting a large dataset across nodes so each holds a subset — to scale beyon
   - `@EntityGraph` on the repository method
   - `@BatchSize` / `default_batch_fetch_size` to load associations in chunks
 
-#### Fetching Pitfalls
+<h4 id="fetching-pitfalls" style="font-size:20px;font-weight:700;margin:22px 0 8px;">📊 Fetching Pitfalls</h4>
 - **LazyInitializationException**: A lazy association is touched after the persistence session is closed — typically outside the transaction, in the controller or during JSON serialization. Fix: fetch what you need inside the transaction, and map entities to Data Transfer Objects before leaving the service layer
 - Default fetch types: `@ManyToOne` and `@OneToOne` are eager; `@OneToMany` and `@ManyToMany` are lazy — prefer lazy everywhere and fetch explicitly where needed
 
-#### Pagination
+<h4 id="pagination" style="font-size:20px;font-weight:700;margin:22px 0 8px;">📊 Pagination</h4>
 - **Offset-based**: pass a **Pageable** (page number, size, sort) to the repository method
   - **Page** runs an extra `COUNT(*)` query so it knows the total (for "page 3 of 47"); **Slice** fetches `size + 1` rows to know only whether a next page exists (cheaper, ideal for infinite scroll)
   - Degrades with depth — `LIMIT n OFFSET k` makes the database scan and discard `k` rows, so deep pages are slow
@@ -4170,9 +4130,9 @@ Splitting a large dataset across nodes so each holds a subset — to scale beyon
   - O(log n) regardless of page depth, because the index seeks straight to the cursor
   - Needs a composite index on the ordering columns and a unique tie-breaker (a surrogate key); the trade-off is no random "jump to page 500", only forward/backward navigation
 
-### 🐻 Hibernate
+<h3 id="hibernate" style="font-size:26px;font-weight:700;margin:26px 0 10px;">🐻 Hibernate</h3>
 
-#### Hibernate Objects
+<h4 id="hibernate-objects" style="font-size:20px;font-weight:700;margin:22px 0 8px;">🐻 Hibernate Objects</h4>
 - **Configuration**: Represents a configuration or properties file required by the Hibernate
 - **SessionFactory**: Configures Hibernate for the application using the supplied configuration file and allows for a Session object to be instantiated
 - **Session**: Used to get a physical connection with a database
@@ -4180,7 +4140,7 @@ Splitting a large dataset across nodes so each holds a subset — to scale beyon
 - **Query**: Uses SQL or Hibernate Query Language (HQL) string to retrieve data from the database and create objects
 - **Criteria**: Used to create and execute object oriented criteria queries to retrieve objects
 
-#### Configuration Steps
+<h4 id="configuration-steps" style="font-size:20px;font-weight:700;margin:22px 0 8px;">🐻 Configuration Steps</h4>
 1. **Add Hibernate config files** (Define DB connection):
     - hibernate.cfg.xml for hibernate
     - persistence.xml: for jpa
@@ -4199,7 +4159,7 @@ Splitting a large dataset across nodes so each holds a subset — to scale beyon
    emf.close();
    ```
 
-#### persistence.xml Example
+<h4 id="persistencexml-example" style="font-size:20px;font-weight:700;margin:22px 0 8px;">🐻 persistence.xml Example</h4>
 ```xml
 <persistenceunit name="hibernatecourse">
     <provider>org.hibernate.jpa.HibernatePersistenceProvider</provider>
@@ -4216,11 +4176,11 @@ Splitting a large dataset across nodes so each holds a subset — to scale beyon
 </persistenceunit>
 ```
 
-#### Mapping Annotations
+<h4 id="mapping-annotations" style="font-size:20px;font-weight:700;margin:22px 0 8px;">🐻 Mapping Annotations</h4>
 1. Map class to table
 2. Map fields to columns
 
-##### Core Annotations
+<h5 id="core-annotations" style="font-size:16px;font-weight:600;margin:18px 0 7px;">Core Annotations</h5>
 - **@Entity**: Marks the class as a DB entity
 - **@Table**(name="table_name"): Indicates the mapping table
 - **@SecondaryTables** and **@SecondaryTables**: defines secondary tables and the logic for populating those tables
@@ -4231,14 +4191,14 @@ Splitting a large dataset across nodes so each holds a subset — to scale beyon
     - AccessType.FIELD: Based Annotations on fields
     - AccessType.PROPERTY: Based Annotations on methods
 
-##### Composite Keys
+<h5 id="composite-keys" style="font-size:16px;font-weight:600;margin:18px 0 7px;">Composite Keys</h5>
 - **@Embeddable**: Marks a class as being embedded inside another class
 - **@EmbeddedId**: Marks a field to be used for an @Embeddable class
 - **@Transactional**: marks the methods as transactional and removes the need to call the methods beginTransaction, commit
 
 *Hibernate needs empty constructors*
 
-#### Relationships
+<h4 id="relationships" style="font-size:20px;font-weight:700;margin:22px 0 8px;">🐻 Relationships</h4>
 - **Unidirectional**
 - **Bidirectional**
 - **@ManyToMany**
@@ -4251,25 +4211,25 @@ Splitting a large dataset across nodes so each holds a subset — to scale beyon
 - **@JoinColumn**: Specifies the column for entity association with the referenced columnName as a param
 - **@JoinColumns**: Defines the mapping for composite fk
 
-#### SessionFactory
+<h4 id="sessionfactory" style="font-size:20px;font-weight:700;margin:22px 0 8px;">🐻 SessionFactory</h4>
 Reads the config, creates session objects, create only once in your app
 
-#### Session
+<h4 id="session" style="font-size:20px;font-weight:700;margin:22px 0 8px;">🐻 Session</h4>
 Wraps JDBC connection, used for saving retrieving objects from db, Retrieved from SessionFactory
 
-#### Entity Lifecycle
+<h4 id="entity-lifecycle" style="font-size:20px;font-weight:700;margin:22px 0 8px;">🐻 Entity Lifecycle</h4>
 - **Detach**: Not associated with a hibernate session
 - **Merge**: Merging will reattach to the session
 - **Persist**: Managed state. Next commit will save to db
 - **Remove**: Managed entities will be removed. Next commit will delete them from db
 - **Refresh**: sync to db
 
-#### Cascade Types
+<h4 id="cascade-types" style="font-size:20px;font-weight:700;margin:22px 0 8px;">🐻 Cascade Types</h4>
 Persist, Remove, Refresh, Detach, Merge, All
 
-### 📄 NoSQL
+<h3 id="nosql" style="font-size:26px;font-weight:700;margin:26px 0 10px;">📄 NoSQL</h3>
 
-#### Database Types
+<h4 id="database-types" style="font-size:20px;font-weight:700;margin:22px 0 8px;">📄 Database Types</h4>
 - **Key-Value** (Redis, DynamoDB): A giant hash map — store and fetch a value by its key, nothing more. Fastest model; ideal for caching, sessions, feature flags
 - **Wide Column** (Cassandra, HBase): Rows keyed by a partition key, each holding a flexible set of columns; built for massive write throughput across a cluster
 - **Graph** (Neo4j): Nodes and edges as first-class citizens; excels when the relationships *are* the query (social networks, recommendations, fraud rings)
@@ -4277,7 +4237,7 @@ Persist, Remove, Refresh, Detach, Merge, All
 
 *Rule of thumb: choose the model by access pattern, not by hype — key-value for lookups, document for aggregates, graph for relationship traversal, wide-column for write-heavy scale.*
 
-#### Database Mapping
+<h4 id="database-mapping" style="font-size:20px;font-weight:700;margin:22px 0 8px;">📄 Database Mapping</h4>
 - **DB** → DB
 - **TABLES** → COLLECTIONS
 - **ROW** → DOCUMENTS
@@ -4285,15 +4245,15 @@ Persist, Remove, Refresh, Detach, Merge, All
 - **INDEX** → INDEX
 - **JOIN** → EMBEDDING & LINKING
 
-#### 🍃 MongoDB
+<h4 id="mongodb" style="font-size:20px;font-weight:700;margin:22px 0 8px;">📄 MongoDB</h4>
 
-##### Characteristics
+<h5 id="characteristics" style="font-size:16px;font-weight:600;margin:18px 0 7px;">Characteristics</h5>
 - Has C&P from CAP theorem
 - Uses documents (JSON - BSON: EXTENDED JSON)
 
-##### Features
+<h5 id="features" style="font-size:16px;font-weight:600;margin:18px 0 7px;">Features</h5>
 
-###### Indexes
+<h6 id="indexes" style="font-size:13px;font-weight:600;opacity:.72;margin:14px 0 5px;">Indexes</h6>
 Support efficient execution of queries
 **Types**:
 - Single Field
@@ -4303,32 +4263,32 @@ Support efficient execution of queries
 - Hashed
 - Compound
 
-###### Aggregation Pipeline
+<h6 id="aggregation-pipeline" style="font-size:13px;font-weight:600;opacity:.72;margin:14px 0 5px;">Aggregation Pipeline</h6>
 A framework for data aggregation modeled on the concept of data processing pipelines
 
-###### Replica Sets
+<h6 id="replica-sets" style="font-size:13px;font-weight:600;opacity:.72;margin:14px 0 5px;">Replica Sets</h6>
 A group of mongodb processes that maintain the same data sets to provide redundancy and high availability
 
-###### Sharding
+<h6 id="sharding" style="font-size:13px;font-weight:600;opacity:.72;margin:14px 0 5px;">Sharding</h6>
 A method to distribute data across multiple machines
 
-#### Commands
+<h4 id="commands" style="font-size:20px;font-weight:700;margin:22px 0 8px;">📄 Commands</h4>
 
-##### Database Operations
+<h5 id="database-operations-1" style="font-size:16px;font-weight:600;margin:18px 0 7px;">Database Operations</h5>
 - **use database**: select database
 - **show databases**: shows available databases
 - **show collections**: show collections
 - **create collection**: db.createCollection("collection")
 
-##### CRUD Operations
+<h5 id="crud-operations" style="font-size:16px;font-weight:600;margin:18px 0 7px;">CRUD Operations</h5>
 
-###### CREATE
+<h6 id="create" style="font-size:13px;font-weight:600;opacity:.72;margin:14px 0 5px;">CREATE</h6>
 ```javascript
 db.collection.insertOne({object})
 insertMany([array])
 ```
 
-###### READ
+<h6 id="read" style="font-size:13px;font-weight:600;opacity:.72;margin:14px 0 5px;">READ</h6>
 ```javascript
 db.collection.find({object})/findMany():
 // filter: query: {attribute: {$operator: value}}, {"attribute.sub":value} , {$and: [{amount: {$lte: 11}},{"awards.wins":3}]}
@@ -4338,7 +4298,7 @@ db.collection.find({object})/findMany():
 // readConcern("type"): specifies read Concern
 ```
 
-###### UPDATE
+<h6 id="update" style="font-size:13px;font-weight:600;opacity:.72;margin:14px 0 5px;">UPDATE</h6>
 ```javascript
 db.collection.updateOne(): // updates only the fields. Atomic on a single document
 db.collection.updateOne(
@@ -4351,14 +4311,14 @@ db.collection.replaceOne({attr:{$op: value}},{new object definition})
 // upsert: true : a document is created if it doesn't exists, else, regular update (update on match, insert on no match)
 ```
 
-###### DELETE
+<h6 id="delete" style="font-size:13px;font-weight:600;opacity:.72;margin:14px 0 5px;">DELETE</h6>
 ```javascript
 db.collection.deleteOne(): db.collection.deleteOne({attr:value})
 db.collection.deleteMany(): db.collection.deleteMany({attr:value})
 db.collection.remove(): db.collection.remove({attr: value}, true) // (true for only one, no param, remove all). db.collection.remove({}) erases all the data from collection
 ```
 
-#### Query Operators
+<h4 id="query-operators" style="font-size:20px;font-weight:700;margin:22px 0 8px;">📄 Query Operators</h4>
 - Comparison
 - Logical
 - Element
@@ -4367,12 +4327,12 @@ db.collection.remove(): db.collection.remove({attr: value}, true) // (true for o
 - Array
 - Bitwise
 
-#### Query Projection
+<h4 id="query-projection" style="font-size:20px;font-weight:700;margin:22px 0 8px;">📄 Query Projection</h4>
 Specifies the fields to return in the document that match the query (true/1: include, false/0: exclude)
 
-#### Concern
+<h4 id="concern" style="font-size:20px;font-weight:700;margin:22px 0 8px;">📄 Concern</h4>
 
-##### Read Concern
+<h5 id="read-concern" style="font-size:16px;font-weight:600;margin:18px 0 7px;">Read Concern</h5>
 Allows to control the consistency and isolation properties of the data read from replica sets and shards
 - **Local**: reading from primary replica, may not exists in other replicas
 - **Available**: reading from secondary replica, data may not be replicated to the majority of replicas
@@ -4380,7 +4340,7 @@ Allows to control the consistency and isolation properties of the data read from
 - **Linearizable**: returns data that has the majority of successful writes previous to the read operation
 - **Snapshot**: Multidocument transaction, reads from majority of committed data
 
-##### Write Concern
+<h5 id="write-concern" style="font-size:16px;font-weight:600;margin:18px 0 7px;">Write Concern</h5>
 Level of acknowledgement requested from mongodb for write operations. Level of consistency across replicas
 - **w1**: Ack only from primary
 - **w0**: No ack
@@ -4388,28 +4348,28 @@ Level of acknowledgement requested from mongodb for write operations. Level of c
 - **w: majority**
 - **wtimeout**: the limit to prevent write operations from blocking indefinitely
 
-#### ⚡ DynamoDB
+<h4 id="dynamodb" style="font-size:20px;font-weight:700;margin:22px 0 8px;">📄 DynamoDB</h4>
 
 - **DynamoDB**: Key-value database
 
 ---
 
-## 🔒 Security
+<h2 id="-security" style="font-size:33px;font-weight:800;margin:30px 0 12px;">🔒 Security</h2>
 
-### Authentication vs Authorization
+<h3 id="authentication-vs-authorization" style="font-size:26px;font-weight:700;margin:26px 0 10px;">🪪 Authentication vs Authorization</h3>
 - **Authentication**: Verifying WHO you are (identity)
 - **Authorization**: Verifying WHAT you can access (permissions)
 
-### Authentication Methods
+<h3 id="authentication-methods" style="font-size:26px;font-weight:700;margin:26px 0 10px;">🔑 Authentication Methods</h3>
 
-#### Session-Based Authentication
+<h4 id="session-based-authentication" style="font-size:20px;font-weight:700;margin:22px 0 8px;">🔑 Session-Based Authentication</h4>
 - **How**: Server creates session, stores session ID in cookie
 - **Flow**: Login → Server creates session → Session ID in cookie → Client sends cookie → Server validates
 - **Stateful**: Server must remember sessions
 - **Pros**: Simple, server control, instant revocation
 - **Cons**: Not scalable, CSRF vulnerable, poor multi-server support
 
-#### Token-Based Authentication (JWT)
+<h4 id="token-based-authentication-jwt" style="font-size:20px;font-weight:700;margin:22px 0 8px;">🔑 Token-Based Authentication (JWT)</h4>
 - **How**: Server creates signed token, client stores and sends it
 - **Flow**: Login → Server creates JWT → Client stores token → Client sends in Authorization header → Server validates signature
 - **JWT Structure**: `header.payload.signature`
@@ -4420,7 +4380,7 @@ Level of acknowledgement requested from mongodb for write operations. Level of c
 - **Pros**: Scalable, cross-domain, mobile-friendly
 - **Cons**: Can't revoke before expiration, larger size, XSS vulnerable
 
-#### OAuth 2.0
+<h4 id="oauth-20" style="font-size:20px;font-weight:700;margin:22px 0 8px;">🔑 OAuth 2.0</h4>
 - **What**: Authorization framework for delegated access
 - **Use case**: "Login with Google/Facebook/GitHub"
 - **Roles**:
@@ -4436,7 +4396,7 @@ Level of acknowledgement requested from mongodb for write operations. Level of c
   - Access Token: Short-lived, access resources
   - Refresh Token: Long-lived, get new access tokens
 
-#### Single Sign-On (SSO)
+<h4 id="single-sign-on-sso" style="font-size:20px;font-weight:700;margin:22px 0 8px;">🔑 Single Sign-On (SSO)</h4>
 - **What**: One login for multiple applications
 - **Protocols**:
   - SAML 2.0: XML-based, enterprise standard
@@ -4444,32 +4404,32 @@ Level of acknowledgement requested from mongodb for write operations. Level of c
 - **Flow**: Access App A → Redirect to IdP → Login once → IdP sends token → Access App B (no login)
 - **Benefits**: Better UX, centralized management, reduced password fatigue
 
-#### Multi-Factor Authentication (MFA/2FA)
+<h4 id="multi-factor-authentication-mfa2fa" style="font-size:20px;font-weight:700;margin:22px 0 8px;">🔑 Multi-Factor Authentication (MFA/2FA)</h4>
 - **Factors**:
   - Something you know: Password, PIN
   - Something you have: Phone, hardware token
   - Something you are: Fingerprint, face
 - **Types**: SMS codes, TOTP (Authenticator apps), Hardware tokens (YubiKey), Biometrics
 
-#### API Keys
+<h4 id="api-keys" style="font-size:20px;font-weight:700;margin:22px 0 8px;">🔑 API Keys</h4>
 - **What**: Simple token for API access
 - **Use case**: Third-party API, service-to-service
 - **Pros**: Simple, easy to implement
 - **Cons**: No expiration, no user context, hard to rotate
 
-#### Basic Authentication
+<h4 id="basic-authentication" style="font-size:20px;font-weight:700;margin:22px 0 8px;">🔑 Basic Authentication</h4>
 - **What**: Username:password encoded in Base64
 - **Header**: `Authorization: Basic dXNlcjpwYXNz`
 - **Pros**: Simple, built into HTTP
 - **Cons**: Not secure (easily decoded), must use HTTPS
 
-#### Certificate-Based Authentication
+<h4 id="certificate-based-authentication" style="font-size:20px;font-weight:700;margin:22px 0 8px;">🔑 Certificate-Based Authentication</h4>
 - **What**: Uses digital certificates (X.509)
 - **Use case**: Enterprise, high-security environments
 
-### Authorization Methods
+<h3 id="authorization-methods" style="font-size:26px;font-weight:700;margin:26px 0 10px;">🛂 Authorization Methods</h3>
 
-#### Role-Based Access Control (RBAC)
+<h4 id="role-based-access-control-rbac" style="font-size:20px;font-weight:700;margin:22px 0 8px;">🛂 Role-Based Access Control (RBAC)</h4>
 - **What**: Permissions based on roles
 - **Structure**: User → Role → Permissions
 - **Example**: Admin, User, Guest
@@ -4479,97 +4439,97 @@ Level of acknowledgement requested from mongodb for write operations. Level of c
 public void deleteUser() { }
 ```
 
-#### Attribute-Based Access Control (ABAC)
+<h4 id="attribute-based-access-control-abac" style="font-size:20px;font-weight:700;margin:22px 0 8px;">🛂 Attribute-Based Access Control (ABAC)</h4>
 - **What**: Permissions based on attributes
 - **Attributes**: User attributes, resource attributes, environment
 - **Example**: Allow if user.department == resource.department AND time < 5pm
 
-#### Access Control Lists (ACL)
+<h4 id="access-control-lists-acl" style="font-size:20px;font-weight:700;margin:22px 0 8px;">🛂 Access Control Lists (ACL)</h4>
 - **What**: Permissions per resource
 - **Example**: File permissions (read, write, execute)
 
-### Security Best Practices
+<h3 id="security-best-practices" style="font-size:26px;font-weight:700;margin:26px 0 10px;">🛡️ Security Best Practices</h3>
 
-#### Token Storage
+<h4 id="token-storage" style="font-size:20px;font-weight:700;margin:22px 0 8px;">🛡️ Token Storage</h4>
 - **Best**: HttpOnly cookies (prevents XSS)
 - **Better**: sessionStorage
 - **Never**: localStorage (XSS risk)
 
-#### Token Refresh Strategy
+<h4 id="token-refresh-strategy" style="font-size:20px;font-weight:700;margin:22px 0 8px;">🛡️ Token Refresh Strategy</h4>
 - **Access Token**: Short-lived (15 min)
 - **Refresh Token**: Long-lived (7 days), HttpOnly cookie
 - **Flow**: Access token expires → Use refresh token → Get new access token
 
-#### Password Security
+<h4 id="password-security" style="font-size:20px;font-weight:700;margin:22px 0 8px;">🛡️ Password Security</h4>
 - **Hash**: bcrypt, Argon2, PBKDF2 (never plain text)
 - **Salt**: Random value added before hashing
 - **Pepper**: Secret value added (stored separately)
 
-#### Common Attacks & Prevention
+<h4 id="common-attacks--prevention" style="font-size:20px;font-weight:700;margin:22px 0 8px;">🛡️ Common Attacks &amp; Prevention</h4>
 - **CSRF**: Use CSRF tokens, SameSite cookies
 - **XSS**: Sanitize input, Content Security Policy
 - **SQL Injection**: Use prepared statements
 - **Brute Force**: Rate limiting, account lockout
 - **OWASP API Top 10 (Open Worldwide Application Security Project)**: the reference list of API vulnerabilities — injection, broken authentication, excessive data exposure, lack of rate limiting
 
-### Spring Security
+<h3 id="spring-security" style="font-size:26px;font-weight:700;margin:26px 0 10px;">🔐 Spring Security</h3>
 - Built as a **filter chain**: each request crosses an ordered list of servlet filters (authentication, authorization, Cross-Site Request Forgery protection...) before reaching the controller — a real-world Chain of Responsibility
 - Configured by declaring a **`SecurityFilterChain` bean** (lambda style; the old `WebSecurityConfigurerAdapter` is deprecated)
 - **Proof Key for Code Exchange (PKCE)**: Extension of the OAuth 2.0 authorization code flow for public clients (single-page and mobile applications) that cannot keep a client secret
 - For service-to-service calls, use the **client credentials** flow
 
-### Recommended Stack
+<h3 id="recommended-stack" style="font-size:26px;font-weight:700;margin:26px 0 10px;">🧱 Recommended Stack</h3>
 
-#### Modern Web App
+<h4 id="modern-web-app" style="font-size:20px;font-weight:700;margin:22px 0 8px;">🧱 Modern Web App</h4>
 - **Authentication**: JWT (access) + Refresh tokens (HttpOnly cookie)
 - **Authorization**: RBAC
 - **Social login**: OAuth 2.0 / OIDC
 - **MFA**: TOTP (Google Authenticator)
 
-#### Enterprise
+<h4 id="enterprise" style="font-size:20px;font-weight:700;margin:22px 0 8px;">🧱 Enterprise</h4>
 - **SSO**: SAML 2.0 or OIDC
 - **Authorization**: RBAC or ABAC
 - **MFA**: Required
 
-### Legacy Security Concepts
-- **Transport Layer Security(TLS)**: Encryption protocol for secure communication
+<h3 id="legacy-security-concepts" style="font-size:26px;font-weight:700;margin:26px 0 10px;">🗝️ Legacy Security Concepts</h3>
+- **Transport Layer Security (TLS)**: Encryption protocol for secure communication
 - **SSL Certificates**: Digital certificates for HTTPS
 - **Client Certificate**: Public key authentication
 - **On behalf**: Microservice passes user credentials to other services
-- **Encryption**: Use standard algorithm.implementation (AES, RSA)
+- **Encryption**: Use standard algorithms (AES, RSA)
 - **Firewalls**: Network security
 - **Pentesting**: Security testing
 - **Automated Security Tests**: Verify API rejects unauthorized callers
 
 ---
 
-## 🏢 System Design
+<h2 id="-system-design" style="font-size:33px;font-weight:800;margin:30px 0 12px;">🏢 System Design</h2>
 
-### System Design Principles
+<h3 id="system-design-principles" style="font-size:26px;font-weight:700;margin:26px 0 10px;">🏗️ System Design Principles</h3>
 
-#### High Availability
+<h4 id="high-availability" style="font-size:20px;font-weight:700;margin:22px 0 8px;">🏗️ High Availability</h4>
 - **Redundancy**: Availability zones, Fallback, Data replication
 - **Switching between servers**: DNS, Load balancers, Reverse proxy, API gateway, Service discovery
 - **Protecting against client behavior**: Load shedding, Rate limiter, Shuffle sharding, Cell based architecture
 - **Protecting against failures**: Timeouts, Circuit breaker, Bulkhead, Retries
 - **Detecting failures**: Monitoring, Logging
 
-#### Scalability
+<h4 id="scalability" style="font-size:20px;font-weight:700;margin:22px 0 8px;">🏗️ Scalability</h4>
 - **Vertical scaling (scale up)**: Add power (CPU, memory, disk) to one machine — simple, but capped by hardware limits and a Single Point Of Failure (SPOF) risk
 - **Horizontal scaling (scale out)**: Add more servers/replicas — the route to large scale; requires a stateless application tier so any server can serve any request
 - **Stateless web tier**: Push session state out of the web servers into a shared store (Redis, a database) so instances are interchangeable and auto-scaling is trivial
 - **Elasticity**: Acquire resources automatically as load rises and release them when it falls
 - **Message queue for async**: A durable queue decouples producer from consumer in time, absorbs spikes, and lets each side scale independently
 
-#### Scaling Building Blocks
+<h4 id="scaling-building-blocks" style="font-size:20px;font-weight:700;margin:22px 0 8px;">🏗️ Scaling Building Blocks</h4>
 
-##### Load Balancer
+<h5 id="load-balancer" style="font-size:16px;font-weight:600;margin:18px 0 7px;">Load Balancer</h5>
 Distributes incoming traffic across a pool of servers. Clients reach the load balancer's public Internet Protocol (IP) address; backend servers talk over private IPs and are never directly reachable. Removes the web tier's single point of failure and lets servers be added or drained transparently.
 
-##### Content Delivery Network (CDN)
+<h5 id="content-delivery-network-cdn" style="font-size:16px;font-weight:600;margin:18px 0 7px;">Content Delivery Network (CDN)</h5>
 A geographically distributed network of edge servers that cache static assets (images, scripts, video) close to users. On a miss the edge fetches from origin, stores it, and serves until the Time-To-Live (TTL) expires. Tune the TTL (too short re-fetches often, too long serves stale), version URLs for invalidation, and fall back to origin if an edge is down.
 
-##### Caching
+<h5 id="caching" style="font-size:16px;font-weight:600;margin:18px 0 7px;">Caching</h5>
 An in-memory store (Redis, Memcached) for expensive or hot data, cutting database load and latency.
 - **Read strategies**: *cache-aside* (the app checks the cache, on a miss reads the database and populates it — most common) and *read-through* (the cache fetches from the database itself)
 - **Write strategies**: *write-through* (write cache and database synchronously — consistent, slower) and *write-back* (write cache, flush to the database asynchronously — fast, risks loss on cache failure)
@@ -4582,10 +4542,10 @@ An in-memory store (Redis, Memcached) for expensive or hot data, cutting databas
 
 Avoid caching rapidly-changing data; replicate the cache across availability zones (a single node is a single point of failure); cache and database are not updated atomically, so brief staleness is possible.
 
-##### Consistent Hashing
-Modular hashing (`key % N`) remaps almost all keys when a node is added or removed. Consistent hashing places nodes and keys on a hash ring; a key maps to the first node clockwise, so a membership change only redistributes the keys in the affected arc (`k/n` on average). **Virtual nodes** (each server holds many ring positions) even out the distribution. Used by Dynamo, Cassandra, and content delivery networks. (See also [Database → Partitioning](#-partitioning--sharding).)
+<h5 id="consistent-hashing" style="font-size:16px;font-weight:600;margin:18px 0 7px;">Consistent Hashing</h5>
+Modular hashing (`key % N`) remaps almost all keys when a node is added or removed. Consistent hashing places nodes and keys on a hash ring; a key maps to the first node clockwise, so a membership change only redistributes the keys in the affected arc (`k/n` on average). **Virtual nodes** (each server holds many ring positions) even out the distribution. Used by Dynamo, Cassandra, and content delivery networks. (See also [Database → Partitioning](#partitioning--sharding).)
 
-##### Rate Limiting
+<h5 id="rate-limiting" style="font-size:16px;font-weight:600;margin:18px 0 7px;">Rate Limiting</h5>
 Caps how many requests a client may make per window — defending against Denial-of-Service (DoS) abuse, brute force, and runaway clients; counters usually live in Redis.
 
 | Algorithm | Mechanism | Strength | Weakness |
@@ -4596,54 +4556,54 @@ Caps how many requests a client may make per window — defending against Denial
 | **Sliding window log** | Store each request's timestamp, count those in the rolling window | Accurate at every instant | Memory-heavy — even rejected timestamps are kept |
 | **Sliding window counter** | Current window count + previous count × overlap fraction | Accurate and memory-efficient | Approximates by assuming an even prior-window spread |
 
-##### Back-of-the-Envelope Estimation
+<h5 id="back-of-the-envelope-estimation" style="font-size:16px;font-weight:600;margin:18px 0 7px;">Back-of-the-Envelope Estimation</h5>
 A quick capacity check early in a design discussion. State assumptions, use round numbers, label every unit, and derive Queries Per Second (QPS), peak QPS, storage per year, cache size, and server count.
 - **Powers**: 1 KB = 10³, 1 MB = 10⁶, 1 GB = 10⁹, 1 TB = 10¹² bytes
 - **Latencies**: main memory ~100 ns, solid-state disk read ~100 µs, same-datacenter round-trip ~0.5 ms, cross-region ~150 ms
 - **Availability**: 99% ≈ 3.65 days/year downtime, 99.9% ≈ 8.7 hours, 99.99% ≈ 52 minutes
 
-#### Performance
+<h4 id="performance" style="font-size:20px;font-weight:700;margin:22px 0 8px;">🏗️ Performance</h4>
 - **Latency**: Time to get a response
 - **Bandwidth**: Rate of data transfer across a given path
 - **Throughput**: Rate at which something is processed
 
-#### Durability
+<h4 id="durability" style="font-size:20px;font-weight:700;margin:22px 0 8px;">🏗️ Durability</h4>
 - **Backup**: Copy data periodically and store it elsewhere
 - **RAID**: Redundant storing of information
 - **Replication**: Copying the data to another machines
 - **Checksum**: For preventing data corruption
 
-#### Consistency
+<h4 id="consistency" style="font-size:20px;font-weight:700;margin:22px 0 8px;">🏗️ Consistency</h4>
 - **ACID**: Database constraints are not violated when transactions are executed
 - **BASE**: NoSQL consistency model
 - **CAP Theorem**: Consistency, Availability, Partition Tolerance
 
-### Hardware
+<h3 id="hardware" style="font-size:26px;font-weight:700;margin:26px 0 10px;">🖥️ Hardware</h3>
 
-#### Compute Environment
+<h4 id="compute-environment" style="font-size:20px;font-weight:700;margin:22px 0 8px;">🖥️ Compute Environment</h4>
 - **Physical Server**: Complete control, expensive, hard to manage
 - **Virtual Machines**: Cheaper, easier to maintain, hypervisor-based
 - **Containers**: Lightweight, portable, container engine-based
 - **Serverless**: Cloud provides all resources, event-driven
 
-### Communication
+<h3 id="communication" style="font-size:26px;font-weight:700;margin:26px 0 10px;">📡 Communication</h3>
 
-#### Request/Response
+<h4 id="requestresponse" style="font-size:20px;font-weight:700;margin:22px 0 8px;">📡 Request/Response</h4>
 - **Sync**: RequestResponse
 - **Async**: Messaging
 
-#### Async Messaging
+<h4 id="async-messaging" style="font-size:20px;font-weight:700;margin:22px 0 8px;">📡 Async Messaging</h4>
 - **Message Queues**: Only a single consumer gets the message
 - **Publisher/Subscriber**: All subscribers get the message
 
-#### Network Protocols
+<h4 id="network-protocols" style="font-size:20px;font-weight:700;margin:22px 0 8px;">📡 Network Protocols</h4>
 - **TCP**: Reliability over time, connection-oriented
 - **UDP**: Time over reliability, connectionless
 - **HTTP**: Request/Response protocol
 
-### 🌍 API Design
+<h3 id="api-design" style="font-size:26px;font-weight:700;margin:26px 0 10px;">🌍 API Design</h3>
 
-#### API Styles — the main options in the industry
+<h4 id="api-styles--the-main-options-in-the-industry" style="font-size:20px;font-weight:700;margin:22px 0 8px;">🌍 API Styles — the main options in the industry</h4>
 | Style | Contract & transport | Best fit |
 |---|---|---|
 | **REST** | Resources over HTTP with JSON; no enforced contract (OpenAPI optional) | Public APIs and general-purpose web services |
@@ -4655,14 +4615,14 @@ A quick capacity check early in a design discussion. State assumptions, use roun
 
 *Choosing in one sentence: default to REST for public-facing APIs; GraphQL when many clients need different shapes of the same data; gRPC for internal latency-sensitive calls; WebSockets or Server-Sent Events when the server must push continuously; webhooks to notify external systems of events.*
 
-#### REST — the default style
+<h4 id="rest--the-default-style" style="font-size:20px;font-weight:700;margin:22px 0 8px;">🌍 REST — the default style</h4>
 
-##### Fundamentals
+<h5 id="fundamentals" style="font-size:16px;font-weight:600;margin:18px 0 7px;">Fundamentals</h5>
 - **Richardson Maturity Model**: Level 1 resources → Level 2 HTTP verbs and status codes → Level 3 hypermedia links in responses (Hypermedia As The Engine Of Application State, HATEOAS — know what it is, and admit almost nobody fully uses it)
 - **Resource naming**: Nouns, plural, hierarchical (`/orders/{id}/items`), never verbs in the Uniform Resource Identifier (URI)
 - **OpenAPI (formerly Swagger)**: Machine-readable description of the API — enables generated documentation, generated clients and contract tests; produced contract-first (write the specification, generate the code) or code-first (annotate the code, generate the specification)
 
-##### HTTP Methods and Idempotency
+<h5 id="http-methods-and-idempotency" style="font-size:16px;font-weight:600;margin:18px 0 7px;">HTTP Methods and Idempotency</h5>
 *Idempotent = repeating the call produces the same final state as calling it once*
 
 | Method | Purpose | Idempotent |
@@ -4673,21 +4633,21 @@ A quick capacity check early in a design discussion. State assumptions, use roun
 | POST | Create a resource or trigger an action | No |
 | PATCH | Modify a resource partially | Usually not |
 
-##### Status Codes To Use Correctly
+<h5 id="status-codes-to-use-correctly" style="font-size:16px;font-weight:600;margin:18px 0 7px;">Status Codes To Use Correctly</h5>
 - **200 OK** (read or update succeeded), **201 Created** (plus a Location header), **204 No Content** (delete succeeded)
 - **400 Bad Request** (malformed request) vs **422 Unprocessable Entity** (well formed but semantically invalid)
 - **401 Unauthorized** = NOT authenticated; **403 Forbidden** = authenticated but NOT allowed — classic interview question
 - **404 Not Found**, **409 Conflict** (state conflict, duplicate creation)
 - **500 Internal Server Error**, **502 Bad Gateway**, **503 Service Unavailable**
 
-##### Design Topics
+<h5 id="design-topics" style="font-size:16px;font-weight:600;margin:18px 0 7px;">Design Topics</h5>
 - **Versioning strategies**: in the path (`/v1/orders` — simple and visible) vs in a header (clean paths — less discoverable) vs content negotiation (most "pure" — least used); know the trade-offs
 - **Pagination**: offset-based (simple to implement — degrades on deep pages because the database still scans every skipped row) vs cursor-based (opaque pointer to the last seen element — scales regardless of depth)
 - **Error responses**: One consistent envelope for the whole API; the standard is RFC 7807 "Problem Details" (fields: type, title, status, detail, instance)
 - **Idempotency keys**: The client sends a unique key with a POST; the server stores the outcome and replays it on retry instead of executing twice — mandatory thinking for payments
 - **Cross-Origin Resource Sharing (CORS)**: Browser mechanism that blocks calls from a different origin unless the server explicitly allows it (allowed origins, methods, headers) — configure it server-side, deliberately
 
-#### GraphQL
+<h4 id="graphql" style="font-size:20px;font-weight:700;margin:22px 0 8px;">🌍 GraphQL</h4>
 - **One endpoint, client-shaped responses**: The client sends a typed query describing exactly the fields it wants; the server returns exactly that
 - **Solves two REST pains**: **over-fetching** (receiving fields you do not need) and **under-fetching** (needing several round trips to assemble one screen)
 - **The schema is the contract**: Strongly typed; three operation types — **queries** (read), **mutations** (write), **subscriptions** (server push)
@@ -4695,57 +4655,57 @@ A quick capacity check early in a design discussion. State assumptions, use roun
 - **Versioning**: Usually none — the schema evolves by adding fields and deprecating old ones
 - In the Java ecosystem: Spring for GraphQL (built on graphql-java)
 
-#### gRPC
+<h4 id="grpc" style="font-size:20px;font-weight:700;margin:22px 0 8px;">🌍 gRPC</h4>
 - **Contract-first**: Messages and services are defined in Protocol Buffers (`.proto` files); client and server code is generated for each language
 - **Binary over HTTP/2**: Compact payloads and multiplexed streams — significantly faster than JSON over HTTP/1.1
 - **Four call types**: Unary (one request, one response), server streaming, client streaming, bidirectional streaming
 - **The limits**: Not browser-friendly (requires a grpc-web proxy), payloads not human-readable — keep it for internal east-west traffic and expose REST at the edge
 - Interview sound bite: "gRPC inside the platform, REST at the boundary"
 
-#### Real-Time Push: WebSockets and Server-Sent Events
+<h4 id="real-time-push-websockets-and-server-sent-events" style="font-size:20px;font-weight:700;margin:22px 0 8px;">🌍 Real-Time Push: WebSockets and Server-Sent Events</h4>
 - **WebSockets**: Persistent connection, full duplex (both directions) — chat, collaborative editing, market data with client interaction
 - **Server-Sent Events (SSE)**: Plain HTTP connection, one direction only (server → client), automatic reconnection built in — notifications, live feeds; simpler than WebSockets whenever the client never needs to push
 
-#### Webhooks
+<h4 id="webhooks" style="font-size:20px;font-weight:700;margin:22px 0 8px;">🌍 Webhooks</h4>
 - **The call is inverted**: The consumer registers a URL; the provider calls it when the event occurs ("don't call us, we'll call you")
 - **Provider obligations**: Retry with backoff (the consumer may be down) and sign the payload (so the consumer can verify authenticity)
 - **Consumer obligations**: Respond fast (acknowledge, then process asynchronously) and stay idempotent (deliveries can arrive duplicated)
 
-### SOLID Principles (explain with examples, not definitions)
+<h3 id="solid-principles-explain-with-examples-not-definitions" style="font-size:26px;font-weight:700;margin:26px 0 10px;">🧱 SOLID Principles (explain with examples, not definitions)</h3>
 - **Single Responsibility**: A class should have only one responsibility — one reason to change
 - **Open Closed**: Open for extension, closed for modifications — add a new Strategy bean instead of modifying a switch statement
 - **Liskov Substitution**: You should be able to substitute classes when using inheritance — the classic violation is Square extending Rectangle (setting the width silently breaks the height invariant)
 - **Interface Segregation**: Do not implement things that you don't need in your interfaces. Small granularity
 - **Dependency Inversion**: Your code should depend on abstractions, not implementations
 
-### Clean Code Habits (verbalize them during a code challenge)
+<h3 id="clean-code-habits-verbalize-them-during-a-code-challenge" style="font-size:26px;font-weight:700;margin:26px 0 10px;">🧭 Clean Code Habits (verbalize them during a code challenge)</h3>
 - Meaningful names; small functions that do one thing
 - No magic numbers — extract named constants
 - Early returns instead of nested if blocks
 - Fail fast: validate inputs at the top of the method
 - Immutability by default
 
-### Design Principles
+<h3 id="design-principles" style="font-size:26px;font-weight:700;margin:26px 0 10px;">📐 Design Principles</h3>
 - **DRY**: Don't repeat yourself (code)
 - **Encapsulate what changes**
 - **Favor composition over inheritance**
 - **Program against an interface, not implementations**
 
-### Design Patterns (each with its Spring incarnation)
+<h3 id="design-patterns-each-with-its-spring-incarnation" style="font-size:26px;font-weight:700;margin:26px 0 10px;">🧩 Design Patterns (each with its Spring incarnation)</h3>
 
 > 💻 Code — Creational: [FactoryTest](../src/main/java/algorithm/concepts/designpatterns/creational/factory/FactoryTest.java) · [SingletonTest](../src/main/java/algorithm/concepts/designpatterns/creational/singleton/SingletonTest.java) · [BuilderTest](../src/main/java/algorithm/concepts/designpatterns/creational/builder/BuilderTest.java)
 > 💻 Code — Behavioral: [StrategyDemo](../src/main/java/algorithm/concepts/designpatterns/behavioral/strategy/StrategyDemo.java) · [ObserverDemo](../src/main/java/algorithm/concepts/designpatterns/behavioral/observer/ObserverDemo.java) · [TemplateMethodDemo](../src/main/java/algorithm/concepts/designpatterns/behavioral/templatemethod/TemplateMethodDemo.java) · [ChainOfResponsibilityDemo](../src/main/java/algorithm/concepts/designpatterns/behavioral/chainofresponsibility/ChainOfResponsibilityDemo.java)
 > 💻 Code — Structural: [AdapterTest](../src/main/java/algorithm/concepts/designpatterns/structural/adapter/AdapterTest.java) · [DecoratorDemo](../src/main/java/algorithm/concepts/designpatterns/structural/decorator/DecoratorDemo.java) · [ProxyDemo](../src/main/java/algorithm/concepts/designpatterns/structural/proxy/ProxyDemo.java)
 > 💻 Code — Spring incarnations: [Strategy via Spring](../src/main/java/algorithm/concepts/spring/strategy/StrategyPatternExample.java) · [Observer via Spring events](../src/main/java/algorithm/concepts/spring/events/ApplicationEventsExample.java) · [Proxy via Spring aspects](../src/main/java/algorithm/concepts/spring/aop/AopProxyExample.java)
 
-#### Creational
+<h4 id="creational" style="font-size:20px;font-weight:700;margin:22px 0 8px;">🏭 Creational</h4>
 - **Factory Method**: Lets subclasses decide which class to instantiate; delegates creation to a method rather than a constructor — Spring's `BeanFactory` and `@Bean` factory methods
 - **Abstract Factory**: Creates families of related objects without naming their concrete classes — a `@Configuration` class declaring a related family of beans
 - **Singleton**: One instance with a global access point — Spring beans are singletons *per container*, not static Java Virtual Machine-wide singletons; prefer the Spring-managed form
 - **Builder**: Separates construction of a complex object from its representation; avoids the telescoping-constructor problem — Lombok `@Builder`, `UriComponentsBuilder`, `MockMvcRequestBuilders`
 - **Prototype**: Creates objects by cloning an existing instance rather than building from scratch — Java's `Cloneable`/copy constructors; useful when construction is expensive
 
-#### Behavioral
+<h4 id="behavioral" style="font-size:20px;font-weight:700;margin:22px 0 8px;">🎭 Behavioral</h4>
 - **Strategy**: Encapsulates interchangeable algorithms behind a common interface — in Spring, inject a `Map<String, PaymentStrategy>` and pick by key; eliminates switch statements. **The most useful pattern to demonstrate in a code challenge**
 - **Template Method**: A base class fixes the skeleton of an algorithm and subclasses fill in steps — `JdbcTemplate` and `RestTemplate` (the naming is literal)
 - **Observer**: A one-to-many dependency where dependents are notified automatically of state changes — Spring `ApplicationEvent` and `@EventListener`; the foundation of event-driven thinking
@@ -4757,7 +4717,7 @@ A quick capacity check early in a design discussion. State assumptions, use roun
 - **Memento**: Captures and restores an object's state without breaking encapsulation — undo history, checkpointing
 - **Visitor**: Adds operations over an object structure without modifying the element classes — `JsonSerializer`/`JsonDeserializer` visiting object graphs
 
-#### Structural
+<h4 id="structural" style="font-size:20px;font-weight:700;margin:22px 0 8px;">🏗️ Structural</h4>
 - **Adapter**: Converts one interface into another that clients expect — wrap third-party clients or legacy data access behind your own interfaces; Spring's `HandlerAdapter` bridges requests to controller methods
 - **Proxy**: A surrogate that controls access to another object — exactly how `@Transactional` and Spring Aspect-Oriented Programming (AOP) work (Java Development Kit dynamic proxy for interfaces, CGLIB subclassing for concrete classes); also Hibernate lazy-loading proxies
 - **Decorator**: Adds responsibilities by wrapping, without subclassing — the Java input/output streams (`new BufferedInputStream(new FileInputStream(...))`); `HttpServletRequestWrapper`
@@ -4766,50 +4726,50 @@ A quick capacity check early in a design discussion. State assumptions, use roun
 - **Bridge**: Decouples an abstraction from its implementation so each varies independently — separate a notification channel (email vs SMS) from its rendering (HTML vs plain text) without a subclass explosion
 - **Flyweight**: Shares many fine-grained objects by splitting intrinsic (shared) from extrinsic (per-use) state — the `String` intern pool, the `Integer.valueOf()` small-integer cache
 
-#### Architectural Patterns
+<h4 id="architectural-patterns" style="font-size:20px;font-weight:700;margin:22px 0 8px;">🏛️ Architectural Patterns</h4>
 - **Repository / Service Layer / Data Transfer Object (DTO)**: The entity is NOT the API contract — map entities to Data Transfer Objects at the service boundary, with a dedicated mapper
 - **Hexagonal Architecture (Ports & Adapters)**: The business domain at the center, isolated from infrastructure behind interfaces (ports) implemented by adapters — high senior signal
 - **Dependency Inversion in practice**: Depend on interfaces at module boundaries, wire the implementations at the edges
 
-### 🌐 Distributed Design Patterns
+<h3 id="distributed-design-patterns" style="font-size:26px;font-weight:700;margin:26px 0 10px;">🕸️ Distributed Design Patterns</h3>
 
 Patterns for systems split across processes and networks. The monolith-versus-microservices framing, resilience patterns (circuit breaker, bulkhead, retry), and data-consistency patterns (saga, outbox, CQRS) below are all distributed design patterns; **Messaging** — and Kafka in particular — is the transport that makes the event-driven ones work.
 
-#### Monolith vs Microservices — the honest trade-off
+<h4 id="monolith-vs-microservices--the-honest-trade-off" style="font-size:20px;font-weight:700;margin:22px 0 8px;">🕸️ Monolith vs Microservices — the honest trade-off</h4>
 - **What microservices give**: Independent deployment, fault isolation, technology freedom per service, team autonomy
 - **What microservices cost**: Distributed complexity, network latency, eventual consistency, heavy operational overhead
 - **When NOT to use microservices** (saying this earns senior points): Small team, unclear domain boundaries, early-stage product — start with a well-modularized monolith and split once the boundaries stabilize
 
-#### How to Split Services
+<h4 id="how-to-split-services" style="font-size:20px;font-weight:700;margin:22px 0 8px;">🕸️ How to Split Services</h4>
 - **Bounded contexts** (from Domain Driven Design): Split by business capability (orders, payments, inventory), never by technical layer
 - **Database per service**: Each service owns its data; a shared database silently re-couples everything you tried to decouple
 
-#### Communication Patterns
+<h4 id="communication-patterns" style="font-size:20px;font-weight:700;margin:22px 0 8px;">🕸️ Communication Patterns</h4>
 - **Synchronous**: REST for general use; gRPC (Remote Procedure Calls over HTTP/2 with Protocol Buffers) when low latency and high throughput matter
 - **Asynchronous**: Events through Kafka — decouples services in time and in availability
 - **Rule of thumb**: Queries → synchronous; state-change notifications → asynchronous events
 - **API Gateway**: Single entry point handling routing, authentication and rate limiting (Spring Cloud Gateway)
 - **Service discovery**: A directory of service instances, with client-side or server-side load balancing; in Kubernetes, native Domain Name System (DNS) discovery makes a Eureka-style registry unnecessary
 
-#### 📨 Messaging
+<h4 id="messaging" style="font-size:20px;font-weight:700;margin:22px 0 8px;">🕸️ Messaging</h4>
 
 Messaging is the asynchronous backbone of distributed systems: instead of one service calling another and waiting, the producer hands a message to a **broker** and moves on, and the consumer processes it whenever it is ready. This decouples services in **time** (the consumer can be down when the message is sent), in **availability** (a slow consumer cannot slow the producer), and in **load** (the broker absorbs spikes).
 
-##### Two delivery models
+<h5 id="two-delivery-models" style="font-size:16px;font-weight:600;margin:18px 0 7px;">Two delivery models</h5>
 - **Message Queue (point-to-point)**: each message is delivered to exactly **one** consumer among those competing on the queue — used to distribute work
 - **Publish/Subscribe (topic)**: each message is delivered to **every** subscriber — used to broadcast events
 
-##### Choosing a broker
+<h5 id="choosing-a-broker" style="font-size:16px;font-weight:600;margin:18px 0 7px;">Choosing a broker</h5>
 - **Apache Kafka**: a distributed, replayable commit log — enormous throughput, event streaming, and the ability to re-read history (covered in depth below)
 - **RabbitMQ / ActiveMQ**: traditional smart brokers with flexible routing and per-message acknowledgement — simpler when you need work queues without replay
 - **Cloud-managed**: AWS Simple Queue Service / Simple Notification Service, Azure Service Bus, Google Pub/Sub — the same models without operating the broker yourself
 
-##### Why messaging belongs to distributed design patterns
+<h5 id="why-messaging-belongs-to-distributed-design-patterns" style="font-size:16px;font-weight:600;margin:18px 0 7px;">Why messaging belongs to distributed design patterns</h5>
 Asynchronous messaging is what makes patterns like **Saga** (choreography through events), **Outbox** (reliable event publishing), and **event-driven architecture** possible. The patterns above describe *what* to coordinate; messaging is *how* the coordination travels.
 
-##### Apache Kafka
+<h5 id="apache-kafka" style="font-size:16px;font-weight:600;margin:18px 0 7px;">Apache Kafka</h5>
 
-###### Architecture (be able to draw it)
+<h6 id="architecture-be-able-to-draw-it" style="font-size:13px;font-weight:600;opacity:.72;margin:14px 0 5px;">Architecture (be able to draw it)</h6>
 - **Broker**: One Kafka server; a cluster is a group of brokers
 - **Topic**: Named stream of messages, split into partitions
 - **Partition**: Append-only ordered log — THE unit of parallelism
@@ -4818,11 +4778,11 @@ Asynchronous messaging is what makes patterns like **Saga** (choreography throug
   - More consumers than partitions → the extra consumers sit idle
 - **Replication**: Each partition has one leader (serves all reads and writes) and followers; the In-Sync Replicas (ISR) are the followers that are fully up to date
 
-###### The Ordering Guarantee
+<h6 id="the-ordering-guarantee" style="font-size:13px;font-weight:600;opacity:.72;margin:14px 0 5px;">The Ordering Guarantee</h6>
 - **Order is guaranteed only within one partition, never across the whole topic**
 - The message **key** determines the partition (hash of the key): same key → same partition → strict order for that key (for example, all the events of one given order or account)
 
-###### Delivery Semantics (guaranteed question)
+<h6 id="delivery-semantics-guaranteed-question" style="font-size:13px;font-weight:600;opacity:.72;margin:14px 0 5px;">Delivery Semantics (guaranteed question)</h6>
 | Semantic | How it is obtained | Trade-off |
 |---|---|---|
 | At-most-once | Commit offsets *before* processing | Messages can be lost, none duplicated |
@@ -4831,23 +4791,23 @@ Asynchronous messaging is what makes patterns like **Saga** (choreography throug
 
 - **The practical answer to duplicates: design idempotent consumers** — deduplicate by business key, upsert instead of insert
 
-###### Producer Acknowledgements (the acks setting)
+<h6 id="producer-acknowledgements-the-acks-setting" style="font-size:13px;font-weight:600;opacity:.72;margin:14px 0 5px;">Producer Acknowledgements (the acks setting)</h6>
 - **acks=0**: Fire and forget — fastest, messages can be lost silently
 - **acks=1**: The partition leader confirms — middle ground, lost if the leader dies before replicating
 - **acks=all**: All in-sync replicas confirm — slowest, no loss as long as one replica survives
 
-###### Operational Knowledge
+<h6 id="operational-knowledge" style="font-size:13px;font-weight:600;opacity:.72;margin:14px 0 5px;">Operational Knowledge</h6>
 - **Consumer lag**: Distance between the last produced offset and the last consumed offset — THE health metric of a consumer; a growing lag means the consumer cannot keep up
 - **Rebalancing**: Redistribution of partitions when a consumer joins, leaves or crashes; disruptive because consumption pauses — cooperative (incremental) rebalancing reduces the pause
 - **Retention**: Messages are kept by time or by size, regardless of consumption — the log is replayable; **compacted topics** keep only the latest value per key (changelog semantics)
 - **Dead letter topic**: Where a consumer parks poison messages (messages that always fail) instead of blocking the whole partition
 
-###### Spring Kafka
+<h6 id="spring-kafka" style="font-size:13px;font-weight:600;opacity:.72;margin:14px 0 5px;">Spring Kafka</h6>
 - **@KafkaListener(topics = "...", groupId = "...")**: Declares a consumer method
 - **ConcurrentKafkaListenerContainerFactory**: Configures concurrency, deserialization and error handling
 - **Error handling**: `DefaultErrorHandler` with backoff, plus `DeadLetterPublishingRecoverer`; retry topics for non-blocking retries
 
-###### Kafka vs Traditional Message Brokers (RabbitMQ)
+<h6 id="kafka-vs-traditional-message-brokers-rabbitmq" style="font-size:13px;font-weight:600;opacity:.72;margin:14px 0 5px;">Kafka vs Traditional Message Brokers (RabbitMQ)</h6>
 | Aspect | Kafka | RabbitMQ |
 |---|---|---|
 | Model | Distributed replayable log (dumb broker, smart consumer) | Routing-centric queues (smart broker, dumb consumer) |
@@ -4856,7 +4816,7 @@ Asynchronous messaging is what makes patterns like **Saga** (choreography throug
 
 - **When a simple queue beats Kafka**: low-volume task distribution with no replay requirement — a plain queue is operationally much simpler
 
-#### Resilience Patterns (know the names AND the why)
+<h4 id="resilience-patterns-know-the-names-and-the-why" style="font-size:20px;font-weight:700;margin:22px 0 8px;">🕸️ Resilience Patterns (know the names AND the why)</h4>
 
 | Pattern | Mechanism | Why it matters |
 |---|---|---|
@@ -4869,7 +4829,7 @@ Asynchronous messaging is what makes patterns like **Saga** (choreography throug
 
 **Libraries**: Resilience4j (Java), Polly (.NET)
 
-#### Data Management Across Services (where interviews get hard)
+<h4 id="data-management-across-services-where-interviews-get-hard" style="font-size:20px;font-weight:700;margin:22px 0 8px;">🕸️ Data Management Across Services (where interviews get hard)</h4>
 - **Why not distributed transactions**: Two-Phase Commit (2PC) blocks every participant on a central coordinator — it kills availability and autonomy, so microservices avoid it
 - **Saga pattern**: A distributed business transaction expressed as a sequence of local transactions, each paired with a **compensating transaction** to undo it on failure
   - **Choreography**: Services react to each other's events — no central brain, but the flow is harder to follow
@@ -4878,67 +4838,67 @@ Asynchronous messaging is what makes patterns like **Saga** (choreography throug
 - **Command Query Responsibility Segregation (CQRS)**: Separate write model and read model — justified when reads and writes have very different shapes or loads; otherwise overkill
 - **Eventual consistency**, explained to a stakeholder: "The order is confirmed immediately; the loyalty points appear a few seconds later — and the business is fine with that"
 
-#### Observability — the three pillars
+<h4 id="observability--the-three-pillars" style="font-size:20px;font-weight:700;margin:22px 0 8px;">🕸️ Observability — the three pillars</h4>
 - **Logs**: Structured (JSON) and centralized
 - **Metrics**: Micrometer → Prometheus → dashboards and alerting
 - **Traces**: Micrometer Tracing / OpenTelemetry — the trace identifier is propagated across every service hop
 - **Correlation identifier**: One identifier per request, present in every log line of every service the request crossed
 - **Health checks**: Spring Boot Actuator exposes **liveness** (is the process alive — restart it if not) and **readiness** (can it serve traffic — remove it from load balancing if not)
 
-#### Entry & Deployment Patterns
+<h4 id="entry--deployment-patterns" style="font-size:20px;font-weight:700;margin:22px 0 8px;">🕸️ Entry &amp; Deployment Patterns</h4>
 - **API Gateway / Backend For Frontend (BFF)**: A single entry point for frontend calls handling routing, authentication, rate limiting, and protocol translation; the BFF variant tailors a gateway per client type (mobile, web)
 - **Shared Event Bus / Message Queues**: Asynchronous communication between microservices through messages, decoupling producers from consumers in time and availability
 - **Service Registry**: A live directory of service instances and addresses for discovery; in Kubernetes, native Domain Name System (DNS) resolution makes a dedicated registry (Eureka) unnecessary
 - **Blue/Green deployment**: Two identical environments; the passive one runs the new version, a router switch cuts traffic over instantly, and rollback is an equally instant switch back — zero-downtime at the cost of double infrastructure
 - **Canary deployment**: Route a small percentage of live traffic to the new version, watch error rates and latency, then grow the percentage or roll back — lower risk than blue/green for a large user base
 
-### Architecture Types
+<h3 id="architecture-types" style="font-size:26px;font-weight:700;margin:26px 0 10px;">🏛️ Architecture Types</h3>
 
-#### Layered Architecture (N-Tier)
+<h4 id="layered-architecture-n-tier" style="font-size:20px;font-weight:700;margin:22px 0 8px;">🏛️ Layered Architecture (N-Tier)</h4>
 Horizontal layers, each with a distinct role: **Presentation → Business → Persistence → Database**. Requests flow down through each closed layer in turn.
 - **Strength**: well understood, easy to build and test (mock lower layers)
 - **Weakness**: tends to deploy as a monolith; the "architecture sinkhole" anti-pattern appears when requests pass through layers that add no logic
 - **When**: the default starting point when domain boundaries are not yet clear
 
-#### Event-Driven Architecture
+<h4 id="event-driven-architecture" style="font-size:20px;font-weight:700;margin:22px 0 8px;">🏛️ Event-Driven Architecture</h4>
 Decoupled, single-purpose components process events asynchronously. Two topologies:
 - **Mediator**: a central mediator orchestrates a multi-step event by dispatching sub-events in sequence
 - **Broker**: components publish to a broker and react to each other, with no central brain
 - **Strength**: high scalability and adaptability; components decoupled in time and availability
 - **Weakness**: complex error handling and flow tracing; eventual consistency
 
-#### Microkernel Architecture (Plugin)
+<h4 id="microkernel-architecture-plugin" style="font-size:20px;font-weight:700;margin:22px 0 8px;">🏛️ Microkernel Architecture (Plugin)</h4>
 A minimal **core system** holds only what is needed to run; all extra features are independent **plug-ins** registered in a registry. The core stays stable; new capability means a new plug-in.
 - **Examples**: the Eclipse IDE, browser extensions, claims processing with per-region rules as plug-ins
 - **Strength**: high agility and testability; plug-ins can be deployed at runtime
 - **Weakness**: usually a single deployable unit (low scalability); designing the plug-in contract is hard
 
-#### Space-Based Architecture
+<h4 id="space-based-architecture" style="font-size:20px;font-weight:700;margin:22px 0 8px;">🏛️ Space-Based Architecture</h4>
 Removes the central-database bottleneck with replicated **in-memory data grids**: multiple processing units each hold the full data set in memory, behind a virtualized middleware (messaging, data, processing grids) that routes and replicates. Units spin up and down with load.
 - **Strength**: near-linear horizontal scalability; in-memory speed
 - **Weakness**: expensive and complex; eventual consistency between units; unsuited to large relational datasets
 - **When**: highly variable, unpredictable concurrent load (auctions, ticket booking)
 
-#### DB Centric Architecture
-Has a database at the center of the application and its divided in the layers:
+<h4 id="db-centric-architecture" style="font-size:20px;font-weight:700;margin:22px 0 8px;">🏛️ DB Centric Architecture</h4>
+Has a database at the center of the application, divided into layers:
 - **UI**
 - **Business Logic**
 - **Data Access**: DB
 
-#### Domain Centric Architecture
+<h4 id="domain-centric-architecture" style="font-size:20px;font-weight:700;margin:22px 0 8px;">🏛️ Domain Centric Architecture</h4>
 The domain is at the center of the application and the layers are divided in:
 - **Presentation**: UI
-- **Application**: Abstractions for the use cases for of the app
+- **Application**: Abstractions for the use cases of the app
 - **Domain**: Abstractions for the problem/business domain
 - **Persistence**: Interface with the storage/DB
 - **Infrastructure**: Interface with the operative system and 3rd party dependencies
 - **Crosscutting**: Aspects common to all projects of the app
 - **Specification**: Acceptance tests verifying the functionality of the application
 
-#### Functional Organization
+<h4 id="functional-organization" style="font-size:20px;font-weight:700;margin:22px 0 8px;">🏛️ Functional Organization</h4>
 Separate the layers by functionality
 
-### Design Tips
+<h3 id="design-tips" style="font-size:26px;font-weight:700;margin:26px 0 10px;">💡 Design Tips</h3>
 - Understand the problem
 - Ask questions about:
     - Features
@@ -4947,28 +4907,28 @@ Separate the layers by functionality
     - Stack
 - Design the most critical components first
 
-### Requirements
+<h3 id="requirements" style="font-size:26px;font-weight:700;margin:26px 0 10px;">📋 Requirements</h3>
 
-#### Functional Requirements
+<h4 id="functional-requirements" style="font-size:20px;font-weight:700;margin:22px 0 8px;">📋 Functional Requirements</h4>
 Describe behavior: APIs, Operations supported
 
-#### Non-Functional Requirements
+<h4 id="non-functional-requirements" style="font-size:20px;font-weight:700;margin:22px 0 8px;">📋 Non-Functional Requirements</h4>
 Describe qualities: Scalable, Fast, Secure
 
 ---
 
-## 🧪 Testing
+<h2 id="-testing" style="font-size:33px;font-weight:800;margin:30px 0 12px;">🧪 Testing</h2>
 
 > 💻 Code: [ExceptionTest (assertions & expected exceptions)](../src/main/java/algorithm/concepts/oop/exceptions/ExceptionTest.java)
 
 The **test pyramid** sets the proportions: many fast unit tests at the base, fewer integration tests in the middle, a handful of slow end-to-end tests at the top.
 
-#### ⚙️ Unit Testing
+<h4 id="unit-testing" style="font-size:20px;font-weight:700;margin:22px 0 8px;">🧪 Unit Testing</h4>
 Tests one class in isolation; collaborators are replaced by mocks. Fast and deterministic.
 - **JUnit**: The Java testing framework — runs tests, provides assertions and the lifecycle
 - **Mockito**: Creates mock objects so you control what dependencies return and verify how they were called
 
-##### JUnit 5 Annotations
+<h5 id="junit-5-annotations" style="font-size:16px;font-weight:600;margin:18px 0 7px;">JUnit 5 Annotations</h5>
 ```java
 @BeforeEach // run before EACH test — fresh fixtures (JUnit 4 name was @Before)
 @AfterEach  // run after EACH test — release resources (JUnit 4 name was @After)
@@ -4977,32 +4937,32 @@ Tests one class in isolation; collaborators are replaced by mocks. Fast and dete
 @Disabled   // temporarily skip a test
 ```
 
-##### Mockito vs Spring test annotations
+<h5 id="mockito-vs-spring-test-annotations" style="font-size:16px;font-weight:600;margin:18px 0 7px;">Mockito vs Spring test annotations</h5>
 - **`@Mock`** (Mockito): a bare mock, no Spring context involved — for pure unit tests
 - **`@MockBean`** (Spring Boot): replaces a bean inside the loaded Spring context with a mock — for slice/integration tests
 - **`when(...).thenReturn(...)`** stubs behavior; **`verify(...)`** asserts an interaction happened
 
-##### Common assertions
+<h5 id="common-assertions" style="font-size:16px;font-weight:600;margin:18px 0 7px;">Common assertions</h5>
 ```java
 assertEquals(expected, actual);
 assertTrue(condition);
 assertThrows(IllegalArgumentException.class, () -> service.call(badInput));
 ```
 
-#### 🔗 Integration Testing
+<h4 id="integration-testing" style="font-size:20px;font-weight:700;margin:22px 0 8px;">🧪 Integration Testing</h4>
 Tests several components together, often with real infrastructure.
 - **`@SpringBootTest`**: boots the full context — heaviest, most realistic
 - **Slices**: `@WebMvcTest` (controller layer + MockMvc), `@DataJpaTest` (repository layer + embedded database)
 - **Testcontainers**: spins up a real database/Kafka in Docker for tests — production-like, a strong senior signal
 - **Selenium**: drives a real browser for end-to-end web testing
 
-#### 🚀 Performance Testing
+<h4 id="performance-testing" style="font-size:20px;font-weight:700;margin:22px 0 8px;">🧪 Performance Testing</h4>
 - **JMeter**: load and stress testing — simulate many concurrent users, measure throughput and latency
 - **curl / scripts**: quick command-line smoke checks of an endpoint
 
 ---
 
-## Data Formats
+<h2 id="data-formats" style="font-size:33px;font-weight:800;margin:30px 0 12px;">📄 Data Formats</h2>
 
 > 💻 Code: [TestSerialization — Java binary serialization](../src/main/java/algorithm/implementation/files/TestSerialization.java)
 
@@ -5015,10 +4975,9 @@ How services serialize the data they exchange — the choice drives payload size
 
 ---
 
-# 🌐 Frontend
+<h1 id="-frontend" style="font-size:42px;font-weight:800;margin:34px 0 14px;">🌐 Frontend</h1>
 
-<a id="html5"></a>
-## HTML5
+<h2 id="html5" style="font-size:33px;font-weight:800;margin:30px 0 12px;">📄 HTML5</h2>
 - Audio/Video
 - Web Workers/Service Workers (Threads js)
 - Local Storage (global)
@@ -5026,16 +4985,14 @@ How services serialize the data they exchange — the choice drives payload size
 
 ---
 
-<a id="css"></a>
-## CSS
+<h2 id="css" style="font-size:33px;font-weight:800;margin:30px 0 12px;">🎨 CSS</h2>
 - Box model: margin (external), padding (internal)
 - CSS selectors and combiners
 - Specificity
 
 ---
 
-<a id="javascript"></a>
-## JavaScript
+<h2 id="javascript" style="font-size:33px;font-weight:800;margin:30px 0 12px;">🟨 JavaScript</h2>
 - **Scopes**
 - **Callbacks**: A function that be passed as argument to be called later
 - **Hoisting**: JS automatically moves all variable declarations at the top when compiling
@@ -5046,8 +5003,7 @@ How services serialize the data they exchange — the choice drives payload size
 
 ---
 
-<a id="typescript"></a>
-## TypeScript
+<h2 id="typescript" style="font-size:33px;font-weight:800;margin:30px 0 12px;">🔷 TypeScript</h2>
 - **Superset of JS**: All JS code is valid TS code
 - **Transpiled to JS**: TS code is converted to JS code
 - **Static typing**: Types are checked at compile time
@@ -5058,8 +5014,7 @@ How services serialize the data they exchange — the choice drives payload size
 npm install -g typescript
 ```
 
-<a id="testing"></a>
-### Testing
+<h3 id="testing" style="font-size:26px;font-weight:700;margin:26px 0 10px;">🧪 Testing</h3>
 ```javascript
 // Jasmine
 it("should be called", function() {})
@@ -5069,8 +5024,7 @@ spyOn() // listener
 toHaveBeenCalled()/toHaveBeenCalledWith(x,y)
 ```
 
-<a id="features"></a>
-#### Features
+<h4 id="features-1" style="font-size:20px;font-weight:700;margin:22px 0 8px;">🧪 Features</h4>
 - **Type Annotations**: `let x: string = 'My string';`
 - **Type Inference**
 - **Union types**: `let somevalue: number | string`
@@ -5078,8 +5032,7 @@ toHaveBeenCalled()/toHaveBeenCalledWith(x,y)
 - **Optional parameters**: `message?: string`
 - **Typed functions**: `function(): string{}`
 
-<a id="react"></a>
-### React
+<h3 id="react" style="font-size:26px;font-weight:700;margin:26px 0 10px;">⚛️ React</h3>
 - **Component**: Building blocks of React applications
 - **Props**: Properties to pass data from parent to child (unidirectional)
 - **State**: Data that belongs to the component
@@ -5091,10 +5044,10 @@ toHaveBeenCalled()/toHaveBeenCalledWith(x,y)
 
 ---
 
-# 🔧 DevOps
+<h1 id="-devops" style="font-size:42px;font-weight:800;margin:34px 0 14px;">🔧 DevOps</h1>
 
-## Features
-- **Automationm**
+<h2 id="features-2" style="font-size:33px;font-weight:800;margin:30px 0 12px;">✨ Features</h2>
+- **Automation**
 - **CI/CD**
 - **Monitoring**
 - **Collaboration**
@@ -5102,8 +5055,8 @@ toHaveBeenCalled()/toHaveBeenCalledWith(x,y)
 
 ---
 
-## SDLC
-- **Requirement gathering**: Interact with the user to understand wht the software should do, features
+<h2 id="sdlc" style="font-size:33px;font-weight:800;margin:30px 0 12px;">🔄 SDLC</h2>
+- **Requirement gathering**: Interact with the user to understand what the software should do, features
 - **Analysis**: Analyse the requirements and understand how to build the software, roadmap for development
 - **Design**: Design the architecture of the software, components, interactions, technologies, ui
 - **Coding**: Write the code
@@ -5113,21 +5066,21 @@ toHaveBeenCalled()/toHaveBeenCalledWith(x,y)
 
 ---
 
-## Docker
+<h2 id="docker" style="font-size:33px;font-weight:800;margin:30px 0 12px;">🐳 Docker</h2>
 
-### Images
+<h3 id="images" style="font-size:26px;font-weight:700;margin:26px 0 10px;">🖼️ Images</h3>
 - **build**: docker image build
 - **show**: docker image ls
 - **pull**: docker image pull name:version
 - **inspect**: docker image inspect name
 - **delete**: docker image rm
 
-### Containers
+<h3 id="containers" style="font-size:26px;font-weight:700;margin:26px 0 10px;">📦 Containers</h3>
 - **start**: docker container run
 - **stop**: docker container stop id
 - **delete**: docker container rm
 
-### Dockerfile
+<h3 id="dockerfile" style="font-size:26px;font-weight:700;margin:26px 0 10px;">📋 Dockerfile</h3>
 
 ```dockerfile
 FROM alpine
@@ -5139,7 +5092,7 @@ EXPOSE 8080
 ENTRYPOINT ["node","./app.js"]
 ```
 
-### Docker for Java Applications
+<h3 id="docker-for-java-applications" style="font-size:26px;font-weight:700;margin:26px 0 10px;">☕ Docker for Java Applications</h3>
 - **Image vs container**: The image is the immutable template; the container is a running instance of it
 - **Layers and caching**: Each Dockerfile instruction creates a layer; order them from least to most frequently changing so rebuilds reuse the cache
 - **Multi-stage builds**: Build with the full Java Development Kit in a first stage, ship only the Java Runtime Environment plus the application in the final stage — much smaller images
@@ -5147,40 +5100,40 @@ ENTRYPOINT ["node","./app.js"]
 
 ---
 
-## Kubernetes
+<h2 id="kubernetes" style="font-size:33px;font-weight:800;margin:30px 0 12px;">☸️ Kubernetes</h2>
 
-### Structure
+<h3 id="structure" style="font-size:26px;font-weight:700;margin:26px 0 10px;">🏗️ Structure</h3>
 Deployment contains > Pods contains > Containers
 
-### Core Objects (from the smallest unit to the entry point)
+<h3 id="core-objects-from-the-smallest-unit-to-the-entry-point" style="font-size:26px;font-weight:700;margin:26px 0 10px;">🔵 Core Objects (from the smallest unit to the entry point)</h3>
 - **Pod**: Smallest deployable unit; one or more containers sharing network and storage
 - **Deployment**: Manages the replicas of a pod; handles rolling updates and rollbacks
 - **Service**: Stable network identity in front of ephemeral pods — **ClusterIP** (internal only), **NodePort** (a port opened on every node), **LoadBalancer** (external, cloud-provisioned)
 - **Ingress**: HTTP routing rules (host and path based) toward services
 
-### Nodes
+<h3 id="nodes" style="font-size:26px;font-weight:700;margin:26px 0 10px;">🔵 Nodes</h3>
 - **Master node (control plane)**: Takes decisions about the cluster
 - **Worker node**: Carries on work
 
-### Components
+<h3 id="components" style="font-size:26px;font-weight:700;margin:26px 0 10px;">🧩 Components</h3>
 - **apiserver**: exposes the interface to communicate with the control plane
 - **kubelet**: Main kubernetes agent on each node
 - **kube-proxy**: Networking component
 
-### Configuration & Spring Boot Integration
+<h3 id="configuration--spring-boot-integration" style="font-size:26px;font-weight:700;margin:26px 0 10px;">🌱 Configuration &amp; Spring Boot Integration</h3>
 - **ConfigMap** (non-sensitive configuration) and **Secret** (sensitive values) are exposed to pods as environment variables or mounted files — Spring Boot reads them like any other property source
 - **Probes wired to Actuator**:
   - **Liveness probe** ("is the process alive?" — Kubernetes restarts the pod on failure) → `/actuator/health/liveness`
   - **Readiness probe** ("can it serve traffic?" — Kubernetes stops routing to the pod on failure) → `/actuator/health/readiness`
 - **Service discovery is native**: Each service gets a Domain Name System (DNS) name (`http://order-service`) — this is why a Eureka-style registry becomes unnecessary in Kubernetes
 
-### Resources & the Java Virtual Machine
+<h3 id="resources--the-java-virtual-machine" style="font-size:26px;font-weight:700;margin:26px 0 10px;">☕ Resources &amp; the Java Virtual Machine</h3>
 - **Requests** (what the scheduler guarantees) vs **limits** (the hard ceiling) for processor and memory
 - Exceeding the memory limit → the container is **OOMKilled** (Out Of Memory)
 - Size the Java heap relative to the container, not with a fixed value: `-XX:MaxRAMPercentage=75.0` instead of a hard-coded `-Xmx`
 - **Horizontal Pod Autoscaler**: Adds or removes pod replicas based on observed load (processor, memory, custom metrics)
 
-### Commands
+<h3 id="commands-1" style="font-size:26px;font-weight:700;margin:26px 0 10px;">⌨️ Commands</h3>
 ```bash
 kubectl get nodes / pods / services
 kubectl describe pod mypod    # events and state — first reflex when debugging
@@ -5193,54 +5146,54 @@ kubectl delete -f pod.yml
 
 ---
 
-## Cloud
+<h2 id="cloud" style="font-size:33px;font-weight:800;margin:30px 0 12px;">☁️ Cloud</h2>
 
-### AWS
+<h3 id="aws" style="font-size:26px;font-weight:700;margin:26px 0 10px;">☁️ AWS</h3>
 
-#### Computing
+<h4 id="computing" style="font-size:20px;font-weight:700;margin:22px 0 8px;">☁️ Computing</h4>
 - **EC2**: Elastic Compute Cloud with autoscaling
 - **Lambda**: Serverless functions, virtual functions, autoscalable, reactive
 - **Batch**: Timed jobs
 - **Lightsail**: Easy user friendly computing + services for quick startup
 
-#### Storage
+<h4 id="storage" style="font-size:20px;font-weight:700;margin:22px 0 8px;">☁️ Storage</h4>
 - **S3**: Simple Storage Service for objects
 - **EBS**: Elastic Block Store for EC2
 - **EFS**: Elastic File System
-- **DynamoDB**: NoDB key/value based
-- **DocumentDB**: NoDB MongoDB document based
-- **RDS**: Relational DB service for MySQL, SQLServer, Oracle, Postgress, etc.
+- **DynamoDB**: NoSQL key/value based
+- **DocumentDB**: NoSQL MongoDB document based
+- **RDS**: Relational database service for MySQL, SQL Server, Oracle, PostgreSQL, etc.
 - **Aurora**: AWS Proprietary SQL DB engine
 
-#### Networking
+<h4 id="networking" style="font-size:20px;font-weight:700;margin:22px 0 8px;">☁️ Networking</h4>
 - **VPC**: Virtual Private Cloud
 - **CloudFront**: Content Delivery Network
 - **API Gateway**: API management service
 - **Route 53**: DNS service
 - **ELB**: Elastic Load Balancer
 
-#### Monitoring
+<h4 id="monitoring" style="font-size:20px;font-weight:700;margin:22px 0 8px;">☁️ Monitoring</h4>
 - **CloudWatch**: Metrics and monitoring
 - **Quicksight**: Dashboard for analytics
 
-#### Events
+<h4 id="events" style="font-size:20px;font-weight:700;margin:22px 0 8px;">☁️ Events</h4>
 - **EventBridge**:  Event/cron based event trigger service
 
-#### Containers
+<h4 id="containers-1" style="font-size:20px;font-weight:700;margin:22px 0 8px;">☁️ Containers</h4>
 - **ECR**: Container repository
 - **ECS**: Provisioned ec2 instances
 - **Fargate**: Serverless container service
 - **EKS**: Elastic Kubernetes service, orchestrator, management
 
-#### CI/CD
+<h4 id="cicd" style="font-size:20px;font-weight:700;margin:22px 0 8px;">☁️ CI/CD</h4>
 - **CodeCommit**: Source control service
 - **CodeBuild**: Build service
 - **CodeDeploy**: Deployment service
 - **CodePipeline**: CI/CD service
 
-### Azure
+<h3 id="azure" style="font-size:26px;font-weight:700;margin:26px 0 10px;">🔷 Azure</h3>
 
-#### Mapping AWS Knowledge to Azure Equivalents
+<h4 id="mapping-aws-knowledge-to-azure-equivalents" style="font-size:20px;font-weight:700;margin:22px 0 8px;">🔷 Mapping AWS Knowledge to Azure Equivalents</h4>
 | Concept | AWS (what you know) | Azure (what they use) |
 |---|---|---|
 | Kubernetes | Elastic Kubernetes Service (EKS) | Azure Kubernetes Service (AKS) |
@@ -5254,7 +5207,7 @@ kubectl delete -f pod.yml
 | Monitoring | CloudWatch | Azure Monitor + Application Insights |
 | Continuous integration/delivery | CodePipeline / GitHub Actions | Azure DevOps Pipelines / GitHub Actions |
 
-#### Talking Points for the Interview
+<h4 id="talking-points-for-the-interview" style="font-size:20px;font-weight:700;margin:22px 0 8px;">🔷 Talking Points for the Interview</h4>
 - **Event Hubs exposes a Kafka-compatible endpoint**: existing Kafka producer and consumer code can often point at it with configuration changes only
 - **Managed Identity**: No credentials in configuration files — Azure's answer to Identity and Access Management roles
 - **Spring Cloud Azure**: Ready-made starters for Key Vault, Service Bus, Event Hubs, and the rest
@@ -5262,9 +5215,9 @@ kubectl delete -f pod.yml
 
 ---
 
-## Infrastructure as Code
+<h2 id="infrastructure-as-code" style="font-size:33px;font-weight:800;margin:30px 0 12px;">🏗️ Infrastructure as Code</h2>
 
-### Terraform
+<h3 id="terraform" style="font-size:26px;font-weight:700;margin:26px 0 10px;">🏗️ Terraform</h3>
 ```hcl
 provider "aws" {
   region = "us-east-1"
@@ -5276,7 +5229,7 @@ resource "aws_instance" "example" {
 }
 ```
 
-### Commands
+<h3 id="commands-2" style="font-size:26px;font-weight:700;margin:26px 0 10px;">⌨️ Commands</h3>
 ```bash
 terraform init
 terraform validate
@@ -5287,16 +5240,16 @@ terraform destroy
 
 ---
 
-## Git
+<h2 id="git" style="font-size:33px;font-weight:800;margin:30px 0 12px;">🌿 Git</h2>
 
-### Concepts
+<h3 id="concepts" style="font-size:26px;font-weight:700;margin:26px 0 10px;">💡 Concepts</h3>
 - **Merging strategies**
 - **Rebase vs Merge**
 - **Cherry pick**
 
 ---
 
-## Jenkins
+<h2 id="jenkins" style="font-size:33px;font-weight:800;margin:30px 0 12px;">🤵 Jenkins</h2>
 - **Jenkinsfile**: Descriptor file for configuring the pipeline
 - **Pipeline block**: the complete script
 - **Agent**: the agent that's going to run the pipeline
@@ -5305,43 +5258,37 @@ terraform destroy
 
 ---
 
-# 🤖 AI
+<h1 id="-ai" style="font-size:42px;font-weight:800;margin:34px 0 14px;">🤖 AI</h1>
 
 *Outline to be filled as the study progresses — the structure below marks the topics that matter for a backend developer integrating artificial intelligence into services.*
 
-<a id="large-language-model-fundamentals"></a>
-## Large Language Model Fundamentals
+<h2 id="large-language-model-fundamentals" style="font-size:33px;font-weight:800;margin:30px 0 12px;">🧠 Large Language Model Fundamentals</h2>
 - **Tokens**: The unit models read and produce; pricing and limits are counted in tokens
 - **Context window**: The maximum amount of tokens a model can consider at once
 - **Temperature and sampling**: Controls randomness — low for deterministic answers, higher for creative output
 - Pre-training vs fine-tuning vs in-context learning (examples inside the prompt)
 
-<a id="prompt-engineering"></a>
-## Prompt Engineering
+<h2 id="prompt-engineering" style="font-size:33px;font-weight:800;margin:30px 0 12px;">💬 Prompt Engineering</h2>
 - System prompt vs user prompt; role separation
 - Few-shot examples; structured (JSON) outputs
 - Why clear, explicit instructions beat clever tricks
 
-<a id="retrieval-augmented-generation-rag"></a>
-## Retrieval-Augmented Generation (RAG)
+<h2 id="retrieval-augmented-generation-rag" style="font-size:33px;font-weight:800;margin:30px 0 12px;">🔎 Retrieval-Augmented Generation (RAG)</h2>
 - **Embeddings**: Text converted to vectors capturing meaning
 - **Vector databases**: Similarity search over embeddings (pgvector, Pinecone, and similar)
 - Chunking strategies and their effect on retrieval quality
 - The pipeline: ingest → embed → store → retrieve → inject into the prompt
 
-<a id="agents--tool-use"></a>
-## Agents & Tool Use
+<h2 id="agents--tool-use" style="font-size:33px;font-weight:800;margin:30px 0 12px;">🤖 Agents &amp; Tool Use</h2>
 - The tool-use loop: the model requests a tool call, the application executes it, the result feeds back into the model
-- **Model Context Protocol (MCP)**: Open standard for exposing utils and data sources to models
+- **Model Context Protocol (MCP)**: Open standard for exposing tools and data sources to models
 - Orchestration patterns: single agent vs planner plus workers
 
-<a id="java-ecosystem"></a>
-## Java Ecosystem
+<h2 id="java-ecosystem" style="font-size:33px;font-weight:800;margin:30px 0 12px;">☕ Java Ecosystem</h2>
 - **Spring AI**: Spring Boot starters for calling model providers, embeddings and vector stores
 - **LangChain4j**: Java library for chains, memory, tool use and Retrieval-Augmented Generation
 
-<a id="evaluation--safety"></a>
-## Evaluation & Safety
+<h2 id="evaluation--safety" style="font-size:33px;font-weight:800;margin:30px 0 12px;">🛡️ Evaluation &amp; Safety</h2>
 - Hallucinations and grounding; when to force the model to cite retrieved sources
 - Evaluation sets and regression testing for prompts
 - Guardrails: input validation, output filtering, human approval for sensitive actions

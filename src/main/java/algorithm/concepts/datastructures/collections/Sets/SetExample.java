@@ -1,4 +1,4 @@
-package algorithm.concepts.datastructures.collections.Sets;
+package algorithm.concepts.datastructures.collections.sets;
 
 import java.util.ArrayList;
 import java.util.List;

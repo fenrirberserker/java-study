@@ -1,37 +1,26 @@
 package algorithm.implementation.numbers;
 
+import java.util.Arrays;
+
 /**
- * Find 2 numbers in a given array that are multiple of a target num
+ * Finds the first pair of values in the array whose product equals target, or an
+ * empty array when no such pair exists. Brute force over every pair, O(n^2).
  */
 public class FindMultiples {
 
     public static void main(String[] args) {
-        int[] nums = {2,4,1,6,5,40,-1};
-        int target = 20;
-
-        int[] result = findMultiples(target,nums);
-        System.out.println("Result: ");
-        for (int n: result) {
-            System.out.println(n);
-        }
+        int[] nums = {2, 4, 1, 6, 5, 40, -1};
+        System.out.println("pair with product 20 = " + Arrays.toString(findMultiples(20, nums)));
     }
 
-    public static int[] findMultiples(int target, int[] array){//brute force
-
-        int[] pairs = new int[2];
-
-        for (int i = 0; i <array.length-1 ; i++) {
-            for (int j = i+1; j < array.length; j++) {
-                if(array[i]*array[j]==target){
-                    pairs[0]=array[i];
-                    pairs[1]=array[j];
-                    return pairs;
+    public static int[] findMultiples(int target, int[] array) {
+        for (int i = 0; i < array.length - 1; i++) {
+            for (int j = i + 1; j < array.length; j++) {
+                if (array[i] * array[j] == target) {
+                    return new int[]{array[i], array[j]};
                 }
             }
-
         }
-        return pairs;
+        return new int[0];
     }
-
-
 }
