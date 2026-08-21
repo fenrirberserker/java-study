@@ -135,6 +135,13 @@ Throughout, a 💻 line links a concept to the runnable Java file under [src/](.
 <div style="margin:2px 0;margin-left:72px">🚀 <a href="#web-endpoint-example-1">Web endpoint example</a></div>
 <div style="margin:2px 0;margin-left:72px">🚀 <a href="#key-features-1">Key Features</a></div>
 <div style="margin:2px 0;margin-left:72px">🚀 <a href="#micronaut-vs-quarkus">Micronaut vs Quarkus</a></div>
+<div style="margin:2px 0;margin-left:48px">🛡️ <a href="#resilience4j">Resilience4j</a></div>
+<div style="margin:2px 0;margin-left:72px">🛡️ <a href="#core-idea-functional-decorators-not-a-thread-pool-framework">Core Idea: functional decorators, not a thread-pool framework</a></div>
+<div style="margin:2px 0;margin-left:72px">🛡️ <a href="#the-problem-it-solves">The problem it solves</a></div>
+<div style="margin:2px 0;margin-left:72px">🛡️ <a href="#architecture--modules-and-composition">Architecture — modules and composition</a></div>
+<div style="margin:2px 0;margin-left:72px">🛡️ <a href="#design-patterns-it-embodies">Design patterns it embodies</a></div>
+<div style="margin:2px 0;margin-left:72px">🛡️ <a href="#code-examples">Code examples</a></div>
+<div style="margin:2px 0;margin-left:72px">🛡️ <a href="#similar--pertinent-frameworks">Similar &amp; Pertinent Frameworks</a></div>
 <div style="margin:2px 0;margin-left:24px">🗄️ <a href="#-database">Database</a></div>
 <div style="margin:2px 0;margin-left:48px">⚖️ <a href="#cap-theorem">CAP Theorem</a></div>
 <div style="margin:2px 0;margin-left:72px">⚖️ <a href="#partition-or-else-latency-or-consistency-pacelc">Partition-or-Else, Latency-or-Consistency (PACELC)</a></div>
@@ -214,7 +221,7 @@ Throughout, a 💻 line links a concept to the runnable Java file under [src/](.
 <div style="margin:2px 0;margin-left:48px">🧱 <a href="#recommended-stack">Recommended Stack</a></div>
 <div style="margin:2px 0;margin-left:72px">🧱 <a href="#modern-web-app">Modern Web App</a></div>
 <div style="margin:2px 0;margin-left:72px">🧱 <a href="#enterprise">Enterprise</a></div>
-<div style="margin:2px 0;margin-left:48px">🗝️ <a href="#legacy-security-concepts">Legacy Security Concepts</a></div>
+<div style="margin:2px 0;margin-left:48px">🗝️ <a href="#legacy-security-concepts">Foundational Network Security Concepts</a></div>
 <div style="margin:2px 0;margin-left:24px">🏢 <a href="#-system-design">System Design</a></div>
 <div style="margin:2px 0;margin-left:48px">🏗️ <a href="#system-design-principles">System Design Principles</a></div>
 <div style="margin:2px 0;margin-left:72px">🏗️ <a href="#high-availability">High Availability</a></div>
@@ -246,6 +253,7 @@ Throughout, a 💻 line links a concept to the runnable Java file under [src/](.
 <div style="margin:2px 0;margin-left:72px">🏛️ <a href="#architectural-patterns">Architectural Patterns</a></div>
 <div style="margin:2px 0;margin-left:48px">🕸️ <a href="#distributed-design-patterns">Distributed Design Patterns</a></div>
 <div style="margin:2px 0;margin-left:72px">🕸️ <a href="#monolith-vs-microservices--the-honest-trade-off">Monolith vs Microservices — the honest trade-off</a></div>
+<div style="margin:2px 0;margin-left:72px">🕸️ <a href="#service-oriented-architecture-soa--the-historical-predecessor">Service-Oriented Architecture (SOA) — the historical predecessor</a></div>
 <div style="margin:2px 0;margin-left:72px">🕸️ <a href="#how-to-split-services">How to Split Services</a></div>
 <div style="margin:2px 0;margin-left:72px">🕸️ <a href="#communication-patterns">Communication Patterns</a></div>
 <div style="margin:2px 0;margin-left:72px">🕸️ <a href="#messaging">Messaging</a></div>
@@ -266,26 +274,31 @@ Throughout, a 💻 line links a concept to the runnable Java file under [src/](.
 <div style="margin:2px 0;margin-left:72px">📋 <a href="#functional-requirements">Functional Requirements</a></div>
 <div style="margin:2px 0;margin-left:72px">📋 <a href="#non-functional-requirements">Non-Functional Requirements</a></div>
 <div style="margin:2px 0;margin-left:24px">🧪 <a href="#-testing">Testing</a></div>
+<div style="margin:2px 0;margin-left:48px">🧪 <a href="#testing-methodologies-tdd-vs-bdd">Testing Methodologies: TDD vs BDD</a></div>
 <div style="margin:2px 0;margin-left:48px">🧪 <a href="#unit-testing">Unit Testing</a></div>
 <div style="margin:2px 0;margin-left:48px">🧪 <a href="#integration-testing">Integration Testing</a></div>
 <div style="margin:2px 0;margin-left:48px">🧪 <a href="#performance-testing">Performance Testing</a></div>
 <div style="margin:2px 0;margin-left:24px">📄 <a href="#data-formats">Data Formats</a></div>
-<div style="margin:2px 0;margin-left:0px">🌐 <a href="#-frontend">Frontend</a></div>
-<div style="margin:2px 0;margin-left:24px">📄 <a href="#html5">HTML5</a></div>
-<div style="margin:2px 0;margin-left:24px">🎨 <a href="#css">CSS</a></div>
-<div style="margin:2px 0;margin-left:24px">🟨 <a href="#javascript">JavaScript</a></div>
-<div style="margin:2px 0;margin-left:24px">🔷 <a href="#typescript">TypeScript</a></div>
-<div style="margin:2px 0;margin-left:48px">🧪 <a href="#testing">Testing</a></div>
-<div style="margin:2px 0;margin-left:72px">🧪 <a href="#features-1">Features</a></div>
-<div style="margin:2px 0;margin-left:48px">⚛️ <a href="#react">React</a></div>
 <div style="margin:2px 0;margin-left:0px">🔧 <a href="#-devops">DevOps</a></div>
 <div style="margin:2px 0;margin-left:24px">✨ <a href="#features-2">Features</a></div>
 <div style="margin:2px 0;margin-left:24px">🔄 <a href="#sdlc">SDLC</a></div>
+<div style="margin:2px 0;margin-left:48px">🔒 <a href="#secure-sdlc">Secure Software Development Life Cycle</a></div>
+<div style="margin:2px 0;margin-left:24px">🔄 <a href="#cicd-pipeline">Continuous Integration / Continuous Delivery Pipeline</a></div>
 <div style="margin:2px 0;margin-left:24px">🐳 <a href="#docker">Docker</a></div>
 <div style="margin:2px 0;margin-left:48px">🖼️ <a href="#images">Images</a></div>
 <div style="margin:2px 0;margin-left:48px">📦 <a href="#containers">Containers</a></div>
 <div style="margin:2px 0;margin-left:48px">📋 <a href="#dockerfile">Dockerfile</a></div>
 <div style="margin:2px 0;margin-left:48px">☕ <a href="#docker-for-java-applications">Docker for Java Applications</a></div>
+<div style="margin:2px 0;margin-left:48px">🌐 <a href="#docker-networking">Networking</a></div>
+<div style="margin:2px 0;margin-left:48px">💾 <a href="#volumes--bind-mounts">Volumes vs Bind Mounts</a></div>
+<div style="margin:2px 0;margin-left:48px">🎼 <a href="#docker-compose">Docker Compose</a></div>
+<div style="margin:2px 0;margin-left:48px">🔒 <a href="#build-optimization--image-security">Build Optimization &amp; Image Security</a></div>
+<div style="margin:2px 0;margin-left:48px">⚙️ <a href="#docker-engine-architecture">Engine Architecture</a></div>
+<div style="margin:2px 0;margin-left:48px">🧬 <a href="#image-internals">Image Internals</a></div>
+<div style="margin:2px 0;margin-left:48px">🐧 <a href="#containers-at-the-kernel-level">Containers at the Kernel Level</a></div>
+<div style="margin:2px 0;margin-left:48px">🗂️ <a href="#union-overlay-filesystem">Union / Overlay Filesystem</a></div>
+<div style="margin:2px 0;margin-left:48px">🛡️ <a href="#container-security-internals">Container Security Internals</a></div>
+<div style="margin:2px 0;margin-left:48px">🔌 <a href="#bridge-networking-internals">Bridge Networking Internals</a></div>
 <div style="margin:2px 0;margin-left:24px">☸️ <a href="#kubernetes">Kubernetes</a></div>
 <div style="margin:2px 0;margin-left:48px">🏗️ <a href="#structure">Structure</a></div>
 <div style="margin:2px 0;margin-left:48px">🔵 <a href="#core-objects-from-the-smallest-unit-to-the-entry-point">Core Objects (from the smallest unit to the entry point)</a></div>
@@ -294,6 +307,18 @@ Throughout, a 💻 line links a concept to the runnable Java file under [src/](.
 <div style="margin:2px 0;margin-left:48px">🌱 <a href="#configuration--spring-boot-integration">Configuration &amp; Spring Boot Integration</a></div>
 <div style="margin:2px 0;margin-left:48px">☕ <a href="#resources--the-java-virtual-machine">Resources &amp; the Java Virtual Machine</a></div>
 <div style="margin:2px 0;margin-left:48px">⌨️ <a href="#commands-1">Commands</a></div>
+<div style="margin:2px 0;margin-left:48px">🧱 <a href="#workload-types">Workload Types</a></div>
+<div style="margin:2px 0;margin-left:48px">🗂️ <a href="#namespaces--rbac">Namespaces &amp; Role-Based Access Control (RBAC)</a></div>
+<div style="margin:2px 0;margin-left:48px">🗄️ <a href="#storage-1">Storage</a></div>
+<div style="margin:2px 0;margin-left:48px">📍 <a href="#scheduling">Scheduling</a></div>
+<div style="margin:2px 0;margin-left:48px">⎈ <a href="#helm">Helm</a></div>
+<div style="margin:2px 0;margin-left:48px">🧠 <a href="#control-plane-internals">Control Plane Internals</a></div>
+<div style="margin:2px 0;margin-left:48px">🔐 <a href="#api-request-path">The API Request Path</a></div>
+<div style="margin:2px 0;margin-left:48px">📐 <a href="#scheduler-internals">Scheduler Internals</a></div>
+<div style="margin:2px 0;margin-left:48px">🔗 <a href="#kubelet-cri-kube-proxy">kubelet, the Container Runtime Interface &amp; kube-proxy</a></div>
+<div style="margin:2px 0;margin-left:48px">🕸️ <a href="#cni-networkpolicy">Container Network Interface &amp; NetworkPolicy</a></div>
+<div style="margin:2px 0;margin-left:48px">🔁 <a href="#crd-operators">Custom Resource Definitions &amp; the Operator Pattern</a></div>
+<div style="margin:2px 0;margin-left:48px">🧩 <a href="#init-containers-multi-container-patterns">Init Containers &amp; Multi-Container Pod Patterns</a></div>
 <div style="margin:2px 0;margin-left:24px">☁️ <a href="#cloud">Cloud</a></div>
 <div style="margin:2px 0;margin-left:48px">☁️ <a href="#aws">AWS</a></div>
 <div style="margin:2px 0;margin-left:72px">☁️ <a href="#computing">Computing</a></div>
@@ -303,6 +328,8 @@ Throughout, a 💻 line links a concept to the runnable Java file under [src/](.
 <div style="margin:2px 0;margin-left:72px">☁️ <a href="#events">Events</a></div>
 <div style="margin:2px 0;margin-left:72px">☁️ <a href="#containers-1">Containers</a></div>
 <div style="margin:2px 0;margin-left:72px">☁️ <a href="#cicd">CI/CD</a></div>
+<div style="margin:2px 0;margin-left:72px">🔑 <a href="#identity-and-access-management-iam--governance">Identity and Access Management (IAM) &amp; Governance</a></div>
+<div style="margin:2px 0;margin-left:72px">🏗️ <a href="#high-availability--disaster-recovery">High Availability &amp; Disaster Recovery</a></div>
 <div style="margin:2px 0;margin-left:48px">🔷 <a href="#azure">Azure</a></div>
 <div style="margin:2px 0;margin-left:72px">🔷 <a href="#mapping-aws-knowledge-to-azure-equivalents">Mapping AWS Knowledge to Azure Equivalents</a></div>
 <div style="margin:2px 0;margin-left:72px">🔷 <a href="#talking-points-for-the-interview">Talking Points for the Interview</a></div>
@@ -312,6 +339,14 @@ Throughout, a 💻 line links a concept to the runnable Java file under [src/](.
 <div style="margin:2px 0;margin-left:24px">🌿 <a href="#git">Git</a></div>
 <div style="margin:2px 0;margin-left:48px">💡 <a href="#concepts">Concepts</a></div>
 <div style="margin:2px 0;margin-left:24px">🤵 <a href="#jenkins">Jenkins</a></div>
+<div style="margin:2px 0;margin-left:0px">🌐 <a href="#-frontend">Frontend</a></div>
+<div style="margin:2px 0;margin-left:24px">📄 <a href="#html5">HTML5</a></div>
+<div style="margin:2px 0;margin-left:24px">🎨 <a href="#css">CSS</a></div>
+<div style="margin:2px 0;margin-left:24px">🟨 <a href="#javascript">JavaScript</a></div>
+<div style="margin:2px 0;margin-left:24px">🔷 <a href="#typescript">TypeScript</a></div>
+<div style="margin:2px 0;margin-left:48px">🧪 <a href="#testing">Testing</a></div>
+<div style="margin:2px 0;margin-left:72px">🧪 <a href="#features-1">Features</a></div>
+<div style="margin:2px 0;margin-left:48px">⚛️ <a href="#react">React</a></div>
 <div style="margin:2px 0;margin-left:0px">🤖 <a href="#-ai">AI</a></div>
 <div style="margin:2px 0;margin-left:24px">🧠 <a href="#large-language-model-fundamentals">Large Language Model Fundamentals</a></div>
 <div style="margin:2px 0;margin-left:24px">💬 <a href="#prompt-engineering">Prompt Engineering</a></div>
@@ -831,6 +866,8 @@ competitive programming, and real-world software engineering:
 4. **Graph Algorithms**
 5. **Dynamic Programming**
 
+**Interview-process reference** (technique over trivia — condensed from three books in [references/Interviews/](references/Interviews/)): [cracking-the-coding-interview.md](references/Interviews/cracking-the-coding-interview.md) for the five-step technical-question framework and the five algorithm-design approaches (examplify, pattern-match, simplify-and-generalize, base-case-and-build, data-structure-brainstorm); [cracking-programming-interview-java-qa.md](references/Interviews/cracking-programming-interview-java-qa.md) for rapid-fire Java exception-handling Q&A; [java-interview-questions-top-20.md](references/Interviews/java-interview-questions-top-20.md) is entry-level and mostly superseded by the sections above.
+
 Each chapter explains: what it is, when to use it, how it works mechanically,
 its time/space complexity, common pitfalls, and a runnable Java reference class
 located in `src/main/java/algorithm/implementation/<topic>/<Topic>Basics.java`.
@@ -1104,7 +1141,9 @@ Two equivalent O(V + E) approaches:
 - **Uses**: dependency resolution, course prerequisites, build ordering, compiler scheduling.
 
 <h5 id="union-find-for-graphs" style="font-size:16px;font-weight:600;margin:18px 0 7px;">Union-Find for graphs</h5>
-The disjoint-set structure (full detail under [Data Structures → Union-Find](#union-find-disjoint-set-union)) drives **Kruskal's minimum spanning tree** (add the next-cheapest edge unless its endpoints are already connected — which would form a cycle), **connected-components** counting, and **cycle detection in undirected graphs**, each at effectively O(α(n)) per operation.
+The disjoint-set structure (full detail under [Data Structures → Union-Find](#union-find-disjoint-set-union)) drives **Kruskal's minimum spanning tree** (add the next-cheapest edge unless its endpoints are already connected — which would form a cycle), **connected-components** counting, and **cycle detection in undirected graphs**, each at effectively O(α(n)) per operation. **Prim's algorithm** solves the same minimum-spanning-tree problem by growing a single tree from an arbitrary start vertex instead of sorting all edges up front — same greedy-is-provably-optimal property as Kruskal's, generally preferred on dense graphs where Kruskal's edge sort dominates.
+
+**Shortest-path decision tree** (a strong one-line answer for "which algorithm would you use"): unweighted graph → Breadth First Search; non-negative weights → Dijkstra; possible negative weights, no negative cycle → Bellman-Ford; need all-pairs distances → Floyd-Warshall; single target and a good admissible heuristic available → A* (Dijkstra plus a `cost-so-far + estimated-cost-to-go` priority, provably optimal as long as the heuristic never overestimates). Full derivations, plus KMP/Rabin-Karp substring search and the online-vs-offline-algorithm distinction, in [algorithms-notes-for-professionals.md](references/Algorithms%20&%20Data%20Structures/algorithms-notes-for-professionals.md).
 
 📁 **See:** [src/main/java/algorithm/implementation/graphs/GraphBasics.java](../src/main/java/algorithm/implementation/graphs/GraphBasics.java)
 
@@ -1290,6 +1329,9 @@ Big-O alone is only an *upper* bound. The full family:
 - **Operations**: AND (&), OR (|), XOR (^), NOT (~), shifts (<<, >>)
 - **Tricks**: XOR for finding unique, AND for checking bits
 - **Examples**: Set operations, single number, counting bits, power of two, reverse bits
+- **`x & (x - 1)`** clears the lowest set bit — loop it to count set bits in O(k) for k set bits, or test once for "is this a power of two" (`(x & (x - 1)) == 0`)
+- **`x & -x`** isolates the lowest set bit (two's-complement negation) — the alternative power-of-two test (`(x & -x) == x`) and a common primitive in bitmask dynamic programming and Fenwick/Binary Indexed Trees
+- `Integer.bitCount()` / `Long.bitCount()`, `highestOneBit()`, `numberOfLeadingZeros()`/`numberOfTrailingZeros()` reach for JDK-optimized (often hardware-accelerated) implementations of exactly these tricks — know the trick so the standard-library method's behavior is never a mystery ([fxtbook-algorithms-for-programmers.md](references/Algorithms%20&%20Data%20Structures/fxtbook-algorithms-for-programmers.md))
 
 <h5 id="prefix-sums" style="font-size:16px;font-weight:600;margin:18px 0 7px;">Prefix Sums</h5>
 - **What**: Precompute a running-sum array so the sum of any subarray `[i, j]` is answered in O(1) as `prefix[j+1] - prefix[i]`
@@ -1356,6 +1398,12 @@ The goal is not to relearn programming three times, but to map concept you alrea
 
 <h4 id="core" style="font-size:20px;font-weight:700;margin:22px 0 8px;">🧠 Core</h4>
 
+<h5 id="class-loading" style="font-size:16px;font-weight:600;margin:18px 0 7px;">Class Loading</h5>
+Java does not execute source code directly: `javac` compiles it into **bytecode**, a platform-independent intermediate format, and the Java Virtual Machine (JVM) turns that bytecode into real instructions for the machine it runs on — which is exactly what lets the same compiled artifact run unchanged on Windows, Linux, or macOS. A class does not exist in memory until something first needs it; at that point a **class loader** locates the `.class` file, verifies the bytecode is well-formed (blocking corrupted or tampered code), and links it into a usable in-memory structure.
+- **Three-level hierarchy**: the **Bootstrap** class loader (native code, has no parent, loads the core Java Runtime Environment classes), the **Platform** class loader **(Java 9+; called the Extension class loader before Java 9)** (loads Java Platform application programming interface classes), and the **Application/System** class loader (loads classes from the application's classpath) — the names changed with Java 9's modular run-time images (JEP 220), not just the mechanism it replaced
+- **Delegation model**: before loading a class itself, every class loader first asks its parent to try, and only loads it locally if the parent fails — this guarantees a given class is never loaded twice in an inconsistent way, and is the mechanism that makes application-server and plugin isolation possible
+- Connects directly to `NoClassDefFoundError` in the [Exceptions](#exceptions) table below: the class loader saw the class at compile time but cannot locate it at runtime
+
 <h5 id="memory-management" style="font-size:16px;font-weight:600;margin:18px 0 7px;">Memory Management</h5>
 - **Heap**: Stores objects; shared by all threads
 - **Stack**: Stores method frames, local variables and references; one stack per thread
@@ -1366,6 +1414,8 @@ The goal is not to relearn programming three times, but to map concept you alrea
   - **Old generation**: Long-lived survivors; collected rarely and expensively (major collections)
 - **Garbage First Garbage Collector (G1GC)** **(Java 7; default since Java 9)**: The default collector; divides the heap into regions and targets a pause-time goal
 - **Z Garbage Collector (ZGC)** **(Java 11 experimental; production-ready Java 15)**: For very low latency requirements; sub-millisecond pauses even on large heaps
+- **Choosing between them is a throughput-versus-latency trade-off, not an aesthetic choice**: a batch reporting job cares about total work done and tolerates a pause, so it favors throughput-oriented settings; a low-latency trading system cannot tolerate a multi-millisecond pause even at the cost of some raw throughput, so it favors ZGC
+- **Mark-sweep, from first principles**: mark phase treats every heap object as a graph vertex and every reference as an edge, then runs a graph traversal from the **root objects** (references live on any running thread's stack) to find every reachable ("live") object; sweep phase reclaims everything unmarked. A naive *recursive* mark implementation would itself consume stack space proportional to the reference graph's depth — exactly the wrong property to have while memory is already under pressure, which is why production collectors implement the traversal iteratively rather than via language-level recursion (worked through in more depth in [data-structures-and-algorithms-in-java.md](references/Algorithms%20&%20Data%20Structures/data-structures-and-algorithms-in-java.md))
 
 <h5 id="common-memory-leaks-in-java" style="font-size:16px;font-weight:600;margin:18px 0 7px;">Common Memory Leaks in Java</h5>
 - Static collections that only grow and are never cleaned
@@ -1417,6 +1467,8 @@ Animal a = new Lion();   // reference type: Animal — object type: Lion
 <h5 id="override-vs-overload" style="font-size:16px;font-weight:600;margin:18px 0 7px;">Override vs Overload</h5>
 - **Override**: same signature redefined in a subclass → resolved at RUNTIME from the object's actual type (dynamic dispatch)
 - **Overload**: same method name, different parameter lists in the same class → resolved at COMPILE time from the declared types of the arguments
+- **Overload resolution order** when several overloads could match a call: exact type match → widening primitive conversion → autoboxing → varargs (last resort) — a call that "looks like" it should hit the varargs overload silently binds to a boxing or widening overload instead whenever one exists
+- **The four compiler checks on a valid override**: same signature (a different parameter list makes it an overload instead, and none of the following rules apply); equal or wider accessibility than the parent method; no new or broader checked exception than the parent declares; covariant return type (same type or a subtype of the parent's). Getting rule 1 wrong is the classic trap — an "override" with a typo'd parameter list silently becomes an unrelated overload, free to have any access modifier or return type, and the compiler won't complain (deeper walkthrough with worked examples in [oca-java-se8-programmer-1.md](references/Java/oca-java-se8-programmer-1.md) and [ocp-java-se8-programmer-2.md](references/Java/ocp-java-se8-programmer-2.md))
 
 <h5 id="access-modifiers" style="font-size:16px;font-weight:600;margin:18px 0 7px;">Access Modifiers</h5>
 | Modifier | Same class | Same package | Subclass (other package) | Anywhere else |
@@ -1495,7 +1547,8 @@ The wrapper classes, `String`, and all `java.time` types follow this pattern. Be
 | **Local** | No | Yes (inside an instance method) | An implementation needed in exactly one method |
 | **Anonymous** | No | Yes | A one-off interface/abstract-class implementation — mostly replaced by lambdas **(Java 8)** |
 
-- A member inner class cannot declare `static` members (only `static final` constants); a local class takes no access modifier
+- Through Java 15, a member/local/anonymous inner class could declare only `static final` constants; **JEP 395 (Java 16)** relaxed this, so inner classes may now declare arbitrary `static` fields, methods, and nested static types
+- A local class takes no access modifier
 - Local and anonymous classes capture only **effectively final** local variables (relaxed from "must be `final`" in **(Java 8)**)
 - The compiler emits `Outer.class` and `Outer$Inner.class`
 
@@ -1601,7 +1654,7 @@ Wrapper that could contain a value or not
 > 💻 Code: [VirtualThreadsExample](../src/main/java/algorithm/concepts/threads/executors/VirtualThreadsExample.java)
 
 - **var (Java 10)**: Local variable type inference; the type stays static, only the declaration is shorter
-- **Records (Java 14+)**: Immutable data carriers with generated constructor, accessors, equals(), hashCode() and toString() — the modern answer for Data Transfer Objects (DTOs)
+- **Records (Java 16)**: Immutable data carriers with generated constructor, accessors, equals(), hashCode() and toString() — the modern answer for Data Transfer Objects (DTOs). Previewed in Java 14 (JEP 359) and 15 (JEP 384), but not usable without `--enable-preview` until finalized in **Java 16** (JEP 395)
   ```java
   public record UserDto(Long id, String name) {}
   ```
@@ -1738,6 +1791,8 @@ tools to reach for. Every section links to a runnable Java file under
 | **Livelock** | A situation where threads stay active and keep reacting to each other, but their constant adjustments cancel out and no real progress is made. |
 | **Starvation** | A condition in which a thread is repeatedly passed over for a resource or for processor time, so it never gets the chance to make progress. |
 | **Daemon Thread** | A background-support thread that the Java Virtual Machine does not wait for at shutdown — once only daemon threads remain, the program exits immediately. |
+
+The concrete case that makes `synchronized` and locks work as advertised: **releasing a lock happens-before any later acquisition of that same lock by another thread** — the formal guarantee that everything the first thread wrote before unlocking becomes visible to the second thread after it locks, not an implementation detail but a contract the JVM must honor.
 
 <h5 id="2-extends-thread-vs-implements-runnable" style="font-size:16px;font-weight:600;margin:18px 0 7px;">2. <code>extends Thread</code> vs <code>implements Runnable</code></h5>
 
@@ -1914,6 +1969,8 @@ That single mechanism delivers two guarantees at once:
 
 - **Mutual exclusion** — no two threads execute the protected code at the same time, so shared state stays consistent.
 - **Visibility** — every change a thread makes before releasing the lock is guaranteed to be observed by the next thread that acquires it, with no stale-cache surprises.
+
+The canonical illustration of *why* this matters is a check-then-act race: two threads each check `balance >= amount` then withdraw, and because the check and the act are two separate operations, both can pass the check before either withdraws — synchronizing the whole check-then-act sequence (not just the withdrawal) is what actually fixes it. Full worked example, plus the raw `wait()`/`notify()`/`notifyAll()` producer-consumer mechanics `Condition` is modeled on, in [scjp-java-6-study-guide.md](references/Java/scjp-java-6-study-guide.md).
 
 The keyword can be applied in three forms:
 
@@ -2455,6 +2512,8 @@ expected to be rare and that the calling code may want to react to.
 Don't use them for ordinary control flow: throwing and catching is
 significantly more expensive than a regular branch.
 
+Best-practice checklist worth having ready verbatim (from [cracking-programming-interview-java-qa.md](references/Interviews/cracking-programming-interview-java-qa.md)): throw specific exception types rather than a bare `Exception`; fail fast (throw as soon as an invalid state is detected); catch late (let the caller, which has more context, decide how to recover, rather than swallowing deep in a low-level method); never leave a catch block empty — at minimum log it, since a silently swallowed exception is one of the hardest bug classes to diagnose later.
+
 <h5 id="2-the-throwable-hierarchy" style="font-size:16px;font-weight:600;margin:18px 0 7px;">2. The <code>Throwable</code> hierarchy</h5>
 
 Every object that can be thrown in Java is a subclass of `Throwable`.
@@ -2497,10 +2556,10 @@ java.lang.Object
             │     │     ├── java.io.EOFException
             │     │     ├── java.io.InterruptedIOException
             │     │     ├── java.io.UnsupportedEncodingException
-            │     │     ├── java.io.NotSerializableException
             │     │     ├── java.io.ObjectStreamException
             │     │     │     ├── java.io.InvalidClassException
             │     │     │     ├── java.io.InvalidObjectException
+            │     │     │     ├── java.io.NotSerializableException
             │     │     │     └── java.io.StreamCorruptedException
             │     │     ├── java.net.SocketException
             │     │     │     ├── java.net.BindException
@@ -2513,12 +2572,12 @@ java.lang.Object
             │     │           ├── java.nio.file.NoSuchFileException
             │     │           └── java.nio.file.FileAlreadyExistsException
             │     ├── java.sql.SQLException
-            │     │     ├── java.sql.SQLTimeoutException
             │     │     ├── java.sql.SQLNonTransientException
             │     │     └── java.sql.SQLTransientException
-            │     ├── java.lang.ClassNotFoundException
+            │     │           └── java.sql.SQLTimeoutException
             │     ├── java.lang.InterruptedException
             │     ├── java.lang.ReflectiveOperationException
+            │     │     ├── java.lang.ClassNotFoundException
             │     │     ├── java.lang.NoSuchMethodException
             │     │     ├── java.lang.NoSuchFieldException
             │     │     ├── java.lang.IllegalAccessException
@@ -3086,7 +3145,7 @@ Java backend frameworks provide the scaffolding every service needs — dependen
 | GraalVM native image | Supported (Spring AOT) | First-class, built around it | First-class, built around it |
 | Reflection at runtime | Heavy | Minimal | Almost none |
 | Ecosystem and maturity | Largest by far | Growing, Jakarta/MicroProfile based | Growing |
-| Backer | VMware/Broadcom community | Red Hat | Object Computing |
+| Backer | VMware/Broadcom community | Red Hat | Commonhaus Foundation (moved from the Unity Foundation in 2026; originally founded by Object Computing) |
 
 *Takeaway for an interview: all three share the same mental model (inject beans, annotate endpoints). The differentiator is **when** the wiring happens. Spring resolves it as the application boots; Quarkus and Micronaut resolve it during compilation, trading a slightly longer build for dramatically faster, leaner runtime — ideal for Kubernetes and serverless.*
 
@@ -3141,7 +3200,8 @@ Support for TDD. Mocking objects and out of container testing
 - **Prototype**: A bean instance for each container request
 - **Request**: Scoped to an http request
 - **Session**: Scoped to an http session
-- **Global session**: Scoped to a global session
+- **Application**: One instance per `ServletContext` — shared across all sessions of the web app, unlike Singleton which is scoped to the Spring container
+- *("Global session" existed only for Portlet MVC, distinguishing a portlet's own session from the surrounding portal's session — Spring dropped Portlet MVC entirely in Spring Framework 5, so this scope has had no meaning in any current servlet-based application for several major versions)*
 
 <h5 id="bean-lifecycle" style="font-size:16px;font-weight:600;margin:18px 0 7px;">Bean Lifecycle</h5>
 Instantiation > Populate properties(injected, fileconfig) > BeanNameAware Context(aware to other resources) > BeanFactoryAware (aware to context) > ApplicationContextAware > PreInitialization > Init() > PostInitialization() > Ready > Container Shutdown > Destroy() > Terminated
@@ -3215,7 +3275,7 @@ public record UserDto(UUID id, String email) {            // no password field
 - **@RestController**(@Controller && @ResponseBody): Marks as a controller that returns data
 - **@PathVariable**: Maps a path var to a param in spring
 - **@RequestParam**: Maps a query param to a java param
-- **@PathParam**: Maps a path param to a param in jaxrs
+- *(`@PathParam` is **not** a Spring annotation — it's Jakarta REST/JAX-RS's equivalent of `@PathVariable` above; mentioned here only so the two aren't confused when reading code from a JAX-RS-based service)*
 - **@RequestBody**: Deserializes HttpRequest (JSON) to an object
 - **@ResponseBody**: Serializes the object and sends it as a response (JSON)
 - **@Value**: For injecting values from the properties/yml file
@@ -3319,9 +3379,9 @@ A **starter** is one dependency that pulls in a curated, tested set of libraries
 
 <h5 id="testing-spring-applications" style="font-size:16px;font-weight:600;margin:18px 0 7px;">Testing Spring Applications</h5>
 - **@SpringBootTest**: Loads the full application context — slow, reserve it for integration tests; add `@AutoConfigureMockMvc` to get a `MockMvc` wired into the full context
-- **@WebMvcTest(MyController.class)**: Controller slice only; `MockMvc` is auto-wired — supply a `@MockBean` for each service the controller needs
+- **@WebMvcTest(MyController.class)**: Controller slice only; `MockMvc` is auto-wired — supply a `@MockitoBean` for each service the controller needs
 - **@DataJpaTest**: Repository slice only, with an embedded database; each test runs in a transaction rolled back on completion, so data mutations need no cleanup
-- **@MockBean vs @Mock**: `@MockBean` replaces a bean inside the Spring context with a Mockito mock (injected everywhere that type is used); plain `@Mock` knows nothing about Spring and suits pure unit tests
+- **@MockitoBean vs @Mock**: `@MockitoBean` (Spring Framework's `spring-test` module) replaces a bean inside the Spring context with a Mockito mock (injected everywhere that type is used); plain `@Mock` knows nothing about Spring and suits pure unit tests. **`@MockBean`/`@MockitoBean` history**: Spring Boot's own `@MockBean` was deprecated in Boot 3.4 and removed in Boot 4.0 (Nov 2025) in favor of the equivalent `@MockitoBean`/`@MockitoSpyBean` now provided directly by Spring Framework — use those on any current project
 - **Testcontainers**: Real PostgreSQL/Kafka running in Docker during integration tests — closer to production than embedded fakes, and a strong senior signal
 - **Test pyramid**: Many unit tests, fewer slice/integration tests, few end-to-end tests
 
@@ -3329,7 +3389,7 @@ A **starter** is one dependency that pulls in a curated, tested set of libraries
 @WebMvcTest(UserRestController.class)
 class UserRestControllerTest {
     @Autowired MockMvc mvc;
-    @MockBean  UserService service;
+    @MockitoBean UserService service;
 
     @Test void createUser_returnsCreated() throws Exception {
         given(service.create(any(), any())).willReturn(new UserDto(UUID.randomUUID(), "a@b.com"));
@@ -3341,6 +3401,14 @@ class UserRestControllerTest {
 }
 // status(), jsonPath(), content() are static imports from MockMvcResultMatchers / RequestBuilders
 ```
+
+<h5 id="building-a-rest-api-end-to-end-worked-example-patterns" style="font-size:16px;font-weight:600;margin:18px 0 7px;">Building a REST API End-to-End (worked example patterns)</h5>
+Patterns from building a real Spring Boot REST API from scratch, in [practical-guide-spring-boot-api-backend.md](references/Spring/practical-guide-spring-boot-api-backend.md):
+- **Package by feature, not by layer**: `com.example.user/` (containing its entity, repository, service, and a `web` sub-package for the controller/Data Transfer Object) beats scattering one feature's classes across `controller/`, `service/`, `repository/` — keeps the project's core abstractions visible in the package tree
+- **Dedicated ID value classes** (`UserId` wrapping a `UUID`) instead of a raw `UUID`/`Long` field: the type signature documents intent, the compiler prevents assigning a `UserId` where an `OrderId` is expected, and swapping the underlying primitive later touches one class instead of every call site
+- **Never return an entity directly from a controller** — always map to a Data Transfer Object at the boundary; the wire format and the persistence shape usually need to diverge, and annotating an entity with serialization annotations accumulates noise over time
+- **Flyway migrations + Testcontainers**: never let a migration script change after it ships (Flyway checksums each one and refuses to start if it changed — add a new migration instead); run integration tests against the actual database engine via Testcontainers rather than an in-memory substitute, since the substitute is rarely a perfect behavioral match
+- **Spring REST Docs**: generate API documentation snippets directly from passing `MockMvc` tests — the documentation cannot go stale without a test also failing, since undocumented or missing response fields fail the build
 
 <h4 id="spring-mvc" style="font-size:20px;font-weight:700;margin:22px 0 8px;">🌐 Spring MVC</h4>
 
@@ -3590,7 +3658,7 @@ Mono<Product> create(@RequestBody @Valid Mono<CreateProduct> body) {
 }
 ```
 - Common constraints: `@NotNull`, `@NotBlank`, `@NotEmpty`, `@Size(min, max)`, `@Min` / `@Max`, `@Positive` / `@Negative`, `@Email`, `@Pattern(regexp)`
-- On failure WebFlux raises `WebExchangeBindException` (a `400 Bad Request`); handle it in a `@ControllerAdvice` `@ExceptionHandler` to shape the error body (ideally RFC 7807 "Problem Details")
+- On failure WebFlux raises `WebExchangeBindException` (a `400 Bad Request`); handle it in a `@ControllerAdvice` `@ExceptionHandler` to shape the error body (ideally RFC 9457 "Problem Details", which obsoleted the original RFC 7807 in 2023)
 - For business rules inside the chain, fail the stream instead of throwing — `switchIfEmpty(Mono.error(new NotFoundException()))` or `onErrorMap(...)` — and let the advice translate the exception into a status code
 
 <h5 id="webclient--the-reactive-http-client" style="font-size:16px;font-weight:600;margin:18px 0 7px;">WebClient — the reactive HTTP client</h5>
@@ -3605,7 +3673,7 @@ Mono<Product> product = client.get().uri("/products/{id}", id)
 <h5 id="advanced-features" style="font-size:16px;font-weight:600;margin:18px 0 7px;">Advanced features</h5>
 - **Backpressure strategies**: when a producer outruns a consumer, control overflow with `onBackpressureBuffer`, `onBackpressureDrop`, or `limitRate(n)`
 - **Threading and schedulers**: event-loop threads must never block. Offload an unavoidable blocking call with `subscribeOn(Schedulers.boundedElastic())`; use `publishOn` to switch the downstream thread. `subscribeOn` affects the source, `publishOn` affects everything after it
-- **Error handling**: `onErrorResume` (fallback publisher), `onErrorReturn` (fallback value), `retry` / `retryWhen` (with backoff); globally, a `@ControllerAdvice` `@ExceptionHandler` or a custom `WebExceptionHandler`, ideally emitting RFC 7807 "Problem Details"
+- **Error handling**: `onErrorResume` (fallback publisher), `onErrorReturn` (fallback value), `retry` / `retryWhen` (with backoff); globally, a `@ControllerAdvice` `@ExceptionHandler` or a custom `WebExceptionHandler`, ideally emitting RFC 9457 "Problem Details" (the 2023 revision of RFC 7807)
 - **Streaming**: return a `Flux` with `produces = MediaType.TEXT_EVENT_STREAM_VALUE` for Server-Sent Events, or a `Flux<ServerSentEvent<T>>` for full control; bidirectional streaming uses a `WebSocketHandler`
 - **Reactive data access**: Reactive Relational Database Connectivity (R2DBC) with `ReactiveCrudRepository`, or reactive MongoDB. Never place blocking Java Persistence API / Java Database Connectivity in a reactive chain — wrap it in `Schedulers.boundedElastic()` only if you truly must
 - **Sinks**: `Sinks.many()` / `Sinks.one()` push values into a `Flux`/`Mono` programmatically (the modern replacement for `Processor`) — useful for broadcasting events
@@ -3779,7 +3847,7 @@ Greenfield microservices on Kubernetes, functions that must start instantly, and
 
 <h3 id="micronaut" style="font-size:26px;font-weight:700;margin:26px 0 10px;">🚀 Micronaut</h3>
 
-A modern Java framework by Object Computing, designed from the start for microservices and serverless. Like Quarkus, it resolves dependency injection and aspect-oriented behavior at **compile time** through annotation processing — but its defining trait is the near-total elimination of runtime reflection, which keeps startup, memory, and native-image builds extremely efficient regardless of how large the application grows.
+A modern Java framework originally created at Object Computing and now stewarded by the Commonhaus Foundation, designed from the start for microservices and serverless. Like Quarkus, it resolves dependency injection and aspect-oriented behavior at **compile time** through annotation processing — but its defining trait is the near-total elimination of runtime reflection, which keeps startup, memory, and native-image builds extremely efficient regardless of how large the application grows.
 
 <h4 id="core-idea-ahead-of-time-reflection-free" style="font-size:20px;font-weight:700;margin:22px 0 8px;">🚀 Core Idea: ahead-of-time, reflection-free</h4>
 Spring's dependency injection cost scales with the number of beans, because wiring is computed at startup via reflection. Micronaut generates the injection logic as ordinary code during compilation, so startup time and memory stay roughly **constant** as the codebase grows, and no reflection metadata is needed at runtime.
@@ -3826,17 +3894,109 @@ Both do build-time dependency injection and target fast, lean, native-ready serv
 
 ---
 
+<h3 id="resilience4j" style="font-size:26px;font-weight:700;margin:26px 0 10px;">🛡️ Resilience4j</h3>
+
+Unlike Spring, Quarkus, and Micronaut above — which are full application frameworks — **Resilience4j** is a focused, lightweight library for one concern: making calls to unreliable dependencies fail safely. It targets Java 8's functional interfaces (`Supplier`, `Function`, `Runnable`, `CompletionStage`) and plugs into any of the three frameworks above through a dedicated Spring Boot, Micronaut, or Quarkus starter. It is the direct successor to **Netflix Hystrix**, which popularized the circuit breaker in Java but entered maintenance mode in 2018.
+
+<h4 id="core-idea-functional-decorators-not-a-thread-pool-framework" style="font-size:20px;font-weight:700;margin:22px 0 8px;">🛡️ Core Idea: functional decorators, not a thread-pool framework</h4>
+Hystrix's architecture isolated every dependency call inside its own dedicated thread pool — strong isolation, but one thread pool per dependency is expensive in threads and memory, and sits awkwardly with non-blocking, reactive code. Resilience4j takes a different approach: each resilience concern is a small **decorator** that wraps a functional interface and runs, by default, on the *caller's own thread* — no dedicated pool unless you explicitly reach for the Bulkhead or TimeLimiter modules, which do manage their own thread pools when true isolation is required. The result is a library an order of magnitude lighter than Hystrix, composable one decorator at a time, and equally at home in blocking and reactive code.
+
+<h4 id="the-problem-it-solves" style="font-size:20px;font-weight:700;margin:22px 0 8px;">🛡️ The problem it solves</h4>
+The resilience *patterns* themselves — circuit breaker, retry with backoff, bulkhead, timeout, rate limiting, fallback — are covered conceptually in [Resilience Patterns](#resilience-patterns-know-the-names-and-the-why); this section is about the concrete library that implements them correctly so you do not have to. Hand-rolling a circuit breaker means getting a state machine, a sliding window of call outcomes, and thread-safe concurrent updates right under load — easy to get subtly wrong. Resilience4j supplies battle-tested implementations of each pattern as an independent module, each exposing the same shape (a `Config`, a `Registry`, and typed events), so the patterns compose predictably instead of being reinvented per service.
+
+<h4 id="architecture--modules-and-composition" style="font-size:20px;font-weight:700;margin:22px 0 8px;">🛡️ Architecture — modules and composition</h4>
+- **Independent modules, one per artifact**: `resilience4j-circuitbreaker`, `-retry`, `-bulkhead` (semaphore-based) / `-timelimiter` (thread-pool based, pairs with `CompletableFuture`), `-ratelimiter`, `-cache` — pull in only what a given service needs
+- **`Config` → `Registry` → instance**: an immutable `Config` object holds the tuning (thresholds, window size, wait duration); a `Registry` is a factory that creates and caches named instances sharing one `Config` — the same role Spring's `BeanFactory` plays for beans
+- **`Decorators` composes several modules around one call**: when a call needs more than one protection, `Decorators.ofSupplier(...)` chains them in a defined, outside-in order (rate limiter → circuit breaker → retry → time limiter → bulkhead is the conventional order) — getting the order wrong changes behavior, e.g. retrying *inside* an open circuit breaker defeats the breaker's purpose. Chaining multiple modules through `Decorators` pulls in the `resilience4j-all` artifact rather than a single module
+- **Version note**: Resilience4j 1.x supports Java 8+; **Resilience4j 2.x requires Java 17+** — check the target runtime before picking a major version
+
+<h4 id="design-patterns-it-embodies" style="font-size:20px;font-weight:700;margin:22px 0 8px;">🛡️ Design patterns it embodies</h4>
+- **Circuit Breaker pattern**: the library's namesake — a finite-state machine (**Closed** → **Open** → **Half-Open**, detailed in [Resilience Patterns](#resilience-patterns-know-the-names-and-the-why)) backed by a sliding window of recent call outcomes
+- **Decorator pattern**: literally how the library composes behavior — `CircuitBreaker.decorateSupplier(...)`, `Retry.decorateSupplier(...)`, and `Decorators.ofSupplier(...)` each wrap one functional interface inside another, layering behavior without subclassing, the same [Decorator pattern](#structural) already covered under Design Patterns — Resilience4j is arguably its clearest real-world application in the Java ecosystem
+- **Strategy pattern**: a `Config` is an interchangeable strategy for how a call should react to failure — a payments call can use a tight `CircuitBreakerConfig` while a low-priority background integration uses a lenient one, with the exact same call-site code
+- **Observer pattern**: every module exposes an `EventPublisher` (`onStateTransition`, `onError`, `onSuccess`, `onCallNotPermitted`) so metrics, logging, and alerting subscribe to state changes without touching the core call — feeds directly into the [Observability](#observability--the-three-pillars) metrics pillar
+- **Factory pattern**: `CircuitBreakerRegistry.of(config)` centralizes creation of named instances, guaranteeing the same name always resolves to the same shared instance rather than a fresh one per call site
+
+<h4 id="code-examples" style="font-size:20px;font-weight:700;margin:22px 0 8px;">🛡️ Code examples</h4>
+
+Framework-agnostic, functional style:
+```java
+CircuitBreakerConfig cbConfig = CircuitBreakerConfig.custom()
+    .failureRateThreshold(50)                          // % of failed calls that trips the breaker
+    .slidingWindowSize(20)                              // last N calls considered
+    .waitDurationInOpenState(Duration.ofSeconds(30))    // time before probing again
+    .permittedNumberOfCallsInHalfOpenState(5)
+    .build();
+CircuitBreaker breaker = CircuitBreakerRegistry.of(cbConfig).circuitBreaker("inventoryService");
+
+RetryConfig retryConfig = RetryConfig.custom()
+    .maxAttempts(3)
+    .waitDuration(Duration.ofMillis(500))
+    .retryExceptions(IOException.class)                 // never retry non-idempotent failures blindly
+    .build();
+Retry retry = RetryRegistry.of(retryConfig).retry("inventoryService");
+
+// compose circuit breaker + retry + a fallback around one call
+Supplier<Inventory> resilientCall = Decorators.ofSupplier(inventoryClient::fetch)
+    .withCircuitBreaker(breaker)
+    .withRetry(retry)
+    .withFallback(List.of(CallNotPermittedException.class, IOException.class),
+                  throwable -> Inventory.empty())        // graceful degradation, not a thrown error
+    .decorate();
+
+Inventory result = resilientCall.get();
+```
+
+Spring Boot annotation style (`resilience4j-spring-boot3` for Spring Boot 3.x; a separate `resilience4j-spring-boot4` artifact targets Spring Boot 4/Spring Framework 7 — match the module to your Boot major version):
+```java
+@CircuitBreaker(name = "inventoryService", fallbackMethod = "fallback")
+@Retry(name = "inventoryService")
+public Inventory getInventory(String sku) {
+    return inventoryClient.fetch(sku);
+}
+
+private Inventory fallback(String sku, Throwable t) {
+    return Inventory.empty();
+}
+```
+```yaml
+resilience4j.circuitbreaker:
+  instances:
+    inventoryService:
+      failureRateThreshold: 50
+      slidingWindowSize: 20
+      waitDurationInOpenState: 30s
+resilience4j.retry:
+  instances:
+    inventoryService:
+      maxAttempts: 3
+      waitDuration: 500ms
+```
+
+<h4 id="similar--pertinent-frameworks" style="font-size:20px;font-weight:700;margin:22px 0 8px;">🛡️ Similar &amp; Pertinent Frameworks</h4>
+| Framework | Model | Notes |
+|---|---|---|
+| **Netflix Hystrix** | Thread-pool isolation — one dedicated pool per dependency | The pattern's popularizer; in maintenance mode since 2018 — Resilience4j is its lightweight, non-blocking-friendly successor |
+| **Spring Retry** | Retry only, via `@Retryable` / `@Recover` | Narrower scope than Resilience4j; frequently paired with it for the patterns it does not cover |
+| **Failsafe** | Functional decorators, framework-agnostic | Same philosophy as Resilience4j — smaller ecosystem and no official Spring Boot starter |
+| **Alibaba Sentinel** | Flow control, circuit breaking, and adaptive system protection, with a live monitoring dashboard | Broader scope than Resilience4j (also does traffic shaping); dominant in the Alibaba Cloud / Chinese cloud-native ecosystem |
+| **Istio / Envoy (service mesh)** | Sidecar-level timeout, retry, and circuit breaking — no application code changes | Enforces uniform policy across every service in the mesh, but the fallback cannot be domain-aware the way in-process library code can |
+
+**Choosing between them**: reach for an in-process library (Resilience4j, Failsafe) when the fallback needs business/domain logic (return cached data, a default value, a degraded response shape); reach for service-mesh-level resilience (Istio/Envoy) when the goal is uniform infrastructure policy across many services without touching each one's code, accepting coarser, non-domain-aware control in exchange.
+
+---
+
 <h2 id="-database" style="font-size:33px;font-weight:800;margin:30px 0 12px;">🗄️ Database</h2>
 
 <h3 id="cap-theorem" style="font-size:26px;font-weight:700;margin:26px 0 10px;">⚖️ CAP Theorem</h3>
 - **Consistency**: Data is consistent across all the nodes
 - **Availability**: Data is available at any time
-- **Partition Tolerance**: System does not fail regardless any data drop or updated in any node
+- **Partition Tolerance**: the system keeps operating even when the network drops or delays an arbitrary number of messages **between nodes** — this is about lost/delayed communication, not about data being dropped or overwritten on a node
 
 *Only two of these requirements can be achieved at a time: choose Consistency + Partition tolerance (CP) or Availability + Partition tolerance (AP), but not all three.*
 
 - **CP systems** (e.g. HBase, ZooKeeper): refuse to return stale data — become unavailable during a partition
-- **AP systems** (e.g. Cassandra, DynamoDB): stay available but may return stale data — eventually consistent
+- **AP systems** (e.g. Cassandra, DynamoDB): stay available but may return stale data — eventually consistent by default. Treat this as the *default posture*, not an absolute: both support tunable consistency per request (Cassandra's `QUORUM`/`ALL` consistency levels, DynamoDB's strongly-consistent reads), which trades some availability back for consistency on the operations that need it — CAP applies per-operation more precisely than it applies to a whole system
 - **CA** is only meaningful on a single node — a real distributed system cannot opt out of partitions, so it must choose C or A *when one occurs*
 - The "consistency" in the Consistency-Availability-Partition (CAP) theorem specifically means **linearizability** (the system behaves as if there is a single, up-to-date copy of the data) — which is a different guarantee from the Consistency in Atomicity-Consistency-Isolation-Durability (ACID)
 
@@ -3954,6 +4114,8 @@ Two families of storage engine, each with a different on-disk index structure:
 
 Rule of thumb: LSM-trees tend to win on writes, B-trees on reads — but benchmarks are workload-sensitive.
 
+Deeper mechanics — hash-index segments, SSTable/memtable construction, compaction strategies (size-tiered vs. leveled), Bloom filters for LSM point lookups — in [designing-data-intensive-applications.md](references/System%20design/designing-data-intensive-applications.md); the external-memory/(a,b)-tree derivation of *why* wider branching factor minimizes disk seeks is in [data-structures-and-algorithms-in-java.md](references/Algorithms%20&%20Data%20Structures/data-structures-and-algorithms-in-java.md).
+
 <h5 id="clustered-secondary-and-covering-indexes" style="font-size:16px;font-weight:600;margin:18px 0 7px;">Clustered, secondary, and covering indexes</h5>
 - **Clustered index**: the row data lives inside the index, ordered by the key. In MySQL/InnoDB the primary key is always clustered; there is at most one per table
 - **Secondary (non-clustered) index**: stores a pointer to the row (in InnoDB, the primary-key value), so reads do a second lookup to fetch the full row
@@ -3979,6 +4141,9 @@ Rule of thumb: LSM-trees tend to win on writes, B-trees on reads — but benchma
 - **Column-oriented** storage keeps each column together — an analytic query reading 3 of 100 columns loads only those 3, compresses well (repeated values per column), and enables vectorized processing; the trade-off is write-unfriendliness (a row insert touches every column file)
 - Online Analytical Processing systems are usually fed from Online Transaction Processing systems by an Extract-Transform-Load (ETL) pipeline, isolating production databases from heavy analytical scans
 
+<h5 id="cloud-data-platforms-snowflake--snowpark" style="font-size:16px;font-weight:600;margin:18px 0 7px;">Cloud Data Platforms (Snowflake / Snowpark)</h5>
+Snowflake positions itself as a converged warehouse/lake/lakehouse/data-mesh platform (one governed engine instead of separate systems per architecture pattern). Its **Snowpark** layer lets non-SQL code (Python, Java, Scala) run as User-Defined Functions or Stored Procedures inside Snowflake's own compute, next to the data, instead of exporting data to an external processing engine such as Apache Spark — the same "bring compute to the data" principle that also motivates column-oriented OLAP storage above: minimizing data movement reduces both cost and the number of places sensitive data can leak. Details in [snowpark-for-dummies.md](references/Big%20data/snowpark-for-dummies.md).
+
 <h4 id="database-tuning-techniques" style="font-size:20px;font-weight:700;margin:22px 0 8px;">🗃️ Database Tuning Techniques</h4>
 - **Indexing**: CREATE INDEX index_name ON table (column);
 - **Views**
@@ -3999,35 +4164,43 @@ Rule of thumb: LSM-trees tend to win on writes, B-trees on reads — but benchma
 - Writers block readers and readers block writers (the opposite of snapshot isolation, below) — this removes all anomalies but raises contention and tail latency
 
 <h4 id="acid-properties" style="font-size:20px;font-weight:700;margin:22px 0 8px;">🗃️ ACID Properties</h4>
-Each letter carries a precise meaning:
-- **Atomicity**: if a multi-write transaction hits a fault partway, every write is discarded — it commits fully or rolls back entirely. The sharper word is *abortability*: the guarantee is the ability to abort cleanly on error. (It is *not* about concurrency — that is Isolation.)
-- **Consistency**: the database holds the application's invariants (balances reconcile, foreign keys resolve). This is really a property of the *application* — the database only enforces the constraints you declare; it is the odd letter out, "tossed in to make the acronym work"
-- **Isolation**: concurrent transactions do not step on each other. The ideal is *serializability* — the result equals some serial order — but full serializability is costly, so databases offer weaker isolation levels (below)
-- **Durability**: once committed, data survives a crash — written to a non-volatile write-ahead log on a single node, or replicated to enough nodes in a cluster. Perfect durability does not exist; disk + replication + backups layer to reduce risk
+A transaction bundles several database operations — say, debiting one account and crediting another — so that, from any observer's point of view, they happen as a single, indivisible unit. That bundling immediately raises two separate questions a database has to answer, and it helps to keep them apart, because they're solved by two different mechanisms.
+
+The first question is about failure partway through: what happens if the second write in that bundle never happens — the process crashes, the disk fills up, a constraint is violated? The answer is **atomicity**: either every write in the transaction lands, or none of them do; there is no state where the debit succeeded but the credit didn't. The word "atomic" undersells what's actually promised — the sharper name for this guarantee is *abortability*, because the real commitment is that the transaction can always be cleanly rolled back on error, discarding every write it had made so far. Notice this says nothing about what happens when two transactions run *at the same time* — that's a different problem, covered by isolation below.
+
+The second question is about surviving *after* the transaction has already reported success: once the database has told the caller "committed," can that promise ever be broken by a crash a moment later? That's **durability** — a committed write must survive a crash, which in practice means it was written to a non-volatile write-ahead log on disk before the commit was ever acknowledged, or replicated to enough other nodes that losing any single one of them doesn't lose the data. Durability is a guarantee with a floor, not a ceiling: disk failures, replication lag, and gaps in backup coverage all chip away at it in the real world, which is why production systems layer several of these mechanisms together rather than trusting any one of them to be perfect on its own.
+
+Between those two questions sits a third, and it's the one most of the complexity in this section comes from: what happens when several transactions run *concurrently*, each written as if it had the database entirely to itself? Left unmanaged, one transaction's half-finished work becomes visible to another, producing results neither transaction alone would ever have produced. **Isolation** is the guarantee that concurrent transactions don't step on each other this way. Its strongest form, *serializability*, guarantees the outcome is identical to some scenario where the transactions ran one after another instead of overlapping — but achieving that fully costs real performance, which is why almost every production database instead offers a *menu* of weaker isolation levels, each trading away some of that safety for speed. What that menu actually looks like, and precisely what each level protects against, is the subject of the next section.
+
+The fourth letter, **consistency**, is the odd one out: it names the guarantee that the database's own invariants hold — balances reconcile, foreign keys resolve — but those invariants are things the *application* declares, not something the database can independently know to enforce. A database only ever enforces the specific constraints you tell it about (unique keys, foreign keys, check constraints); genuine business-level consistency, like "the sum of debits must always equal the sum of credits," is really the application's own responsibility — atomicity and isolation are simply what make maintaining that responsibility *possible* in the first place, by guaranteeing nothing is ever left half-done or visibly stepped on. This is why consistency is sometimes described as having been folded into the acronym mainly to make it pronounceable: Atomicity, Consistency, Isolation, Durability — ACID.
 
 <h4 id="isolation-levels-and-their-anomalies" style="font-size:20px;font-weight:700;margin:22px 0 8px;">🗃️ Isolation Levels and Their Anomalies</h4>
-From most permissive to strictest — each level prevents one more anomaly (✓ prevented / ✗ possible):
+Since full serializability is expensive, the practical question a database engineer actually faces is narrower: exactly which ways can concurrent transactions interfere with each other, and how much of that interference is a given isolation level willing to prevent? There are five recognized anomalies, and it's worth seeing what each one actually looks like before looking at which levels block which:
+
+- **Dirty read**: one transaction reads data that another transaction has written but not yet committed — data that might still be rolled back, meaning the reader can briefly see a value that officially never existed.
+- **Non-repeatable read**: a transaction reads the same row twice within itself and gets two different answers, because a different transaction committed a change to that row in between the two reads.
+- **Phantom read**: the same idea as above, but for an entire query instead of one row — re-running an identical query returns a different *set* of rows, because another transaction inserted or deleted rows matching the query's condition while the first transaction was still running.
+- **Lost update**: two transactions each read a value, modify it, and write it back — a read-modify-write cycle — and the second write silently overwrites the first, so one of the two updates simply vanishes without either transaction ever seeing an error.
+- **Write skew**: the subtlest of the five. Two transactions read the same set of rows, each independently decides an update is safe based on what it read, and each then writes to a *different* row — yet the combined result violates a constraint that neither transaction broke on its own (the textbook case: two on-call doctors both go off-call at the same moment, because each one checked and saw the other was still covering, and neither individual update looked unsafe in isolation).
+
+Every isolation level, at bottom, is a promise about which of those five anomalies it rules out — and the standard levels form a ladder from most permissive to strictest, each rung closing off one more anomaly than the last:
 
 | Isolation level | Dirty read | Non-repeatable read | Phantom read | Lost update | Write skew |
 |---|---|---|---|---|---|
 | READ UNCOMMITTED | ✗ possible | ✗ possible | ✗ possible | ✗ possible | ✗ possible |
 | READ COMMITTED | ✓ prevented | ✗ possible | ✗ possible | ✗ possible | ✗ possible |
-| REPEATABLE READ | ✓ prevented | ✓ prevented | ✗ possible | ✓ prevented (most engines) | ✗ possible |
-| SNAPSHOT ISOLATION | ✓ prevented | ✓ prevented | ✓ prevented | ✓ prevented (auto-detected) | ✗ possible |
+| REPEATABLE READ *(SQL-standard definition)* | ✓ prevented | ✓ prevented | ✗ possible | ✓ prevented (most engines) | ✗ possible |
+| SNAPSHOT ISOLATION *(what PostgreSQL and MySQL actually name "Repeatable Read")* | ✓ prevented | ✓ prevented | ✓ prevented | ✓ prevented (auto-detected) | ✗ possible |
 | SERIALIZABLE | ✓ prevented | ✓ prevented | ✓ prevented | ✓ prevented | ✓ prevented |
 
-**The anomalies:**
-- **Dirty read**: reading another transaction's uncommitted data, which may still roll back
-- **Non-repeatable read**: re-reading a row inside one transaction returns a different value, because another transaction committed in between
-- **Phantom read**: re-running a query inside one transaction returns new or vanished rows, because another transaction inserted/deleted matching rows
-- **Lost update**: two read-modify-write cycles run concurrently and the second overwrites the first without incorporating it — one update is silently lost
-- **Write skew**: two transactions read the same rows, each makes a decision, then each updates *different* rows; the combined result violates a constraint neither broke alone (e.g. both on-call doctors go off-call because each saw the other still on-call)
+That table hides a trap worth knowing before trusting a vendor's naming: the row labeled "Repeatable Read" above is the generic SQL-standard definition, which only promises to prevent non-repeatable reads and explicitly still permits phantom reads. PostgreSQL and MySQL, however, both implement their own `REPEATABLE READ` level as snapshot isolation instead — stricter than the standard technically requires — so on those two engines the real behavior actually matches the *Snapshot Isolation* row above (phantoms prevented too), not the weaker row the name would suggest by the standard's definition. The lesson generalizes beyond this one case: always ask "prevented per the SQL standard, or per this specific engine's actual implementation?" before trusting what an isolation level's name implies.
 
-**Snapshot isolation and Multi-Version Concurrency Control (MVCC)**: each transaction reads from a consistent snapshot taken at its start, so later commits are invisible to it. The engine keeps several committed versions of each row side by side (tagged with the writer's transaction ID), so **readers never block writers and writers never block readers**; old versions are garbage-collected once no in-flight transaction needs them. PostgreSQL/MySQL call this level "Repeatable Read", Oracle calls it "Serializable" — neither is true serializability, and snapshot isolation still permits **write skew**. PostgreSQL's *Serializable Snapshot Isolation (SSI)* adds optimistic conflict detection to reach genuine serializability at modest cost.
+Snapshot isolation is common enough, and clever enough mechanically, to be worth understanding rather than just trusting the table above. Each transaction reads from a consistent snapshot taken the moment it started, so any commit that happens later is simply invisible to it — there is no way for it to observe a half-finished concurrent write. The engine makes this cheap through a technique called **Multi-Version Concurrency Control (MVCC)**: it keeps several committed versions of each row side by side, each tagged with the ID of the transaction that wrote it, so that **readers never block writers and writers never block readers** — a reader just picks the version that was current when its own snapshot began. Old versions are only cleaned up once no in-flight transaction could still need them. Oracle happens to name this exact same level "Serializable" instead of "Repeatable Read," a second, entirely independent vendor-naming inconsistency layered on top of the first one — and despite the name, it still isn't true serializability, because snapshot isolation permits write skew, the anomaly described above. PostgreSQL's *Serializable Snapshot Isolation (SSI)* closes that last gap by adding optimistic conflict detection on top of ordinary snapshot isolation, reaching genuine serializability at a modest performance cost.
+
+(For the full derivation of this table, the storage-engine internals behind why LSM-trees trade write throughput for the latency predictability of B-trees, replication and partitioning trade-offs, and why no timeout is ever fully safe in a distributed system, see [designing-data-intensive-applications.md](references/System%20design/designing-data-intensive-applications.md).)
 
 <h4 id="optimistic-vs-pessimistic-locking" style="font-size:20px;font-weight:700;margin:22px 0 8px;">🗃️ Optimistic vs Pessimistic Locking</h4>
-- **Optimistic** (a `@Version` column in Java Persistence API): No lock is taken; the update checks the version and fails if someone modified the row meanwhile. Best when conflicts are rare
-- **Pessimistic** (`SELECT ... FOR UPDATE`): The row is locked while being worked on; other transactions wait. Best when conflicts are frequent
+Even inside a single isolation level, an application still has to decide *how* to handle the moment two transactions actually do want to touch the same row — and there are two fundamentally different postures to take, depending on how often that collision is expected to actually happen. **Pessimistic locking** assumes conflict is common: the moment a transaction starts working on a row, it takes a lock (`SELECT ... FOR UPDATE`), and every other transaction wanting that same row simply waits its turn. **Optimistic locking** assumes conflict is rare: no lock is taken at all, every transaction proceeds freely, and interference is only checked for right at the end — typically via a `@Version` column in Java Persistence API that increments on every update, so a transaction's final write fails outright if the version it originally read has since changed underneath it. Which posture wins is really a bet about collision frequency: pessimistic locking pays an upfront cost (waiting) to avoid a problem cheaply when that problem is expected to be common; optimistic locking pays nothing upfront but has to redo the work whenever its bet turns out to be wrong.
 
 <h4 id="deadlocks" style="font-size:20px;font-weight:700;margin:22px 0 8px;">🗃️ Deadlocks</h4>
 - **How they happen**: Transaction A locks row 1 then wants row 2; transaction B locks row 2 then wants row 1 — a circular wait
@@ -4101,7 +4274,8 @@ Splitting a large dataset across nodes so each holds a subset — to scale beyon
 <h4 id="constants" style="font-size:20px;font-weight:700;margin:22px 0 8px;">📊 Constants</h4>
 - **GenerationType**(strategy = TABLE,AUTO,IDENTITY,SEQUENCE)
 - **FetchType**(fetch = EAGER,LAZY)
-- **CascadeType**(ALL,PERSIST,MERGE,REMOVE,DETACH,LOCK,REFRESH,REPLICATE,SAVE_UPDATE)
+- **`jakarta.persistence.CascadeType`** (the Java Persistence API spec, portable across providers): `ALL, PERSIST, MERGE, REMOVE, REFRESH, DETACH`
+- **`org.hibernate.annotations.CascadeType`** (Hibernate-native extension, not portable): adds `LOCK, REPLICATE, SAVE_UPDATE` on top of the Java Persistence API set
 - **EnumType**(ORDINAL,STRING)
 
 <h4 id="repository" style="font-size:20px;font-weight:700;margin:22px 0 8px;">📊 Repository</h4>
@@ -4219,7 +4393,7 @@ Wraps JDBC connection, used for saving retrieving objects from db, Retrieved fro
 
 <h4 id="entity-lifecycle" style="font-size:20px;font-weight:700;margin:22px 0 8px;">🐻 Entity Lifecycle</h4>
 - **Detach**: Not associated with a hibernate session
-- **Merge**: Merging will reattach to the session
+- **Merge**: does **not** reattach the detached instance you pass in — Hibernate copies its state onto a *different*, managed entity (fetched or found in the session) and returns that new reference; the original object you called `merge()` on stays detached, so callers must use the returned value, not the original
 - **Persist**: Managed state. Next commit will save to db
 - **Remove**: Managed entities will be removed. Next commit will delete them from db
 - **Refresh**: sync to db
@@ -4334,23 +4508,31 @@ Specifies the fields to return in the document that match the query (true/1: inc
 
 <h5 id="read-concern" style="font-size:16px;font-weight:600;margin:18px 0 7px;">Read Concern</h5>
 Allows to control the consistency and isolation properties of the data read from replica sets and shards
-- **Local**: reading from primary replica, may not exists in other replicas
-- **Available**: reading from secondary replica, data may not be replicated to the majority of replicas
-- **Majority**: default for all the fixed operators, data acknowledged by majority of replicas
-- **Linearizable**: returns data that has the majority of successful writes previous to the read operation
-- **Snapshot**: Multidocument transaction, reads from majority of committed data
+- **Local (the default)**: returns whatever the queried node — primary **or** secondary — has right now, with no guarantee it has replicated to any other node
+- **Available**: behaves like `local` on an unsharded collection; on a **sharded** cluster it additionally skips the shard-ownership check, so it can return orphaned documents left behind by an in-progress chunk migration — the trade-off is lower read latency for a small correctness risk unique to sharding
+- **Majority**: data acknowledged by a majority of the replica set — not the default, must be requested explicitly
+- **Linearizable**: returns data reflecting all successful majority-acknowledged writes that completed before the read started
+- **Snapshot**: used inside multi-document transactions, reads from a majority-committed snapshot
 
 <h5 id="write-concern" style="font-size:16px;font-weight:600;margin:18px 0 7px;">Write Concern</h5>
 Level of acknowledgement requested from mongodb for write operations. Level of consistency across replicas
-- **w1**: Ack only from primary
-- **w0**: No ack
-- **w(n)**: Ack primary + (n-1) secondary: (All nodes-1 always including primary)
-- **w: majority**
+- **w:1**: Ack only from primary
+- **w:0**: No ack
+- **w:n**: Ack primary + (n-1) secondary: (All nodes-1 always including primary)
+- **w: majority (the default since MongoDB 5.0, paired with journaling)**
 - **wtimeout**: the limit to prevent write operations from blocking indefinitely
 
 <h4 id="dynamodb" style="font-size:20px;font-weight:700;margin:22px 0 8px;">📄 DynamoDB</h4>
 
-- **DynamoDB**: Key-value database
+- **DynamoDB**: AWS's own summary is "key-value **and document** database" — it natively stores nested JSON-like attributes (maps, lists), not just a flat key-to-value lookup
+
+<h5 id="how-a-dynamo-style-store-actually-works" style="font-size:16px;font-weight:600;margin:18px 0 7px;">How a Dynamo-style store actually works</h5>
+The mechanics behind DynamoDB, Cassandra, and Riak — derived from Amazon's original Dynamo paper, worked through in full in [system-design-interview-alex-xu.md](references/System%20design/system-design-interview-alex-xu.md):
+- **Quorum consensus**: with `N` replicas, a write needs `W` acknowledgements and a read needs `R` responses; `W + R > N` guarantees strong consistency (a write set and a read set always overlap on at least one replica) — the common production baseline is `N=3, W=R=2`
+- **Vector clocks**: a `[server, version]` pair set per data item, used to distinguish a genuine ancestor relationship (safe to overwrite) from a real concurrent conflict (neither version dominates the other, so the client must reconcile them) — this is *how* an eventually-consistent store detects that two concurrent writes actually collided
+- **Gossip protocol**: nodes periodically exchange heartbeat/membership state with random peers rather than an all-to-all broadcast — the standard decentralized failure-detection mechanism at this scale
+- **Sloppy quorum + hinted handoff**: writes go to the first `W` *healthy* nodes on the hash ring (skipping temporarily-down ones) rather than blocking; the temporary stand-in later hands the data back to the node that was down
+- **Merkle trees**: used for anti-entropy resync after a permanent replica failure — comparing root hashes first, recursing only into mismatched subtrees, so resync cost is proportional to the actual *difference* between replicas, not their total size
 
 ---
 
@@ -4379,6 +4561,7 @@ Level of acknowledgement requested from mongodb for write operations. Level of c
 - **Stateless**: Server doesn't store tokens
 - **Pros**: Scalable, cross-domain, mobile-friendly
 - **Cons**: Can't revoke before expiration, larger size, XSS vulnerable
+- **Algorithm confusion / `alg:none` forgery**: a JWT library that trusts the `alg` header from the token itself can be tricked into accepting an unsigned token (`alg: none`) or into verifying an RS256 token's signature as if it were HMAC using the public key as the secret — the fix is to pin the expected algorithm on the verifier side and never derive it from the token
 
 <h4 id="oauth-20" style="font-size:20px;font-weight:700;margin:22px 0 8px;">🔑 OAuth 2.0</h4>
 - **What**: Authorization framework for delegated access
@@ -4391,7 +4574,7 @@ Level of acknowledgement requested from mongodb for write operations. Level of c
 - **Grant Types**:
   - Authorization Code (most secure, web apps)
   - Client Credentials (machine-to-machine)
-  - Password (legacy, not recommended)
+  - Password (Resource Owner Password Credentials) — **prohibited** by the IETF OAuth 2.0 Security Best Current Practice (RFC 9700): it exposes the user's raw credentials to the client and cannot support multi-factor authentication or passkeys
 - **Tokens**:
   - Access Token: Short-lived, access resources
   - Refresh Token: Long-lived, get new access tokens
@@ -4451,17 +4634,16 @@ public void deleteUser() { }
 <h3 id="security-best-practices" style="font-size:26px;font-weight:700;margin:26px 0 10px;">🛡️ Security Best Practices</h3>
 
 <h4 id="token-storage" style="font-size:20px;font-weight:700;margin:22px 0 8px;">🛡️ Token Storage</h4>
-- **Best**: HttpOnly cookies (prevents XSS)
-- **Better**: sessionStorage
-- **Never**: localStorage (XSS risk)
+- **Recommended**: an `HttpOnly` cookie — JavaScript cannot read it, so a Cross-Site Scripting bug cannot steal it. It must be paired with `SameSite=Strict` (or `Lax`) plus an anti-Cross-Site-Request-Forgery token, because a cookie is sent automatically by the browser and is therefore exposed to forgery unless something proves the request came from your own page
+- **Never**: `localStorage` or `sessionStorage` — current OWASP guidance treats both the same way, not as a fallback tier: both are plain JavaScript-readable storage, so a single Cross-Site Scripting vulnerability anywhere on the page discloses every token stored there, session or access, no exceptions
 
 <h4 id="token-refresh-strategy" style="font-size:20px;font-weight:700;margin:22px 0 8px;">🛡️ Token Refresh Strategy</h4>
 - **Access Token**: Short-lived (15 min)
-- **Refresh Token**: Long-lived (7 days), HttpOnly cookie
+- **Refresh Token**: Long-lived (7 days), `HttpOnly` + `SameSite` cookie, protected by the same anti-Cross-Site-Request-Forgery pairing as any other cookie-carried credential
 - **Flow**: Access token expires → Use refresh token → Get new access token
 
 <h4 id="password-security" style="font-size:20px;font-weight:700;margin:22px 0 8px;">🛡️ Password Security</h4>
-- **Hash**: bcrypt, Argon2, PBKDF2 (never plain text)
+- **Hash, in the current OWASP-recommended order**: **Argon2id** first choice (tunable memory/time/parallelism cost, resists both GPU cracking and side-channel attacks); **scrypt** if Argon2id is unavailable; **bcrypt** for legacy systems only (fixed 72-byte password limit); **PBKDF2** last resort, reserved for environments requiring FIPS-140 compliance — never plain text, never a fast general-purpose hash like MD5/SHA-256 alone
 - **Salt**: Random value added before hashing
 - **Pepper**: Secret value added (stored separately)
 
@@ -4470,12 +4652,14 @@ public void deleteUser() { }
 - **XSS**: Sanitize input, Content Security Policy
 - **SQL Injection**: Use prepared statements
 - **Brute Force**: Rate limiting, account lockout
-- **OWASP API Top 10 (Open Worldwide Application Security Project)**: the reference list of API vulnerabilities — injection, broken authentication, excessive data exposure, lack of rate limiting
+- **OWASP (Open Worldwide Application Security Project) Top 10**: the community-maintained ranking of the most critical web application risks, current as of the **2021** edition — **A01 Broken Access Control**, **A02 Cryptographic Failures**, **A03 Injection** (now folds in Cross-Site Scripting), **A04 Insecure Design**, **A05 Security Misconfiguration**, **A06 Vulnerable and Outdated Components**, **A07 Identification and Authentication Failures**, **A08 Software and Data Integrity Failures**, **A09 Security Logging and Monitoring Failures**, **A10 Server-Side Request Forgery**
+- **OWASP API Security Top 10** is a separate, API-specific list (current edition **2023**), because APIs fail in ways the general list does not fully capture: **Broken Object Level Authorization** (an endpoint returns or modifies another user's object because the object identifier alone is trusted) has topped it since the list's inception — the practical checklist item is "does every endpoint re-check ownership, or only authentication?"; **Broken Authentication**; **Broken Object Property Level Authorization** (excess data exposure and mass assignment merged into one category); and **Unrestricted Resource Consumption** (missing rate limits, formerly its own category) round out the most-cited entries
+- Practical use: review every new endpoint explicitly against both lists rather than discovering the gap in production — that habit is what "OWASP" is shorthand for in a design review, more than memorizing the exact ranking
 
 <h3 id="spring-security" style="font-size:26px;font-weight:700;margin:26px 0 10px;">🔐 Spring Security</h3>
 - Built as a **filter chain**: each request crosses an ordered list of servlet filters (authentication, authorization, Cross-Site Request Forgery protection...) before reaching the controller — a real-world Chain of Responsibility
 - Configured by declaring a **`SecurityFilterChain` bean** (lambda style; the old `WebSecurityConfigurerAdapter` is deprecated)
-- **Proof Key for Code Exchange (PKCE)**: Extension of the OAuth 2.0 authorization code flow for public clients (single-page and mobile applications) that cannot keep a client secret
+- **Proof Key for Code Exchange (PKCE)**: an extension of the OAuth 2.0 authorization code flow that binds the token exchange to the same client that started it, closing an authorization-code-interception gap. **Mandatory** for public clients (single-page and mobile applications) that cannot keep a client secret; the IETF OAuth 2.0 Security Best Current Practice (RFC 9700) now recommends it for confidential clients too, since it also blocks authorization-code injection regardless of client type
 - For service-to-service calls, use the **client credentials** flow
 
 <h3 id="recommended-stack" style="font-size:26px;font-weight:700;margin:26px 0 10px;">🧱 Recommended Stack</h3>
@@ -4491,9 +4675,9 @@ public void deleteUser() { }
 - **Authorization**: RBAC or ABAC
 - **MFA**: Required
 
-<h3 id="legacy-security-concepts" style="font-size:26px;font-weight:700;margin:26px 0 10px;">🗝️ Legacy Security Concepts</h3>
-- **Transport Layer Security (TLS)**: Encryption protocol for secure communication
-- **SSL Certificates**: Digital certificates for HTTPS
+<h3 id="legacy-security-concepts" style="font-size:26px;font-weight:700;margin:26px 0 10px;">🗝️ Foundational Network Security Concepts</h3>
+- **Transport Layer Security (TLS)**: the encryption protocol securing HTTPS traffic in transit — **TLS 1.2 and 1.3 are the current, required versions**; TLS 1.0 and 1.1 were formally deprecated by the IETF in 2021 (RFC 8996) and must not be enabled
+- **Secure Sockets Layer (SSL) Certificates**: the common name still used for what are, since 1999, actually TLS certificates — SSL itself (versions 2 and 3) is obsolete and insecure; the certificate format persisted across the SSL-to-TLS transition, which is why the old name stuck
 - **Client Certificate**: Public key authentication
 - **On behalf**: Microservice passes user credentials to other services
 - **Encryption**: Use standard algorithms (AES, RSA)
@@ -4543,7 +4727,7 @@ An in-memory store (Redis, Memcached) for expensive or hot data, cutting databas
 Avoid caching rapidly-changing data; replicate the cache across availability zones (a single node is a single point of failure); cache and database are not updated atomically, so brief staleness is possible.
 
 <h5 id="consistent-hashing" style="font-size:16px;font-weight:600;margin:18px 0 7px;">Consistent Hashing</h5>
-Modular hashing (`key % N`) remaps almost all keys when a node is added or removed. Consistent hashing places nodes and keys on a hash ring; a key maps to the first node clockwise, so a membership change only redistributes the keys in the affected arc (`k/n` on average). **Virtual nodes** (each server holds many ring positions) even out the distribution. Used by Dynamo, Cassandra, and content delivery networks. (See also [Database → Partitioning](#partitioning--sharding).)
+Modular hashing (`key % N`) remaps almost all keys when a node is added or removed. Consistent hashing places nodes and keys on a hash ring; a key maps to the first node clockwise, so a membership change only redistributes the keys in the affected arc (`k/n` on average). **Virtual nodes** (each server holds many ring positions) even out the distribution. Used by Dynamo, Cassandra, and content delivery networks. (See also [Database → Partitioning](#partitioning--sharding); worked mechanically, ring-walk step by step, in [grokking-system-design-interview.md](references/System%20design/grokking-system-design-interview.md).)
 
 <h5 id="rate-limiting" style="font-size:16px;font-weight:600;margin:18px 0 7px;">Rate Limiting</h5>
 Caps how many requests a client may make per window — defending against Denial-of-Service (DoS) abuse, brute force, and runaway clients; counters usually live in Redis.
@@ -4576,6 +4760,8 @@ A quick capacity check early in a design discussion. State assumptions, use roun
 <h4 id="consistency" style="font-size:20px;font-weight:700;margin:22px 0 8px;">🏗️ Consistency</h4>
 - **ACID**: Database constraints are not violated when transactions are executed
 - **BASE**: NoSQL consistency model
+- **Linearizability**: the strongest single-object guarantee — the system behaves as if there were only one copy of the data, and every operation appears to take effect atomically at some point between its start and finish, respecting real-time order across all clients. It requires coordination (hence latency) and cannot be had with full availability during a network partition — the precise, sharper version of "CAP" (the trade-off is specifically about behavior *during* a partition, not a blanket property of the system at all times, per [designing-data-intensive-applications.md](references/System%20design/designing-data-intensive-applications.md))
+- **No timeout is ever fully safe**: a slow node and a dead node look identical from the caller's side, so any timeout-based failure detector is a trade-off between false positives (declaring a slow-but-alive node dead) and false negatives (waiting too long on a genuinely dead one) — worth remembering when tuning any circuit-breaker or retry timeout
 - **CAP Theorem**: Consistency, Availability, Partition Tolerance
 
 <h3 id="hardware" style="font-size:26px;font-weight:700;margin:26px 0 10px;">🖥️ Hardware</h3>
@@ -4643,7 +4829,7 @@ A quick capacity check early in a design discussion. State assumptions, use roun
 <h5 id="design-topics" style="font-size:16px;font-weight:600;margin:18px 0 7px;">Design Topics</h5>
 - **Versioning strategies**: in the path (`/v1/orders` — simple and visible) vs in a header (clean paths — less discoverable) vs content negotiation (most "pure" — least used); know the trade-offs
 - **Pagination**: offset-based (simple to implement — degrades on deep pages because the database still scans every skipped row) vs cursor-based (opaque pointer to the last seen element — scales regardless of depth)
-- **Error responses**: One consistent envelope for the whole API; the standard is RFC 7807 "Problem Details" (fields: type, title, status, detail, instance)
+- **Error responses**: One consistent envelope for the whole API; the standard is RFC 9457 "Problem Details" (2023, obsoleting the original RFC 7807) — fields: type, title, status, detail, instance
 - **Idempotency keys**: The client sends a unique key with a POST; the server stores the outcome and replays it on retry instead of executing twice — mandatory thinking for payments
 - **Cross-Origin Resource Sharing (CORS)**: Browser mechanism that blocks calls from a different origin unless the server explicitly allows it (allowed origins, methods, headers) — configure it server-side, deliberately
 
@@ -4675,8 +4861,9 @@ A quick capacity check early in a design discussion. State assumptions, use roun
 - **Single Responsibility**: A class should have only one responsibility — one reason to change
 - **Open Closed**: Open for extension, closed for modifications — add a new Strategy bean instead of modifying a switch statement
 - **Liskov Substitution**: You should be able to substitute classes when using inheritance — the classic violation is Square extending Rectangle (setting the width silently breaks the height invariant)
+  - **Checkable rule list** (deeper coverage in [dive-into-design-patterns.md](references/Design%20Patterns/dive-into-design-patterns.md)): a subclass method's parameter types must stay the same or widen (contravariant), its return type must stay the same or narrow (covariant), it must not throw new/broader exception types than the base method declares, it must not strengthen preconditions or weaken postconditions, and it must preserve the superclass's invariants — most "this override technically compiles but breaks the caller" bugs trace back to one of these five
 - **Interface Segregation**: Do not implement things that you don't need in your interfaces. Small granularity
-- **Dependency Inversion**: Your code should depend on abstractions, not implementations
+- **Dependency Inversion**: Your code should depend on abstractions, not implementations — **not the same thing as Dependency Injection** (DI is one common technique for satisfying this principle, not a synonym for it)
 
 <h3 id="clean-code-habits-verbalize-them-during-a-code-challenge" style="font-size:26px;font-weight:700;margin:26px 0 10px;">🧭 Clean Code Habits (verbalize them during a code challenge)</h3>
 - Meaningful names; small functions that do one thing
@@ -4697,6 +4884,8 @@ A quick capacity check early in a design discussion. State assumptions, use roun
 > 💻 Code — Behavioral: [StrategyDemo](../src/main/java/algorithm/concepts/designpatterns/behavioral/strategy/StrategyDemo.java) · [ObserverDemo](../src/main/java/algorithm/concepts/designpatterns/behavioral/observer/ObserverDemo.java) · [TemplateMethodDemo](../src/main/java/algorithm/concepts/designpatterns/behavioral/templatemethod/TemplateMethodDemo.java) · [ChainOfResponsibilityDemo](../src/main/java/algorithm/concepts/designpatterns/behavioral/chainofresponsibility/ChainOfResponsibilityDemo.java)
 > 💻 Code — Structural: [AdapterTest](../src/main/java/algorithm/concepts/designpatterns/structural/adapter/AdapterTest.java) · [DecoratorDemo](../src/main/java/algorithm/concepts/designpatterns/structural/decorator/DecoratorDemo.java) · [ProxyDemo](../src/main/java/algorithm/concepts/designpatterns/structural/proxy/ProxyDemo.java)
 > 💻 Code — Spring incarnations: [Strategy via Spring](../src/main/java/algorithm/concepts/spring/strategy/StrategyPatternExample.java) · [Observer via Spring events](../src/main/java/algorithm/concepts/spring/events/ApplicationEventsExample.java) · [Proxy via Spring aspects](../src/main/java/algorithm/concepts/spring/aop/AopProxyExample.java)
+
+Deeper reading on the full 23-pattern catalog and how to actually pick one: [gang-of-four-design-patterns.md](references/Design%20Patterns/gang-of-four-design-patterns.md) (the original catalog — its causes-of-redesign lookup table maps "why am I about to need to change this design" straight to the pattern that addresses it, and its explicit warning that a pattern should only be applied when the flexibility it buys is actually needed is worth repeating in code review), [dive-into-design-patterns.md](references/Design%20Patterns/dive-into-design-patterns.md) (same catalog plus the SOLID chapter referenced above), and [head-first-design-patterns.md](references/Design%20Patterns/head-first-design-patterns.md) (the same patterns taught through memorable scenarios — its State-vs-Strategy disambiguation is genuinely useful: Strategy is a behavior a client injects from outside, State is a transition the object drives from within, and the two produce near-identical class diagrams despite the opposite intent).
 
 <h4 id="creational" style="font-size:20px;font-weight:700;margin:22px 0 8px;">🏭 Creational</h4>
 - **Factory Method**: Lets subclasses decide which class to instantiate; delegates creation to a method rather than a constructor — Spring's `BeanFactory` and `@Bean` factory methods
@@ -4740,6 +4929,11 @@ Patterns for systems split across processes and networks. The monolith-versus-mi
 - **What microservices cost**: Distributed complexity, network latency, eventual consistency, heavy operational overhead
 - **When NOT to use microservices** (saying this earns senior points): Small team, unclear domain boundaries, early-stage product — start with a well-modularized monolith and split once the boundaries stabilize
 
+<h4 id="service-oriented-architecture-soa--the-historical-predecessor" style="font-size:20px;font-weight:700;margin:22px 0 8px;">🕸️ Service-Oriented Architecture (SOA) — the historical predecessor</h4>
+The evolutionary step between the two above: independently deployable services, like microservices, but built around a shared **Enterprise Service Bus (ESB)** that centralizes routing, message transformation, and protocol translation between them, under **centralized governance** of shared contracts.
+- **Where it differs from microservices**: SOA optimizes for *reusing* services across the whole organization through the bus; microservices optimize for *independent deployability* of each service, even at the cost of some duplication
+- **Why it fell out of favor**: the ESB becomes a shared bottleneck and a single point of failure — the exact centralization microservices were designed to avoid — and its heavyweight protocols (SOAP, WS-* standards) added overhead that lighter REST/JSON and event-driven communication later made unnecessary
+
 <h4 id="how-to-split-services" style="font-size:20px;font-weight:700;margin:22px 0 8px;">🕸️ How to Split Services</h4>
 - **Bounded contexts** (from Domain Driven Design): Split by business capability (orders, payments, inventory), never by technical layer
 - **Database per service**: Each service owns its data; a shared database silently re-couples everything you tried to decouple
@@ -4767,45 +4961,258 @@ Messaging is the asynchronous backbone of distributed systems: instead of one se
 <h5 id="why-messaging-belongs-to-distributed-design-patterns" style="font-size:16px;font-weight:600;margin:18px 0 7px;">Why messaging belongs to distributed design patterns</h5>
 Asynchronous messaging is what makes patterns like **Saga** (choreography through events), **Outbox** (reliable event publishing), and **event-driven architecture** possible. The patterns above describe *what* to coordinate; messaging is *how* the coordination travels.
 
-<h5 id="apache-kafka" style="font-size:16px;font-weight:600;margin:18px 0 7px;">Apache Kafka</h5>
+<h5 id="apache-kafka" style="font-size:16px;font-weight:600;margin:18px 0 7px;">Kafka</h5>
+
+Reference library backing this section: [apache-kafka.md](references/Distributed%20systems/Messaging/Kafka/apache-kafka.md) (historical, 2013 — origins of page-cache-based storage, batching, and MirrorMaker), [kafka-in-action.md](references/Distributed%20systems/Messaging/Kafka/kafka-in-action.md) (operations, producer customization, and the deepest security coverage of the four), [kafka-streams-in-action.md](references/Distributed%20systems/Messaging/Kafka/kafka-streams-in-action.md) (Kafka Streams in depth, including the Processor API and windowing), and [kafka-the-definitive-guide.md](references/Distributed%20systems/Messaging/Kafka/kafka-the-definitive-guide.md) (the authoritative source on the controller/KRaft, the transaction protocol, and Kafka Connect internals). Structured here as storage/throughput fundamentals → core architecture → durability and delivery guarantees → producer/consumer configuration → operational concerns (including security and cross-cluster replication) → Kafka Streams → Spring integration → comparison to a traditional broker.
 
 <h6 id="architecture-be-able-to-draw-it" style="font-size:13px;font-weight:600;opacity:.72;margin:14px 0 5px;">Architecture (be able to draw it)</h6>
-- **Broker**: One Kafka server; a cluster is a group of brokers
-- **Topic**: Named stream of messages, split into partitions
-- **Partition**: Append-only ordered log — THE unit of parallelism
-- **Offset**: Position of a message inside a partition; each consumer tracks its own offsets
-- **Consumer group**: Set of consumers sharing the work — each partition is assigned to exactly one consumer within the group
-  - More consumers than partitions → the extra consumers sit idle
-- **Replication**: Each partition has one leader (serves all reads and writes) and followers; the In-Sync Replicas (ISR) are the followers that are fully up to date
+Kafka's whole design starts from one requirement: a single server can't durably absorb and serve the message volume a large system produces, so the work has to be spread across a group of servers. Each individual server in that group is a **broker**, and the group as a whole — however many brokers happen to be running together — is the **cluster**.
+
+What a cluster actually stores is organized into **topics**: a topic is simply a named stream of messages, the equivalent of a named channel one service writes to and others read from. A single topic can easily need more throughput than one broker's disk and network can provide, so Kafka splits every topic into **partitions** — each partition is its own append-only, strictly ordered log, and a partition, not the topic as a whole, is the actual unit Kafka parallelizes across brokers and consumers. This is why a topic's total capacity scales with how many partitions it has, not with the topic itself.
+
+Because a partition is just a log that messages are appended to, a reader needs some way to remember exactly where it left off — that position is the partition's **offset**, and Kafka deliberately puts the *consumer* in charge of tracking its own offset rather than having the broker track it for every reader. That choice keeps the broker simple and lets many independent readers progress through the same log at their own pace, each with no effect on any other reader.
+
+Reading a high-volume partition with a single consumer would just recreate the original bottleneck one level down, so Kafka lets several consumers share the work as a **consumer group**: within one group, every partition is assigned to exactly one consumer at a time, so the group's total read throughput scales with how many consumers — up to the partition count — are working in parallel. Adding more consumers than partitions just leaves the extras idle, since there's nothing left to hand them.
+
+None of this protects against the most basic failure mode, though: what happens when the broker holding a partition simply dies? That's what **replication** answers. Every partition has one **leader** replica, which alone serves all of that partition's reads and writes, plus zero or more **follower** replicas that continuously copy the leader's log. Followers that have genuinely kept up are called the **In-Sync Replicas (ISR)** — the leader always counts as a member of its own ISR, and only ISR members are ever eligible to be promoted to leader if the current one fails. A write isn't considered durably committed until every current ISR member has it, which is exactly what makes the size and health of the ISR the thing that actually determines how much data a broker failure can lose. Which broker *is* the leader for a given partition, and how that gets decided the moment a broker fails, is itself managed by a separate piece of the cluster called the controller — covered on its own below.
+
+<h6 id="storage-and-throughput-fundamentals" style="font-size:13px;font-weight:600;opacity:.72;margin:14px 0 5px;">Storage and Throughput Fundamentals</h6>
+Everything above explains what a partition *is* logically — an ordered log — but the reason Kafka can sustain such enormous message volume comes down to how that log is actually written to disk. A partition is, physically, nothing more exotic than a plain append-only sequence of segment files, and Kafka never writes one message to disk at a time: a producer's outgoing records are grouped into a **record batch** per partition before they're ever sent over the network. Combining sequential disk appends (no random seeks the way an update-in-place workload would need) with batching (fewer, larger network round-trips and disk writes instead of many small ones) is the entire mechanical reason Kafka sustains throughput a broker persisting and acknowledging one message at a time never could.
+
+The batching decision is tunable from the producer side, and it's worth treating as a genuine trade-off rather than a fixed default: `batch.size` caps how large one batch is allowed to grow (16KB by default), while `linger.ms` (0 by default) adds a small artificial delay before a not-yet-full batch gets sent anyway — trading a little added latency for materially better throughput once traffic is heavy enough to fill batches quickly. Raising both together is the standard first lever when tuning a producer specifically for throughput over latency.
+
+There's a second, less obvious piece to the throughput story, and it lives below Kafka entirely, in how the operating system handles the write. A produced record does land on the broker's filesystem, but that write goes first into the operating system's **page cache** — Kafka does not `fsync` to physical disk per message, leaving the OS to flush on its own schedule (Kafka does expose `log.flush.interval.messages`/`.ms` to control this directly, but it's rarely tuned in practice, because replication across brokers, not a single disk's fsync, is what production Kafka actually relies on for durability). The payoff shows up on the read side: a consumer asking for recent data is usually served straight out of page cache rather than disk, and Kafka moves those bytes from page cache to the network socket via **zero-copy transfer** (`sendfile`), skipping the extra copy through the broker's own process memory that a naive implementation would need. This is *why* Kafka's consumer throughput barely degrades even when many consumers read the same recent data concurrently — they're all just hitting the same cached memory, not competing for disk I/O.
+
+**Implementation example** — creating a topic and inspecting the architecture concepts above directly:
+```bash
+kafka-topics.sh --bootstrap-server localhost:9092 --create \
+  --topic orders --partitions 6 --replication-factor 3 \
+  --config min.insync.replicas=2
+
+kafka-topics.sh --bootstrap-server localhost:9092 --describe --topic orders
+# Topic: orders  PartitionCount: 6  ReplicationFactor: 3
+# Partition: 0  Leader: 1  Replicas: 1,2,3  Isr: 1,2,3
+# ...
+```
+Each `Partition` line above is exactly the **Broker/Topic/Partition/Replication** vocabulary made concrete: `Leader: 1` is the broker currently serving partition 0's reads/writes, `Isr: 1,2,3` is its current In-Sync Replica set.
+
+<h6 id="partitions-and-consumer-groups-in-depth" style="font-size:13px;font-weight:600;opacity:.72;margin:14px 0 5px;">Partitions and Consumer Groups in Depth</h6>
+Two of the concepts introduced above — partitions and consumer groups — carry more operational weight than their one-line definitions suggest. Start with partition count, since it's a decision that has to be made deliberately upfront rather than tuned casually later: a partition is the true unit of both parallelism and ordering, so a topic's total throughput ceiling is roughly (partition count) × (single-partition throughput) — under-partitioning is the single most common Kafka scaling mistake. The catch is that partition count can only be *increased* later, never decreased, and increasing it reshuffles which partition each key maps to, breaking the "same key always lands on the same partition" guarantee for every key that already existed. That guarantee itself comes from how a producer decides where to send a keyed message in the first place: the default partitioner hashes the key to a specific partition, so every message sharing a key lands in the same partition, in send order, every time. With no key at all, the default behavior (Kafka 2.4's "sticky" partitioner) instead batches a run of keyless messages onto one partition at a time before rotating to the next, rather than strict round-robin per message — trading slightly less even distribution for materially better batching efficiency. A **custom partitioner** can override this default entirely, which matters when, say, one alert level needs its own dedicated partition so a downstream consumer can prioritize it over the rest.
+
+Consumer groups are Kafka's answer to the load-balancing half of the same problem, and they work in a deliberately coarser way than a traditional task queue: within one group, each partition is owned by exactly one consumer at a time, rather than balancing individual messages the way a queue would. That coarseness is the trade Kafka makes for dramatically higher throughput and cheap offset bookkeeping — a consumer only ever needs to remember "everything up to offset N is done," never acknowledge each message individually the way a queue-based consumer would. Membership and offset commits for a group are tracked by one specific broker acting as that group's **GroupCoordinator**, and exactly how it divides partitions among the group's members is itself configurable via `partition.assignment.strategy`: `Range` (the default, which can unevenly stack extra partitions onto the first-listed consumers when one consumer subscribes to many topics), `RoundRobin` (evens assignment out across every subscribed topic), or `Sticky`/`CooperativeSticky` (minimizes how many partitions actually move during a rebalance — worth understanding in full once rebalancing itself has been introduced, further down). One consequence of this design is worth calling out on its own: multiple independent consumer groups can read the very same topic without interfering with each other at all, because each group keeps its own entirely separate copy of offset-tracking state — which is how one topic can simultaneously feed, say, a real-time dashboard that's always caught up and a slower batch-analytics job that's hours behind, with neither ever affecting the other.
+
+<h6 id="replication-factor-and-in-sync-replicas" style="font-size:13px;font-weight:600;opacity:.72;margin:14px 0 5px;">Replication Factor and In-Sync Replicas (ISR) in Depth</h6>
+The architecture section above established that a write only counts as durably committed once every current In-Sync Replica has it — which means the practical durability of any given topic comes down to two numbers working together, not one. **Replication factor** (commonly 3 in production) sets how many total copies of each partition exist — the leader plus its followers — and directly determines how many broker failures a topic can survive without losing data: replication factor 3 tolerates exactly 2 broker failures before that partition becomes unavailable. But replication factor alone only describes the topic's configuration, not what's actually acknowledged at write time — that's the job of **`min.insync.replicas`** (commonly 2, alongside replication factor 3), the minimum number of in-sync replicas that must acknowledge a write before a producer using `acks=all` considers it successful. Without this setting, `acks=all` only requires whatever the *current* ISR happens to be to acknowledge — and if that set has shrunk to just the leader during a partial outage, the "acks=all" guarantee silently weakens to no better than a single node's durability. Combining `acks=all` with `min.insync.replicas=2` on a replication-factor-3 topic is the standard production baseline for "an acknowledged write cannot be lost": losing one broker still leaves two in-sync replicas satisfying the minimum, so writes keep flowing; losing two brokers correctly makes the partition unavailable for writes rather than silently accepting them with no real durability behind them.
+
+This also explains why the ISR set needs active management rather than existing as a fixed snapshot of replication factor: a follower that's fallen behind on replication is dropped out of the ISR until it catches back up, which is precisely why `min.insync.replicas` matters in the first place — without it, a shrinking ISR would silently reduce the effective durability guarantee even while the topic's nominal replication factor stays unchanged. Kafka does **not** self-heal a replica count back up to the configured factor automatically the way, say, HDFS re-replicates a corrupted block — restoring a lost replica is a deliberate operational reassignment step, not something the cluster handles on its own. Two further knobs sit on top of this same trade-off between durability and availability: `unclean.leader.election.enable` (default `false`, overridable per topic) lets the controller elect a leader from *outside* the ISR when no in-sync replica survives a failure, at the cost of whatever data those out-of-sync followers never received — a deliberate choice of availability over durability when the alternative is no leader at all. And on the read side, `client.rack` on the consumer paired with `replica.selector.class=RackAwareReplicaSelector` on the broker (the default is leader-only reads) lets a consumer read from whichever in-sync replica is geographically nearest instead of always the leader, cutting cross-datacenter network cost at the price of possibly slightly stale reads if that replica happens to be lagging.
+
+<h6 id="controller-election-kraft-vs-zookeeper" style="font-size:13px;font-weight:600;opacity:.72;margin:14px 0 5px;">Controller Election and Cluster Metadata: KRaft vs ZooKeeper</h6>
+All of the leader election and ISR management described above has to be decided by *someone* — and that someone is a single broker in the cluster designated the **controller**, responsible for cluster-wide metadata: electing partition leaders, creating and deleting topics, reassigning replicas. This has to be centralized in one place rather than left to each broker's own judgment for a straightforward reason: without one coordinating authority, two brokers could each independently believe they're entitled to elect a leader for the same partition, producing a split-brain cluster where two different brokers think they're in charge of the same data.
+
+How that one controller actually gets chosen has changed completely over Kafka's history, and the old mechanism's specific weakness is exactly what motivated the new one. The legacy mechanism, used before Kafka 4.0, delegated coordination to ZooKeeper: brokers raced to create an ephemeral znode at a known path, the first to succeed became controller, and every other broker watched that znode to be notified the instant it disappeared — from a crash, a network partition, or even a garbage-collection pause long enough to miss ZooKeeper's own heartbeats. Every new election bumped a **controller epoch** number, so brokers could safely ignore stale commands arriving from a "zombie" controller resuming activity after a pause it never realized happened. The real weakness showed up on every failover, though: the newly elected controller had to reload the *entire* replica state map from ZooKeeper before it could manage anything at all, and that reload measurably slowed down as a cluster's partition count grew — a well-documented scaling bottleneck that got worse exactly as clusters got bigger.
+
+**KRaft** (Kafka Raft metadata mode, the only mode Kafka has supported since version 4.0) replaces ZooKeeper entirely to fix precisely that bottleneck. Instead of an external coordination service, a small quorum of dedicated controller nodes stores all cluster metadata — topics, partitions, ISRs, configuration, everything ZooKeeper used to hold — as a Kafka-style replicated log of metadata events, and that quorum elects its own leader (the **active controller**) using the Raft consensus algorithm, with no external system involved at all. The reload problem disappears because the relationship between brokers and the controller is inverted: brokers **fetch** metadata updates from the active controller rather than having them pushed, and persist that metadata locally, so a broker restart never needs a full remote reload — and because every controller in the quorum already tracks the latest state as a hot standby, failing over to a new active controller is fast rather than requiring a rebuild from scratch. The operational payoff goes beyond raw speed: a production Kafka cluster no longer needs to separately deploy, secure, and operate a ZooKeeper ensemble at all, a genuine reduction in how much distributed-systems surface area the whole deployment carries — and that reduction, not just internal performance, is what actually motivated the migration. Any Kafka deployment encountered today should be assumed to be running KRaft unless it's explicitly identified as a legacy, pre-migration cluster — ZooKeeper mode isn't merely deprecated at this point, it has been removed entirely.
 
 <h6 id="the-ordering-guarantee" style="font-size:13px;font-weight:600;opacity:.72;margin:14px 0 5px;">The Ordering Guarantee</h6>
-- **Order is guaranteed only within one partition, never across the whole topic**
-- The message **key** determines the partition (hash of the key): same key → same partition → strict order for that key (for example, all the events of one given order or account)
+A natural question after all of this is: given that a topic is split across several independently operating partitions, in what order do consumers actually see messages? The honest answer is narrower than it's often assumed to be — order is guaranteed only *within* a single partition, never across a topic as a whole; two messages sitting in different partitions have no defined relative order at all. This is exactly why the message **key**, already introduced above as the thing that decides which partition a message lands in, doubles as Kafka's entire ordering mechanism: the same key always hashes to the same partition, so every message sharing a key is guaranteed to arrive in the order it was sent — all the events belonging to one specific order, or one specific account, for instance — while messages under different keys carry no ordering promise relative to each other at all.
 
 <h6 id="delivery-semantics-guaranteed-question" style="font-size:13px;font-weight:600;opacity:.72;margin:14px 0 5px;">Delivery Semantics (guaranteed question)</h6>
+Ordering only answers "in what sequence do messages arrive," not "how many times might a consumer actually process the same one." That second question turns out to hinge entirely on *when* a consumer commits its offset relative to when it actually finishes processing a message, and there are three distinct postures a system can take:
+
 | Semantic | How it is obtained | Trade-off |
 |---|---|---|
 | At-most-once | Commit offsets *before* processing | Messages can be lost, none duplicated |
 | At-least-once | Commit offsets *after* processing (the default reality) | Messages can be duplicated, none lost |
-| Exactly-once | Idempotent producer + Kafka transactions | Strongest guarantee, costs throughput and complexity |
+| Exactly-once | Idempotent producer + Kafka transactions (mechanics below) | Strongest guarantee, costs throughput and complexity |
 
-- **The practical answer to duplicates: design idempotent consumers** — deduplicate by business key, upsert instead of insert
+Committing before processing (at-most-once) risks losing a message outright if the consumer crashes mid-processing, since the offset has already advanced past a message that was never actually handled. Committing after processing (at-least-once, and the default behavior in practice) avoids that loss but opens the opposite risk: a crash *after* processing but *before* the commit lands means the same message gets redelivered and processed a second time. Exactly-once closes both gaps at once, but — as the mechanics further down make clear — it isn't free, and most systems don't actually need it: the practical, far cheaper answer to duplicates is designing **idempotent consumers** in the first place — deduplicating by a business key, and upserting instead of blindly inserting — which makes at-least-once delivery behave exactly like exactly-once from the consumer's own point of view, without ever paying for transactions.
 
 <h6 id="producer-acknowledgements-the-acks-setting" style="font-size:13px;font-weight:600;opacity:.72;margin:14px 0 5px;">Producer Acknowledgements (the acks setting)</h6>
-- **acks=0**: Fire and forget — fastest, messages can be lost silently
-- **acks=1**: The partition leader confirms — middle ground, lost if the leader dies before replicating
-- **acks=all**: All in-sync replicas confirm — slowest, no loss as long as one replica survives
+Delivery semantics describe what happens on the consumer side once a message has landed; the `acks` setting controls something earlier and just as consequential — how confident the producer needs to be that a message truly landed before it considers the send successful — and that confidence level is itself a direct trade against latency. `acks=0` is fire-and-forget: the producer doesn't wait for any confirmation at all, the fastest option and the one where messages can silently vanish with no error ever raised. `acks=1` waits for the partition leader alone to confirm the write, a middle ground still vulnerable to loss if the leader dies before its followers manage to replicate the message. `acks=all` (the client default since Kafka 3.0, KIP-679) waits for every current In-Sync Replica to confirm, guaranteeing no loss as long as at least one ISR member survives — and it's paired by default with `enable.idempotence=true`, which is exactly what turns the exactly-once row of the table above from something requiring an explicit opt-in into the out-of-the-box producer behavior.
+
+One more producer-side lever affects both throughput and this whole picture without touching correctness at all: **compression** (`compression.type`: `snappy`, `gzip`, `lz4`, `zstd`) operates at the batch level, not per individual message — compressing a batch of many small messages together is efficient, while compressing one large message in isolation gains little, so how much benefit compression actually delivers depends heavily on typical message size and throughput.
+
+<h6 id="producer-customization" style="font-size:13px;font-weight:600;opacity:.72;margin:14px 0 5px;">Producer Customization</h6>
+Everything above assumes the built-in partitioning, serialization, and monitoring behavior — but each of those is a pluggable seam, not a fixed pipeline. A custom **`Partitioner`** (implementing `Partitioner.partition(...)`) can override the default key-hash/sticky routing described earlier entirely: routing a `CRITICAL` alert level to its own dedicated partition, for instance, or deliberately spreading one disproportionately hot key across several partitions instead of concentrating it on one. A custom **`Serializer`/`Deserializer`** — jointly nicknamed a **Serde** — lets producer and consumer agree on a wire format beyond the built-in `StringSerializer`/Avro serializers, and key and value can each use an entirely independent serializer on the same record. **Producer interceptors** (`interceptor.classes`, KIP-42) hook into every record just before partition assignment, intended for cross-cutting measurement and monitoring rather than business logic — Kafka Streams itself leans on this hook style more heavily internally than application code typically should.
+
+<h6 id="idempotent-producer-and-transactions" style="font-size:13px;font-weight:600;opacity:.72;margin:14px 0 5px;">Idempotent Producer and Transactions: Exactly-Once Mechanics</h6>
+The delivery-semantics table above named "idempotent producer plus Kafka transactions" as what it takes to reach exactly-once, without yet explaining how either piece actually works — that's the gap this section closes. Start with the simpler of the two: an **idempotent producer** (`enable.idempotence=true`) has each message carry a unique **Producer ID (PID)** plus a per-partition, monotonically increasing sequence number, and the broker tracks the last five sequence numbers it has seen per partition per producer — which is exactly why `max.in.flight.requests.per.connection` is capped at 5 for an idempotent producer, that cap is what keeps the tracking window sufficient. Whenever a message arrives whose `(PID, sequence)` pair the broker has already accepted, it's silently rejected rather than appended a second time — closing exactly the gap where a producer's own retry, issued after an acknowledgment timeout that turned out to be a false alarm, would otherwise create a visible duplicate. This tracking state isn't fragile either: it survives leader failover, because followers replicate it in memory as they replicate messages, and it survives broker restarts via periodic disk snapshots that can be rebuilt from the log itself if a snapshot goes stale.
+
+It's worth being precise about what this mechanism does *not* fix, because it's a narrower guarantee than "no duplicates" might suggest: two separate `producer.send()` calls carrying the same logical record are completely indistinguishable from two genuinely different records, and two independent producer instances sending the same data are never deduplicated against each other either — idempotence only ever removes duplicates created by the producer's *own* retry logic, nothing broader. And the tracking state itself isn't retained forever: a PID's sequence-tracking entry lives for `transactional.id.expiration.ms` (7 days by default) after that producer goes idle, which matters in practice for workloads that spin up many short-lived producers — one per Function-as-a-Service invocation, for instance — since each new instance's state accumulates on the broker rather than freeing on process exit. A sustained 3 new producer IDs per second for a week works out to roughly 1.8 million retained entries, on the order of 5 GB of broker memory — the practical fix is either reusing a small number of long-lived producers, or lowering the expiration window for workloads that genuinely can't avoid this kind of churn.
+
+Idempotence alone only protects a single partition against duplicate sends — it says nothing about atomicity *across* partitions, which is the gap **transactions** close. A transaction lets a producer write to multiple partitions atomically, and — via `sendOffsetsToTransaction()` — atomically commit "the offset I consumed" together with "the output I produced," which is precisely what Kafka Streams relies on for stateful exactly-once processing, since a stream processor is always, at bottom, consuming from one topic and producing to another. Making this safe across restarts requires the producer to register a stable `transactional.id` — one that stays consistent across restarts of the same logical instance — with a **transaction coordinator** broker; calling `initTransactions()` bumps a **producer epoch** that fences off any earlier "zombie" instance still trying to use that same transactional ID.
+
+The epoch bump alone used to be a real operational constraint: before KIP-447 (Kafka 2.5+), safe fencing required statically mapping each transactional ID to one fixed set of partitions, so a restarted instance had to reuse the *exact same* transactional ID for the *exact same* partitions to be fenced correctly at all. KIP-447 relaxed this by letting the coordinator instead use the **consumer group generation** (passed via `sendOffsetsToTransaction`) to recognize that a producer belongs to a stale generation of its consumer group and fence it on that basis — a change specifically motivated by letting Kafka Streams run multiple tasks per transactional producer safely, without needing a rigid one-partition-set-per-ID mapping.
+
+The commit protocol itself is worth walking through step by step, because it explains why a coordinator crash mid-transaction never leaves things in an ambiguous state. Modeled conceptually on Chandy-Lamport distributed snapshots and built on "marker" control messages (with an internal `__transaction_state` log backing all of it): as the producer sends to each new partition, it first logs that this partition is now part of an in-progress transaction (step 1). When the application calls `commitTransaction()` or `abortTransaction()`, the coordinator logs its **intent** to commit or abort *before* doing anything else (step 2) — and because that intent is logged first, a coordinator crash at exactly this point is still recoverable: a newly elected coordinator simply resumes from the logged intent instead of having to re-decide anything. The coordinator then writes commit or abort **markers to every partition** the transaction touched (step 3), and finally logs completion (step 4). A transaction that never reaches `commitTransaction()`/`abortTransaction()` within `transaction.timeout.ms` is auto-aborted, so a crashed producer can't leave a transaction open indefinitely.
+
+All of that machinery is invisible to a consumer unless it explicitly asks to see it: setting `isolation.level=read_committed` means a consumer never sees records from a transaction that's still open or that was aborted — the broker withholds them from fetch responses entirely, so there's no consumer-side buffering cost, only some added latency proportional to how long transactions stay open before committing. The default, `read_uncommitted`, sees everything, including writes from transactions that later abort; non-transactional records are always visible regardless of this setting either way. Kafka Streams sets `processing.guarantee=exactly_once_v2` (the modern name for what earlier versions called `exactly_once`, then `exactly_once_beta`) to drive this entire protocol internally, per task, with no application code ever touching the transactional producer API directly — the default remains `at_least_once`, since exactly-once has to be deliberately opted into given its cost.
+
+What Kafka Streams does internally is exactly what a hand-written exactly-once consume-process-produce loop has to do explicitly at the raw client level:
+```java
+producer.initTransactions();
+try {
+    producer.beginTransaction();
+    // ...process input, send output records...
+    producer.sendOffsetsToTransaction(offsets, consumerGroupMetadata);
+    producer.commitTransaction();
+} catch (ProducerFencedException | OutOfOrderSequenceException | AuthorizationException e) {
+    producer.close();               // non-recoverable — a newer instance has taken over, this one must stop
+} catch (KafkaException e) {
+    producer.abortTransaction();    // recoverable — abort and retry
+}
+```
+The consumer side needs no special API call: setting `isolation.level=read_committed` (Kafka Streams sets this automatically) is the entire consumer-side requirement — aborted or still-open transactional records are withheld by the broker before they ever reach the consumer
+
+<h6 id="consumer-poll-loop-and-rebalancing" style="font-size:13px;font-weight:600;opacity:.72;margin:14px 0 5px;">Consumer Poll Loop and Rebalancing</h6>
+- **The poll loop does more than fetch records**: the first `poll()` call on a new consumer also discovers the GroupCoordinator, joins the group, and receives a partition assignment; any later rebalance (and its listener callbacks) is likewise processed *inside* a `poll()` call, so most consumer-group exceptions surface from `poll()` itself
+- **Two independent failure-detection mechanisms**: missed **heartbeats** (`session.timeout.ms`, default 10s, driven by a background thread firing every `heartbeat.interval.ms` — conventionally a third of the session timeout) and missed **polls** (`max.poll.interval.ms`, default 5 minutes). These are deliberately separate because the heartbeat thread runs independently of the main processing thread — a consumer stuck processing one slow record can keep heartbeating and look alive by that measure alone. `max.poll.interval.ms` is the backstop that actually catches a hung processor: if `poll()` isn't called again in time, the background thread itself sends a "leave group" request and the group rebalances
+- **`max.poll.records`** caps how many records one `poll()` call returns — the direct lever for keeping per-poll processing time predictable and safely under `max.poll.interval.ms` when per-record work is slow or variable
+- **`ConsumerRebalanceListener`**: hooks `onPartitionsRevoked` (save offsets/state before losing a partition — always called before any `onPartitionsAssigned`) and `onPartitionsAssigned` (e.g., `consumer.seek()` to a custom-stored offset) — needed when committing offsets to an external store instead of Kafka's own offset topic. `consumer.assign(List<TopicPartition>)` bypasses group coordination entirely for cases needing full manual partition ownership with no rebalancing at all
+- **Eager rebalancing** (the historical default): when group membership changes, **every** consumer in the group revokes **all** of its assigned partitions and the whole group pauses while partitions are reassigned from scratch — simple, but the "stop-the-world" pause hits the entire group even if only one consumer joined or left, and a consumer typically gets reassigned different partitions than it had before, discarding any partition-local state/caches
+- **Cooperative-sticky rebalancing** (`CooperativeStickyAssignor`, the modern recommended default): only the specific partitions that must actually move are revoked, and this happens over **two** rebalance rounds instead of one stop-the-world pause — consumers that keep the same partitions never stop consuming at all, dramatically shrinking the blast radius of a rebalance triggered by, say, one consumer restarting during a routine deployment
+- **Static group membership** (`group.instance.id`) goes a step further: a consumer that restarts within a configured session timeout keeps its previous partition assignment entirely, avoiding a rebalance altogether — valuable for rolling deployments of a consumer service, where each pod restarting one at a time would otherwise trigger a rebalance per pod
+
+<h6 id="consumer-fetch-tuning-and-offset-commits" style="font-size:13px;font-weight:600;opacity:.72;margin:14px 0 5px;">Consumer Fetch Tuning and Offset Commit Modes</h6>
+- **Fetch tuning**: `fetch.min.bytes` (broker waits until at least this many bytes are available before responding, reducing request/response chatter on low-traffic topics) paired with `fetch.max.wait.ms` (default 500ms — the upper bound on that wait, so a quiet topic doesn't add unbounded latency) and `fetch.max.bytes` (default 50MB cap on total response size — though one oversized first record is still returned in full, so the consumer always makes progress even on a message bigger than the cap). The per-partition `max.partition.fetch.bytes` (1MB default) is harder to reason about in practice, since you don't directly control how many partitions land in one fetch response — `fetch.max.bytes` is the generally preferred lever
+- **`enable.auto.commit=true`** (default) commits offsets on a timer (`auto.commit.interval.ms`) regardless of whether processing of the fetched batch actually finished — a crash between the last commit and completed processing re-delivers already-handled records (at-least-once by accident, not by design)
+- **Manual commits** (`enable.auto.commit=false`): `commitSync()` blocks until the broker acknowledges, simplest to reason about; `commitAsync(callback)` doesn't block but needs the callback to observe failures, since a fire-and-forget async commit that silently fails looks identical to success until the next rebalance reprocesses more than expected. Manual commit *after* processing succeeds is what actually delivers deliberate at-least-once semantics, as opposed to auto-commit's accidental version above
+- **Thread-safety rule**: a single `KafkaConsumer` instance is not thread-safe, and one thread cannot run two consumers in the same group — the standard pattern is one consumer per thread, with an `ExecutorService`-managed pool if an application wants several consumers reading one group in parallel
 
 <h6 id="operational-knowledge" style="font-size:13px;font-weight:600;opacity:.72;margin:14px 0 5px;">Operational Knowledge</h6>
 - **Consumer lag**: Distance between the last produced offset and the last consumed offset — THE health metric of a consumer; a growing lag means the consumer cannot keep up
-- **Rebalancing**: Redistribution of partitions when a consumer joins, leaves or crashes; disruptive because consumption pauses — cooperative (incremental) rebalancing reduces the pause
 - **Retention**: Messages are kept by time or by size, regardless of consumption — the log is replayable; **compacted topics** keep only the latest value per key (changelog semantics)
 - **Dead letter topic**: Where a consumer parks poison messages (messages that always fail) instead of blocking the whole partition
+- **Broker/controller diagnostics**: `server.log` (startup errors, general activity), `controller.log` (present only on the controller broker — its leadership decisions), and `state-change.log` (every partition state transition a broker received from the controller) are the three logs to check first when diagnosing a replication or leadership issue
+
+<h6 id="log-compaction-vs-retention" style="font-size:13px;font-weight:600;opacity:.72;margin:14px 0 5px;">Log Compaction vs Time/Size Retention</h6>
+- **Time/size retention** (`cleanup.policy=delete`, the default): discards whole log segments once they exceed a configured age or the partition exceeds a configured size, regardless of whether the discarded messages were ever overwritten — suited to genuine event streams where every event is independently meaningful (a click, a payment, a sensor reading) and old events simply age out
+- **Log compaction** (`cleanup.policy=compact`): instead of discarding by age, a background process retains only the **most recent value per key**, discarding all older values for that same key (a `null` value acts as a **tombstone**, eventually removing the key entirely after a grace period — the mechanism a General Data Protection Regulation (GDPR)-style deletion request typically relies on) — the amount of data retained is bounded by the number of distinct keys, not by how much history has accumulated
+- **How compaction actually runs**: a compacted partition's segments are either **clean** (already deduplicated) or **dirty** (not yet processed, possibly still holding several values for one key); compaction only ever touches **inactive** segments, never the currently-active one being written to — so a consumer can legitimately observe more than one value for the same key until the active segment rolls over (`log.roll.hours`, commonly `24`)
+- **Why this matters beyond storage savings**: compaction is what turns a Kafka topic into a durable, replayable representation of *current state* rather than just a stream of *events* — exactly the state/stream duality explored in Martin Kleppmann's *Designing Data-Intensive Applications* (see `doc/references/System design/designing-data-intensive-applications.md`): "the truth is the log; a database is a cache of a subset of the log." A compacted topic backs Kafka Streams' `KTable` abstraction (below), lets a new consumer rebuild full current state by replaying just the compacted log from the beginning (no separate snapshot mechanism needed), and is the standard target for Change Data Capture (CDC) pipelines that mirror a database table's current rows into Kafka
+- Both policies can be combined (`cleanup.policy=compact,delete`) — compact by key, but still enforce an outer time/size bound on tombstones and how long superseded values can linger before compaction actually runs
+
+<h6 id="kafka-connect" style="font-size:13px;font-weight:600;opacity:.72;margin:14px 0 5px;">Kafka Connect</h6>
+- **What**: a framework bundled with Kafka core for moving data into and out of Kafka via pluggable **connectors** instead of hand-written producer/consumer code — **source connectors** import data (e.g., a database table → topic), **sink connectors** export it (e.g., topic → Elasticsearch index or Hadoop Distributed File System). Internally a connector task is itself just a producer (source) or consumer (sink); Connect's value is standardizing the surrounding lifecycle — offset tracking, restart/retry, format conversion, configuration — that every hand-rolled pipeline would otherwise reimplement
+- **Why reach for it over a custom client**: when you don't control the source/sink system's code and a maintained connector exists, Connect avoids reinventing fault tolerance and offset management. Its **Single Message Transformation** feature handles lightweight in-flight reshaping (routing, filtering, field redaction, type conversion) — joins and aggregations are explicitly out of scope and are Kafka Streams' job instead, the same DSL-vs-custom-logic boundary that separates the Kafka Streams DSL from its Processor API (below)
+- **CDC connectors** like Debezium read a database's own internal replication log (e.g., a MySQL binlog) and emit one Kafka event per row-level change, avoiding the inefficiency and lag of polling the database for changes — the standard way to feed a compacted topic that mirrors a table's current rows (see Log Compaction above)
+- **Standalone vs. distributed workers**: standalone mode runs one worker process with connector config passed directly on the command line — useful only when a connector must run on one specific known machine (e.g., tailing a local file). Distributed mode runs a cluster of workers sharing a `group.id`, which coordinate and rebalance connector tasks across themselves the same way a consumer group rebalances partitions, and are configured/monitored through a REST Application Programming Interface (API) rather than local files
+- **Key worker settings**: `plugin.path` (directories Connect scans for connector jars and their dependencies — the recommended way to add a connector, versus the classpath directly, which risks dependency conflicts between connectors), `key.converter`/`value.converter` (the format data takes as it's stored in Kafka — built-in JSON, or Avro/Protobuf/JSON Schema via Confluent Schema Registry), and `rest.host.name`/`rest.port` (each worker exposes a REST API for configuring and monitoring connectors, e.g. `curl http://host:8083/connector-plugins` lists what's installed)
+- **Minimal source connector config** (no custom code required):
+```properties
+name=local-file-source
+connector.class=FileStreamSource
+tasks.max=1
+file=test.txt
+topic=connect-test
+```
+- **Extract-Transform-Load (ETL) vs. Extract-Load-Transform (ELT)**: transforming data in-flight (ETL, via a Single Message Transformation) saves downstream storage/compute but locks every consumer of that topic into the pipeline author's transformation choices — if a field is dropped in-flight, it's permanently gone for every downstream consumer without a pipeline rebuild and historical reprocessing. ELT (land the raw data, transform at the target) keeps every consumer's options open at the cost of shifting compute/storage burden downstream. Kafka's one-topic-many-consumers fan-out makes premature in-pipeline transformation specifically risky, since a choice made for one consumer constrains every other consumer of the same topic, not just the one that requested it
+
+<h6 id="kafka-security" style="font-size:13px;font-weight:600;opacity:.72;margin:14px 0 5px;">Security</h6>
+- **Encryption in transit**: a broker can expose several `listeners` at once (e.g., `PLAINTEXT://:9092,SSL://:9093`), which is how clients migrate to Transport Layer Security without downtime — old and new listeners run side by side until every client has moved. Each broker needs its own keystore (private key + signed certificate); clients need a truststore holding the Certificate Authority's certificate. `security.inter.broker.protocol=SSL` separately controls broker-to-broker traffic, independent of client-facing listeners
+- **Authentication**: Simple Authentication and Security Layer (SASL) with Kerberos is the traditional enterprise option (common where a Kerberos Key Distribution Center already exists, e.g. Hadoop-adjacent shops), configured via a Java Authentication and Authorization Service login file specifying a keytab and principal per broker/client. `SASL/SCRAM` (username/password, no external Kerberos infrastructure needed) and `SASL/OAUTHBEARER` (token-based, integrates with an existing identity provider) are the common lighter-weight alternatives
+- **Authorization**: Kafka's `Authorizer` interface is pluggable; the built-in implementation stores ACLs and is managed via `kafka-acls.sh` (e.g., granting `Read`+`Write` on a topic to a specific principal) — deny-by-default once any ACL exists for a resource. Grouping permissions into named roles instead of per-principal ACL entries (Role-Based Access Control) is a Confluent Platform extension layered on top of open-source Kafka's ACL model, not part of Kafka itself
+- **Quotas**: enforced **per broker**, not summed cluster-wide, so the effective cluster-wide limit for a client scales with how many brokers it happens to talk to. Two independent quota types: **network bandwidth** (`producer_byte_rate`/`consumer_byte_rate`, bytes/sec per client) and **request rate** (`request_percentage`, caps the share of a broker's Input/Output-plus-network thread capacity one client can consume) — request-rate quotas exist specifically because a bandwidth quota alone doesn't catch a CPU-heavy client (an expensive Transport Layer Security handshake pattern, or aggressive `fetch.max.wait.ms=0` polling that generates many cheap-bandwidth-but-expensive-CPU requests). Quota precedence, most specific first: user+`client.id` combination, then user alone, then `client.id` alone
+- **Data at rest**: Kafka does not encrypt log segments on disk by default — encryption at rest, when required, is typically handled at the filesystem or disk layer rather than by Kafka itself
+
+<h6 id="cross-cluster-replication-mirrormaker" style="font-size:13px;font-weight:600;opacity:.72;margin:14px 0 5px;">Cross-Cluster Replication (MirrorMaker)</h6>
+- **What**: replication configured via replication factor and In-Sync Replicas is **intra-cluster only** — Kafka has no built-in mechanism to replicate data between two separate clusters. **MirrorMaker 2** (built on Kafka Connect) is the standard tool for that: it runs as a set of source/sink connectors that consume an entire source cluster and republish to a target cluster
+- **Why**: cross-datacenter disaster recovery, migrating a cluster without downtime, and aggregating multiple regional clusters into one analytics cluster all require moving data between clusters that don't share replication state — a problem replication factor alone cannot solve, since Kafka's replication protocol only runs among brokers that are members of the same cluster metadata quorum
+- **How MirrorMaker 2 improves on the original MirrorMaker**: topic renaming (prefixing a mirrored topic with its source cluster's name, so the same logical topic from two source clusters doesn't collide in the target), offset translation (a consumer failing over from the source to the target cluster can resume from an equivalent offset instead of restarting from the beginning), and **active/active** replication support (both clusters replicate to each other, versus the original tool's active/passive-only design)
+- **Active/passive vs. active/active**: active/passive keeps one cluster as the only one clients write to, with the other purely a disaster-recovery target — simpler, but the passive cluster's capacity sits idle. Active/active lets clients write to either cluster (e.g., the geographically nearest one) at the cost of needing an application-level strategy for conflicting concurrent writes to the same key, since Kafka's replication itself has no conflict-resolution mechanism
+
+<h6 id="kafka-streams-basics" style="font-size:13px;font-weight:600;opacity:.72;margin:14px 0 5px;">Kafka Streams Basics</h6>
+- A Java library (not a separate cluster/service, unlike Kafka Connect or ksqlDB) for building stream-processing applications directly on top of consumer/producer APIs — a Kafka Streams application is just a regular Java process, horizontally scaled by running more instances, which automatically share the input topic's partitions via a consumer group
+- **KStream**: a record stream — every message is an independent, immutable event (naturally maps onto a topic using time/size retention)
+- **KTable**: a changelog/table abstraction — only the latest value per key is meaningful, and updates overwrite previous values for the same key (naturally maps onto a compacted topic; conceptually a continuously-updated materialized view over a KStream of updates)
+- **Stateful operations** (aggregations, joins, windowing) keep local state in an embedded RocksDB instance per application instance, itself continuously backed up to an internal compacted **changelog topic** — so a crashed instance can fully rebuild its local state by replaying its changelog partition rather than losing it, and rebalancing state across instances just means reassigning changelog-topic partitions the same way any other partition reassignment works
+- **Stream-table duality** in practice: joining a KStream (e.g., incoming orders) against a KTable (e.g., current customer data, kept fresh by a compacted `customers` topic) is how Kafka Streams implements the common "enrich an event stream with reference data" pattern without a synchronous database call per event
+- **`groupByKey()` vs. `groupBy()`**: both feed an aggregation (`reduce`/`aggregate`/`count`, which always produce a `KTable`), but `groupByKey()` keeps the existing key and never forces repartitioning, while `groupBy()` (used when deriving a new key) always triggers an extra repartition topic round-trip before the aggregation can run — prefer `groupByKey()` whenever the key doesn't need to change
+- **`reduce()` vs. `aggregate()`**: `reduce()` combines two values of the *same* type (e.g., summing volumes) and needs no initializer. `aggregate()` can produce a *different* output type than the input (e.g., building a running top-N `PriorityQueue` from individual records) and requires an explicit initializer plus, for windowed aggregations, a "subtract" function alongside the "add" one — needed because a record can fall back out of a session window and must be removed from the running result, not just added once
+
+**Implementation example** — the KStream/KTable join described above, built with the `StreamsBuilder` topology Application Programming Interface (API):
+```java
+@Bean
+public KStream<String, EnrichedOrder> orderEnrichmentTopology(StreamsBuilder builder) {
+    KStream<String, Order> orders = builder.stream("orders");                     // event stream — every record independently meaningful
+    KTable<String, Customer> customers = builder.table("customers");              // changelog table — only the latest value per key matters
+
+    KStream<String, EnrichedOrder> enriched = orders
+        .join(customers,
+              (order, customer) -> new EnrichedOrder(order, customer),
+              Joined.with(Serdes.String(), orderSerde, customerSerde));
+
+    enriched.to("orders-enriched");                                               // materialize the result back onto its own topic
+    return enriched;
+}
+```
+No explicit database call happens per order: the `customers` KTable is a continuously-updated local materialized view (backed by an embedded RocksDB instance, itself checkpointed to a compacted changelog topic per the mechanics above), so the join is an in-memory lookup — this is exactly what keeps Kafka Streams topologies horizontally scalable by just running more application instances.
+
+<h6 id="kafka-streams-windowing-and-the-processor-api" style="font-size:13px;font-weight:600;opacity:.72;margin:14px 0 5px;">Kafka Streams: Windowing and the Processor API</h6>
+- **Windowing** groups a windowed aggregation's results into buckets instead of one running total since the beginning of time, via `KGroupedStream.windowedBy(...)`. Window boundaries are computed from **timestamps embedded in each record**, not wall-clock processing time, so late or out-of-order records (within the window's retention) still land in the correct window
+  - **Tumbling** (`TimeWindows.of(size)`): fixed-size, back-to-back, non-overlapping buckets — every record belongs to exactly one window
+  - **Hopping/sliding** (`TimeWindows.of(size).advanceBy(advance)`): fixed-size windows that advance by less than their size, so consecutive windows overlap and one record can land in several — used for a smoothed rolling metric rather than a hard periodic reset
+  - **Session** (`SessionWindows.with(inactivityGap)`): not time-bound at all — delimited purely by a gap of inactivity per key; two records within the gap merge into one growing session, modeling genuine activity bursts (e.g., a shopping session) rather than clock-aligned buckets
+- **Processor API vs. the DSL**: the DSL (`KStream`/`KTable`) controls *when* records move downstream — a `KTable` aggregation, for instance, doesn't forward every single intermediate update. The lower-level **Processor API** (`Topology.addSource()`/`.addProcessor()`/`.addSink()`, with an imperative `Processor` implementation) trades that convenience for explicit control: scheduling periodic actions on wall-clock or record time (`punctuate`), forwarding a record to only one of several child nodes, or implementing logic the DSL doesn't expose at all — the same higher-abstraction-vs-more-control trade-off as an Object-Relational Mapping framework vs. raw Structured Query Language. `KStream.process()`/`.transform()` let the two approaches mix within one topology rather than forcing an all-or-nothing choice:
+```java
+topology.addSource(LATEST, "source", timestampExtractor, keyDeserializer, valueDeserializer, "input-topic")
+        .addProcessor("enrich", () -> new MyProcessor(), "source");   // 3rd argument wires "enrich" as source's child
+```
+Every node is named explicitly, unlike the DSL where names are auto-generated — parent/child wiring is done by name, and every call returns the same `Topology` instance rather than a new `KStream`/`KTable`.
+- **Testing without a live cluster**: `TopologyTestDriver` drives a built `Topology` in-process — `pipeInput(...)` feeds a record, `readOutput(...)` reads what came out, validating an entire topology's wiring and transformations (source → several processors → multiple sinks) with no real broker or KRaft/ZooKeeper cluster involved, as long as the topology is built as a standalone factory method rather than assembled inline in `main()`
 
 <h6 id="spring-kafka" style="font-size:13px;font-weight:600;opacity:.72;margin:14px 0 5px;">Spring Kafka</h6>
 - **@KafkaListener(topics = "...", groupId = "...")**: Declares a consumer method
 - **ConcurrentKafkaListenerContainerFactory**: Configures concurrency, deserialization and error handling
 - **Error handling**: `DefaultErrorHandler` with backoff, plus `DeadLetterPublishingRecoverer`; retry topics for non-blocking retries
+
+**Implementation example** — a producer publishing keyed events with the `acks=all` durability setting from above, and a consumer with dead-letter error handling:
+```yaml
+# application.yml
+spring:
+  kafka:
+    bootstrap-servers: localhost:9092
+    producer:
+      acks: all
+      properties:
+        enable.idempotence: true
+    consumer:
+      group-id: order-service
+      auto-offset-reset: earliest
+```
+```java
+@Service
+public class OrderEventProducer {
+    private final KafkaTemplate<String, OrderPlacedEvent> kafkaTemplate;
+
+    public OrderEventProducer(KafkaTemplate<String, OrderPlacedEvent> kafkaTemplate) {
+        this.kafkaTemplate = kafkaTemplate;
+    }
+
+    public void publish(OrderPlacedEvent event) {
+        // key = orderId: guarantees every event for this order lands in the same partition, in order
+        kafkaTemplate.send("orders", event.orderId(), event);
+    }
+}
+
+@Configuration
+public class KafkaErrorHandlingConfig {
+    @Bean
+    public DefaultErrorHandler errorHandler(KafkaTemplate<Object, Object> template) {
+        var recoverer = new DeadLetterPublishingRecoverer(template);          // after retries exhaust, publish to "orders.DLT"
+        return new DefaultErrorHandler(recoverer, new FixedBackOff(1000L, 3)); // 3 retries, 1s apart, before giving up
+    }
+}
+
+@Component
+public class OrderEventConsumer {
+    @KafkaListener(topics = "orders", groupId = "order-service")
+    public void onOrderPlaced(ConsumerRecord<String, OrderPlacedEvent> record) {
+        // idempotent by design: upsert on event.orderId(), safe to process the same message twice
+        orderProjectionService.upsert(record.key(), record.value());
+    }
+}
+```
 
 <h6 id="kafka-vs-traditional-message-brokers-rabbitmq" style="font-size:13px;font-weight:600;opacity:.72;margin:14px 0 5px;">Kafka vs Traditional Message Brokers (RabbitMQ)</h6>
 | Aspect | Kafka | RabbitMQ |
@@ -4834,7 +5241,7 @@ Asynchronous messaging is what makes patterns like **Saga** (choreography throug
 - **Saga pattern**: A distributed business transaction expressed as a sequence of local transactions, each paired with a **compensating transaction** to undo it on failure
   - **Choreography**: Services react to each other's events — no central brain, but the flow is harder to follow
   - **Orchestration**: A central coordinator drives the steps — easier to follow, but one more component to run
-- **Outbox pattern**: Solves the dual-write problem (a database and a message broker cannot be updated atomically): write the event into an `outbox` table *inside* the business transaction, then a relay publishes it — typically Change Data Capture (CDC) with Debezium
+- **Outbox pattern**: Solves the dual-write problem (a database and a message broker cannot be updated atomically): write the event into an `outbox` table *inside* the business transaction, then a relay publishes it — typically CDC with Debezium
 - **Command Query Responsibility Segregation (CQRS)**: Separate write model and read model — justified when reads and writes have very different shapes or loads; otherwise overkill
 - **Eventual consistency**, explained to a stakeholder: "The order is confirmed immediately; the loyalty points appear a few seconds later — and the business is fine with that"
 
@@ -4853,6 +5260,8 @@ Asynchronous messaging is what makes patterns like **Saga** (choreography throug
 - **Canary deployment**: Route a small percentage of live traffic to the new version, watch error rates and latency, then grow the percentage or roll back — lower risk than blue/green for a large user base
 
 <h3 id="architecture-types" style="font-size:26px;font-weight:700;margin:26px 0 10px;">🏛️ Architecture Types</h3>
+
+Each pattern below is scored, consistently, against the same six characteristics — agility, deployability, testability, performance, scalability, ease of development — in [software-architecture-patterns.md](references/System%20design/software-architecture-patterns.md); applying that same fixed checklist to any architecture decision (not just these five patterns) is a good habit for an architecture decision record.
 
 <h4 id="layered-architecture-n-tier" style="font-size:20px;font-weight:700;margin:22px 0 8px;">🏛️ Layered Architecture (N-Tier)</h4>
 Horizontal layers, each with a distinct role: **Presentation → Business → Persistence → Database**. Requests flow down through each closed layer in turn.
@@ -4907,6 +5316,8 @@ Separate the layers by functionality
     - Stack
 - Design the most critical components first
 
+**A repeatable seven-step interview structure** (from [grokking-system-design-interview.md](references/System%20design/grokking-system-design-interview.md)): requirements clarification → define the Application Programming Interface (API) surface → back-of-the-envelope estimation (queries per second, storage, bandwidth — before designing anything) → data model → high-level design (five or six boxes end-to-end) → detailed design on the two or three components the interviewer signals interest in, framed as trade-offs, never as a single correct answer → explicit bottleneck/single-point-of-failure walkthrough. Worked case studies for URL shorteners, news feeds, chat systems, web crawlers, and rate limiters (including the fixed-window → exact-sliding-window → sliding-window-with-counters algorithm progression) are in the same reference, along with [system-design-interview-alex-xu.md](references/System%20design/system-design-interview-alex-xu.md)'s from-scratch key-value store and unique-ID-generator (Twitter Snowflake) designs.
+
 <h3 id="requirements" style="font-size:26px;font-weight:700;margin:26px 0 10px;">📋 Requirements</h3>
 
 <h4 id="functional-requirements" style="font-size:20px;font-weight:700;margin:22px 0 8px;">📋 Functional Requirements</h4>
@@ -4915,13 +5326,20 @@ Describe behavior: APIs, Operations supported
 <h4 id="non-functional-requirements" style="font-size:20px;font-weight:700;margin:22px 0 8px;">📋 Non-Functional Requirements</h4>
 Describe qualities: Scalable, Fast, Secure
 
+A system that satisfies every functional requirement while ignoring the non-functional ones (latency, availability, security) is, in practice, a badly designed system — non-functional requirements must be defined *before* the design starts, not added afterward, because they drive foundational choices (data consistency model, deployment topology, observability) that are expensive to retrofit.
+
 ---
 
 <h2 id="-testing" style="font-size:33px;font-weight:800;margin:30px 0 12px;">🧪 Testing</h2>
 
 > 💻 Code: [ExceptionTest (assertions & expected exceptions)](../src/main/java/algorithm/concepts/oop/exceptions/ExceptionTest.java)
 
-The **test pyramid** sets the proportions: many fast unit tests at the base, fewer integration tests in the middle, a handful of slow end-to-end tests at the top.
+The **test pyramid** sets the proportions: many fast unit tests at the base, fewer integration tests in the middle, a handful of slow end-to-end tests at the top. End-to-end tests give the highest confidence because they exercise the whole system the way a real user would, but they are slow and brittle — they depend on the database, network, and every external service being up and behaving predictably. Unit tests are fast and stable but only prove one isolated piece works, not that the pieces integrate correctly. Inverting the pyramid's proportions produces a slow, hard-to-maintain suite.
+
+<h4 id="testing-methodologies-tdd-vs-bdd" style="font-size:20px;font-weight:700;margin:22px 0 8px;">🧪 Testing Methodologies: Test-Driven Development vs Behavior-Driven Development</h4>
+- **Test-Driven Development (TDD)**: a workflow, not a testing tool — write a failing test first, write the minimum code to make it pass, then refactor (the *red-green-refactor* cycle). Its purpose is incremental design guided by tests, not test coverage as an afterthought
+- **Behavior-Driven Development (BDD)**: a way of *specifying* expected behavior in language close to the business domain (*given-when-then*, typically in Gherkin), so non-technical stakeholders can confirm the tests capture the right behavior
+- **The two are not mutually exclusive**: a team can practice TDD while writing each test in BDD's given-when-then style — TDD is about *when* tests are written, BDD is about *how* they are phrased
 
 <h4 id="unit-testing" style="font-size:20px;font-weight:700;margin:22px 0 8px;">🧪 Unit Testing</h4>
 Tests one class in isolation; collaborators are replaced by mocks. Fast and deterministic.
@@ -4939,7 +5357,7 @@ Tests one class in isolation; collaborators are replaced by mocks. Fast and dete
 
 <h5 id="mockito-vs-spring-test-annotations" style="font-size:16px;font-weight:600;margin:18px 0 7px;">Mockito vs Spring test annotations</h5>
 - **`@Mock`** (Mockito): a bare mock, no Spring context involved — for pure unit tests
-- **`@MockBean`** (Spring Boot): replaces a bean inside the loaded Spring context with a mock — for slice/integration tests
+- **`@MockitoBean`** (Spring Framework, `spring-test`): replaces a bean inside the loaded Spring context with a mock — for slice/integration tests. Supersedes Spring Boot's own `@MockBean`, deprecated in Boot 3.4 and removed in Boot 4.0
 - **`when(...).thenReturn(...)`** stubs behavior; **`verify(...)`** asserts an interaction happened
 
 <h5 id="common-assertions" style="font-size:16px;font-weight:600;margin:18px 0 7px;">Common assertions</h5>
@@ -4972,6 +5390,882 @@ How services serialize the data they exchange — the choice drives payload size
 - **Binary (raw)**: Compact and fast, but opaque; both sides must agree on the exact byte layout out of band
 - **Avro**: Binary format whose schema travels with the data or lives in a schema registry; supports schema evolution — the standard pairing with Kafka
 - **Protocol Buffers**: Binary format with a compiled `.proto` contract and generated classes; the serialization behind gRPC
+
+---
+
+<h1 id="-devops" style="font-size:42px;font-weight:800;margin:34px 0 14px;">🔧 DevOps</h1>
+
+<h2 id="features-2" style="font-size:33px;font-weight:800;margin:30px 0 12px;">✨ Features</h2>
+- **Automation**
+- **CI/CD**
+- **Monitoring**
+- **Collaboration**
+- **Infrastructure as Code**
+
+---
+
+<h2 id="sdlc" style="font-size:33px;font-weight:800;margin:30px 0 12px;">🔄 SDLC</h2>
+- **Requirement gathering**: Interact with the user to understand what the software should do, features
+- **Analysis**: Analyse the requirements and understand how to build the software, roadmap for development
+- **Design**: Design the architecture of the software, components, interactions, technologies, ui
+- **Coding**: Write the code
+- **Testing**: Test the software functionality to ensure it meets the requirements and is free of bugs
+- **Deployment**: Deploy the software to a production environment
+- **Maintenance**: Ongoing support and maintenance of the software, improvements, bug fixes
+
+<h3 id="secure-sdlc" style="font-size:26px;font-weight:700;margin:26px 0 10px;">🔒 Secure Software Development Life Cycle</h3>
+Security built into every stage of the life cycle above, instead of a review bolted on right before release:
+- **Static Application Security Testing (SAST)**: automated source-code scanning wired directly into the Continuous Integration pipeline, so a vulnerable pattern (injection, hard-coded credential) fails the build instead of reaching production
+- **Secrets management**: credentials, API keys, and connection strings live in a dedicated secrets store (never committed in code or plain configuration files) and are injected into the running process at deploy time
+- **Least privilege by design**: every component, service account, and pipeline step gets exactly the access it needs to do its job — no more — decided at design time rather than granted broadly and trimmed later
+
+---
+
+<h2 id="cicd-pipeline" style="font-size:33px;font-weight:800;margin:30px 0 12px;">🔄 Continuous Integration / Continuous Delivery Pipeline</h2>
+Continuous Integration (CI) automates verifying that each code change does not break what already works — build plus automated tests on every change. Continuous Delivery/Deployment (CD) automates carrying that verified change all the way to production. Together they exist to shrink the gap between "the code changed" and "the change is validated and available," removing manual, error-prone steps from that path.
+- **Minimal pipeline shape**: build → automated tests → static analysis (SAST) → package/image → deploy
+- **Identifying and removing bottlenecks**: parallelize independent test suites instead of running them serially; cache dependency downloads and build layers between runs (see [Docker layers and caching](#docker-for-java-applications)) so an unrelated change does not re-download the world; split a slow end-to-end suite out of the fast feedback loop and run it less frequently
+
+---
+
+<h2 id="docker" style="font-size:33px;font-weight:800;margin:30px 0 12px;">🐳 Docker</h2>
+
+<h3 id="images" style="font-size:26px;font-weight:700;margin:26px 0 10px;">🖼️ Images</h3>
+- **build**: docker image build
+- **show**: docker image ls
+- **pull**: docker image pull name:version
+- **inspect**: docker image inspect name
+- **delete**: docker image rm
+
+<h3 id="containers" style="font-size:26px;font-weight:700;margin:26px 0 10px;">📦 Containers</h3>
+- **start**: docker container run
+- **stop**: docker container stop id
+- **delete**: docker container rm
+
+<h3 id="dockerfile" style="font-size:26px;font-weight:700;margin:26px 0 10px;">📋 Dockerfile</h3>
+A **Dockerfile** is a text recipe of instructions that the Docker daemon executes in order, top to bottom, to produce an **image** — each instruction commits a new, cached **layer** on top of the previous one, which is *how* the build works mechanically:
+
+```dockerfile
+FROM alpine
+RUN apk add --no-cache nodejs npm
+COPY resources /src
+WORKDIR /src
+RUN npm install
+EXPOSE 8080
+ENTRYPOINT ["node","./app.js"]
+```
+- **`FROM`**: the base layer everything else builds on top of
+- **`RUN`**: executes a shell command at *build* time and commits its filesystem changes as a new layer (installing packages, compiling)
+- **`COPY`**: adds files from the build context into the image
+- **`WORKDIR`**: sets the working directory for subsequent instructions, creating it if needed
+- **`EXPOSE`**: documentation only — declares which port the container listens on, does not itself publish it (`-p` at `docker run` time does that)
+- **`ENTRYPOINT`**: the command that actually runs when a *container* starts from this image
+
+<h3 id="docker-for-java-applications" style="font-size:26px;font-weight:700;margin:26px 0 10px;">☕ Docker for Java Applications</h3>
+- **Image vs container**: The image is the immutable template; the container is a running instance of it
+- **Layers and caching**: Each Dockerfile instruction creates a layer; order them from least to most frequently changing so rebuilds reuse the cache
+- **Multi-stage builds**: Build with the full Java Development Kit in a first stage, ship only the Java Runtime Environment plus the application in the final stage — much smaller images
+- **Spring Boot specifics**: Layered jars (dependencies cached in their own layer, separate from your code), and run as a non-root user
+
+**Implementation example** — a multi-stage build for a Spring Boot application, putting the bullets above into practice:
+```dockerfile
+# Stage 1: build with the full JDK, produce a layered jar
+FROM eclipse-temurin:21-jdk AS build
+WORKDIR /app
+COPY pom.xml .
+COPY .mvn .mvn
+COPY mvnw .
+RUN ./mvnw dependency:go-offline          # cached unless pom.xml changes
+COPY src src
+RUN ./mvnw package -DskipTests
+RUN java -Djarmode=layertools -jar target/*.jar extract --destination extracted
+
+# Stage 2: ship only the JRE plus the extracted layers, least- to most-frequently-changing
+FROM eclipse-temurin:21-jre
+WORKDIR /app
+RUN useradd --system --uid 1001 appuser
+COPY --from=build /app/extracted/dependencies/ ./
+COPY --from=build /app/extracted/spring-boot-loader/ ./
+COPY --from=build /app/extracted/snapshot-dependencies/ ./
+COPY --from=build /app/extracted/application/ ./     # your own code — changes most often, so copied last
+USER appuser
+EXPOSE 8080
+ENTRYPOINT ["java", "org.springframework.boot.loader.launch.JarLauncher"]
+```
+Only the final `FROM eclipse-temurin:21-jre` stage and everything under it ships in the resulting image — the JDK, Maven, and source tree from stage 1 never leave the build machine, which is *how* multi-stage builds shrink the final image without a separate manual cleanup step.
+
+<h3 id="docker-networking" style="font-size:26px;font-weight:700;margin:26px 0 10px;">🌐 Networking</h3>
+- **bridge** (default): containers get a private internal network and reach the outside via Network Address Translation (NAT); published ports (`-p 8080:80`) map a host port to a container port
+- **host**: the container shares the host's network namespace directly — no NAT, lowest latency, but no port isolation (two containers cannot both bind port 80)
+- **none**: no networking at all — used for isolated batch jobs that need no network access
+- **overlay**: a virtual network spanning multiple Docker hosts, used by Docker Swarm (and conceptually similar to what a Kubernetes cluster network provides) so containers on different machines can address each other by name
+- **User-defined bridge networks** give containers automatic Domain Name System (DNS) resolution by container/service name — the default bridge network does not
+
+**Implementation example** — two containers reaching each other by name, which only works because they share a *user-defined* network (the default bridge does not provide name resolution):
+```bash
+docker network create app-net
+docker run -d --name db --network app-net postgres:16
+docker run -d --name app --network app-net -p 8080:8080 my-app:latest
+# from inside "app", the hostname "db" now resolves to the db container's IP —
+# the datasource URL can simply be jdbc:postgresql://db:5432/mydb
+```
+
+<h3 id="volumes--bind-mounts" style="font-size:26px;font-weight:700;margin:26px 0 10px;">💾 Volumes vs Bind Mounts</h3>
+- **Volumes**: storage managed entirely by Docker (`docker volume create`), living outside any container's writable layer — the recommended way to persist data (databases, uploaded files) beyond a container's lifecycle; portable across hosts when using a volume driver
+- **Bind mounts**: map an exact host filesystem path into the container (`-v /host/path:/container/path`) — useful for local development (live-reloading source code into a running container) but ties the container to that host's directory layout, which breaks portability
+- **tmpfs mounts**: in-memory only, never written to disk — for secrets or scratch data that must not persist
+- **.dockerignore**: excludes files (`.git`, `node_modules`, build output, secrets) from the build context sent to the Docker daemon — smaller, faster, more secure builds, and prevents accidentally baking secrets into an image layer
+
+**Implementation example** — a named volume outliving the container that wrote it, versus a bind mount for local development:
+```bash
+docker volume create pgdata
+docker run -d --name db -v pgdata:/var/lib/postgresql/data postgres:16
+docker rm -f db                              # container is gone...
+docker run -d --name db2 -v pgdata:/var/lib/postgresql/data postgres:16
+# ...but db2 sees exactly the same data, because the volume outlives any single container
+
+docker run -v "$(pwd)/src:/app/src" -p 8080:8080 my-app:dev   # bind mount: host edits are visible inside the running container immediately
+```
+
+<h3 id="docker-compose" style="font-size:26px;font-weight:700;margin:26px 0 10px;">🎼 Docker Compose</h3>
+Declarative multi-container orchestration for local development and simple deployments — defines a set of services, their images/build contexts, networks, volumes, and startup order in one `docker-compose.yml`.
+```yaml
+services:
+  app:
+    build: .
+    ports: ["8080:8080"]
+    depends_on: [db]
+    environment:
+      SPRING_DATASOURCE_URL: jdbc:postgresql://db:5432/mydb
+  db:
+    image: postgres:16
+    volumes: ["pgdata:/var/lib/postgresql/data"]
+volumes:
+  pgdata:
+```
+- **`depends_on`** controls start order only, not readiness — the dependent service can still start before the database is actually accepting connections, so application-level retry/backoff on the datasource connection is still necessary
+- Common commands: `docker compose up -d`, `docker compose logs -f`, `docker compose down -v` (the `-v` also removes named volumes)
+
+<h3 id="build-optimization--image-security" style="font-size:26px;font-weight:700;margin:26px 0 10px;">🔒 Build Optimization &amp; Image Security</h3>
+- **Resource limits at run time**: `docker run --memory=512m --cpus=1.5` caps what a single container can consume — the same guarantee Kubernetes requests/limits provide at the pod level, useful for catching runaway processes even outside a cluster
+- **HEALTHCHECK**: a Dockerfile instruction (`HEALTHCHECK CMD curl -f http://localhost:8080/actuator/health || exit 1`) that lets Docker itself mark a container `unhealthy` — `docker ps` surfaces the status, and orchestrators can restart unhealthy containers automatically
+- **Non-root user**: run the process as an unprivileged user (`USER appuser` in the Dockerfile, or `runAsNonRoot` in a Kubernetes pod's security context) — limits the blast radius if the container is compromised, since a container-breakout exploit inherits the process's host-level privileges
+- **Minimal / distroless base images**: `gcr.io/distroless/java` or Alpine-based images ship without a shell, package manager, or unrelated Operating System (OS) tooling — smaller attack surface and smaller images than a full Ubuntu/Debian base
+- **BuildKit cache mounts**: `RUN --mount=type=cache,target=/root/.m2 mvn package` persists the Maven/Gradle dependency cache **between builds** without baking it into any image layer — dependencies download once and are reused on every subsequent build, dramatically speeding up Continuous Integration (CI) build times without bloating the final image
+- **Scanning**: `docker scan` / Trivy / Grype check an image's layers against known Common Vulnerabilities and Exposures (CVE) databases — a standard Continuous Integration/Continuous Delivery (CI/CD) gate before pushing to a registry
+
+**Implementation example** — the bullets above combined into one build stage:
+```dockerfile
+# syntax=docker/dockerfile:1
+FROM eclipse-temurin:21-jre
+RUN --mount=type=cache,target=/var/cache/apt apt-get update      # cached across builds, not baked into the image
+RUN useradd --system --uid 1001 appuser
+WORKDIR /app
+COPY target/app.jar .
+USER appuser
+EXPOSE 8080
+HEALTHCHECK --interval=30s --timeout=3s CMD curl -f http://localhost:8080/actuator/health || exit 1
+ENTRYPOINT ["java", "-jar", "app.jar"]
+```
+`docker ps` now shows this container's status as `healthy`/`unhealthy` once the interval elapses, and it runs as `appuser` (uid 1001) rather than root — check both with `docker inspect --format='{{.State.Health.Status}}' <container>` and `docker exec <container> whoami`.
+
+<h3 id="docker-engine-architecture" style="font-size:26px;font-weight:700;margin:26px 0 10px;">⚙️ Engine Architecture</h3>
+The Docker Engine is four cooperating components, not one process — this is *how* a `docker run` actually results in a running container, and *why* restarting the daemon no longer kills every container:
+- **`dockerd`** (the daemon): exposes the REST API; still owns image management, builds, auth, and core networking — but contains **no container execution code**
+- **`containerd`**: a container supervisor with one job — lifecycle operations (start/stop/pause/destroy). Donated to the Cloud Native Computing Foundation; Kubernetes' kubelet talks to it directly too (via the Container Runtime Interface, see the Kubernetes section)
+- **`runc`**: the reference implementation of the Open Container Initiative (OCI) container-runtime-spec — a small, fast CLI wrapping `libcontainer` whose only job is to create a container and immediately exit
+- **`containerd-shim`**: becomes the container's parent process the instant `runc` exits, keeping stdio pipes open and reporting exit status back to `dockerd` — this is what decouples a running container from `dockerd`'s own lifecycle ("daemonless containers")
+- **Open Container Initiative (OCI)**: the vendor-neutral image-spec and container-runtime-spec (both v1.0 since July 2017) that this whole chain implements — `containerd` converts a Docker image into an OCI-compliant bundle before handing it to `runc`
+
+**Implementation example** — the request path from CLI to running process, and why upgrading `dockerd` no longer kills containers:
+```bash
+docker container run --name web -d nginx:alpine
+# 1. Docker client -> REST API call -> dockerd
+# 2. dockerd -> gRPC (CRUD-style) -> containerd
+# 3. containerd converts the nginx:alpine image to an OCI bundle, forks a new runc instance
+# 4. runc talks to the kernel to build namespaces + cgroups, starts the container process, then EXITS
+# 5. containerd-shim adopts the running process as its parent and persists for the container's lifetime
+ps -ef | grep -E 'containerd-shim|runc'   # runc is gone; only the lightweight shim remains per running container
+```
+Because only the shim persists (not `runc`), a host can run hundreds of containers without hundreds of lingering runtime processes — and `systemctl restart docker` no longer kills any of them, since none of them are children of `dockerd`.
+
+<h3 id="image-internals" style="font-size:26px;font-weight:700;margin:26px 0 10px;">🧬 Image Internals</h3>
+- **Manifest**: metadata listing which content-addressed layers (by digest) make up an image; a **fat manifest** additionally lists which per-architecture manifest to use for multi-platform repositories (e.g., `linux/amd64` vs `linux/arm64` from the same tag)
+- **Content-addressable layers**: each layer's ID is a cryptographic hash of its own content, and the image ID is a hash of its config object — not a randomly assigned ID. Two consequences: tampering with a byte anywhere changes the hash (tamper-evidence), and identical layers shared across images hash identically (deduplication)
+- **Why `docker pull` avoids re-downloading shared layers**: the client resolves the manifest, then checks each listed layer digest against the local blob store (`/var/lib/docker/<storage-driver>`) — only digests not already present are fetched; `docker pull` output literally prints `Already exists` for the rest
+- **Two hashes per layer**: a **content hash** of the uncompressed layer (the stable ID) and a **distribution hash** of the compressed transfer form (compression changes the bytes, so a separate hash verifies the wire transfer didn't corrupt the layer) — pulling by content digest (`image@sha256:...`) pins exact content regardless of what a mutable tag later points to
+
+**Implementation example** — pinning a base image by content digest instead of a movable tag, so a rebuild can never silently pick up different content:
+```dockerfile
+# docker pull debian:bookworm  ->  Digest: sha256:d5e87cfcb730...
+FROM debian@sha256:d5e87cfcb730...   # pinned to exact content, unlike FROM debian:bookworm (a movable pointer)
+```
+`docker image ls --digests <repo>` shows the digest alongside the tag; every subsequent build from this Dockerfile uses byte-identical base content even if `bookworm` is later repointed upstream.
+
+<h3 id="containers-at-the-kernel-level" style="font-size:26px;font-weight:700;margin:26px 0 10px;">🐧 Containers at the Kernel Level</h3>
+A container is not a lightweight virtual machine — it is a regular Linux process, made to look isolated by two independent kernel mechanisms that do different jobs:
+- **Namespaces isolate *what a process can see*** — Docker uses six: **pid** (own process tree, own PID 1, cannot see other containers'/the host's processes), **net** (own network stack — interfaces, IPs, port ranges, routing table; every container gets its own `eth0`), **mnt** (own root filesystem — `/etc`, `/var`, `/dev` are private), **ipc** (own shared-memory segments/semaphores/message queues), **uts** (own hostname), **user** (optionally maps a container's root to an unprivileged host user)
+- **Control groups (cgroups) limit *how much a process can consume*** — CPU, memory, and disk I/O ceilings so one container cannot starve the others sharing the host's kernel
+- **Why this distinction matters**: namespaces alone provide *no* resource protection (a namespaced process can still exhaust host memory) and *no* privilege restriction (a root process in a namespace is still root to the kernel unless capabilities/seccomp also constrain it) — isolation and limiting are two separate mechanisms that Docker composes together, not one "container" primitive
+- A container is, mechanically, an organized collection of these namespaces plus a cgroup — there is no separate "container" object in the kernel
+
+**Implementation example** — observing that a container's isolation is just namespaces, from the host's own process table:
+```bash
+docker run -d --name web nginx:alpine
+docker inspect --format '{{.State.Pid}}' web        # the container's PID 1, as seen from the HOST's own pid namespace
+ls -la /proc/<that-pid>/ns/                          # pid, net, mnt, ipc, uts (+ user if enabled) — one file per namespace
+cat /sys/fs/cgroup/.../docker-<id>.scope/memory.max  # the cgroup enforcing this container's memory ceiling
+```
+The same host-visible process shows up as PID 1 *inside* the container's own pid namespace (`docker exec web ps` shows it as PID 1) — same process, two different namespace views.
+
+<h3 id="union-overlay-filesystem" style="font-size:26px;font-weight:700;margin:26px 0 10px;">🗂️ Union / Overlay Filesystem</h3>
+- **What it is**: an image's root filesystem is a stack of independent, read-only layers merged into a single view by a union filesystem driver — on modern Linux, the `overlay2` storage driver. A running container adds exactly one more layer on top: its own **writable layer**
+- **Read path**: a file read is resolved top-down — the writable layer first, then each read-only layer in order — returning the first match found
+- **Copy-on-write**: modifying a file that lives in a lower read-only layer copies the *entire file* up into the writable layer first, then applies the change there — the original in the lower layer is untouched. This is why changing one byte of a large file baked into a lower layer is expensive, and why frequently-changed large files shouldn't sit deep in the layer stack
+- **Deletion**: recorded as a **whiteout** — a marker in the writable layer that hides the file from the layers below, since a read-only layer can never be edited in place
+- `docker diff` exposes exactly this: `A` (added, new in the writable layer), `C` (changed — the copy-on-write path, also marks parent directories), `D` (deleted — a whiteout)
+
+**Implementation example** — watching copy-on-write and whiteouts happen via `docker diff`:
+```bash
+docker run --name mod nginx:alpine sh -c "touch /new-file && rm /etc/nginx/nginx.conf"
+docker diff mod
+# A /new-file                 <- new in the writable layer
+# C /etc                      <- parent directory marked changed
+# D /etc/nginx/nginx.conf     <- whiteout; the file still exists, untouched, in the read-only layer beneath
+```
+`docker commit` saves exactly this writable top layer as a new immutable layer, content-addressed like any other — the mechanical basis for every `docker build` step.
+
+<h3 id="container-security-internals" style="font-size:26px;font-weight:700;margin:26px 0 10px;">🛡️ Container Security Internals</h3>
+Beyond the non-root-user and minimal-base-image practices already covered above, Docker composes four additional Linux security layers, each answering a different question:
+- **Capabilities** — split the Linux root account's monolithic power into ~40 discrete privileges (`CAP_NET_BIND_SERVICE`, `CAP_SYS_ADMIN`, ...). Docker **drops a fixed set by default** on every new container — including `SYS_MODULE` (kernel modules), `SYS_ADMIN` (administrative catch-all), `NET_ADMIN` (reconfigure networking), `SYS_TIME` (modify the clock), and `MAC_ADMIN`/`MAC_OVERRIDE` (bypass Mandatory Access Control) — so a container can run *as* root while missing most of root's host-level power. `--cap-drop`/`--cap-add` (unprefixed, lowercase) tune the set further; a dropped capability cannot be silently re-added
+- **seccomp** — a kernel filter restricting which system calls a container's processes may make at all, independent of capabilities: a process can hold a capability and still be blocked from the corresponding syscall by the seccomp profile. Docker applies a default profile to every container; it can be customized or (not recommended) disabled per container
+- **Mandatory Access Control (MAC)** — Docker applies a default AppArmor profile (SELinux on distributions that use it instead), a policy layer independent of both capabilities and seccomp
+- **Rootless mode** — running the Docker daemon itself as an unprivileged host user (not root), so even a full daemon compromise doesn't grant host root — a defense-in-depth layer distinct from running individual *containers* as non-root
+
+**Implementation example** — verifying the default capability drop actually removes a specific privilege:
+```bash
+docker run --rm ubuntu:latest sh -c "apt-get update -qq && apt-get install -y -qq libcap2-bin >/dev/null; capsh --print | grep cap_sys_admin"
+# cap_sys_admin is absent from the default set — confirms it was dropped, not merely unused
+docker run --rm --cap-add sys_admin ubuntu:latest sh -c "apt-get update -qq && apt-get install -y -qq libcap2-bin >/dev/null; capsh --print | grep cap_sys_admin"
+# now present — explicitly re-added, opt-in only
+```
+
+<h3 id="bridge-networking-internals" style="font-size:26px;font-weight:700;margin:26px 0 10px;">🔌 Bridge Networking Internals</h3>
+- **How the bridge is built**: Docker creates a virtual Ethernet (veth) pair per container — one end becomes the container's `eth0` inside its network namespace, the other end attaches to the `docker0` Linux bridge in the host's namespace. All bridged containers' host-side veth ends share `docker0`, which is why they can reach each other directly — they're on the same virtual subnet
+- **Isolation is a firewall concern, not a namespace concern**: the net namespace only gives a container its own private stack — it does not by itself block traffic. What actually allows or blocks traffic in and out is the host's `iptables`/netfilter rules, which Docker programs automatically
+- **How `-p`/port publishing actually works**: a bridged container has no route from the host's external interface by default. `docker run -p 8080:80` makes the daemon insert a **DNAT (destination network address translation)** rule into the host's `iptables` `nat` table, rewriting packets that arrive on host port 8080 to the container's private IP on port 80 — this is the literal mechanism behind "publishing" a port, not just a label
+- **How inter-container DNS resolution works**: a **user-defined bridge network** runs an embedded DNS resolver (at `127.0.0.11` inside each attached container) that Docker keeps updated as containers join/leave the network — resolving a container/service name to its current private IP. The *default* bridge network has no such resolver, which is exactly why only user-defined networks support connecting by container name (already noted in Networking above)
+
+**Implementation example** — inspecting the actual `iptables` DNAT rule a published port creates (Linux hosts; requires root):
+```bash
+docker run -d --name web -p 8080:80 nginx:alpine
+sudo iptables -t nat -L DOCKER -n
+# DNAT  tcp -- 0.0.0.0/0  0.0.0.0/0  tcp dpt:8080 to:172.17.0.2:80
+# ^ the literal rule Docker inserted: traffic to host:8080 gets rewritten to the container's private IP:80
+```
+
+---
+
+<h2 id="kubernetes" style="font-size:33px;font-weight:800;margin:30px 0 12px;">☸️ Kubernetes</h2>
+
+<h3 id="structure" style="font-size:26px;font-weight:700;margin:26px 0 10px;">🏗️ Structure</h3>
+Deployment contains > Pods contains > Containers
+
+<h3 id="core-objects-from-the-smallest-unit-to-the-entry-point" style="font-size:26px;font-weight:700;margin:26px 0 10px;">🔵 Core Objects (from the smallest unit to the entry point)</h3>
+- **Pod**: Smallest deployable unit; one or more containers sharing network and storage
+- **Deployment**: Manages the replicas of a pod; handles rolling updates and rollbacks
+  - **Rolling update strategy**: `maxSurge` (how many extra pods can be created above the desired count while updating) and `maxUnavailable` (how many pods can be offline at once) tune the trade-off between rollout speed and safety margin — `maxSurge=1, maxUnavailable=0` is the conservative default (never fewer pods than desired, briefly one extra)
+- **Service**: Stable network identity in front of ephemeral pods — **ClusterIP** (internal only), **NodePort** (a port opened on every node), **LoadBalancer** (external, cloud-provisioned)
+- **Ingress**: HTTP routing rules (host and path based) toward services — the rules alone do nothing without an **Ingress controller** (NGINX Ingress, Traefik, or a cloud provider's own) actually running in the cluster and watching Ingress objects to configure the real load balancer/reverse proxy; unlike a Service, Ingress understands HTTP concepts like host/path routing and Transport Layer Security (TLS) termination
+
+**Implementation example** — a Deployment (3 stateless replicas of one image) fronted by a ClusterIP Service, which is *how* the objects above compose into a running, reachable application:
+```yaml
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: order-service
+spec:
+  replicas: 3
+  selector:
+    matchLabels: { app: order-service }        # Service below finds pods via this same label
+  strategy:
+    rollingUpdate: { maxSurge: 1, maxUnavailable: 0 }
+  template:
+    metadata:
+      labels: { app: order-service }
+    spec:
+      containers:
+        - name: order-service
+          image: my-registry/order-service:1.4.2
+          ports:
+            - containerPort: 8080
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: order-service
+spec:
+  selector: { app: order-service }              # routes to any pod carrying this label — not to a fixed IP
+  ports:
+    - port: 80
+      targetPort: 8080
+```
+`kubectl apply -f order-service.yaml` creates both; `kubectl get pods -l app=order-service` shows the 3 replicas the Deployment is managing, and any other pod in the cluster can now reach this Service at `http://order-service` (Kubernetes' native Domain Name System resolution, below).
+
+<h3 id="nodes" style="font-size:26px;font-weight:700;margin:26px 0 10px;">🔵 Nodes</h3>
+- **Master node (control plane)**: Takes decisions about the cluster
+- **Worker node**: Carries on work
+
+<h3 id="components" style="font-size:26px;font-weight:700;margin:26px 0 10px;">🧩 Components</h3>
+- **apiserver**: exposes the interface to communicate with the control plane
+- **kubelet**: Main kubernetes agent on each node
+- **kube-proxy**: Networking component
+
+<h3 id="configuration--spring-boot-integration" style="font-size:26px;font-weight:700;margin:26px 0 10px;">🌱 Configuration &amp; Spring Boot Integration</h3>
+- **ConfigMap** (non-sensitive configuration) and **Secret** (sensitive values) are exposed to pods as environment variables or mounted files — Spring Boot reads them like any other property source
+- **Probes wired to Actuator**:
+  - **Startup probe** ("has the process finished starting up yet?" — disables liveness/readiness checks until it succeeds) → useful for slow-starting Java applications, since without it a large heap warm-up or slow Spring context initialization can trip the liveness probe and cause Kubernetes to kill and restart a pod that was simply still booting
+  - **Liveness probe** ("is the process alive?" — Kubernetes restarts the pod on failure) → `/actuator/health/liveness`
+  - **Readiness probe** ("can it serve traffic?" — Kubernetes stops routing to the pod on failure) → `/actuator/health/readiness`
+- **Service discovery is native**: Each service gets a Domain Name System (DNS) name (`http://order-service`) — this is why a Eureka-style registry becomes unnecessary in Kubernetes
+
+**Implementation example** — a ConfigMap and Secret feeding a Spring Boot pod's environment, wired to all three probe types:
+```yaml
+apiVersion: v1
+kind: ConfigMap
+metadata: { name: order-service-config }
+data:
+  SPRING_PROFILES_ACTIVE: "prod"
+---
+apiVersion: v1
+kind: Secret
+metadata: { name: order-service-secret }
+type: Opaque
+stringData:
+  DB_PASSWORD: "change-me"                      # Kubernetes stores this base64-encoded, not encrypted, at rest by default
+---
+# inside the Deployment's pod template (spec.template.spec.containers[0]):
+        envFrom:
+          - configMapRef: { name: order-service-config }
+        env:
+          - name: DB_PASSWORD
+            valueFrom:
+              secretKeyRef: { name: order-service-secret, key: DB_PASSWORD }
+        startupProbe:
+          httpGet: { path: /actuator/health/liveness, port: 8080 }
+          failureThreshold: 30                   # 30 × periodSeconds(default 10s) = 5 min to finish starting
+        livenessProbe:
+          httpGet: { path: /actuator/health/liveness, port: 8080 }
+        readinessProbe:
+          httpGet: { path: /actuator/health/readiness, port: 8080 }
+```
+The startup probe gates the other two: Kubernetes does not even begin evaluating liveness/readiness until the startup probe succeeds once, which is what stops a slow Spring context refresh from being mistaken for a hung process.
+
+<h3 id="resources--the-java-virtual-machine" style="font-size:26px;font-weight:700;margin:26px 0 10px;">☕ Resources &amp; the Java Virtual Machine</h3>
+- **Requests** (what the scheduler guarantees) vs **limits** (the hard ceiling) for processor and memory
+- Exceeding the memory limit → the container is **OOMKilled** (Out Of Memory)
+- Size the Java heap relative to the container, not with a fixed value: `-XX:MaxRAMPercentage=75.0` instead of a hard-coded `-Xmx`
+- **Horizontal Pod Autoscaler**: Adds or removes pod replicas based on observed load (processor, memory, custom metrics)
+
+**Implementation example** — requests/limits sized relative to the container (feeding `-XX:MaxRAMPercentage`), plus a Horizontal Pod Autoscaler reacting to processor load:
+```yaml
+# inside the Deployment's pod template:
+        resources:
+          requests: { cpu: "250m", memory: "512Mi" }   # scheduler guarantees this much is available
+          limits:   { cpu: "1",    memory: "512Mi" }   # exceeding memory → OOMKilled; exceeding cpu → throttled, not killed
+        env:
+          - name: JAVA_OPTS
+            value: "-XX:MaxRAMPercentage=75.0"          # 75% of the 512Mi limit, not a hard-coded -Xmx
+---
+apiVersion: autoscaling/v2
+kind: HorizontalPodAutoscaler
+metadata: { name: order-service-hpa }
+spec:
+  scaleTargetRef: { apiVersion: apps/v1, kind: Deployment, name: order-service }
+  minReplicas: 3
+  maxReplicas: 10
+  metrics:
+    - type: Resource
+      resource: { name: cpu, target: { type: Utilization, averageUtilization: 70 } }
+```
+Above 70% average processor utilization across the Deployment's pods, the Horizontal Pod Autoscaler adds replicas (up to 10); below it, it scales back down (never under the 3-replica floor) — `kubectl get hpa` shows the current/target metric and replica count live.
+
+<h3 id="commands-1" style="font-size:26px;font-weight:700;margin:26px 0 10px;">⌨️ Commands</h3>
+```bash
+kubectl get nodes / pods / services
+kubectl describe pod mypod    # events and state — first reflex when debugging
+kubectl logs mypod
+kubectl exec -it mypod -- sh
+kubectl apply -f pod.yml
+kubectl get pods --watch
+kubectl delete -f pod.yml
+```
+
+<h3 id="workload-types" style="font-size:26px;font-weight:700;margin:26px 0 10px;">🧱 Workload Types</h3>
+- **Deployment**: for **stateless** pods — replicas are interchangeable, any replica can be replaced by a fresh one with a new random name and no assumption is made about which one served a previous request
+- **StatefulSet**: for **stateful** workloads (databases, message-broker nodes) — each pod gets a stable, predictable network identity (`pod-0`, `pod-1`, ...) and its own dedicated PersistentVolumeClaim that follows it across restarts; pods are created, updated, and deleted in strict ordinal order rather than in parallel
+- **DaemonSet**: ensures exactly one copy of a pod runs on every node (or a selected subset) — the standard shape for node-level agents like log collectors, metrics exporters, or network plugins; scaling the cluster up/down automatically scales the DaemonSet's pod count with it
+- **Job**: runs a pod to completion for a one-off task, retrying on failure up to a configured limit, then stops — unlike a Deployment, a Job is not expected to keep running indefinitely
+- **CronJob**: schedules a Job on a cron-style time schedule — the Kubernetes-native equivalent of a crontab entry, for periodic batch work (nightly reports, cleanup tasks)
+
+**Implementation example** — a StatefulSet (stable identity per replica) versus a CronJob (runs to completion on a schedule):
+```yaml
+apiVersion: apps/v1
+kind: StatefulSet
+metadata: { name: kafka }
+spec:
+  serviceName: kafka                              # a headless Service, giving each pod kafka-0.kafka, kafka-1.kafka, ...
+  replicas: 3
+  selector: { matchLabels: { app: kafka } }
+  template:
+    metadata: { labels: { app: kafka } }
+    spec:
+      containers:
+        - name: kafka
+          image: apache/kafka:3.7.0
+          volumeMounts: [{ name: data, mountPath: /var/lib/kafka/data }]
+  volumeClaimTemplates:                            # one dedicated PersistentVolumeClaim PER replica, following it across restarts
+    - metadata: { name: data }
+      spec: { accessModes: ["ReadWriteOnce"], resources: { requests: { storage: 20Gi } } }
+---
+apiVersion: batch/v1
+kind: CronJob
+metadata: { name: nightly-report }
+spec:
+  schedule: "0 2 * * *"                            # 02:00 every day, standard crontab syntax
+  jobTemplate:
+    spec:
+      template:
+        spec:
+          restartPolicy: OnFailure
+          containers:
+            - { name: report, image: my-registry/report-job:1.0, command: ["./run-report.sh"] }
+```
+
+<h3 id="namespaces--rbac" style="font-size:26px;font-weight:700;margin:26px 0 10px;">🗂️ Namespaces &amp; Role-Based Access Control (RBAC)</h3>
+- **Namespaces**: partition a single cluster into isolated logical sub-clusters (e.g., `dev`, `staging`, `prod`, or one namespace per team) — most object names only need to be unique within a namespace, and resource quotas/network policies are commonly scoped per namespace
+- **Role-Based Access Control (RBAC)**: governs who can do what to which resources
+  - **Role** / **ClusterRole**: a set of permitted verbs (get, list, create, delete, ...) on a set of resource types — a Role is scoped to one namespace, a ClusterRole is cluster-wide
+  - **RoleBinding** / **ClusterRoleBinding**: grants a Role/ClusterRole to a specific user, group, or **ServiceAccount** (the identity a pod itself runs as when calling the Kubernetes API)
+  - Principle of least privilege in practice: a pod's ServiceAccount should be bound only to the specific verbs/resources it actually needs (e.g., "read ConfigMaps in this namespace"), never cluster-admin by default
+  - **Verbs map directly to HTTP methods**: `create`→POST, `delete`→DELETE, `get`/`list`/`watch`→GET, `patch`→PATCH, `update`→PUT, plus `proxy`→GET (connect via a streaming WebSocket proxy)
+  - **Built-in ClusterRoles**: `cluster-admin` (full cluster access), `admin` (full access to one namespace), `edit` (modify resources in a namespace, not RBAC itself), `view` (read-only) — auto-installed and **auto-reconciled** by the API server on every restart, so a manual edit to one is silently overwritten unless the `rbac.authorization.kubernetes.io/autoupdate: "false"` annotation is set first
+  - **`kubectl auth can-i create pods`** tests authorization directly (add `--subresource=logs` for subresources) — the fastest way to validate a policy or diagnose a user's "unauthorized" error without reproducing the failing call
+  - **ClusterRole aggregation**: a ClusterRole can declare `aggregationRule.clusterRoleSelector` (a label selector) instead of hand-copied rules — every ClusterRole matching that selector has its rules automatically merged in and kept in sync as the constituent roles change; this is how Kubernetes' own built-in `edit`/`view` roles are composed internally
+
+**Implementation example** — a namespace-scoped ServiceAccount allowed only to read ConfigMaps in its own namespace:
+```yaml
+apiVersion: v1
+kind: Namespace
+metadata: { name: orders }
+---
+apiVersion: v1
+kind: ServiceAccount
+metadata: { name: order-service-sa, namespace: orders }
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: Role
+metadata: { name: configmap-reader, namespace: orders }
+rules:
+  - apiGroups: [""]
+    resources: ["configmaps"]
+    verbs: ["get", "list", "watch"]                # no create/update/delete — least privilege
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: RoleBinding
+metadata: { name: order-service-configmap-reader, namespace: orders }
+subjects:
+  - { kind: ServiceAccount, name: order-service-sa, namespace: orders }
+roleRef: { kind: Role, name: configmap-reader, apiGroup: rbac.authorization.k8s.io }
+```
+The Deployment's pod template then sets `spec.serviceAccountName: order-service-sa`; a call from this pod to `create` a ConfigMap, or to read one in a *different* namespace, is rejected by the apiserver — `kubectl auth can-i create configmaps --as=system:serviceaccount:orders:order-service-sa -n orders` verifies this without needing to actually run the pod.
+
+<h3 id="storage-1" style="font-size:26px;font-weight:700;margin:26px 0 10px;">🗄️ Storage</h3>
+- **PersistentVolume (PV)**: a piece of storage provisioned in the cluster (backed by a cloud disk, Network File System, or similar) — exists independently of any pod's lifecycle
+- **PersistentVolumeClaim (PVC)**: a pod's *request* for storage matching certain criteria (size, access mode) — Kubernetes binds the claim to a matching available PersistentVolume; the pod mounts the PVC, not the PV directly, keeping the pod definition decoupled from the specific underlying storage
+- **StorageClass**: defines *how* a PersistentVolume gets provisioned on demand (which storage backend, performance tier) — enables **dynamic provisioning**, where a PVC with no pre-existing matching PV automatically triggers creation of a new one, instead of an operator having to pre-create volumes by hand
+
+**Implementation example** — a PersistentVolumeClaim that dynamically provisions its own PersistentVolume via a StorageClass, then gets mounted into a pod:
+```yaml
+apiVersion: storage.k8s.io/v1
+kind: StorageClass
+metadata: { name: fast-ssd }
+provisioner: kubernetes.io/aws-ebs                # cloud-specific; this one provisions Amazon Elastic Block Store volumes
+parameters: { type: gp3 }
+---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata: { name: order-service-data }
+spec:
+  accessModes: ["ReadWriteOnce"]
+  storageClassName: fast-ssd
+  resources: { requests: { storage: 10Gi } }
+---
+# inside a pod spec:
+      volumes:
+        - name: data
+          persistentVolumeClaim: { claimName: order-service-data }
+      containers:
+        - name: order-service
+          volumeMounts: [{ name: data, mountPath: /var/lib/app/data }]
+```
+No PersistentVolume object was written by hand — the moment the PersistentVolumeClaim is applied with no matching existing PersistentVolume, the `fast-ssd` StorageClass's provisioner creates one automatically and binds it; `kubectl get pv,pvc` shows the resulting bound pair.
+
+<h3 id="scheduling" style="font-size:26px;font-weight:700;margin:26px 0 10px;">📍 Scheduling</h3>
+- **Node affinity / anti-affinity**: rules that attract or repel pod scheduling toward nodes matching certain labels (e.g., "prefer nodes in this availability zone") — `requiredDuringScheduling` (hard constraint) vs `preferredDuringScheduling` (soft preference)
+- **Pod affinity / anti-affinity**: the same idea but relative to *other pods'* placement rather than node labels — e.g., anti-affinity to spread replicas of the same Deployment across different nodes for resilience, or affinity to co-locate a cache alongside the service that uses it for lower latency
+- **Taints and tolerations**: the inverse mechanism — a **taint** on a node repels pods by default (e.g., a node reserved for a specific workload, or one under maintenance); only pods with a matching **toleration** are allowed to schedule there. Affinity is a pod expressing a preference; a taint is a node actively refusing pods that don't explicitly tolerate it
+
+**Implementation example** — spreading replicas of one Deployment across nodes (pod anti-affinity), while also requiring a GPU-labeled node (node affinity) that other workloads are kept off (a taint + matching toleration):
+```yaml
+# node setup (once): kubectl taint nodes gpu-node-1 workload=gpu:NoSchedule
+# inside the Deployment's pod template:
+      affinity:
+        podAntiAffinity:
+          requiredDuringSchedulingIgnoredDuringExecution:
+            - topologyKey: "kubernetes.io/hostname"      # never co-locate two replicas on the same node
+              labelSelector: { matchLabels: { app: order-service } }
+        nodeAffinity:
+          requiredDuringSchedulingIgnoredDuringExecution:
+            nodeSelectorTerms:
+              - matchExpressions:
+                  - { key: gpu, operator: In, values: ["true"] }
+      tolerations:
+        - { key: "workload", operator: "Equal", value: "gpu", effect: "NoSchedule" }
+```
+Without the toleration, the scheduler would refuse to place this pod on `gpu-node-1` at all (the taint repels it); the node affinity separately *requires* a GPU-labeled node specifically, and the pod anti-affinity then spreads however many replicas exist across the different nodes matching that requirement.
+
+<h3 id="helm" style="font-size:26px;font-weight:700;margin:26px 0 10px;">⎈ Helm</h3>
+- The de facto package manager for Kubernetes — bundles a set of related manifests (Deployment, Service, ConfigMap, Ingress, ...) into a versioned, templated **chart**, parameterized by a `values.yaml` file instead of hand-editing raw YAML Ain't Markup Language (YAML) per environment
+- **`helm install` / `helm upgrade` / `helm rollback`**: install a chart, apply a new version with new values, or revert to a previous release's exact rendered manifests — rollback is Helm's main advantage over plain `kubectl apply`, since it tracks release history
+- Common in practice: one chart per microservice, with `values-dev.yaml` / `values-prod.yaml` overrides supplying environment-specific replica counts, resource limits, and image tags
+
+**Implementation example** — a minimal chart parameterizing the Deployment shown earlier in this section:
+```
+order-service-chart/
+├── Chart.yaml              # name, version
+├── values.yaml             # default parameters
+└── templates/
+    └── deployment.yaml     # the manifest, with {{ }} placeholders filled from values.yaml
+```
+```yaml
+# values.yaml
+replicaCount: 3
+image: { repository: my-registry/order-service, tag: "1.4.2" }
+```
+```yaml
+# templates/deployment.yaml
+apiVersion: apps/v1
+kind: Deployment
+metadata: { name: {{ .Release.Name }}-order-service }
+spec:
+  replicas: {{ .Values.replicaCount }}
+  template:
+    spec:
+      containers:
+        - name: order-service
+          image: "{{ .Values.image.repository }}:{{ .Values.image.tag }}"
+```
+```bash
+helm install prod ./order-service-chart -f values-prod.yaml   # renders the template, applies the result
+helm upgrade prod ./order-service-chart --set image.tag=1.4.3  # new version, no manifest hand-editing
+helm rollback prod 1                                            # back to release revision 1 if it goes wrong
+```
+
+<h3 id="control-plane-internals" style="font-size:26px;font-weight:700;margin:26px 0 10px;">🧠 Control Plane Internals</h3>
+"The control plane" is not a black box — it's five components, each with a narrow job, all reading/writing through one source of truth:
+- **etcd**: a distributed key-value store holding the **entire cluster state** — nothing else in Kubernetes is the source of truth. Runs as its own 3- or 5-node cluster (odd, for quorum) separate from the other components, for high availability
+- **API server (`kube-apiserver`)**: exposes the REST API and is **stateless** — every read and write goes to/from etcd, which is exactly what lets the API server scale horizontally by running more replicas behind a load balancer; it also caches reads to reduce direct load on etcd
+- **Controller manager (`kube-controller-manager`)**: one binary bundling many independent controllers (replication, endpoints, services, ...), each running its own reconciliation loop (see below) against state read through the API server
+- **Cloud controller manager**: an optional, cloud-provider-specific component that takes over load-balancer/instance/route management from the controller manager (`--cloud-provider=external` on the controller manager hands this off)
+- **Scheduler (`kube-scheduler`)** and **kubelet**: covered in their own sections below
+
+**Why the split matters**: every component is independently replaceable or horizontally scalable *because* the API server is stateless and etcd is the one source of truth — a custom controller, a custom scheduler, or a CRD's controller (below) is just another client of the same API server, with no special access Kubernetes' own built-in controllers don't also use.
+
+**Implementation example** — proving the API server is genuinely stateless by watching it survive a restart with cluster state intact (state lives in etcd, not the API server process):
+```bash
+kubectl get pods -A -o wide | wc -l           # baseline pod count, served from the API server's view of etcd
+kubectl -n kube-system delete pod -l component=kube-apiserver --wait=false  # force an API server restart (managed clusters only)
+kubectl get pods -A -o wide | wc -l           # unchanged once the new API server pod is Ready — nothing was lost, because nothing was held in the API server itself
+```
+
+<h3 id="api-request-path" style="font-size:26px;font-weight:700;margin:26px 0 10px;">🔐 The API Request Path</h3>
+Every request to the API server passes through three sequential stages, each answering a different question:
+- **Authentication** ("who is this?"): client certificates, static token files, cloud identity and access management (IAM) integration, or OpenID Connect providers. An unauthenticated request still gets an identity — the `system:unauthenticated` group
+- **Authorization** ("is this identity allowed to do this?"): Role-Based Access Control (RBAC, below) is the standard mode; Kubernetes also supports ABAC (privileges from a static file) and a Webhook mode delegating the decision to an external service via a `SubjectAccessReview` object
+- **Admission control** ("should this specific request additionally be transformed or rejected?"): runs *after* authentication and authorization succeed, so it only ever has to reason about the request body itself, never re-derive identity or permissions. Built-in admission controllers cover generic policy (e.g., defaulting resource limits on pods that don't specify them); custom policy is added via **webhooks**:
+  - **Validating admission webhook** (`ValidatingWebhookConfiguration`): can only allow or reject a request, with a reason on rejection
+  - **Mutating admission webhook** (`MutatingWebhookConfiguration`): can rewrite the request body in flight via a JSONPatch before it's persisted — e.g., auto-injecting a sidecar container, or defaulting an unset field. **Mutating webhooks run before validating webhooks** in the chain, so defaulting logic can supply a value a subsequent validating webhook then checks
+  - Both are HTTP(S) services the API server calls — in-cluster or external — and the API server **requires HTTPS**, so the webhook needs a certificate the cluster's own certificate authority (CA) can issue via a `CertificateSigningRequest` object
+
+**Implementation example** — a mutating webhook that defaults a missing field, registered without any API server restart:
+```yaml
+apiVersion: admissionregistration.k8s.io/v1
+kind: MutatingWebhookConfiguration
+metadata: { name: pod-defaulter }
+webhooks:
+  - name: defaulter.example.com
+    rules:
+      - apiGroups: [""]
+        apiVersions: ["v1"]
+        operations: ["CREATE"]
+        resources: ["pods"]
+    clientConfig:
+      service: { name: pod-defaulter-svc, namespace: default, path: "/mutate" }
+      caBundle: <base64 CA cert>
+    sideEffects: None
+    admissionReviewVersions: ["v1"]
+```
+On a matching `CREATE`, the API server POSTs an `AdmissionReview` (request metadata + object body) to the webhook; the webhook's response can carry a base64-encoded JSONPatch that the API server applies to the object *before* it's ever written to etcd — the pod object that ends up persisted was never exactly what the client submitted.
+
+<h3 id="scheduler-internals" style="font-size:26px;font-weight:700;margin:26px 0 10px;">📐 Scheduler Internals</h3>
+- **Two-phase decision, not a single step**: the scheduler first **filters** (predicates) — eliminates every node that cannot possibly run the pod (insufficient resources, a taint with no matching toleration, a required node-affinity term not met) — then **scores** (priorities) the remaining nodes and picks the highest-scoring one. This is *why* affinity/anti-affinity/taints/tolerations (already covered above) are only half the picture: they largely operate in the filtering phase, while resource-based bin-packing preferences operate in the scoring phase
+- **Factors considered together**: resource requirements, node/pod affinity and anti-affinity, taints/tolerations, data locality, and deadlines all feed into the same filter-then-score pass — not independent checks
+- **Pluggable, not fixed**: a cluster can run a **custom scheduler** alongside the default one; a pod opts in via `spec.schedulerName`, so only a subset of pods use custom logic while everything else keeps using the default scheduler unmodified
+
+**Implementation example** — a pod explicitly opting into a second, custom scheduler running alongside the default one:
+```yaml
+apiVersion: v1
+kind: Pod
+metadata: { name: batch-worker }
+spec:
+  schedulerName: my-custom-scheduler   # any pod omitting this field still uses the built-in default-scheduler
+  containers:
+    - { name: worker, image: my-registry/batch-worker:1.0 }
+```
+`kubectl get events --field-selector reason=Scheduled` shows which scheduler placed a given pod — useful to confirm `my-custom-scheduler`, not `default-scheduler`, made this particular placement decision.
+
+<h3 id="kubelet-cri-kube-proxy" style="font-size:26px;font-weight:700;margin:26px 0 10px;">🔗 kubelet, the Container Runtime Interface &amp; kube-proxy</h3>
+- **Container Runtime Interface (CRI)**: a gRPC application programming interface (API) that lets the kubelet talk to **any** compliant container runtime (containerd, CRI-O) without runtime-specific code in the kubelet itself — the same decouple-with-a-stable-interface pattern behind Docker's own `containerd`/`runc` split (see Docker section above). Two gRPC services: **`ImageService`** (`PullImage`, `ListImages`, `RemoveImage`, ...) and **`RuntimeService`** (`RunPodSandbox`, `CreateContainer`, `StartContainer`, `ExecSync`, ...) — the kubelet calls these RPCs directly and never needs to know which runtime actually satisfies them
+- **kube-proxy — iptables mode mechanics**: kube-proxy watches the API server for Service/Endpoint changes and programs `iptables` rules directly into the kernel's netfilter tables, rewriting (destination network address translation, DNAT) packets addressed to a Service's virtual Cluster IP straight to a backing pod's real IP — the kernel does the rewrite; kube-proxy itself is **not in the data path**. When endpoints change (pods coming/going, failing readiness), the rule set is rewritten. Because kube-proxy isn't in the data path, it also can't retry a failed request against a different pod — which is exactly why a correctly configured readiness probe matters: a pod failing readiness is pulled out of the `iptables` rules entirely, not silently retried around
+- **kube-proxy — IP Virtual Server (IPVS) mode**: a newer alternative built on the kernel's IPVS load-balancing subsystem instead of sequential `iptables` rule matching — O(1) hash-table lookup of the right backend versus `iptables`' O(n) linear rule scan, plus more load-balancing algorithms than iptables mode's effectively random selection; matters most once Service/endpoint counts make `iptables` rule-chain length itself the bottleneck
+
+**Implementation example** — inspecting the literal `iptables` DNAT rule kube-proxy programs for a Service (any node, iptables mode; requires root):
+```bash
+kubectl get svc order-service -o jsonpath='{.spec.clusterIP}'   # e.g. 10.96.12.34
+sudo iptables -t nat -L KUBE-SERVICES -n | grep 10.96.12.34
+# KUBE-SVC-XXXX  tcp -- 0.0.0.0/0  10.96.12.34  /* default/order-service */ tcp dpt:80
+sudo iptables -t nat -L KUBE-SVC-XXXX -n
+# KUBE-SEP-YYYY ... statistic mode random probability 0.33333  -> DNAT to one of 3 pod IPs
+```
+Each Service Cluster IP resolves to a chain that randomly DNATs to one of the ready endpoint pods — literally what "load balancing" means under iptables mode.
+
+<h3 id="cni-networkpolicy" style="font-size:26px;font-weight:700;margin:26px 0 10px;">🕸️ Container Network Interface &amp; NetworkPolicy</h3>
+- **Container Network Interface (CNI) plugin contract**: for Kubernetes, the network-addressable unit CNI wires up is the **pod** (all containers in a pod share one network namespace and IP), not the individual container. The **container runtime**'s job is to create the network namespace and invoke a CNI plugin as a subprocess, passing a JSON network config on stdin plus context via environment variables (`CNI_COMMAND=ADD|DEL|VERSION`, `CNI_CONTAINERID`, `CNI_NETNS`, `CNI_IFNAME`). The **CNI plugin**'s job is narrow: add an interface into the pod's namespace, bridge it to the host via a virtual Ethernet (veth) pair, assign an IP (typically via a separate IP address management/IPAM plugin), and set up routes — on success it streams the resulting interface/IP/route config back as JSON on stdout. Because the contract is just "read JSON from stdin, write JSON to stdout," plugins can be written in any language, no shared library required
+- **NetworkPolicy — enforcement is delegated, not built in**: the Kubernetes API only *stores* a NetworkPolicy object; enforcement requires a networking solution whose CNI plugin implements policy (Calico is a common example). If an attacker can reach the pod network directly and create a pod matching the policy's allowed selectors, they still communicate freely — NetworkPolicy constrains legitimate pod-to-pod traffic patterns, it is not a perimeter security boundary on its own
+
+**Implementation example** — a default-deny-then-allow NetworkPolicy restricting a database pod to only accept traffic from labeled frontend pods on one port:
+```yaml
+apiVersion: networking.k8s.io/v1
+kind: NetworkPolicy
+metadata: { name: db-allow-frontend, namespace: default }
+spec:
+  podSelector: { matchLabels: { role: db } }
+  policyTypes: ["Ingress"]
+  ingress:
+    - from: [{ podSelector: { matchLabels: { role: frontend } } }]
+      ports: [{ protocol: TCP, port: 5432 }]
+```
+Any pod without `role: frontend` — even one on the same node, same namespace — is dropped by the enforcing CNI plugin's node-level agent before it reaches the database pod; `kubectl describe networkpolicy db-allow-frontend` confirms the applied selector and rule.
+
+<h3 id="crd-operators" style="font-size:26px;font-weight:700;margin:26px 0 10px;">🔁 Custom Resource Definitions &amp; the Operator Pattern</h3>
+- **Reconciliation loop — the pattern behind every controller**: continuously compares **desired state** (what the spec says should exist) against **observed state** (what's actually running, discovered via a label query, not a hard-coded reference) and acts to close the gap. The *same* loop transparently handles both an explicit user action (scaling a Deployment) and an implicit environmental change (a node failing and pods needing rescheduling) — there is no special-cased failure-handling branch, only "does observed state match desired state; if not, act." Watching state changes uses the API server's **watch API** (a stream of change events) rather than polling, since polling adds latency bounded by the poll interval and unnecessary API server load
+- **Custom Resource Definition (CRD)**: a meta-resource that adds an entirely new API object type — namespaced or cluster-scoped, subject to RBAC, usable with `kubectl` like any built-in type. Its name must be `<resource-plural>.<api-group>` (guarantees cluster-wide uniqueness); exactly one declared `version` must have `storage: true`, marking which representation etcd actually persists
+- **Operator = CRD + controller**: the CRD alone only yields a CRUD API for inert data — a controller running the reconciliation loop against instances of that custom resource is what actually makes something happen (creating/modifying/deleting the real resources a custom object's spec describes)
+
+**Implementation example** — a CRD for a `LoadTest` custom resource, which by itself does nothing until a controller reconciles it:
+```yaml
+apiVersion: apiextensions.k8s.io/v1
+kind: CustomResourceDefinition
+metadata: { name: loadtests.beta.example.com }
+spec:
+  group: beta.example.com
+  versions: [{ name: v1, served: true, storage: true }]
+  scope: Namespaced
+  names: { plural: loadtests, singular: loadtest, kind: LoadTest, shortNames: ["lt"] }
+---
+apiVersion: beta.example.com/v1
+kind: LoadTest
+metadata: { name: checkout-flow-test }
+spec: { service: order-service, requestsPerSecond: 1000, paths: ["/checkout"] }
+```
+`kubectl get loadtests` works immediately after applying the CRD — but nothing runs a load test until a separate controller process watches `LoadTest` objects (via the watch API) and reconciles each one into real worker pods; the CRD is the API surface, the controller is the behavior.
+
+<h3 id="init-containers-multi-container-patterns" style="font-size:26px;font-weight:700;margin:26px 0 10px;">🧩 Init Containers &amp; Multi-Container Pod Patterns</h3>
+- **Init containers**: declared in `spec.initContainers`, run to completion **in order** before any regular container starts. They solve a specific readiness-probe trade-off: a fixed `initialDelaySeconds` either misclassifies genuinely slow starts as failures (too short) or wastes that entire delay on every rollout even when startup is normally fast (too long, "just in case") — at scale, that wasted delay alone can make a service effectively unavailable during a rollout. An init container absorbs non-deterministic setup work so the main container's own probe delay only has to cover its own, more predictable startup
+- **Sidecar pattern**: a second container co-located in the pod that the main application container is unaware of — e.g., a logging agent shipping the main container's `stdout` to a central service. Swapping the logging backend means changing only the sidecar; the application container can never be broken by that change
+- **Ambassador pattern**: a local proxy container representing a remote service as if it were local — e.g., exposed on `localhost:6379` inside the pod, routing writes to a database primary and reads to replicas. The application only ever talks to `localhost`; topology changes (failover, adding replicas) only require updating the ambassador
+- **Adapter pattern**: standardizes the main container's output for downstream consumers expecting an older format — e.g., during an incremental rollout, an adapter sharing the pod's filesystem rewrites new-format output back to the old format until every consumer has upgraded. Unlike sidecar/ambassador (which run independently alongside the app), the adapter pattern depends on a **shared filesystem** with the main container to observe and transform its output
+
+**Implementation example** — an init container blocking on a dependency, plus a sidecar shipping logs, in one pod:
+```yaml
+apiVersion: v1
+kind: Pod
+metadata: { name: order-service }
+spec:
+  initContainers:
+    - name: wait-for-db                      # runs to completion FIRST
+      image: busybox:1.36
+      command: ["sh", "-c", "until nc -z db 5432; do sleep 2; done"]
+  containers:
+    - name: order-service
+      image: my-registry/order-service:1.4.2
+      volumeMounts: [{ name: logs, mountPath: /var/log/app }]
+    - name: log-shipper                      # sidecar: unaware to the app, ships /var/log/app to a central service
+      image: my-registry/log-shipper:1.0
+      volumeMounts: [{ name: logs, mountPath: /var/log/app, readOnly: true }]
+  volumes: [{ name: logs, emptyDir: {} }]
+```
+The `order-service` container never starts until `wait-for-db` exits successfully; once running, `order-service` and `log-shipper` run concurrently, sharing only the `logs` volume — the application code has zero awareness that shipping is happening.
+
+---
+
+<h2 id="cloud" style="font-size:33px;font-weight:800;margin:30px 0 12px;">☁️ Cloud</h2>
+
+<h3 id="aws" style="font-size:26px;font-weight:700;margin:26px 0 10px;">☁️ AWS</h3>
+
+<h4 id="computing" style="font-size:20px;font-weight:700;margin:22px 0 8px;">☁️ Computing</h4>
+- **EC2**: Elastic Compute Cloud with autoscaling
+- **Lambda**: Serverless functions, virtual functions, autoscalable, reactive
+- **Batch**: fully managed batch-computing service that plans, schedules, and runs containerized jobs across EC2, Spot, or Fargate capacity — not itself a scheduler; recurring runs are triggered on a timer by EventBridge calling Batch's `SubmitJob`
+- **Lightsail**: Easy user friendly computing + services for quick startup
+
+<h4 id="storage" style="font-size:20px;font-weight:700;margin:22px 0 8px;">☁️ Storage</h4>
+- **S3**: Simple Storage Service for objects
+- **EBS**: Elastic Block Store for EC2
+- **EFS**: Elastic File System
+- **DynamoDB**: NoSQL key/value based
+- **DocumentDB**: NoSQL MongoDB document based
+- **RDS**: Relational database service for MySQL, SQL Server, Oracle, PostgreSQL, etc.
+- **Aurora**: an AWS-built relational engine, **MySQL- and PostgreSQL-compatible** — the SQL dialect and wire protocol are standard, so existing drivers and tooling work unchanged; only the underlying distributed storage layer is proprietary, which is what gives it higher throughput than stock MySQL/PostgreSQL on RDS
+
+<h4 id="networking" style="font-size:20px;font-weight:700;margin:22px 0 8px;">☁️ Networking</h4>
+- **VPC (Virtual Private Cloud)**: an isolated private network inside AWS — the base every other networking concept sits on. Inside it, **subnets** split the address space into **public** (direct internet route) and **private** (no direct internet route) segments; **security groups** act as stateful, instance-level firewalls that allow traffic only where a rule explicitly permits it, while **Network Access Control Lists (NACLs)** are stateless, subnet-level rules evaluated in order — together they are the concrete mechanism behind the least-privilege principle from [Security](#-security): nothing talks to anything unless a rule says so
+- **CloudFront**: Content Delivery Network
+- **API Gateway**: API management service
+- **Route 53**: DNS service
+- **ELB**: Elastic Load Balancer
+
+<h4 id="monitoring" style="font-size:20px;font-weight:700;margin:22px 0 8px;">☁️ Monitoring</h4>
+- **CloudWatch**: Metrics and monitoring
+- **Amazon QuickSight**: Dashboard for analytics
+
+<h4 id="events" style="font-size:20px;font-weight:700;margin:22px 0 8px;">☁️ Events</h4>
+- **EventBridge**:  Event/cron based event trigger service
+
+<h4 id="containers-1" style="font-size:20px;font-weight:700;margin:22px 0 8px;">☁️ Containers</h4>
+- **ECR**: Container repository
+- **ECS**: AWS's own container orchestrator; a task runs on one of two **launch types** — **EC2** (you manage and pay for the underlying instances) or **Fargate** (serverless, no instances to manage) — Fargate is not a separate competing service, it is a launch mode of ECS (and of EKS)
+- **Fargate**: the serverless launch type shared by ECS and EKS — you specify container resource needs, AWS runs them with no instance to patch or size
+- **EKS**: Elastic Kubernetes Service, a managed Kubernetes control plane; worker nodes run on the same EC2-or-Fargate choice as ECS
+
+<h4 id="cicd" style="font-size:20px;font-weight:700;margin:22px 0 8px;">☁️ CI/CD</h4>
+- **CodeCommit**: managed Git source control — **closed to new customers since mid-2024** (existing repositories keep working, but AWS no longer onboards new ones); for a new project, point to GitHub, GitLab, or Amazon CodeCatalyst instead
+- **CodeBuild**: Build service
+- **CodeDeploy**: Deployment service
+- **CodePipeline**: CI/CD service
+
+<h4 id="identity-and-access-management-iam--governance" style="font-size:20px;font-weight:700;margin:22px 0 8px;">🔑 Identity and Access Management (IAM) &amp; Governance</h4>
+Identity and Access Management (IAM) is the identity and permission system underneath every other AWS service — networking (security groups) enforces *what traffic* is allowed, IAM enforces *who is allowed to act*.
+- **Users vs Roles**: a **user** represents a person or system with long-lived credentials that can leak if mishandled; a **role** is a set of permissions *assumed* temporarily (by a service, or by an already-authenticated identity) with no fixed credentials to steal — prefer roles wherever the caller can assume one
+- **Least privilege**: every role or user carries exactly the permissions its job requires, no more — the same principle already covered in [Security Best Practices](#security-best-practices), materialized here as IAM policies
+- **AWS Organizations**: groups multiple AWS accounts (per project, per team, per environment) under one management hierarchy, enabling consolidated billing and centralized policy
+- **Service Control Policies (SCPs)**: guardrails applied at the Organizations level that cap what member accounts can do, *regardless* of what their own IAM policies allow — the mechanism that lets a company enforce "no account may disable logging" account-wide without trusting every account's local configuration
+
+<h4 id="high-availability--disaster-recovery" style="font-size:20px;font-weight:700;margin:22px 0 8px;">🏗️ High Availability &amp; Disaster Recovery</h4>
+Distinct from the generic [High Availability](#high-availability) principles above: HA absorbs routine, partial failures (one instance, one Availability Zone) without the business ever declaring an incident; Disaster Recovery (DR) is the plan for a full regional loss, sized against two numbers set by the business, not by engineering:
+- **Recovery Time Objective (RTO)**: the maximum acceptable delay between the interruption of service and its restoration — how long the business tolerates being down
+- **Recovery Point Objective (RPO)**: the maximum acceptable amount of data loss, measured as time since the last recoverable state — how much recent work the business tolerates losing
+- **Multi-Availability Zone (Multi-AZ) vs multi-region**: Multi-AZ spreads resources across physically separate data centers within one region and is enough for most HA needs; multi-region additionally survives losing an entire region, at materially higher cost and complexity — justified only when the business impact of a full-region outage exceeds that cost
+
+<h5 id="the-four-aws-disaster-recovery-strategies" style="font-size:16px;font-weight:600;margin:18px 0 7px;">The four AWS disaster recovery strategies</h5>
+Each strategy trades cost against RTO/RPO — the tighter the objective, the more standby infrastructure must already be running before the disaster happens:
+| Strategy | What is already running in the recovery site | RTO / RPO |
+|---|---|---|
+| **Backup & Restore** | Nothing — only backups exist | Hours — restoring and provisioning from scratch takes time |
+| **Pilot Light** | The smallest core (typically just the database, replicating continuously) | Tens of minutes — the rest of the stack is provisioned and scaled up on failover |
+| **Warm Standby** | A scaled-down but fully functional replica of the whole stack | Minutes — traffic shifts to it and it scales up under load |
+| **Multi-Site Active/Active** | A full-scale replica already serving live traffic in both sites | Seconds, near-zero data loss — the most expensive tier, reserved for the strictest objectives |
+
+- **The RTO/RPO trade-off drives replication strategy directly**: an RPO near zero demands synchronous cross-region replication, paying its latency cost on every write; a looser RPO allows cheaper, faster asynchronous replication — the same synchronous-vs-asynchronous replication trade-off covered in [Database → Replication](#synchronous-vs-asynchronous), applied at infrastructure scale
+- **Disaster Recovery is proven by drills, not by the design document alone**: a scheduled failover exercise is what actually validates that RTO/RPO targets are achievable, not just theoretical
+
+<h3 id="azure" style="font-size:26px;font-weight:700;margin:26px 0 10px;">🔷 Azure</h3>
+
+<h4 id="mapping-aws-knowledge-to-azure-equivalents" style="font-size:20px;font-weight:700;margin:22px 0 8px;">🔷 Mapping AWS Knowledge to Azure Equivalents</h4>
+| Concept | AWS (what you know) | Azure (what they use) |
+|---|---|---|
+| Kubernetes | Elastic Kubernetes Service (EKS) | Azure Kubernetes Service (AKS) |
+| Serverless containers | Elastic Container Service (ECS) / Fargate | Azure Container Apps |
+| Functions | Lambda | Azure Functions |
+| Object storage | Simple Storage Service (S3) | Blob Storage |
+| Relational database | Relational Database Service (RDS) | Azure SQL Database / Database for PostgreSQL |
+| Messaging | Simple Queue Service (SQS) / Simple Notification Service (SNS) | Service Bus (queues and topics) / Event Hubs (Kafka-like) |
+| Secrets | Secrets Manager | Key Vault |
+| Identity | Identity and Access Management (IAM) | Entra ID (formerly Azure Active Directory) + Managed Identities |
+| Monitoring | CloudWatch | Azure Monitor + Application Insights |
+| Continuous integration/delivery | CodePipeline / GitHub Actions | Azure DevOps Pipelines / GitHub Actions |
+
+<h4 id="talking-points-for-the-interview" style="font-size:20px;font-weight:700;margin:22px 0 8px;">🔷 Talking Points for the Interview</h4>
+- **Event Hubs exposes a Kafka-compatible endpoint**: existing Kafka producer and consumer code can often point at it with configuration changes only
+- **Managed Identity**: No credentials in configuration files — Azure's answer to Identity and Access Management roles
+- **Spring Cloud Azure**: Ready-made starters for Key Vault, Service Bus, Event Hubs, and the rest
+- Honest positioning: "Deep AWS experience; cloud concept transfer — here is the mapping I have already studied"
+
+---
+
+<h2 id="infrastructure-as-code" style="font-size:33px;font-weight:800;margin:30px 0 12px;">🏗️ Infrastructure as Code</h2>
+
+Creating resources by hand in a cloud console is not reproducible, not versionable, and not auditable — the same environment can never be recreated with certainty, and nothing records *why* a setting changed. Infrastructure as Code (IaC) describes the desired infrastructure in configuration files that a tool interprets and applies, solving three problems at once: **reproducibility** (the same files always produce the same environment), **version control** (infrastructure changes are reviewed as code, the same way application code is), and **environment consistency** (development, testing, and production are generated from the same definition, differing only in the parameters that must differ).
+
+<h3 id="terraform" style="font-size:26px;font-weight:700;margin:26px 0 10px;">🏗️ Terraform</h3>
+Never hardcode an Amazon Machine Image (AMI) ID: it is region-specific and gets deregistered over time, so a pinned ID silently breaks months later. Look it up with a `data` source instead, which always resolves to the current image at `plan` time:
+```hcl
+provider "aws" {
+  region = "us-east-1"
+}
+
+data "aws_ami" "amazon_linux" {
+  most_recent = true
+  owners      = ["amazon"]
+  filter {
+    name   = "name"
+    values = ["al2023-ami-*-x86_64"]
+  }
+}
+
+resource "aws_instance" "example" {
+  ami           = data.aws_ami.amazon_linux.id
+  instance_type = "t2.micro"
+}
+```
+
+<h3 id="commands-2" style="font-size:26px;font-weight:700;margin:26px 0 10px;">⌨️ Commands</h3>
+```bash
+terraform init
+terraform validate
+terraform plan
+terraform apply
+terraform destroy
+```
+
+---
+
+<h2 id="git" style="font-size:33px;font-weight:800;margin:30px 0 12px;">🌿 Git</h2>
+
+<h3 id="concepts" style="font-size:26px;font-weight:700;margin:26px 0 10px;">💡 Concepts</h3>
+- **Merging strategies**
+- **Rebase vs Merge**
+- **Cherry pick**
+
+---
+
+<h2 id="jenkins" style="font-size:33px;font-weight:800;margin:30px 0 12px;">🤵 Jenkins</h2>
+- **Jenkinsfile**: Descriptor file for configuring the pipeline
+- **Pipeline block**: the complete script
+- **Agent**: the agent that's going to run the pipeline
+- **Stages**: Stages of the pipeline
+- **Steps**: Steps in the stage
 
 ---
 
@@ -5041,220 +6335,6 @@ toHaveBeenCalled()/toHaveBeenCalledWith(x,y)
     - **useEffect**: used when component is mounted and when state changes
     - **useContext**: used to share data across all the component tree
     - **useRef**: creates a mutable object that keeps the reference between renders
-
----
-
-<h1 id="-devops" style="font-size:42px;font-weight:800;margin:34px 0 14px;">🔧 DevOps</h1>
-
-<h2 id="features-2" style="font-size:33px;font-weight:800;margin:30px 0 12px;">✨ Features</h2>
-- **Automation**
-- **CI/CD**
-- **Monitoring**
-- **Collaboration**
-- **Infrastructure as Code**
-
----
-
-<h2 id="sdlc" style="font-size:33px;font-weight:800;margin:30px 0 12px;">🔄 SDLC</h2>
-- **Requirement gathering**: Interact with the user to understand what the software should do, features
-- **Analysis**: Analyse the requirements and understand how to build the software, roadmap for development
-- **Design**: Design the architecture of the software, components, interactions, technologies, ui
-- **Coding**: Write the code
-- **Testing**: Test the software functionality to ensure it meets the requirements and is free of bugs
-- **Deployment**: Deploy the software to a production environment
-- **Maintenance**: Ongoing support and maintenance of the software, improvements, bug fixes
-
----
-
-<h2 id="docker" style="font-size:33px;font-weight:800;margin:30px 0 12px;">🐳 Docker</h2>
-
-<h3 id="images" style="font-size:26px;font-weight:700;margin:26px 0 10px;">🖼️ Images</h3>
-- **build**: docker image build
-- **show**: docker image ls
-- **pull**: docker image pull name:version
-- **inspect**: docker image inspect name
-- **delete**: docker image rm
-
-<h3 id="containers" style="font-size:26px;font-weight:700;margin:26px 0 10px;">📦 Containers</h3>
-- **start**: docker container run
-- **stop**: docker container stop id
-- **delete**: docker container rm
-
-<h3 id="dockerfile" style="font-size:26px;font-weight:700;margin:26px 0 10px;">📋 Dockerfile</h3>
-
-```dockerfile
-FROM alpine
-RUN apk add update nodejs npm
-COPY resources /src
-WORKDIR /src
-RUN npm install
-EXPOSE 8080
-ENTRYPOINT ["node","./app.js"]
-```
-
-<h3 id="docker-for-java-applications" style="font-size:26px;font-weight:700;margin:26px 0 10px;">☕ Docker for Java Applications</h3>
-- **Image vs container**: The image is the immutable template; the container is a running instance of it
-- **Layers and caching**: Each Dockerfile instruction creates a layer; order them from least to most frequently changing so rebuilds reuse the cache
-- **Multi-stage builds**: Build with the full Java Development Kit in a first stage, ship only the Java Runtime Environment plus the application in the final stage — much smaller images
-- **Spring Boot specifics**: Layered jars (dependencies cached in their own layer, separate from your code), and run as a non-root user
-
----
-
-<h2 id="kubernetes" style="font-size:33px;font-weight:800;margin:30px 0 12px;">☸️ Kubernetes</h2>
-
-<h3 id="structure" style="font-size:26px;font-weight:700;margin:26px 0 10px;">🏗️ Structure</h3>
-Deployment contains > Pods contains > Containers
-
-<h3 id="core-objects-from-the-smallest-unit-to-the-entry-point" style="font-size:26px;font-weight:700;margin:26px 0 10px;">🔵 Core Objects (from the smallest unit to the entry point)</h3>
-- **Pod**: Smallest deployable unit; one or more containers sharing network and storage
-- **Deployment**: Manages the replicas of a pod; handles rolling updates and rollbacks
-- **Service**: Stable network identity in front of ephemeral pods — **ClusterIP** (internal only), **NodePort** (a port opened on every node), **LoadBalancer** (external, cloud-provisioned)
-- **Ingress**: HTTP routing rules (host and path based) toward services
-
-<h3 id="nodes" style="font-size:26px;font-weight:700;margin:26px 0 10px;">🔵 Nodes</h3>
-- **Master node (control plane)**: Takes decisions about the cluster
-- **Worker node**: Carries on work
-
-<h3 id="components" style="font-size:26px;font-weight:700;margin:26px 0 10px;">🧩 Components</h3>
-- **apiserver**: exposes the interface to communicate with the control plane
-- **kubelet**: Main kubernetes agent on each node
-- **kube-proxy**: Networking component
-
-<h3 id="configuration--spring-boot-integration" style="font-size:26px;font-weight:700;margin:26px 0 10px;">🌱 Configuration &amp; Spring Boot Integration</h3>
-- **ConfigMap** (non-sensitive configuration) and **Secret** (sensitive values) are exposed to pods as environment variables or mounted files — Spring Boot reads them like any other property source
-- **Probes wired to Actuator**:
-  - **Liveness probe** ("is the process alive?" — Kubernetes restarts the pod on failure) → `/actuator/health/liveness`
-  - **Readiness probe** ("can it serve traffic?" — Kubernetes stops routing to the pod on failure) → `/actuator/health/readiness`
-- **Service discovery is native**: Each service gets a Domain Name System (DNS) name (`http://order-service`) — this is why a Eureka-style registry becomes unnecessary in Kubernetes
-
-<h3 id="resources--the-java-virtual-machine" style="font-size:26px;font-weight:700;margin:26px 0 10px;">☕ Resources &amp; the Java Virtual Machine</h3>
-- **Requests** (what the scheduler guarantees) vs **limits** (the hard ceiling) for processor and memory
-- Exceeding the memory limit → the container is **OOMKilled** (Out Of Memory)
-- Size the Java heap relative to the container, not with a fixed value: `-XX:MaxRAMPercentage=75.0` instead of a hard-coded `-Xmx`
-- **Horizontal Pod Autoscaler**: Adds or removes pod replicas based on observed load (processor, memory, custom metrics)
-
-<h3 id="commands-1" style="font-size:26px;font-weight:700;margin:26px 0 10px;">⌨️ Commands</h3>
-```bash
-kubectl get nodes / pods / services
-kubectl describe pod mypod    # events and state — first reflex when debugging
-kubectl logs mypod
-kubectl exec -it mypod -- sh
-kubectl apply -f pod.yml
-kubectl get pods --watch
-kubectl delete -f pod.yml
-```
-
----
-
-<h2 id="cloud" style="font-size:33px;font-weight:800;margin:30px 0 12px;">☁️ Cloud</h2>
-
-<h3 id="aws" style="font-size:26px;font-weight:700;margin:26px 0 10px;">☁️ AWS</h3>
-
-<h4 id="computing" style="font-size:20px;font-weight:700;margin:22px 0 8px;">☁️ Computing</h4>
-- **EC2**: Elastic Compute Cloud with autoscaling
-- **Lambda**: Serverless functions, virtual functions, autoscalable, reactive
-- **Batch**: Timed jobs
-- **Lightsail**: Easy user friendly computing + services for quick startup
-
-<h4 id="storage" style="font-size:20px;font-weight:700;margin:22px 0 8px;">☁️ Storage</h4>
-- **S3**: Simple Storage Service for objects
-- **EBS**: Elastic Block Store for EC2
-- **EFS**: Elastic File System
-- **DynamoDB**: NoSQL key/value based
-- **DocumentDB**: NoSQL MongoDB document based
-- **RDS**: Relational database service for MySQL, SQL Server, Oracle, PostgreSQL, etc.
-- **Aurora**: AWS Proprietary SQL DB engine
-
-<h4 id="networking" style="font-size:20px;font-weight:700;margin:22px 0 8px;">☁️ Networking</h4>
-- **VPC**: Virtual Private Cloud
-- **CloudFront**: Content Delivery Network
-- **API Gateway**: API management service
-- **Route 53**: DNS service
-- **ELB**: Elastic Load Balancer
-
-<h4 id="monitoring" style="font-size:20px;font-weight:700;margin:22px 0 8px;">☁️ Monitoring</h4>
-- **CloudWatch**: Metrics and monitoring
-- **Quicksight**: Dashboard for analytics
-
-<h4 id="events" style="font-size:20px;font-weight:700;margin:22px 0 8px;">☁️ Events</h4>
-- **EventBridge**:  Event/cron based event trigger service
-
-<h4 id="containers-1" style="font-size:20px;font-weight:700;margin:22px 0 8px;">☁️ Containers</h4>
-- **ECR**: Container repository
-- **ECS**: Provisioned ec2 instances
-- **Fargate**: Serverless container service
-- **EKS**: Elastic Kubernetes service, orchestrator, management
-
-<h4 id="cicd" style="font-size:20px;font-weight:700;margin:22px 0 8px;">☁️ CI/CD</h4>
-- **CodeCommit**: Source control service
-- **CodeBuild**: Build service
-- **CodeDeploy**: Deployment service
-- **CodePipeline**: CI/CD service
-
-<h3 id="azure" style="font-size:26px;font-weight:700;margin:26px 0 10px;">🔷 Azure</h3>
-
-<h4 id="mapping-aws-knowledge-to-azure-equivalents" style="font-size:20px;font-weight:700;margin:22px 0 8px;">🔷 Mapping AWS Knowledge to Azure Equivalents</h4>
-| Concept | AWS (what you know) | Azure (what they use) |
-|---|---|---|
-| Kubernetes | Elastic Kubernetes Service (EKS) | Azure Kubernetes Service (AKS) |
-| Serverless containers | Elastic Container Service (ECS) / Fargate | Azure Container Apps |
-| Functions | Lambda | Azure Functions |
-| Object storage | Simple Storage Service (S3) | Blob Storage |
-| Relational database | Relational Database Service (RDS) | Azure SQL Database / Database for PostgreSQL |
-| Messaging | Simple Queue Service (SQS) / Simple Notification Service (SNS) | Service Bus (queues and topics) / Event Hubs (Kafka-like) |
-| Secrets | Secrets Manager | Key Vault |
-| Identity | Identity and Access Management (IAM) | Entra ID (formerly Azure Active Directory) + Managed Identities |
-| Monitoring | CloudWatch | Azure Monitor + Application Insights |
-| Continuous integration/delivery | CodePipeline / GitHub Actions | Azure DevOps Pipelines / GitHub Actions |
-
-<h4 id="talking-points-for-the-interview" style="font-size:20px;font-weight:700;margin:22px 0 8px;">🔷 Talking Points for the Interview</h4>
-- **Event Hubs exposes a Kafka-compatible endpoint**: existing Kafka producer and consumer code can often point at it with configuration changes only
-- **Managed Identity**: No credentials in configuration files — Azure's answer to Identity and Access Management roles
-- **Spring Cloud Azure**: Ready-made starters for Key Vault, Service Bus, Event Hubs, and the rest
-- Honest positioning: "Deep AWS experience; cloud concept transfer — here is the mapping I have already studied"
-
----
-
-<h2 id="infrastructure-as-code" style="font-size:33px;font-weight:800;margin:30px 0 12px;">🏗️ Infrastructure as Code</h2>
-
-<h3 id="terraform" style="font-size:26px;font-weight:700;margin:26px 0 10px;">🏗️ Terraform</h3>
-```hcl
-provider "aws" {
-  region = "us-east-1"
-}
-
-resource "aws_instance" "example" {
-  ami           = "ami-0c55b159cbfafe1d0"
-  instance_type = "t2.micro"
-}
-```
-
-<h3 id="commands-2" style="font-size:26px;font-weight:700;margin:26px 0 10px;">⌨️ Commands</h3>
-```bash
-terraform init
-terraform validate
-terraform plan
-terraform apply
-terraform destroy
-```
-
----
-
-<h2 id="git" style="font-size:33px;font-weight:800;margin:30px 0 12px;">🌿 Git</h2>
-
-<h3 id="concepts" style="font-size:26px;font-weight:700;margin:26px 0 10px;">💡 Concepts</h3>
-- **Merging strategies**
-- **Rebase vs Merge**
-- **Cherry pick**
-
----
-
-<h2 id="jenkins" style="font-size:33px;font-weight:800;margin:30px 0 12px;">🤵 Jenkins</h2>
-- **Jenkinsfile**: Descriptor file for configuring the pipeline
-- **Pipeline block**: the complete script
-- **Agent**: the agent that's going to run the pipeline
-- **Stages**: Stages of the pipeline
-- **Steps**: Steps in the stage
 
 ---
 
