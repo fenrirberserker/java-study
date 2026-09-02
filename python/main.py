@@ -1,19 +1,15 @@
-from anthropic import Anthropic
 import os
+import sys
 
-client = Anthropic(
-    api_key=os.environ["ANTHROPIC_API_KEY"]
-)
+sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 
-response = client.messages.create(
-    model="claude-sonnet-4-6",
-    max_tokens=200,
-    messages=[
-        {
-            "role": "user",
-            "content": "Explain dependency injection in Spring Boot"
-        }
-    ]
-)
+from vector.Vector import Vector
+from datamodel.Datamodel import FrenchDeck
 
-print(response.content[0].text)
+if __name__ == '__main__':
+    v1 = Vector(2, 4)
+    v2 = Vector(2, 1)
+    print(v1 + v2)
+
+    deck = FrenchDeck()
+    print(f'{len(deck)} cards, first: {deck[0]}, last: {deck[-1]}')

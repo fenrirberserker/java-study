@@ -145,3 +145,9 @@ coverage/
 # Documentation build
 docs/_build/
 site/
+
+# Python
+venv/
+.venv/
+__pycache__/
+*.pyc
